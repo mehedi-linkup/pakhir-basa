@@ -548,41 +548,7 @@
                                 <a href="index.html">Home</a>
                             </li>
                             <li>
-                                <a href="shop-banner-sidebar.html">Shop</a>
-
-                                <!-- Start of Megamenu -->
-                                <ul class="megamenu">
-                                    <li>
-                                        <h4 class="menu-title">Shop Pages</h4>
-                                        <ul>
-                                            <li><a href="shop-banner-sidebar.html">Banner With Sidebar</a></li>
-                                            <li><a href="shop-boxed-banner.html">Boxed Banner</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <h4 class="menu-title">Shop Layouts</h4>
-                                        <ul>
-                                            <li><a href="shop-grid-4cols.html">4 Columns Mode</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <h4 class="menu-title">Product Pages</h4>
-                                        <ul>
-                                            <li><a href="product-variable.html">Variable Product</a></li>
-                                            </li>
-                                            <li><a href="product-without-sidebar.html">Without Sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <h4 class="menu-title">Product Layouts</h4>
-                                        <ul>
-                                            <li><a href="product-default.html">Default<span
-                                                        class="tip tip-hot">Hot</span></a></li>
-                                            <li><a href="product-gallery.html">Gallery</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <!-- End of Megamenu -->
+                                <a href="{{ route('shop.box') }}">Shop</a>
                             </li>
                             <li>
                                 <a href="blog.html">Blog</a>

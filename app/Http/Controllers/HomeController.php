@@ -78,14 +78,21 @@ class HomeController extends Controller
         return view('website.subcategory_list', compact('Categorylist'));
     }
 
-    public function shop()
+    public function shop(Request $req)
     {
+        if($req->query('shop_view') == 'shop list sidebar') {
+            return view('website.shop-list-sidebar');
+        }else if($req->query('shop_view') == 'shop list') {
+            return view('website.shop-list');
+        } else {
+            return view('website.shop-boxed');
+        }
         // $category = Category::latest()->get();
         // $product = Product::inRandomOrder()->paginate(5);
         // $centerBigAds = Ad::where('status', 'a')->where('position', '4')->inRandomOrder()->limit(1)->get();
         // $leftAds = Ad::where('status', 'a')->where('position', '1')->inRandomOrder()->limit(1)->get();
         // return view('website.productsList', compact('product', 'category', 'centerBigAds', 'leftAds'));
-        return view('website.shop-boxed');
+        
     }
 
 

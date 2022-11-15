@@ -161,11 +161,14 @@
                             </select>
                         </div>
                         <div class="toolbox-item toolbox-layout">
-                            <a href="shop-boxed-banner.html" class="icon-mode-grid btn-layout active">
+                            <a href="{{ route('shop.box', ['shop_view'=>'shop box']) }}" class="icon-mode-grid btn-layout active">
                                 <i class="w-icon-grid"></i>
                             </a>
-                            <a href="shop-list.html" class="icon-mode-list btn-layout">
+                            <a href="{{ route('shop.box', ['shop_view'=>'shop list']) }}" class="icon-mode-list btn-layout">
                                 <i class="w-icon-list"></i>
+                            </a>
+                            <a href="{{ route('shop.box', ['shop_view'=>'shop list sidebar']) }}" class="icon-mode-list btn-layout">
+                                <i class="w-icon-category"></i>
                             </a>
                         </div>
                     </div>
