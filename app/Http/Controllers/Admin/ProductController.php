@@ -71,7 +71,7 @@ class ProductController extends Controller
             'price' => 'required|max:10|regex:/^\d+(\.\d{1,2})?$/',
             'image' => 'required|image|mimes:jpg,png,gif,bmp|max:500',
             'otherImage' => 'max:500',
-            'purchage' => 'required|min:1|max:10',
+            'purchase' => 'required|min:1|max:10',
         ]);
         $slug = Str::slug($request->name . '-' . time());
         $i = 0;
@@ -116,20 +116,35 @@ class ProductController extends Controller
             $product->ip_address = $request->ip();
             $product->save();
 
-            $productImages = $this->imageUpload($request, 'otherImage', 'uploads/otherImage');
-            if (is_array($productImages) && count($productImages)) {
-                foreach ($productImages as $image) {
-                    $imagePath = new ProductImage();
-                    $imagePath->product_id = $product->id;
-                    $imagePath->otherImage = $image;
-                    $imagePath->save();
+            // $productImages = $this->imageUpload($request, 'otherImage', 'uploads/otherImage');
+            // if (is_array($productImages) && count($productImages)) {
+            //     foreach ($productImages as $image) {
+            //         $imagePath = new ProductImage();
+            //         $imagePath->product_id = $product->id;
+            //         $imagePath->otherImage = $image;
+            //         $imagePath->save();
+            //     }
+            // }
+                $otherImage = $request->file('otherImage');
+                if(is_array($otherImage) && count($otherImage) > 0) {
+                    foreach ($otherImage as $key => $image) {
+
+                        $name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                        $extention = $image->getClientOriginalExtension();
+                        $imageName = $name . '_' . uniqId() . '.' . $extention;
+                        $image->move('uploads/otherImage', $imageName);            
+
+                        $productImages = new ProductImage();
+                        $productImages->product_id = $product->id;
+                        $productImages->otherImage = $imageName;
+                        $productImages->save();
+                    }
                 }
-            }
             
-                $purchage = new Inventory();
-                $purchage->product_id = $product->id;
-                $purchage->purchage = $request->purchage;
-                $purchage->save();
+                $purchase = new Inventory();
+                $purchase->product_id = $product->id;
+                $purchase->purchase = $request->purchase;
+                $purchase->save();
                 if ($product) {
                 Session::flash('success', 'Product Added Successfully');
                 return back();
@@ -140,11 +155,17 @@ class ProductController extends Controller
             }
 
         }
-        catch (Exception $e) {
+        catch (\Throwable $th) {
             DB::rollBack();
-            Session::flash('faild', 'order Submit faild');
-            return back();
+            Session::flash('faild', 'Product added faild');
+            // return back();
+            throw $th;
         }
+        // try {
+        //     //code...
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        // }
         
     }
 
@@ -206,7 +227,7 @@ class ProductController extends Controller
             'image' => 'image|mimes:jpg,png,gif,bmp|max:500',
             'ip_address' => 'max:15',
             'otherImage' => 'max:500',
-            'purchage' => 'required',
+            'purchase' => 'required',
             // 'code' => 'max:18|unique:products,id',
         ]);
 
@@ -267,10 +288,10 @@ class ProductController extends Controller
                 }
             }
     
-            // if ($request->purchage) {
-                // dd($$request->purchage);
+            // if ($request->purchase) {
+                // dd($$request->purchase);
                 $inventory = Inventory::where('product_id',$product->id)->first();
-                $inventory->purchage = $request->purchage;
+                $inventory->purchase = $request->purchase;
                 $inventory->save();
             // }
             if($product){
@@ -295,16 +316,30 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        $image_path = public_path('uploads/product/' . $product->image);
-        $image_path_thumb = public_path('uploads/product/thumbnail/' . $product->thum_image);
-        if (file_exists($image_path)) {
-            @unlink($image_path);
-            @unlink($image_path_thumb);
-        }
-        Inventory::where('product_id',$id)->delete();
-        $product->delete();
+        try {
+            $product = Product::find($id);
+            // $image_path = public_path('uploads/product/' . $product->image);
+            // $image_path_thumb = public_path('uploads/product/thumbnail/' . $product->thum_image);
+            // if (file_exists($image_path)) {
+            //     @unlink($image_path);
+            //     @unlink($image_path_thumb);
+            // }
+            $productImage = ProductImage::where('product_id', $id)->get();
+            return $productImage;
+            if(is_array($productImage) && count($productImage) > 0) {
+                foreach ($productImage as $key => $image) {
+                    if(file_exists($image->otherImage)) {
+                        unlink($image->otherImage);
+                    }
+                    $image->delete();
+                }
+                return "if condition passed";
+            }
+            // Inventory::where('product_id',$id)->delete();
+            // $product->delete();
             return back()->with('success','product deleted successfully');
-        
+        } catch (\Throwable $th) {
+            return back()->with('error','product delete failed');
+        }
     }
 }

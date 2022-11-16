@@ -108,9 +108,9 @@
                                                 </div>
 
                                                 <div class="col-md-8">
-                                                    <input type="number" name="purchage" id="purchage"
-                                                        value="{{ old('purchage') }}"
-                                                        class="form-control my-form-control @error('purchage') is-invalid @enderror">
+                                                    <input type="number" name="purchase" id="purchase"
+                                                        value="{{ old('purchase') }}"
+                                                        class="form-control my-form-control @error('purchase') is-invalid @enderror">
                                                     @error('stock')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -400,7 +400,7 @@
                         <td style="text-align: center;border:1px solid #000 ">{{ $item->code }}</td>
                         <td style="text-align: center;border:1px solid #000 ">{{ $item->price }}</td>
                         <td style="text-align: center;border:1px solid #000 ">{{ $item->discount }}</td>
-                        <td style="text-align: center;border:1px solid #000 ">{{ $item->inventory['purchage'] }}</td>
+                        <td style="text-align: center;border:1px solid #000 ">{{ $item->inventory['purchase'] }}</td>
 
                     </tr>
                 @endforeach

@@ -795,7 +795,7 @@
     <script src="{{asset('/')}}website/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="{{asset('/')}}website/vendor/zoom/jquery.zoom.js"></script>
     <script src="{{asset('/')}}website/vendor/jquery.countdown/jquery.countdown.min.js"></script>
-    <!-- <script src="{{asset('/')}}website/vendor/magnific-popup/jquery.magnific-popup.min.js"></script> -->
+    <script src="{{asset('/')}}website/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
     <script src="{{asset('/')}}website/vendor/skrollr/skrollr.min.js"></script>
 
     <!-- Swiper JS -->

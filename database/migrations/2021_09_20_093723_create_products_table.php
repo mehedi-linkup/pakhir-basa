@@ -28,8 +28,12 @@ class CreateProductsTable extends Migration
             $table->text('image');
             $table->text('thum_image')->nullable();
             $table->decimal('discount', 18,2)->nullable();
-            $table->string('product_size', 10)->nullable();
-            $table->string('color', 20)->nullable();
+            $table->foreignId('size_id')->nullable()
+                    ->constrained('sizes')
+                    ->onDelete('cascade');
+            $table->foreignId('color_id')->nullable()
+                    ->constrained('colors')
+                    ->onDelete('cascade');
             $table->text('short_details')->nullable();
             $table->text('description')->nullable();
             $table->string('is_popular',1)->nullable();
