@@ -318,25 +318,23 @@ class ProductController extends Controller
     {
         try {
             $product = Product::find($id);
-            // $image_path = public_path('uploads/product/' . $product->image);
-            // $image_path_thumb = public_path('uploads/product/thumbnail/' . $product->thum_image);
-            // if (file_exists($image_path)) {
-            //     @unlink($image_path);
-            //     @unlink($image_path_thumb);
-            // }
+            $image_path = public_path('uploads/product/' . $product->image);
+            $image_path_thumb = public_path('uploads/product/thumbnail/' . $product->thum_image);
+            if (file_exists($image_path)) {
+                @unlink($image_path);
+                @unlink($image_path_thumb);
+            }
             $productImage = ProductImage::where('product_id', $id)->get();
-            return $productImage;
-            if(is_array($productImage) && count($productImage) > 0) {
-                foreach ($productImage as $key => $image) {
-                    if(file_exists($image->otherImage)) {
-                        unlink($image->otherImage);
+            if(isset($productImage) && count($productImage) > 0) {
+                foreach ($productImage as $image) {
+                    if(file_exists('uploads/otherImage/'.$image->otherImage)) {
+                        unlink('uploads/otherImage/'.$image->otherImage);
                     }
                     $image->delete();
                 }
-                return "if condition passed";
             }
-            // Inventory::where('product_id',$id)->delete();
-            // $product->delete();
+            Inventory::where('product_id',$id)->delete();
+            $product->delete();
             return back()->with('success','product deleted successfully');
         } catch (\Throwable $th) {
             return back()->with('error','product delete failed');
