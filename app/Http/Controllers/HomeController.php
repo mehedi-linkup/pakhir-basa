@@ -60,6 +60,22 @@ class HomeController extends Controller
         $product['image'] = asset('uploads/product/' . $product->image);
         return response()->json($product);
     }
+    public function blog()
+    {
+        return view('website.blog');
+    }
+    public function blogDetails()
+    {
+        return view('website.blogDetails');
+    }
+    public function compare()
+    {
+        return view('website.compare');
+    }
+    public function wishlist()
+    {
+        return view('website.wishList');
+    }
 
 
 
@@ -80,9 +96,9 @@ class HomeController extends Controller
 
     public function shop(Request $req)
     {
-        if($req->query('shop_view') == 'shop list sidebar') {
+        if ($req->query('shop_view') == 'shop list sidebar') {
             return view('website.shop-list-sidebar');
-        }else if($req->query('shop_view') == 'shop list') {
+        } else if ($req->query('shop_view') == 'shop list') {
             return view('website.shop-list');
         } else {
             return view('website.shop-boxed');
@@ -92,7 +108,7 @@ class HomeController extends Controller
         // $centerBigAds = Ad::where('status', 'a')->where('position', '4')->inRandomOrder()->limit(1)->get();
         // $leftAds = Ad::where('status', 'a')->where('position', '1')->inRandomOrder()->limit(1)->get();
         // return view('website.productsList', compact('product', 'category', 'centerBigAds', 'leftAds'));
-        
+
     }
 
 

@@ -12042,9 +12042,9 @@ body .product-popup {
             flex: 1;
   }
 
-  /* .row .main-content {
-    max-width: calc( 100% );
-  } */
+  .row .main-content {
+    max-width: calc( 100% - 31rem );
+  }
 
   .shop-sidebar.sidebar-fixed .sidebar-content {
     padding: 0 0 2rem;
