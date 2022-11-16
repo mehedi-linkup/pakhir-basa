@@ -8,11 +8,13 @@ use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\CompanyProfile;
 use App\Models\DeliveryTime;
 use App\Models\Management;
 use App\Models\Partner;
 use App\Models\Service;
+use App\Models\Size;
 use App\Models\SubCategory;
 use App\Models\Team;
 use App\Models\Thana;
@@ -96,12 +98,15 @@ class HomeController extends Controller
 
     public function shop(Request $req)
     {
+        $product = Product::latest()->paginate(12);
+        $size = Size::latest()->get();
+        $color = Color::latest()->get();
         if ($req->query('shop_view') == 'shop list sidebar') {
-            return view('website.shop-list-sidebar');
+            return view('website.shop-list-sidebar', compact('product', 'size', 'color'));
         } else if ($req->query('shop_view') == 'shop list') {
-            return view('website.shop-list');
+            return view('website.shop-list', compact('product', 'size', 'color'));
         } else {
-            return view('website.shop-boxed');
+            return view('website.shop-boxed', compact('product', 'size', 'color'));
         }
         // $category = Category::latest()->get();
         // $product = Product::inRandomOrder()->paginate(5);

@@ -42,6 +42,6 @@ class AppServiceProvider extends ServiceProvider
         view()->share('content', CompanyProfile::first());
         view()->share('category', Category::OrderBy('rank_id','ASC')->get());
         view()->share('randCategory', Category::inRandomOrder()->limit(5)->get());
-        view()->share('offer',Offer::first());
+        view()->share('offer', Offer::first());
     }
 }

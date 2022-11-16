@@ -56,8 +56,8 @@ Route::get('/category/{slug}', [HomeController::class, 'CategoryWise'])->name('c
 Route::get('/SubCategory/{slug}', [HomeController::class, 'SubCategoryWise'])->name('SubCategoryWise.list');
 Route::get('/subcategory/list/{slug}',[HomeController::class,'singleSubCategory'])->name('single.subcategory.list');
 Route::get('/allproduct',[HomeController::class,'allProduct'])->name('all.product');
-Route::get('/blog',[HomeController::class,'blog'])->name('blog');
-Route::get('/blog-details',[HomeController::class,'blogDetails'])->name('blog.details');
+// Route::get('/blog',[HomeController::class,'blog'])->name('blog');
+// Route::get('/blog-details',[HomeController::class,'blogDetails'])->name('blog.details');
 Route::get('/compare',[HomeController::class,'compare'])->name('compare');
 Route::get('/wishlist',[HomeController::class,'wishlist'])->name('wishlist');
 

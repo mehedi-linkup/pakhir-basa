@@ -170,10 +170,11 @@
                     </div>
                 </nav>
                 <div class="product-wrapper row cols-xl-2 cols-sm-1 cols-xs-2 cols-1">
+                    @foreach ($product as $item)
                     <div class="product product-list product-select">
                         <figure class="product-media">
                             <a href="product-default.html">
-                                <img src="assets/images/shop/1.jpg" alt="Product" width="330"
+                                <img src="{{ 'uploads/product/'.$item->image }}" alt="{{ $item->name }}" width="330"
                                     height="338" />
                             </a>
                             <div class="product-action-vertical">
@@ -183,22 +184,21 @@
                         </figure>
                         <div class="product-details">
                             <div class="product-cat">
-                                <a href="shop-banner-sidebar.html">Electronics</a>
+                                <a href="shop-banner-sidebar.html">{{ @$item->category ? $item->category->name : '' }}</a>
                             </div>
                             <h4 class="product-name">
-                                <a href="product-default.html">3D Television</a>
+                                <a href="product-default.html">{{ $item->name }}</a>
                             </h4>
-                            <div class="ratings-container">
+                            {{-- <div class="ratings-container">
                                 <div class="ratings-full">
                                     <span class="ratings" style="width: 100%;"></span>
                                     <span class="tooltiptext tooltip-top"></span>
                                 </div>
                                 <a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
-                            </div>
-                            <div class="product-price">$220.00 - $230.00</div>
+                            </div> --}}
+                            <div class="product-price">{{ $item->price }} TK</div>
                             <div class="product-desc">
-                                Ultrices eros in cursus turpis massa cursus mattis. Volutpat ac tincidunt
-                                vitae semper quis lectus. Aliquam id diam maecenas ultricies…
+                                {!! $item->short_details !!}
                             </div>
                             <div class="product-action">
                                 <a href="product-default.html" class="btn-product btn-cart"
@@ -210,298 +210,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product product-list">
-                        <figure class="product-media">
-                            <a href="product-default.html">
-                                <img src="assets/images/shop/2-1.jpg" alt="Product" width="330"
-                                    height="338" />
-                                <img src="assets/images/shop/2-2.jpg" alt="Product" width="330"
-                                    height="338" />
-                            </a>
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                                    title="Quick View"></a>
-                            </div>
-                            <div class="product-countdown-container">
-                                <div class="product-countdown countdown-compact" data-until="2021, 9, 9"
-                                    data-format="DHMS" data-compact="false"
-                                    data-labels-short="Days, Hours, Mins, Secs">
-                                    00:00:00:00</div>
-                            </div>
-                        </figure>
-                        <div class="product-details">
-                            <div class="product-cat">
-                                <a href="shop-banner-sidebar.html">Electronics</a>
-                            </div>
-                            <h4 class="product-name">
-                                <a href="product-default.html">Alarm Clock With Lamp</a>
-                            </h4>
-                            <div class="ratings-container">
-                                <div class="ratings-full">
-                                    <span class="ratings" style="width: 100%;"></span>
-                                    <span class="tooltiptext tooltip-top"></span>
-                                </div>
-                                <a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
-                            </div>
-                            <div class="product-price">
-                                <ins class="new-price">$30.00</ins><del class="old-price">$60.00</del>
-                            </div>
-                            <div class="product-desc">
-                                Ultrices eros in cursus turpis massa cursus mattis. Volutpat ac tincidunt
-                                vitae semper quis lectus. Aliquam id diam maecenas ultricies…
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to Cart"><i
-                                        class="w-icon-cart"></i> Add To Cart</a>
-                                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                    title="Add to wishlist"></a>
-                                <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                    title="Compare"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product product-list">
-                        <figure class="product-media">
-                            <a href="product-default.html">
-                                <img src="assets/images/shop/3.jpg" alt="Product" width="330"
-                                    height="338" />
-                            </a>
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                                    title="Quick View"></a>
-                            </div>
-                        </figure>
-                        <div class="product-details">
-                            <div class="product-cat">
-                                <a href="shop-banner-sidebar.html">Electronics</a>
-                            </div>
-                            <h4 class="product-name">
-                                <a href="product-default.html">Apple Laptop</a>
-                            </h4>
-                            <div class="ratings-container">
-                                <div class="ratings-full">
-                                    <span class="ratings" style="width: 100%;"></span>
-                                    <span class="tooltiptext tooltip-top"></span>
-                                </div>
-                                <a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
-                            </div>
-                            <div class="product-price">$1,800.00</div>
-                            <div class="product-desc">
-                                Ultrices eros in cursus turpis massa cursus mattis. Volutpat ac tincidunt
-                                vitae semper quis lectus. Aliquam id diam maecenas ultricies…
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to Cart"><i
-                                        class="w-icon-cart"></i> Add To Cart</a>
-                                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                    title="Add to wishlist"></a>
-                                <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                    title="Compare"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product product-list">
-                        <figure class="product-media">
-                            <a href="product-default.html">
-                                <img src="assets/images/shop/4.jpg" alt="Product" width="330"
-                                    height="338" />
-                            </a>
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                                    title="Quick View"></a>
-                            </div>
-                        </figure>
-                        <div class="product-details">
-                            <div class="product-cat">
-                                <a href="shop-banner-sidebar.html">Electronics</a>
-                            </div>
-                            <h4 class="product-name">
-                                <a href="product-default.html">Attachable Charge Alarm</a>
-                            </h4>
-                            <div class="ratings-container">
-                                <div class="ratings-full">
-                                    <span class="ratings" style="width: 100%;"></span>
-                                    <span class="tooltiptext tooltip-top"></span>
-                                </div>
-                                <a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
-                            </div>
-                            <div class="product-price">$15.00</div>
-                            <div class="product-desc">
-                                Ultrices eros in cursus turpis massa cursus mattis. Volutpat ac tincidunt
-                                vitae semper quis lectus. Aliquam id diam maecenas ultricies…
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to Cart"><i
-                                        class="w-icon-cart"></i> Add To Cart</a>
-                                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                    title="Add to wishlist"></a>
-                                <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                    title="Compare"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product product-list">
-                        <figure class="product-media">
-                            <a href="product-default.html">
-                                <img src="assets/images/shop/5.jpg" alt="Product" width="330"
-                                    height="338" />
-                            </a>
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                                    title="Quick View"></a>
-                            </div>
-                        </figure>
-                        <div class="product-details">
-                            <div class="product-cat">
-                                <a href="shop-banner-sidebar.html">Fashion</a>
-                            </div>
-                            <h4 class="product-name">
-                                <a href="product-default.html">Best Travel Bag</a>
-                            </h4>
-                            <div class="ratings-container">
-                                <div class="ratings-full">
-                                    <span class="ratings" style="width: 100%;"></span>
-                                    <span class="tooltiptext tooltip-top"></span>
-                                </div>
-                                <a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
-                            </div>
-                            <div class="product-price">$83.00</div>
-                            <div class="product-desc">
-                                Ultrices eros in cursus turpis massa cursus mattis. Volutpat ac tincidunt
-                                vitae semper quis lectus. Aliquam id diam maecenas ultricies…
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to Cart"><i
-                                        class="w-icon-cart"></i> Add To Cart</a>
-                                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                    title="Add to wishlist"></a>
-                                <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                    title="Compare"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product product-list">
-                        <figure class="product-media">
-                            <a href="product-default.html">
-                                <img src="assets/images/shop/6.jpg" alt="Product" width="330"
-                                    height="338" />
-                            </a>
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                                    title="Quick View"></a>
-                            </div>
-                        </figure>
-                        <div class="product-details">
-                            <div class="product-cat">
-                                <a href="shop-banner-sidebar.html">Sports</a>
-                            </div>
-                            <h4 class="product-name">
-                                <a href="product-default.html">Black Stunt Motor</a>
-                            </h4>
-                            <div class="ratings-container">
-                                <div class="ratings-full">
-                                    <span class="ratings" style="width: 100%;"></span>
-                                    <span class="tooltiptext tooltip-top"></span>
-                                </div>
-                                <a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
-                            </div>
-                            <div class="product-price">$374.00</div>
-                            <div class="product-desc">
-                                Ultrices eros in cursus turpis massa cursus mattis. Volutpat ac tincidunt
-                                vitae semper quis lectus. Aliquam id diam maecenas ultricies…
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to Cart"><i
-                                        class="w-icon-cart"></i> Add To Cart</a>
-                                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                    title="Add to wishlist"></a>
-                                <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                    title="Compare"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product product-list">
-                        <figure class="product-media">
-                            <a href="product-default.html">
-                                <img src="assets/images/shop/7-1.jpg" alt="Product" width="330"
-                                    height="338" />
-                                <img src="assets/images/shop/7-2.jpg" alt="Product" width="330"
-                                    height="338" />
-                            </a>
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                                    title="Quick View"></a>
-                            </div>
-                        </figure>
-                        <div class="product-details">
-                            <div class="product-cat">
-                                <a href="shop-banner-sidebar.html">Fashion</a>
-                            </div>
-                            <h4 class="product-name">
-                                <a href="product-default.html">Blue Sky Trunk</a>
-                            </h4>
-                            <div class="ratings-container">
-                                <div class="ratings-full">
-                                    <span class="ratings" style="width: 100%;"></span>
-                                    <span class="tooltiptext tooltip-top"></span>
-                                </div>
-                                <a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
-                            </div>
-                            <div class="product-price">$85.00</div>
-                            <div class="product-desc">
-                                Ultrices eros in cursus turpis massa cursus mattis. Volutpat ac tincidunt
-                                vitae semper quis lectus. Aliquam id diam maecenas ultricies…
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to Cart"><i
-                                        class="w-icon-cart"></i> Add To Cart</a>
-                                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                    title="Add to wishlist"></a>
-                                <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                    title="Compare"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product product-list">
-                        <figure class="product-media">
-                            <a href="product-default.html">
-                                <img src="assets/images/shop/8.jpg" alt="Product" width="330"
-                                    height="338" />
-                            </a>
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                                    title="Quick View"></a>
-                            </div>
-                        </figure>
-                        <div class="product-details">
-                            <div class="product-cat">
-                                <a href="shop-banner-sidebar.html">Beauty</a>
-                            </div>
-                            <h4 class="product-name">
-                                <a href="product-default.html">Bodycare Smooth Powder</a>
-                            </h4>
-                            <div class="ratings-container">
-                                <div class="ratings-full">
-                                    <span class="ratings" style="width: 100%;"></span>
-                                    <span class="tooltiptext tooltip-top"></span>
-                                </div>
-                                <a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
-                            </div>
-                            <div class="product-price">$25.00</div>
-                            <div class="product-desc">
-                                Ultrices eros in cursus turpis massa cursus mattis. Volutpat ac tincidunt
-                                vitae semper quis lectus. Aliquam id diam maecenas ultricies…
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to Cart"><i
-                                        class="w-icon-cart"></i> Add To Cart</a>
-                                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                    title="Add to wishlist"></a>
-                                <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                    title="Compare"></a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="toolbox toolbox-pagination justify-content-between">
                     <p class="showing-info mb-2 mb-sm-0">
@@ -527,10 +236,7 @@
                     </ul>
                 </div>
             </div>
-            <!-- End of Shop Main Content -->
         </div>
-        <!-- End of Shop Content -->
     </div>
 </div>
-<!-- End of Page Content -->
 @endsection

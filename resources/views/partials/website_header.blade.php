@@ -551,28 +551,6 @@
                                 <a href="{{ route('shop.box') }}">Shop</a>
                             </li>
                             <li>
-                                <a href="{{route('blog')}}">Blog</a>
-                                {{-- <ul>
-                                    <li><a href="blog.html">Classic</a></li>
-                                    <li>
-                                        <a href="blog-grid-3cols.html">Grid</a>
-                                        <ul>
-                                            <li><a href="blog-grid-4cols.html">Grid 4 columns</a></li>
-                                            <li><a href="blog-grid-sidebar.html">Grid sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="blog-mask-grid.html">Mask</a>
-                                        <ul>
-                                            <li><a href="blog-mask-grid.html">Blog mask grid</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="post-single.html">Single Post</a>
-                                    </li>
-                                </ul> --}}
-                            </li>
-                            <li>
                                 <a href="about-us.html">Pages</a>
                                 <ul>
 
