@@ -11,10 +11,10 @@
                 <!-- End of Dropdown Menu -->
                 <!-- <span class="divider d-lg-show"></span> -->
                 <a href="my-account.html" class="d-lg-show">My Account</a>
-                <a href="assets/ajax/login.html" class="d-lg-show login sign-in"><i
+                <a href="website/ajax/login.html" class="d-lg-show login sign-in"><i
                         class="w-icon-account"></i>Sign In</a>
                 <span class="delimiter d-lg-show">/</span>
-                <a href="assets/ajax/login.html" class="ml-0 d-lg-show login register">Register</a>
+                <a href="website/ajax/login.html" class="ml-0 d-lg-show login register">Register</a>
             </div>
         </div>
     </div>
@@ -25,8 +25,8 @@
             <div class="header-left mr-md-4">
                 <a href="#" class="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle">
                 </a>
-                <a href="index.html" class="logo ml-lg-0">
-                    <img src="assets/images/pakhir_basa_logo-removebg.png" alt="logo" width="144" height="45" />
+                <a href="{{route('home')}}" class="logo ml-lg-0">
+                    <img src="website/images/pakhir_basa_logo-removebg.png" alt="logo" width="144" height="45" />
                 </a>
                 <form method="get" action="#"
                     class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
@@ -63,7 +63,7 @@
                     <i class="w-icon-heart"></i>
                     <span class="wishlist-label d-lg-show">Wishlist</span>
                 </a>
-                <a class="compare label-down link d-xs-show" href="compare.html">
+                <a class="compare label-down link d-xs-show" href="{{route('compare')}}">
                     <i class="w-icon-compare"></i>
                     <span class="compare-label d-lg-show">Compare</span>
                 </a>
@@ -94,7 +94,7 @@
                                 </div>
                                 <figure class="product-media">
                                     <a href="product-default.html">
-                                        <img src="assets/images/cart/product-1.jpg" alt="product" height="84"
+                                        <img src="website/images/cart/product-1.jpg" alt="product" height="84"
                                             width="94" />
                                     </a>
                                 </figure>
@@ -115,7 +115,7 @@
                                 </div>
                                 <figure class="product-media">
                                     <a href="product-default.html">
-                                        <img src="assets/images/cart/product-2.jpg" alt="product" width="84"
+                                        <img src="website/images/cart/product-2.jpg" alt="product" width="84"
                                             height="94" />
                                     </a>
                                 </figure>
@@ -131,8 +131,8 @@
                         </div>
 
                         <div class="cart-action">
-                            <a href="cart.html" class="btn btn-dark btn-outline btn-rounded">View Cart</a>
-                            <a href="checkout.html" class="btn btn-primary  btn-rounded">Checkout</a>
+                            <a href="" class="btn btn-dark btn-outline btn-rounded">View Cart</a>
+                            <a href="{{route('checkout.user')}}" class="btn btn-primary  btn-rounded">Checkout</a>
                         </div>
                     </div>
                     <!-- End of Dropdown Box -->
@@ -200,7 +200,7 @@
                                         <li>
                                             <div class="banner-fixed menu-banner menu-banner2">
                                                 <figure>
-                                                    <img src="assets/images/menu/banner-2.jpg" alt="Menu Banner"
+                                                    <img src="website/images/menu/banner-2.jpg" alt="Menu Banner"
                                                         width="235" height="347" />
                                                 </figure>
                                                 <div class="banner-content">
@@ -283,7 +283,7 @@
                                         <li>
                                             <div class="menu-banner banner-fixed menu-banner3">
                                                 <figure>
-                                                    <img src="assets/images/menu/banner-3.jpg" alt="Menu Banner"
+                                                    <img src="website/images/menu/banner-3.jpg" alt="Menu Banner"
                                                         width="235" height="461" />
                                                 </figure>
                                                 <div class="banner-content">
@@ -369,7 +369,7 @@
                                         <li>
                                             <div class="menu-banner banner-fixed menu-banner4">
                                                 <figure>
-                                                    <img src="assets/images/menu/banner-4.jpg" alt="Menu Banner"
+                                                    <img src="website/images/menu/banner-4.jpg" alt="Menu Banner"
                                                         width="235" height="433" />
                                                 </figure>
                                                 <div class="banner-content">
@@ -458,7 +458,7 @@
                                             <div class="col-6">
                                                 <div class="banner banner-fixed menu-banner5 br-xs">
                                                     <figure>
-                                                        <img src="assets/images/menu/banner-5.jpg" alt="Banner"
+                                                        <img src="website/images/menu/banner-5.jpg" alt="Banner"
                                                             width="410" height="123"
                                                             style="background-color: #D2D2D2;" />
                                                     </figure>
@@ -478,7 +478,7 @@
                                             <div class="col-6">
                                                 <div class="banner banner-fixed menu-banner5 br-xs">
                                                     <figure>
-                                                        <img src="assets/images/menu/banner-6.jpg" alt="Banner"
+                                                        <img src="website/images/menu/banner-6.jpg" alt="Banner"
                                                             width="410" height="123"
                                                             style="background-color: #9F9888;" />
                                                     </figure>
@@ -545,14 +545,14 @@
                     <nav class="main-nav">
                         <ul class="menu active-underline">
                             <li class="active">
-                                <a href="index.html">Home</a>
+                                <a href="{{route('home')}}">Home</a>
                             </li>
                             <li>
                                 <a href="{{ route('shop.box') }}">Shop</a>
                             </li>
                             <li>
-                                <a href="blog.html">Blog</a>
-                                <ul>
+                                <a href="{{route('blog')}}">Blog</a>
+                                {{-- <ul>
                                     <li><a href="blog.html">Classic</a></li>
                                     <li>
                                         <a href="blog-grid-3cols.html">Grid</a>
@@ -570,20 +570,20 @@
                                     <li>
                                         <a href="post-single.html">Single Post</a>
                                     </li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             <li>
                                 <a href="about-us.html">Pages</a>
                                 <ul>
 
-                                    <li><a href="about-us.html">About Us</a></li>
-                                    <li><a href="faq.html">FAQs</a></li>
+                                    <li><a href="{{route('about.website')}}">About Us</a></li>
+                                    {{-- <li><a href="faq.html">FAQs</a></li> --}}
                                     <li><a href="error-404.html">Error 404</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
+                                    <li><a href="{{route('wishlist')}}">Wishlist</a></li>
                                     <li><a href="cart.html">Cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="compare.html">Compare</a></li>
+                                    <li><a href="{{route('compare')}}">Compare</a></li>
                                 </ul>
                             </li>
                             <li>
