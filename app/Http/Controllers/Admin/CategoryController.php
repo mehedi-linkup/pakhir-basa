@@ -57,9 +57,10 @@ class CategoryController extends Controller
         $image = $request->file('image');
         $extension = $image->getClientOriginalExtension();
         $fileName = rand(111, 99999) . '.' . $extension;
-        $imageResize = Image::make($image->getRealPath());
-        $imageResize->resize(100, 100);
-        $imageResize->save(public_path('uploads/category/' . $fileName));
+        // $imageResize = Image::make($image->getRealPath());
+        // $imageResize->resize(100, 100);
+        // $imageResize->save(public_path('uploads/category/' . $fileName));
+        Image::make($image)->save('uploads/category/' . $fileName);
         $imageNameWithPath = 'uploads/category/' . $fileName;
 
         try {
@@ -125,16 +126,6 @@ class CategoryController extends Controller
         ]);
         $category = Category::find($id);
         $duplicate = Category::where('id', '!=', $id)->where('name', $request->name)->get();
-
-       
-        // $phone->code = rand(4);
-        // $pone->save();
-        
-        // If($only (,phoe-,code) )
-
-
-
-
 
         if (count($duplicate) > 0) {
             Session::flash('duplicate', ' Duplicate Category');

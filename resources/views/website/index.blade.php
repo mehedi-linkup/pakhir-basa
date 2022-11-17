@@ -1,6 +1,6 @@
 @extends('layouts.website')
 @section('website-css')
-<link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/home.min.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('website/assets/css/home.min.css') }}">
 @endsection
 @section('website-content')
 <section class="intro-section">
@@ -13,11 +13,13 @@
         }
     }">
         <div class="swiper-wrapper">
+
+            @foreach ($banner as $key => $item)
             <div class="swiper-slide banner banner-fixed intro-slide intro-slide1"
-                style="background-image: url(website/images/demos/demo1/sliders/slide-1.jpg); background-color: #ebeef2;">
+            style="background-image: url({{ asset($item->bgimage) }}); background-color: #ebeef2;">
                 <div class="container">
                     <figure class="slide-image skrollable slide-animate">
-                        <img src="website/images/demos/demo1/sliders/shoes.png" alt="Banner"
+                        <img src="{{ asset($item->image) }}" alt="Banner"
                             data-bottom-top="transform: translateY(10vh);"
                             data-top-bottom="transform: translateY(-10vh);" width="474" height="397">
                     </figure>
@@ -28,7 +30,7 @@
                         'duration': '1s',
                         'delay': '.2s'
                     }">
-                            Custom <span class="p-relative d-inline-block">Men’s</span>
+                            {{ $item->offer_name }}
                         </h5>
                         <h3 class="banner-title font-weight-bolder ls-25 lh-1 slide-animate"
                             data-animation-options="{
@@ -36,17 +38,17 @@
                         'duration': '1s',
                         'delay': '.4s'
                     }">
-                            RUNNING SHOES
+                            {{ $item->title }}
                         </h3>
-                        <p class="font-weight-normal text-default slide-animate" data-animation-options="{
+                        <div class="font-weight-normal text-default slide-animate" data-animation-options="{
                         'name': 'fadeInRightShorter',
                         'duration': '1s',
                         'delay': '.6s'
-                    }">
-                            Sale up to <span class="font-weight-bolder text-secondary">30% OFF</span>
-                        </p>
+                        }">
+                            {!! $item->short_details !!}
+                        </div>
 
-                        <a href="shop-list.html"
+                        <a href="{{ $item->offer_link }}"
                             class="btn btn-dark btn-outline btn-rounded btn-icon-right slide-animate"
                             data-animation-options="{
                         'name': 'fadeInRightShorter',
@@ -58,110 +60,8 @@
                     <!-- End of .banner-content -->
                 </div>
                 <!-- End of .container -->
-            </div>
-            <!-- End of .intro-slide1 -->
-
-            <div class="swiper-slide banner banner-fixed intro-slide intro-slide2"
-                style="background-image: url(website/images/demos/demo1/sliders/slide-2.jpg); background-color: #ebeef2;">
-                <div class="container">
-                    <figure class="slide-image skrollable slide-animate" data-animation-options="{
-                        'name': 'fadeInUpShorter',
-                        'duration': '1s'
-                    }">
-                        <img src="website/images/demos/demo1/sliders/men.png" alt="Banner"
-                            data-bottom-top="transform: translateX(10vh);"
-                            data-top-bottom="transform: translateX(-10vh);" width="480" height="633">
-                    </figure>
-                    <div class="banner-content d-inline-block y-50">
-                        <h5 class="banner-subtitle font-weight-normal text-default ls-50 slide-animate"
-                            data-animation-options="{
-                            'name': 'fadeInUpShorter',
-                            'duration': '1s',
-                            'delay': '.2s'
-                        }">
-                            Mountain-<span class="text-secondary">Climbing</span>
-                        </h5>
-                        <h3 class="banner-title font-weight-bolder text-dark mb-0 ls-25 slide-animate"
-                            data-animation-options="{
-                            'name': 'fadeInUpShorter',
-                            'duration': '1s',
-                            'delay': '.4s'
-                        }">
-                            Hot & Packback
-                        </h3>
-                        <p class="font-weight-normal text-default slide-animate" data-animation-options="{
-                            'name': 'fadeInUpShorter',
-                            'duration': '1s',
-                            'delay': '.8s'
-                        }">
-                            Only until the end of this week.
-                        </p>
-                        <a href="shop-banner-sidebar.html"
-                            class="btn btn-dark btn-outline btn-rounded btn-icon-right slide-animate"
-                            data-animation-options="{
-                            'name': 'fadeInUpShorter',
-                            'duration': '1s',
-                            'delay': '1s'
-                        }">
-                            SHOP NOW<i class="w-icon-long-arrow-right"></i>
-                        </a>
-                    </div>
-                    <!-- End of .banner-content -->
-                </div>
-                <!-- End of .container -->
-            </div>
-            <!-- End of .intro-slide2 -->
-
-            <div class="swiper-slide banner banner-fixed intro-slide intro-slide3"
-                style="background-image: url(website/images/demos/demo1/sliders/slide-3.jpg); background-color: #f0f1f2;">
-                <div class="container">
-                    <figure class="slide-image skrollable slide-animate" data-animation-options="{
-                        'name': 'fadeInDownShorter',
-                        'duration': '1s'
-                    }">
-                        <img src="website/images/demos/demo1/sliders/skate.png" alt="Banner"
-                            data-bottom-top="transform: translateY(10vh);"
-                            data-top-bottom="transform: translateY(-10vh);" width="310" height="444">
-                    </figure>
-                    <div class="banner-content text-right y-50">
-                        <p class="font-weight-normal text-default text-uppercase mb-0 slide-animate"
-                            data-animation-options="{
-                            'name': 'fadeInLeftShorter',
-                            'duration': '1s',
-                            'delay': '.6s'
-                        }">
-                            Top weekly Seller
-                        </p>
-                        <h5 class="banner-subtitle font-weight-normal text-default ls-25 slide-animate"
-                            data-animation-options="{
-                            'name': 'fadeInLeftShorter',
-                            'duration': '1s',
-                            'delay': '.4s'
-                        }">
-                            Trending Collection
-                        </h5>
-                        <h3 class="banner-title p-relative font-weight-bolder ls-50 slide-animate"
-                            data-animation-options="{
-                            'name': 'fadeInLeftShorter',
-                            'duration': '1s',
-                            'delay': '.2s'
-                        }"><span class="text-white mr-4">Roller</span>-skate
-                        </h3>
-                        <div class="btn-group slide-animate" data-animation-options="{
-                            'name': 'fadeInLeftShorter',
-                            'duration': '1s',
-                            'delay': '.8s'
-                        }">
-                            <a href="shop-list.html"
-                                class="btn btn-dark btn-outline btn-rounded btn-icon-right">SHOP
-                                NOW<i class="w-icon-long-arrow-right"></i></a>
-                        </div>
-                        <!-- End of .banner-content -->
-                    </div>
-                    <!-- End of .container -->
-                </div>
-            </div>
-            <!-- End of .intro-slide3 -->
+            </div> 
+            @endforeach
         </div>
         <div class="swiper-pagination"></div>
         <button class="swiper-button-next"></button>
@@ -171,7 +71,7 @@
 </section>
 <!-- End of .intro-section -->
 
-<div class="container">
+{{-- <div class="container">
     <div class="swiper-container appear-animate icon-box-wrapper br-sm mt-6 mb-6" data-swiper-options="{
         'slidesPerView': 1,
         'loop': false,
@@ -227,11 +127,11 @@
         </div>
     </div>
     <!-- End of Iocn Box Wrapper -->         
-</div>
+</div> --}}
 
 <section class="category-section top-category bg-grey pt-10 pb-10 appear-animate">
     <div class="container pb-2">
-        <h2 class="title justify-content-center pt-1 ls-normal mb-5">Top Categories Of The Month</h2>
+        <h2 class="title justify-content-center pt-1 ls-normal mb-5">Top Categories Of All Time</h2>
         <div class="swiper">
             <div class="swiper-container swiper-theme pg-show" data-swiper-options="{
                 'spaceBetween': 20,
@@ -250,162 +150,21 @@
                 }
             }">
                 <div class="swiper-wrapper row cols-lg-6 cols-md-5 cols-sm-3 cols-2">
+                    @foreach ($topcategory as $item)
                     <div
                         class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-1.jpg" alt="Category"
+                        <a href="{{ route('shop.box') }}" class="category-media">
+                            <img src="{{ asset($item->image) }}" alt="{{ $item->name }}"
                                 width="130" height="130">
                         </a>
                         <div class="category-content">
-                            <h4 class="category-name">Fashion</h4>
-                            <a href="shop-banner-sidebar.html"
+                            <h4 class="category-name">{{ $item->name }}</h4>
+                            <a href="{{ route('shop.box') }}"
                                 class="btn btn-primary btn-link btn-underline">Shop
                                 Now</a>
                         </div>
                     </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-2.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Furniture</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-3.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Shoes</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-4.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Sports</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-5.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Games</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-6.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Computers</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-1.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Fashion</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-2.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Furniture</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-3.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Shoes</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-4.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Sports</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-5.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Games</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                    <div
-                        class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="shop-banner-sidebar.html" class="category-media">
-                            <img src="{{ asset('/') }}website/images/demos/demo1/categories/2-6.jpg" alt="Category"
-                                width="130" height="130">
-                        </a>
-                        <div class="category-content">
-                            <h4 class="category-name">Computers</h4>
-                            <a href="shop-banner-sidebar.html"
-                                class="btn btn-primary btn-link btn-underline">Shop
-                                Now</a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

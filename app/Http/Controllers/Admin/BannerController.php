@@ -31,6 +31,7 @@ class BannerController extends Controller
         'offer_name' => 'required|max:100',
         'offer_link' => 'required|max:120',
         'image' => 'required|max:1000||Image|mimes:jpg,png,jpeg,bmp',
+        'bgimage' => 'required|max:1000||Image|mimes:jpg,png,jpeg,bmp',
         'ip_address' => 'max:15'
       ]);
       $banner = new Banner();
@@ -39,6 +40,7 @@ class BannerController extends Controller
       $banner->offer_name = $request->offer_name;
       $banner->offer_link = $request->offer_link;
       $banner->image = $this->imageUpload($request, 'image', 'uploads/banner');
+      $banner->bgimage = $this->imageUpload($request, 'bgimage', 'uploads/banner/background');
       $banner->save_by = 1;
       $banner->updated_by = 1;
       $banner->ip_address = $request->ip();
@@ -72,8 +74,16 @@ class BannerController extends Controller
     $banner->offer_name = $request->offer_name;
     $banner->offer_link = $request->offer_link;
     if ($request->hasFile('image')) {
-      @unlink($banner->image);
-      $banner->image = $this->imageUpload($request, 'image', 'uploads/category');
+      if(file_exists($banner->image)) {
+        @unlink($banner->image);
+      }
+      $banner->image = $this->imageUpload($request, 'image', 'uploads/banner');
+    }
+    if ($request->hasFile('bgimage')) {
+      if(file_exists($banner->bgimage)) {
+        @unlink($banner->bgimage);
+      }
+      $banner->bgimage = $this->imageUpload($request, 'bgimage', 'uploads/banner/background');
     }
     // $banner->image= $this->imageUpload($request, 'image', 'uploads/banner');
     $banner->save_by = 1;
@@ -87,7 +97,14 @@ class BannerController extends Controller
   {
     $banner = Banner::where('id', $id)->first();
     if ($banner->image) {
-      @unlink($banner->image);
+      if(file_exists($banner->image)){
+        @unlink($banner->image);
+      }
+    }
+    if($banner->bgimage) {
+      if(file_exists($banner->bgimage)){
+        @unlink($banner->bgimage);
+      }
     }
     $banner->delete();
     $data = "Data Deleted Successfully";

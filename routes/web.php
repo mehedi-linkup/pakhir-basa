@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PagelistController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -237,14 +238,22 @@ Route::post('/login',[AuthController::class, 'authCheck'])->name('login.check');
 
         // subcategory route
         // Route::resource('/subcategory', SubcategoryController::class)->except('create', 'show')->middleware('check');
-         // category route
-         Route::get('/subcategory',[SubcategoryController::class,'index'])->name('subcategory.index')->middleware('check');
-         Route::post('/subcategory/store',[SubcategoryController::class,'store'])->name('subcategory.store');
-         Route::get('/subcategory/edit/{id}',[SubcategoryController::class,'edit'])->name('subcategory.edit')->middleware('check');
-         Route::put('/subcategory/update/{id}',[SubcategoryController::class,'update'])->name('subcategory.update');
-         Route::delete('/subcategory/{id}',[SubcategoryController::class,'destroy'])->name('subcategory.destroy');
+        // category route
+        Route::get('/subcategory',[SubcategoryController::class,'index'])->name('subcategory.index')->middleware('check');
+        Route::post('/subcategory/store',[SubcategoryController::class,'store'])->name('subcategory.store');
+        Route::get('/subcategory/edit/{id}',[SubcategoryController::class,'edit'])->name('subcategory.edit')->middleware('check');
+        Route::put('/subcategory/update/{id}',[SubcategoryController::class,'update'])->name('subcategory.update');
+        Route::delete('/subcategory/{id}',[SubcategoryController::class,'destroy'])->name('subcategory.destroy');
 
         Route::get('/subcategory-list', [SubcategoryController::class, 'list'])->name('subcategory.list')->middleware('check');
+        
+        Route::get('/childcategory', [ChildCategoryController::class, 'index'])->name('childcategory.index')->middleware(('check'));
+        Route::post('/childcategory/store',[ChildCategoryController::class,'store'])->name('childcategory.store');
+        Route::get('/childcategory/edit/{id}',[ChildCategoryController::class,'edit'])->name('childcategory.edit')->middleware('check');
+        Route::put('/childcategory/update/{id}',[ChildCategoryController::class,'update'])->name('childcategory.update');
+        Route::delete('/childcategory/{id}',[ChildCategoryController::class,'destroy'])->name('childcategory.destroy');
+        Route::get('/childcategory-list', [ChildCategoryController::class, 'list'])->name('childcategory.list')->middleware('check');
+        
         // product route dfsdfs
         Route::get('/product-create', [ProductController::class, 'create'])->name('product.create')->middleware('check');
         Route::post('/product-store', [ProductController::class, 'store'])->name('product.store');

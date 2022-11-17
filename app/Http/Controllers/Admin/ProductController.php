@@ -108,7 +108,7 @@ class ProductController extends Controller
             $mainImage = 'p-' . time() . uniqid() . $image->getClientOriginalName();
             $thumbImage = 'thumb-' . time() . uniqid() . $image->getClientOriginalName();
             Image::make($image)->save('uploads/product/' . $mainImage);
-            Image::make($image)->resize(100,75)->save('uploads/product/thumbnail/' . $thumbImage);
+            Image::make($image)->resize(100,75)->save('uploads/product/thumbnail/'.$thumbImage);
 
             $product->image = $mainImage;
             $product->thum_image = $thumbImage;

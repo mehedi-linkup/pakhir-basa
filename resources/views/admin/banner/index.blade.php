@@ -7,68 +7,83 @@
         <span class="my-3 heading "><i class="fas fa-home"></i> <a class="" href="{{route('admin.index')}}">Home</a> >Banner</span>
     </div>
             <form id="bannerCreate" class="bannerCreate"  enctype="multipart/form-data">
-               
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header py-1">
-                                <div class="addT"><i class="fas fa-images me-1"></i>Add Banner</div>
-                                <div class="updateT" style="display: none"><i class="fas fa-images me-1"></i>Update Banner</div>
-                            </div>
-                            <input type="hidden" id="id" name="id">
-                                <div class="card-body table-card-body">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <strong><label>Title</label> <span class="float-right">:</span></strong>
+                            <div class="card-body table-card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card-header py-1">
+                                            <div class="addT"><i class="fas fa-images me-1"></i>Add Banner</div>
+                                            <div class="updateT" style="display: none"><i class="fas fa-images me-1"></i>Update Banner</div>
                                         </div>
-                                        <div class="col-md-9">
-                                          <input type="text" class="form-control my-form-control"  id="title"  name="title">
-                                          <strong><span class="text-danger" id="titleError"></span></strong>
+                                        <input type="hidden" id="id" name="id">
+                                        <div class="row">
+                                            <div class="col-md-3 mt-2">
+                                                <strong><label>Title</label> <span class="float-right">:</span></strong>
+                                            </div>
+                                            <div class="col-md-9 mt-2">
+                                                <input type="text" class="form-control my-form-control"  id="title"  name="title">
+                                                <strong><span class="text-danger" id="titleError"></span></strong>
+                                            </div>
+                                            <div class="col-md-3 mt-2">
+                                                <strong><label>Sub Title</label> <span class="float-right">:</span></strong>
+                                            </div>
+                                            <div class="col-md-9 mt-2">
+                                                <input type="text" class="form-control my-form-control" id="offer_name" name="offer_name">
+                                                <strong><span class="text-danger" id="offerError"></span></strong>
+                                            </div>
+                                            <div class="col-md-3 mt-2">
+                                                <strong><label>Short Details</label> <span class="float-right">:</span></strong>
+                                            </div>
+                                            <div class="col-md-9 mt-2">
+                                                {{-- <div class="form-control"  id="short_details"></div> --}}
+                                                <textarea name="short_details" id="short_details" class="form-control"></textarea>
+                                            </div>
+                                            <div class="col-md-3 mt-2">
+                                                <strong><label>Slider Link</label> <span class="float-right">:</span></strong>
+                                            </div>
+                                            <div class="col-md-9 mt-2">
+                                                <input type="text" class="form-control my-form-control" id="offer_link" name="offer_link">
+                                                <strong><span class="text-danger" id="offerlinkError"></span></strong>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <strong><label>Image<small class="text-danger">(480px X 633px)</small></label></strong>
+                                            </div>
+                                            <div class="col-md-5 mt-2">
+                                                <input type="file" class="form-control  my-form-control" id="image" name="image" onchange="readURL(this);">
+                                                <strong><span class="text-danger" id="imageError"></span></strong>
+                                            </div>
+                                            <div class="col-md-4 mt-2">
+                                                <img class="form-controlo img-thumbnail" src="#" id="previewImage" style="height:100px;width:120px; background: #3f4a49;">
+                                            </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <strong><label>Short Details</label> <span class="float-right">:</span></strong>
-                                        </div>
-                                        <div class="col-md-9">
-                                          {{-- <div class="form-control"  id="short_details"></div> --}}
-                                          <textarea name="short_details" id="short_details" class="form-control"></textarea>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <strong><label>Offer Name</label> <span class="float-right">:</span></strong>
-                                        </div>
-                                        <div class="col-md-9 mt-2">
-                                          <input type="text" class="form-control my-form-control" id="offer_name" name="offer_name">
-                                          <strong><span class="text-danger" id="offerError"></span></strong>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <strong><label>Offer Link</label> <span class="float-right">:</span></strong>
-                                        </div>
-                                        <div class="col-md-9">
-                                          <input type="text" class="form-control my-form-control" id="offer_link" name="offer_link">
-                                          <strong><span class="text-danger" id="offerlinkError"></span></strong>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <strong><label>Image</label> <span class="float-right">:</span></strong>
-                                        </div>
-                                        <div class="col-md-5 mt-2">
-                                            <input type="file" class="form-control  my-form-control" id="image" name="image" onchange="readURL(this);">
-                                            <strong><span class="text-danger" id="imageError"></span></strong>
-                                        </div>
-                                        <div class="col-md-4 mt-2">
-                                            <img class="form-controlo img-thumbnail" src="#" id="previewImage" style="height:100px;width:120px; background: #3f4a49;">
+                                        <div class="row">
+                                            <div class="col-md-12 text-right">
+                                                <button type="submit" class="btn btn-primary btn-sm mt-3" id="createBtn" onclick="addData()" value="Submit">Save</button>
+                                                <button type="submit" class="btn btn-primary btn-sm mt-3" id="updateBtn" style="display: none" value="Submit">Update</button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <button type="submit" class="btn btn-primary btn-sm mt-2 float-right mt-3 btn-p" id="createBtn" onclick="addData()" value="Submit">Create</button>
-                                            <button type="submit" class="btn btn-primary btn-sm mt-2 float-right mt-3 btn-p" id="updateBtn" style="display: none" value="Submit">Update</button>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <strong><label>Background Image<small class="text-danger">(Size: 1903px X 520px)</small></label></strong>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="file" class="form-control my-form-control" id="bgimage" name="bgimage" onchange="readURLBg(this);">
+                                                <strong><span class="text-danger" id="bgimageError"></span></strong>
+                                            </div>
+                                            <div class="col-md-12 mt-2">
+                                                <img class="form-controlo img-thumbnail" src="#" id="previewbgImage" style="height:200px;width:100%; background: #3f4a49; object-fit:contain">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                        
-                            
-                        </div> 
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card"> 
                             <div class="card-header py-1">
                                 <div class="table-head"><i class="fas fa-table me-1"></i>Banner List <a href="#" class="btn btn-sm float-right"><i class="fas fa-print"></i></a></div>
@@ -110,45 +125,42 @@
 <script src="{{ asset('admin/js/sweetalert2.all.js') }}"></script>
 <script>
     ClassicEditor
-        .create( document.querySelector( '#short_details' ) )
+        .create( document.querySelector('#short_details'))
         .catch( error => {
             console.error( error );
-        } );
-        
-</script>
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#details' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-        
-</script>
-<script> 
-function readURL(input) {
+        });
+    function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload=function(e) {
                 $('#previewImage')
                     .attr('src', e.target.result)
                     .width(100);
-                   
+                    
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
-    document.getElementById("previewImage").src="/noimage.png";
-    
-</script> 
+    document.getElementById("previewImage").src="/noimage.png";  
 
-<script>
-    // ajax header setup
-     $.ajaxSetup({
+    function readURLBg(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload=function(e) {
+                $('#previewbgImage')
+                    .attr('src', e.target.result)
+                    .width(100+'%');
+                    
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
 
         // all data retrive from database
         function allData(){
@@ -163,6 +175,8 @@ function readURL(input) {
                         data = data + '<td>'+value.title+'</td>'
                         data = data + '<td>'+value.offer_name+'</td>'
                         data = data + '<td>'+value.offer_link+'</td>'
+                        // data = data + `<td><img src="asset(${value.image})" height = 50></td>`
+                        
                         data = data + '<td>'+value.short_details+'</td>'
                         data = data + '<td class="text-nowrap text-center">'
                         data = data + '<a class="btn btn-edit btn-info btn-sm " id="createSubmit" onclick="editData('+value.id+')"><i class="fas fa-edit"></i></a>'
@@ -174,7 +188,6 @@ function readURL(input) {
             })
         }
         allData();
-
        
         $(document).on('submit', '.bannerCreate', function(e){
             e.preventDefault();
@@ -194,6 +207,7 @@ function readURL(input) {
                     $('#short_details').val('');
                     $('#imagePreview').val('');
                     $('#previewImage').attr('src','/noimage.png');
+                    $('#previewbgImage').attr('src', '');
 
                      // error messag hide
                      $('#titleError').text('');
@@ -205,6 +219,8 @@ function readURL(input) {
                     $('#offer_link').removeClass('is-invalid');
                     $('#imageError').text('');
                     $('#image').removeClass('is-invalid');
+                    $('#bgimageError').text('');
+                    $('#bgimage').removeClass('is-invalid');
                 },
                 error:function(data){
                     $('#titleError').text(data.responseJSON.errors.title);
@@ -223,6 +239,10 @@ function readURL(input) {
                     if(data.responseJSON.errors.image){
                         $('#image').addClass('is-invalid');
                     }
+                    $('#bgimageError').text(data.responseJSON.errors.bgimage);
+                    if(data.responseJSON.errors.bgimage){
+                        $('#bgimage').addClass('is-invalid');
+                    }
                 }
 
             });
@@ -240,22 +260,27 @@ function readURL(input) {
               $('#updateBtn').show();
               $('#title').val(res.title);
               $('#short_details').html(res.short_details);
+                // ClassicEditor.instances['#short_details'].insertText(res.short_details);
+                // $('#short_details').ClassicEditor().editor.insertHtml(res.short_details);
               $('#offer_name').val(res.offer_name);
               $('#offer_link').val(res.offer_link);
               $('#previewImage').attr('src',res.image);
+              $('#previewbgImage').attr('src', window.location.origin+'/'+res.bgimage);
               $('#id').val(res.id);
               $('#bannerCreate').removeClass('bannerCreate');
               $('#bannerCreate').addClass('editCreate');
                // error messag hide
                $('#titleError').text('');
-                    $('#title').removeClass('is-invalid');
-                    $('#short_details').removeClass('is-invalid');
-                    $('#offerError').text('');
-                    $('#offer_name').removeClass('is-invalid');
-                    $('#offerlinkError').text('');
-                    $('#offer_link').removeClass('is-invalid');
-                    $('#imageError').text('');
-                    $('#image').removeClass('is-invalid');
+                $('#title').removeClass('is-invalid');
+                $('#short_details').removeClass('is-invalid');
+                $('#offerError').text('');
+                $('#offer_name').removeClass('is-invalid');
+                $('#offerlinkError').text('');
+                $('#offer_link').removeClass('is-invalid');
+                $('#imageError').text('');
+                $('#image').removeClass('is-invalid');
+                $('#bgimageError').text('');
+                $('#bgimage').removeClass('is-invalid');
             }
           })
         }
@@ -287,6 +312,9 @@ function readURL(input) {
                     $('#imageError').text('');
                     $('#image').removeClass('is-invalid');
                     $('#previewImage').attr('src','/noimage.png');
+                    $('#bgimageError').text('');
+                    $('#bgimage').removeClass('is-invalid');
+                    $('#previewbgImage').attr('src', '');
                    
                 },
                 error:function(data){
@@ -306,6 +334,10 @@ function readURL(input) {
                     if(data.responseJSON.errors.image){
                         $('#image').addClass('is-invalid');
                     }
+                    $('#bgimageError').text(data.responseJSON.errors.bgimage);
+                    if(data.responseJSON.errors.bgimage){
+                        $('#bgimage').addClass('is-invalid');
+                    }
                 }
 
             });
@@ -317,7 +349,7 @@ function readURL(input) {
             var x = confirm("Are you sure you want to delete?");
                 if (x)
                 $.ajax({
-                url:"/website-content/banner/delete/"+id,
+                    url:"/website-content/banner/delete/"+id,
                     type:"get",
                     dataType:"json",
                     success:function(res){

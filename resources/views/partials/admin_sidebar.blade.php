@@ -12,7 +12,7 @@
                     Dashboard
                 </a>
                 @php
-                    $permisson = \App\Models\Permission::with('page')->where('user_id',Auth::id())->get();
+                   $permisson = \App\Models\Permission::with('page')->where('user_id',Auth::id())->get();
                  @endphp
                 @foreach ($permisson as $p)
                     @if($p->page->name == 'order.index')
@@ -192,6 +192,16 @@
                                     <a class="nav-link {{($route == 'subcategory.list')?'active':''}}" href="{{ route('subcategory.list') }}"><i class="fas fa-angle-right"></i>&nbsp;Sub Category List</a>
                                 @endif
                             @endif
+                            @if ($p->page->name == 'childcategory.index')
+                            @if($p->page->status == 1)
+                                <a class="nav-link {{($route == 'childcategory.index')?'active':''}}" href="{{ route('childcategory.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Child Category Entry</a>
+                            @endif
+                            @endif
+                            @if ($p->page->name == 'childcategory.list')
+                            @if($p->page->status == 1)
+                                <a class="nav-link {{($route == 'childcategory.list')?'active':''}}" href="{{ route('childcategory.list') }}"><i class="fas fa-angle-right"></i>&nbsp;Child Category List</a>
+                            @endif
+                            @endif
                             @if ($p->page->name == 'color.index')
                                 @if($p->page->status == 1)
                                     <a class="nav-link {{($route == 'color.index')?'active':''}}" href="{{ route('color.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Color </a>
@@ -364,11 +374,17 @@
                                     <a class="nav-link {{($route == 'admin.phone.edit')?'active':''}}" href="{{ route('admin.phone.edit') }}"><i class="fas fa-angle-right"></i>&nbsp;Admin Phone Edit</a>
                                 @endif
                              @endif
+                                @if ($p->page->name == 'page.index')
+                                @if($p->page->status == 1)
+                                 <a class="nav-link {{($route == 'page.index')?'active':''}}" href="{{ route('page.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Page Entry</a>
+                             @endif
+                            @endif
                             @if ($p->page->name == 'page.list')
                                 @if($p->page->status == 1)
                                     <a class="nav-link {{($route == 'page.list')?'active':''}}" href="{{ route('page.list') }}"><i class="fas fa-angle-right"></i>&nbsp;Page List</a>
                                 @endif
                             @endif
+                           
                             @if ($p->page->name == 'area.index')
                                 @if($p->page->status == 1)
                                     <a class="nav-link {{($route == 'area.index')?'active':''}}" href="{{ route('area.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Area Entry</a>

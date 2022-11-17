@@ -20,6 +20,7 @@ class CreateBannersTable extends Migration
             $table->text('short_details')->nullable();
             $table->string('offer_link', 120)->nullable();
             $table->text('image');
+            $table->text('bgimage')->nullable();
             $table->string('status', 1)->default('a');
             $table->string('save_by', 3);
             $table->string('updated_by', 3);
