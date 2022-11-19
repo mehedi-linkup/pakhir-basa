@@ -26,7 +26,7 @@
                 <a href="#" class="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle">
                 </a>
                 <a href="{{route('home')}}" class="logo ml-lg-0">
-                    <img src="website/images/pakhir_basa_logo-removebg.png" alt="logo" width="144" height="45" />
+                    <img src="{{ $content->logo }}" alt="logo" width="auto" style="height: 47px" />
                 </a>
                 <form method="get" action="#"
                     class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">

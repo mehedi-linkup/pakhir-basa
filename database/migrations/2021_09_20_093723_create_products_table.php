@@ -24,6 +24,9 @@ class CreateProductsTable extends Migration
             $table->foreignId('sub_category_id')->nullable() 
                     ->constrained('sub_categories')
                     ->onDelete('cascade');  
+            $table->foreignId('child_category_id')->nullable() 
+                ->constrained('child_categories')
+                ->onDelete('cascade');  
             $table->decimal('price', 18,2);
             $table->text('image');
             $table->text('thum_image')->nullable();

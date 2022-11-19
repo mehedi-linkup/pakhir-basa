@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ChildCategory;
 use App\Models\Color;
 use App\Models\Inventory;
 use App\Models\Size;
@@ -53,6 +54,13 @@ class ProductController extends Controller
         $subCategory = SubCategory::where('category_id', $id)->get();
         return response()->json($subCategory);
     }
+
+    public function getChildcategory($id)
+    {
+        $childCategory = ChildCategory::where('subcategory_id', $id)->get();
+        return response()->json($childCategory);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

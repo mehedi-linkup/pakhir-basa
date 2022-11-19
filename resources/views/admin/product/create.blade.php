@@ -207,6 +207,29 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-md-4">
+                                                    <strong><label>Child Category</label><span class="my-label">:</span></strong>
+                                                </div>
+                                                <div class="col-md-8 mt-1">
+                                                    <div class="input-group input-group-sm">
+                                                        <select name="child_category_id" id="child_category_id"
+                                                            class="js-example-basic-multiple form-control my-form-control @error('child_category_id') is-invalid @enderror "
+                                                            data-live-search="true">
+                                                            <option data-tokens="ketchup mustard" value="">Select Child
+                                                                Category</option>
+                                                        </select>
+                                                        <div class="input-group-append">
+                                                            <a class="border rounded my-select my-form-control py-0 px-2"
+                                                                href="{{ route('childcategory.index') }}"
+                                                                target="_blank"><i class="fas fa-plus"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    @error('child_category_id')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-md-4">
                                                     <strong><label>Product Size</label> <span
                                                             class="my-label">:</span> </strong>
                                                 </div>
@@ -466,6 +489,25 @@
                         $('#sub_category_id').empty();
                         $.each(data, function(key, value) {
                             $('#sub_category_id').append('<option value="' + value.id +
+                                '">' + value.name + '</option>');
+                        });
+                    }
+                });
+
+            });
+        });
+
+        $(document).ready(function() {
+            $("select[name='sub_category_id']").on('change', function() {
+                var subcategory_id = $(this).val();
+                $.ajax({
+                    url: "{{ url('product/childcategory/list/') }}/" + subcategory_id,
+                    dataType: "json",
+                    method: "GET",
+                    success: function(data) {
+                        $('#child_category_id').empty();
+                        $.each(data, function(key, value) {
+                            $('#child_category_id').append('<option value="' + value.id +
                                 '">' + value.name + '</option>');
                         });
                     }
