@@ -13,7 +13,6 @@
         }
     }">
         <div class="swiper-wrapper">
-
             @foreach ($banner as $key => $item)
             <div class="swiper-slide banner banner-fixed intro-slide intro-slide1"
             style="background-image: url({{ asset($item->bgimage) }}); background-color: #ebeef2;">

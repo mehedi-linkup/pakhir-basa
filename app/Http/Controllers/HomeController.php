@@ -25,6 +25,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        
         $banner = Banner::latest()->get();
         $topcategory = Category::with('SubCategory')->orderBy('rank_id', 'ASC')->get();
         $recent = Product::latest()->take(24)->get();
