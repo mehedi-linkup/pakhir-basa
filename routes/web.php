@@ -259,6 +259,7 @@ Route::post('/login',[AuthController::class, 'authCheck'])->name('login.check');
         Route::post('/product-store', [ProductController::class, 'store'])->name('product.store');
 
         Route::get('/subcategory/list/{id}', [ProductController::class, 'getSubcategory']);
+        Route::get('/childcategory/list/{id}', [ProductController::class, 'getChildcategory']);
 
         Route::get('/products', [ProductController::class, 'index'])->name('product.index');
         Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');

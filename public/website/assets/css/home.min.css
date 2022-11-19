@@ -13039,8 +13039,8 @@ aside .sp-sidebar-banner span {
 }
 
 .header-middle {
-  padding-top: 3.2rem;
-  padding-bottom: 3.2rem;
+  padding-top: 2.8rem;
+  padding-bottom: 2.8rem;
   color: #333;
   background: #fff;
   font-size: 1.2rem;
@@ -14558,6 +14558,8 @@ aside .sp-sidebar-banner span {
 .category-menu {
   padding: 1rem 0;
   background: #fff;
+  max-height: 460px;
+  overflow-y: clip;
 }
 .category-menu i {
   display: inline-block;
@@ -15179,7 +15181,6 @@ aside .sp-sidebar-banner span {
   -webkit-transform: none;
           transform: none;
 }
-
 .category-dropdown:hover > a, .category-dropdown.show > a {
   background-color: #f1f1f1;
 }
@@ -15224,7 +15225,8 @@ aside .sp-sidebar-banner span {
 }
 
 .intro-slide {
-  min-height: 520px;
+  /* min-height: 520px; */
+  min-height: 460px;
   height: 100%;
 }
 .intro-slide .banner-content {

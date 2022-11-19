@@ -193,14 +193,14 @@
                                 @endif
                             @endif
                             @if ($p->page->name == 'childcategory.index')
-                            @if($p->page->status == 1)
-                                <a class="nav-link {{($route == 'childcategory.index')?'active':''}}" href="{{ route('childcategory.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Child Category Entry</a>
-                            @endif
+                                @if($p->page->status == 1)
+                                    <a class="nav-link {{($route == 'childcategory.index')?'active':''}}" href="{{ route('childcategory.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Child Category Entry</a>
+                                @endif
                             @endif
                             @if ($p->page->name == 'childcategory.list')
-                            @if($p->page->status == 1)
-                                <a class="nav-link {{($route == 'childcategory.list')?'active':''}}" href="{{ route('childcategory.list') }}"><i class="fas fa-angle-right"></i>&nbsp;Child Category List</a>
-                            @endif
+                                @if($p->page->status == 1)
+                                    <a class="nav-link {{($route == 'childcategory.list')?'active':''}}" href="{{ route('childcategory.list') }}"><i class="fas fa-angle-right"></i>&nbsp;Child Category List</a>
+                                @endif
                             @endif
                             @if ($p->page->name == 'color.index')
                                 @if($p->page->status == 1)
