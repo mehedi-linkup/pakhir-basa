@@ -78,6 +78,14 @@ class HomeController extends Controller
     {
         return view('website.wishList');
     }
+    public function shopBanner()
+    {
+        return view('website.shopBanner');
+    }
+    public function checkOut()
+    {
+        return view('website.checkout');
+    }
 
 
 

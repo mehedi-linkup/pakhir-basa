@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'subsubcategory')
+@section('title', 'subcategory')
 @section('admin-content')
 @push('admin-css')
   <style>

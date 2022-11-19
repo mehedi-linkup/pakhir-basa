@@ -192,6 +192,11 @@
                                     <a class="nav-link {{($route == 'subcategory.list')?'active':''}}" href="{{ route('subcategory.list') }}"><i class="fas fa-angle-right"></i>&nbsp;Sub Category List</a>
                                 @endif
                             @endif
+                            {{-- @if ($p->page->name == 'subsubcategory.index')
+                                @if($p->page->status == 1)
+                                <a class="nav-link {{($route == 'subsubcategory.index')?'active':''}}" href="{{ route('subsubcategory.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Sub Subcategory Entry</a>
+                                @endif
+                            @endif --}}
                             @if ($p->page->name == 'color.index')
                                 @if($p->page->status == 1)
                                     <a class="nav-link {{($route == 'color.index')?'active':''}}" href="{{ route('color.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Color </a>

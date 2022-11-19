@@ -35,11 +35,13 @@ use App\Http\Controllers\Admin\PhotoGalleryController;
 use App\Http\Controllers\Admin\PublicMessageController;
 use App\Http\Controllers\Admin\MessageSendingController;
 use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\SubsubcategoryController;
 use App\Http\Controllers\Admin\ThanaController;
 use App\Http\Controllers\Admin\TimeSetController;
 use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\CustomerController as CustomerCustomerController;
 use App\Http\Controllers\Customer\OrderCancelController;
+use App\Models\Subsubcategory;
 use Illuminate\Support\Facades\Artisan;
 
 // optimiZe
@@ -60,6 +62,8 @@ Route::get('/allproduct',[HomeController::class,'allProduct'])->name('all.produc
 // Route::get('/blog-details',[HomeController::class,'blogDetails'])->name('blog.details');
 Route::get('/compare',[HomeController::class,'compare'])->name('compare');
 Route::get('/wishlist',[HomeController::class,'wishlist'])->name('wishlist');
+Route::get('/shop-banner',[HomeController::class,'shopBanner'])->name('shop.banner');
+Route::get('/checkout',[HomeController::class,'checkOut'])->name('check.out');
 
 // company profile route
 
@@ -245,6 +249,8 @@ Route::post('/login',[AuthController::class, 'authCheck'])->name('login.check');
          Route::delete('/subcategory/{id}',[SubcategoryController::class,'destroy'])->name('subcategory.destroy');
 
         Route::get('/subcategory-list', [SubcategoryController::class, 'list'])->name('subcategory.list')->middleware('check');
+        //sub subcategory
+        // Route::get('sub-subcategory',[SubsubcategoryController::class,'index'])->name('subsubcategory.index')->middleware('check');
         // product route dfsdfs
         Route::get('/product-create', [ProductController::class, 'create'])->name('product.create')->middleware('check');
         Route::post('/product-store', [ProductController::class, 'store'])->name('product.store');
