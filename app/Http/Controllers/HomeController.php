@@ -62,21 +62,14 @@ class HomeController extends Controller
         $product['image'] = asset('uploads/product/' . $product->image);
         return response()->json($product);
     }
-    public function blog()
+  
+    public function shopBanner()
     {
-        return view('website.blog');
+        return view('website.shopBanner');
     }
-    public function blogDetails()
+    public function checkOut()
     {
-        return view('website.blogDetails');
-    }
-    public function compare()
-    {
-        return view('website.compare');
-    }
-    public function wishlist()
-    {
-        return view('website.wishList');
+        return view('website.checkout');
     }
 
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>{{ $content->title }}</title>
+    <title>{{ $content->company_name }}</title>
     <meta name="keywords" content="Pakhir Basa Theme" />
     <meta name="description" content="Pakhir Basa Ecommerce Site">
     <meta name="author" content="Mehedi Hasan">
@@ -28,13 +28,11 @@
         crossorigin="anonymous">
     <link rel="preload" href="{{ asset('/') }}website/assets/fonts/wolmart87d5.woff?png09e" as="font" type="font/woff" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/vendor/fontawesome-free/css/all.min.css">
-    <!-- <link rel="stylesheet" href="{{ asset('/') }}website/vendor/swiper/swiper-bundle.min.css"> -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/vendor/animate/animate.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/vendor/magnific-popup/magnific-popup.min.css"> -->
     <link rel="stylesheet" href="{{ asset('/') }}website/vendor/swiper/swiper-bundle.min.css">
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/demo1.min.css"> --}}
      <!-- Default CSS -->
      <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/style.min.css">
+     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/custom.css">
     @yield('website-css')
 </head>
 <body class="home">

@@ -36,11 +36,13 @@ use App\Http\Controllers\Admin\PhotoGalleryController;
 use App\Http\Controllers\Admin\PublicMessageController;
 use App\Http\Controllers\Admin\MessageSendingController;
 use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\SubsubcategoryController;
 use App\Http\Controllers\Admin\ThanaController;
 use App\Http\Controllers\Admin\TimeSetController;
 use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\CustomerController as CustomerCustomerController;
 use App\Http\Controllers\Customer\OrderCancelController;
+use App\Models\Subsubcategory;
 use Illuminate\Support\Facades\Artisan;
 
 // optimiZe
@@ -57,10 +59,8 @@ Route::get('/category/{slug}', [HomeController::class, 'CategoryWise'])->name('c
 Route::get('/SubCategory/{slug}', [HomeController::class, 'SubCategoryWise'])->name('SubCategoryWise.list');
 Route::get('/subcategory/list/{slug}',[HomeController::class,'singleSubCategory'])->name('single.subcategory.list');
 Route::get('/allproduct',[HomeController::class,'allProduct'])->name('all.product');
-// Route::get('/blog',[HomeController::class,'blog'])->name('blog');
-// Route::get('/blog-details',[HomeController::class,'blogDetails'])->name('blog.details');
-Route::get('/compare',[HomeController::class,'compare'])->name('compare');
-Route::get('/wishlist',[HomeController::class,'wishlist'])->name('wishlist');
+Route::get('/shop-banner',[HomeController::class,'shopBanner'])->name('shop.banner');
+Route::get('/checkout',[HomeController::class,'checkOut'])->name('check.out');
 
 // company profile route
 
