@@ -720,6 +720,30 @@
 
     <!-- Main JS -->
     <script src="{{asset('/')}}website/assets/js/main.js"></script>
+
+
+    <script>
+         function addToCard(id) {
+            var url = "/cart-add/"+id;
+            $.ajax({
+                    url: url,
+                    type: "get",
+                    dataType: "json",
+                    success:function(res) {
+                        let new_time = new Date().getTime();
+            
+                        localStorage.setItem('cartTime',new_time);
+                        cartAllData();
+                        $('#details-btn'+id).show();
+                        $('#addCart'+id).hide();
+                    }
+                })
+            var overlay_1 = $('.overlay-1'+id).hide();
+            $('.overlay-2'+id).show();
+            $('#add-btn'+id).remove();
+            $('#increment_decrement_part').show();
+        }
+    </script>
 </body>
 
 </html>

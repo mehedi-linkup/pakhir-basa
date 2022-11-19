@@ -72,7 +72,6 @@
                             <span>Shopping Cart</span>
                             <a href="#" class="btn-close">Close<i class="w-icon-long-arrow-right"></i></a>
                         </div>
-
                         <div class="products">
                             <div class="product product-cart">
                                 <div class="product-detail">
