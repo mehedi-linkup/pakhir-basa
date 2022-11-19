@@ -11,7 +11,7 @@
                 <!-- End of Dropdown Menu -->
                 <!-- <span class="divider d-lg-show"></span> -->
                 <a href="my-account.html" class="d-lg-show">My Account</a>
-                <a href="website/ajax/login.html" class="d-lg-show login sign-in"><i
+                <a href="{{route('customer.login')}}" class="d-lg-show login sign-in"><i
                         class="w-icon-account"></i>Sign In</a>
                 <span class="delimiter d-lg-show">/</span>
                 <a href="website/ajax/login.html" class="ml-0 d-lg-show login register">Register</a>
@@ -55,18 +55,10 @@
                     <a href="tel:#" class="w-icon-call"></a>
                     <div class="call-info d-lg-show">
                         <h4 class="chat font-weight-normal font-size-md text-normal ls-normal text-light mb-0">
-                            <a href="mailto:#" class="text-capitalize">Live Chat</a> or :</h4>
-                        <a href="tel:#" class="phone-number font-weight-bolder ls-50">0(800)123-456</a>
+                            <a href="mailto:" class="text-capitalize">Live Chat</a> or :</h4>
+                        <a href="tel:{{$content->phone_1}}" class="phone-number font-weight-bolder ls-50">{{$content->phone_1}}</a>
                     </div>
                 </div>
-                <a class="wishlist label-down link d-xs-show" href="wishlist.html">
-                    <i class="w-icon-heart"></i>
-                    <span class="wishlist-label d-lg-show">Wishlist</span>
-                </a>
-                <a class="compare label-down link d-xs-show" href="{{route('compare')}}">
-                    <i class="w-icon-compare"></i>
-                    <span class="compare-label d-lg-show">Compare</span>
-                </a>
                 <div class="dropdown cart-dropdown cart-offcanvas mr-0 mr-lg-2">
                     <div class="cart-overlay"></div>
                     <a href="#" class="cart-toggle label-down link">
@@ -555,17 +547,11 @@
                                 <ul>
 
                                     <li><a href="{{route('about.website')}}">About Us</a></li>
-                                    {{-- <li><a href="faq.html">FAQs</a></li> --}}
-                                    <li><a href="error-404.html">Error 404</a></li>
-                                    {{-- <li><a href="{{route('wishlist')}}">Wishlist</a></li> --}}
-                                    {{-- <li><a href="cart.html">Cart</a></li> --}}
-                                    {{-- <li><a href="checkout.html">Checkout</a></li> --}}
-                                    {{-- <li><a href="my-account.html">My Account</a></li> --}}
-                                    {{-- <li><a href="{{route('compare')}}">Compare</a></li> --}}
+                                    <li><a href="{{route('about.website')}}">Privacy Policy</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="contact-us.html">Contact Us</a>
+                                <a href="{{route('web.contact')}}">Contact Us</a>
                               
                             </li>
                         </ul>
@@ -573,7 +559,6 @@
                 </div>
                 <div class="header-right">
                     <a href="#" class="d-xl-show"><i class="w-icon-map-marker mr-1"></i>Track Order</a>
-                    <a href="#"><i class="w-icon-sale"></i>Daily Deals</a>
                 </div>
             </div>
         </div>
