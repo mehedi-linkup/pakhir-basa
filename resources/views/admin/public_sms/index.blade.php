@@ -34,7 +34,6 @@
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->subject }}</td>
                                 <td> {{$item->message }}</td>
-                               
                             </tr>
                            @endforeach
                         </tbody>

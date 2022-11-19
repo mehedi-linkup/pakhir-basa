@@ -129,6 +129,12 @@
                             <div class="col-md-8">
                                 <input type="text" value="{{$company->instagram}}" name="instagram" class="form-control my-form-control" >
                             </div>
+                            <div class="col-md-4">
+                                <strong><label>Map Link</label> <span class="float-right">:</span></strong>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" value="{{$company->map}}" name="map" class="form-control my-form-control" >
+                            </div>
                             {{-- <div class="col-md-4">
                                 <strong><label>News Headline</label> <span class="float-right">:</span></strong>
                             </div>

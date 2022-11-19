@@ -8,7 +8,7 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="widget widget-about">
                         <a href="{{route('home')}}" class="logo-footer">
-                            <img src="website/images/pakhir_basa_logo-removebg.png" alt="logo-footer" width="144"
+                            <img src="{{ $content->logo }}" alt="logo-footer" width="144"
                                 height="45" />
                         </a>
                         <div class="widget-body">
@@ -19,11 +19,11 @@
                             </p>
 
                             <div class="social-icons social-icons-colored">
-                                <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
-                                <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
-                                <a href="#" class="social-icon social-instagram w-icon-instagram"></a>
-                                <a href="#" class="social-icon social-youtube w-icon-youtube"></a>
-                                <a href="#" class="social-icon social-pinterest w-icon-pinterest"></a>
+                                <a href="{{$content->facebook}}" target="_blank" class="social-icon social-facebook w-icon-facebook"></a>
+                                <a href="{{$content->linkedin}}" target="_blank" class="social-icon social-twitter w-icon-twitter"></a>
+                                <a href="{{$content->instagram}}" target="_blank" class="social-icon social-instagram w-icon-instagram"></a>
+                                <a href="{{$content->youtube}}" target="_blank" class="social-icon social-youtube w-icon-youtube"></a>
+                                {{-- <a href="#" target="_blank" class="social-icon social-pinterest w-icon-pinterest"></a> --}}
                             </div>
                         </div>
                     </div>
@@ -33,10 +33,7 @@
                         <h3 class="widget-title">Company</h3>
                         <ul class="widget-body">
                             <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="#">Team Member</a></li>
-                            <li><a href="#">Career</a></li>
                             <li><a href="contact-us.html">Contact Us</a></li>
-                            <li><a href="#">Affilate</a></li>
                             <li><a href="#">Order History</a></li>
                         </ul>
                     </div>
@@ -49,7 +46,6 @@
                             <li><a href="cart.html">View Cart</a></li>
                             <li><a href="login.html">Sign In</a></li>
                             <li><a href="#">Help</a></li>
-                            <li><a href="wishlist.html">My Wishlist</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </div>
@@ -58,9 +54,6 @@
                     <div class="widget">
                         <h4 class="widget-title">Customer Service</h4>
                         <ul class="widget-body">
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Money-back guarantee!</a></li>
-                            <li><a href="#">Product Returns</a></li>
                             <li><a href="#">Support Center</a></li>
                             <li><a href="#">Shipping</a></li>
                             <li><a href="#">Term and Conditions</a></li>
