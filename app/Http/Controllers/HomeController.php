@@ -25,8 +25,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        
         $banner = Banner::latest()->get();
+        $product = Product::latest()->get();
         $topcategory = Category::with('SubCategory')->orderBy('rank_id', 'ASC')->get();
         $recent = Product::latest()->take(24)->get();
         $popular = Product::latest()->where('is_popular', '1')->limit(24)->get();
@@ -35,7 +35,7 @@ class HomeController extends Controller
         $fullAd = Ad::where('status', 'a')->where('position', '5')->inRandomOrder()->limit(1)->get();
         $partner = Partner::latest()->get();
         $cartAll = \Cart::getContent();
-        return view('website.index', compact('banner', 'topcategory',  'new_arrival', 'cartAll', 'fullAd', 'popular', 'home', 'recent'));
+        return view('website.index', compact('banner', 'topcategory', 'product', 'new_arrival', 'cartAll', 'fullAd', 'popular', 'home', 'recent'));
     }
 
     public function ProductDetails($slug)
