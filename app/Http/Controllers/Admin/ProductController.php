@@ -102,6 +102,7 @@ class ProductController extends Controller
             $product->code = $productCode;
             $product->category_id = $request->category_id;
             $product->sub_category_id = $request->sub_category_id;
+            $product->child_category_id = $request->child_category_id;
             $product->price = $request->price;
             $product->discount = $request->discount;
             $product->size_id = $request->size_id;
@@ -213,7 +214,9 @@ class ProductController extends Controller
         $size = Size::all();
         $category = Category::all();
         $product = Product::with('inventory')->where('slug', $slug)->first();
-        return view('admin.product.edit', compact('product', 'category','color','size'));
+        $subcategory = Subcategory::where('category_id', $product->category_id)->get();
+        $childcategory = ChildCategory::where('subcategory_id', $product->subcategory_id)->get();
+        return view('admin.product.edit', compact('product', 'subcategory', 'childcategory', 'category','color','size'));
     }
 
     /**
@@ -271,6 +274,7 @@ class ProductController extends Controller
             // $product->code = $request->code;
             $product->category_id = $request->category_id;
             $product->sub_category_id = $request->sub_category_id;
+            $product->child_category_id = $request->child_category_id;
             $product->price = $request->price;
             $product->discount = $request->discount;
             $product->size_id = $request->size_id;

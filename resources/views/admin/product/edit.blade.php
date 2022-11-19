@@ -145,7 +145,9 @@
                                     <div class="col-md-8 mt-1">
                                       <div class="input-group input-group-sm">
                                       <select name="sub_category_id" id="sub_category_id" class="js-example-basic-multiple form-control my-form-control @error('sub_category_id') is-invalid @enderror " data-live-search="true" >
-                                        <option  data-tokens="ketchup mustard">Select Sub Category</option>
+                                        @foreach ($subcategory as $item)
+                                        <option value="{{ $item->id }}" {{ $item->id == $product->subcategory_id ? 'selected' : '' }} data-tokens="ketchup mustard">Select Sub Category</option>
+                                        @endforeach
                                     </select>
                                     <div class="input-group-append">
                                       <a class="border rounded my-select my-form-control py-0 px-2" href="{{ route('subcategory.index') }}" target="_blank"><i class="fas fa-plus"></i></a>
@@ -156,6 +158,30 @@
                                               <strong>{{ $message }}</strong>
                                           </span> 
                                         @enderror
+                                  </div>
+                                  <div class="col-md-4">
+                                    <strong><label>Child Category</label><span class="my-label">:</span></strong>
+                                  </div>
+                                  <div class="col-md-8 mt-1">
+                                    <div class="input-group input-group-sm">
+                                        <select name="child_category_id" id="child_category_id"
+                                            class="js-example-basic-multiple form-control my-form-control @error('child_category_id') is-invalid @enderror ">
+                                            @foreach ($childcategory as $item)
+                                            <option data-tokens="ketchup mustard" value="" {{$item->id == $product->child_category_id ? 'selected' : ''}}>Select Child
+                                              Category</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="input-group-append">
+                                            <a class="border rounded my-select my-form-control py-0 px-2"
+                                                href="{{ route('childcategory.index') }}"
+                                                target="_blank"><i class="fas fa-plus"></i></a>
+                                        </div>
+                                    </div>
+                                    @error('child_category_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                   </div>
                                   <div class="col-md-4">
                                     <strong><label>Product Size</label> <span class="my-label">:</span> </strong>
@@ -237,7 +263,7 @@
                                     <input type="file" class=" form-control form-control-sm" maxlength="5" id="otherImage" name="otherImage[]" multiple />
                                     @foreach($product->productImage as $item)
                                     <span class="pip"> 
-                                        <img src="{{ asset($item->otherImage) }}" class="imageThumb" data-image_id="{{ $item->id }}" alt="">
+                                        <img src="{{ asset('uploads/otherImage/'.$item->otherImage) }}" class="imageThumb" data-image_id="{{ $item->id }}" alt="">
                                         <span class="close-btn remove" data-image_id="{{ $item->id }}">
                                             remove
                                         </span>
@@ -288,6 +314,32 @@
                    $('#sub_category_id').empty();
                        $.each(data, function(key,value){
                        $("#sub_category_id").append('<option value="'+value.id+'">'+value.name+'</option>');
+                       });
+                   }
+               });
+           }
+       }
+
+
+       $(document).ready(function() {
+           $("select[name='sub_category_id']").on('change', function(){
+               var sub_category_id =$(this).val();
+               product(sub_category_id)
+           });
+       });
+       var subcategoryId = "<?php echo $product->sub_category_id ?>";
+       product(subcategoryId);
+       function product(id) {
+           var childcategoryId = id;
+           if(childcategoryId != 0 && childcategoryId != undefined) {
+               $.ajax({
+                   url:"{{ url('product/childcategory/list')}}/"+ childcategoryId,
+                   type :"GET",
+                   dataType:"json",
+                   success:function(data){
+                   $('#child_category_id').empty();
+                       $.each(data, function(key,value){
+                       $("#childcategoryId").append('<option value="'+value.id+'">'+value.name+'</option>');
                        });
                    }
                });
