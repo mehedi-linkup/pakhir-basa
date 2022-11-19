@@ -48,7 +48,7 @@ class PermissionController extends Controller
 
         return back()->with('success', 'Permission Created Successfully');
         } catch (\Throwable $th) {
-            return back()->with('error', 'Minimub one permission given');
+            return back()->with('error', 'Minimum one permission given');
         }
        
     }

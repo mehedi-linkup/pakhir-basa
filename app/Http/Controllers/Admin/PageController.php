@@ -16,10 +16,15 @@ class PageController extends Controller
     }
     public function store(Request $request)
     {
-        $page = new Page();
-        $page->name = $request->name;
-        $page->url = $request->url;
-        $page->save();
-        return back()->with('success', 'Page Created Successfully');
+        try {
+            $page = new Page();
+            $page->name = $request->name;
+            $page->display_name = $request->display_name;
+            $page->save();
+            return back()->with('success', 'Page Created Successfully');
+        } catch (\Throwable $th) {
+            // throw $th;
+            return back()->with('error', 'Page Created unsuccessfully');
+        }
     }
 }

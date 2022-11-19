@@ -13,16 +13,16 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-3">
-                            <strong><label>Page Name</label> <span class="my-label">:</span> </strong>
+                            <strong><label>Route Name</label> <span class="my-label">:</span> </strong>
                         </div>
                         <div class="col-md-9">
                             <input type="text" name="name" class="form-control">
                         </div>
                         <div class="col-md-3">
-                            <strong><label>Page Url</label> <span class="my-label">:</span> </strong>
+                            <strong><label>Page Name</label> <span class="my-label">:</span> </strong>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" name="url" class="form-control">
+                            <input type="text" name="display_name" class="form-control">
                         </div>
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-primary mt-2 float-right" value="Submit">Create</button>
