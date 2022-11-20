@@ -142,16 +142,13 @@
                             <ul class="menu vertical-menu category-menu">
                                 @foreach ($category as $item)
                                 <li>
-                                    <a href="{{route('shop.banner')}}">
-                                        {{-- <i class="w-icon-tshirt2"></i> --}}
-                                        {{ $item->name }}
-                                    </a>
+                                    <a href="{{route('shop.banner')}}">{{ $item->name }} </a>
                                     @if(count($item->SubCategory) > 0)
                                     <ul class="megamenu">
                                         @foreach ($item->SubCategory as $item1)
                                         <li>
-                                            {{-- <a href="" class="menu-title">{{ $item1->name }}</a> --}}
-                                            <h4 class="menu-title">{{ $item1->name }}</h4>
+                                            <a class="menu-title" href="#">{{ $item1->name }}</a>
+                                            {{-- <h4 class="menu-title">{{ $item1->name }}</h4> --}}
                                             <hr class="divider">
                                             @if(is_array($item1->childcategory))
                                             <ul>

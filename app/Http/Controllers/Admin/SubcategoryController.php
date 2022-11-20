@@ -63,6 +63,9 @@ class SubcategoryController extends Controller
             $subcategory->image = $this->imageUpload($request, 'image', 'uploads/subcategory');
             $subcategory->save_by = 1;
             $subcategory->ip_address = $request->ip();
+            if (!empty($request->is_popular)) {
+                $subcategory->is_popular = $request->is_popular;
+            }
             $subcategory->save();
             if ($subcategory) {
                 Session::flash('success', 'subcategory added successfully');
@@ -132,6 +135,7 @@ class SubcategoryController extends Controller
             $subcategory->slug = $slug;
             $subcategory->image = $subcategoryImage;
             $subcategory->updated_by = 1;
+            $subcategory->is_popular = $request->is_popular;
             $subcategory->save();
             if ($subcategory) {
                 Session::flash('success', 'Subcategory Update Successfully');

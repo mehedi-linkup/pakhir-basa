@@ -45,6 +45,11 @@
                                 </div>
                             </div>
                     </div>
+                    <div class="group">
+                        <input type="checkbox" name="is_popular" id="is_popular" {{ !empty($category->is_popular) ? 'checked' : ''}}  value="p" title="is popular">
+                        {{-- <input type="checkbox" name="is_popular" id="is_popular"  {{$category->is_popular == "p"?"checked":""}}  value="{{$category->is_popular}}" title="is popular"> --}}
+                        <label for="is_popular">Is popular</label>
+                       </div>
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary btn-sm mt-2" value="Submit">Update</button>
                     </div>

@@ -42,7 +42,12 @@
                                       
                                     </div>
                                 </div>
+                                
                             </div>
+                            <div class="group">
+                                <input type="checkbox" name="is_popular" id="is_popular" value="p" title="is popular">
+                                <label for="is_popular">Is popular</label>
+                               </div>
                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                         </form>  
                     </div> 

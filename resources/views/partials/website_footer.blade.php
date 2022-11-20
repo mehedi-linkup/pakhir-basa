@@ -2,6 +2,7 @@
  <footer class="footer appear-animate" data-animation-options="{
     'name': 'fadeIn'
 }">
+{{-- this is for footer --}}
     <div class="container">
         <div class="footer-top">
             <div class="row">
