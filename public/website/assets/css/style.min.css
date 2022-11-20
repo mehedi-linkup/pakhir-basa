@@ -3025,7 +3025,9 @@ blockquote {
 .text-dark {
   color: #333 !important;
 }
-
+.text-danger {
+  color: #f04;
+}
 .text-default {
   color: #666 !important;
 }
@@ -9056,7 +9058,7 @@ img.mfp-img {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 18rem;
+  height: 10rem;
   background-color: #eee;
   text-align: center;
   text-transform: capitalize;

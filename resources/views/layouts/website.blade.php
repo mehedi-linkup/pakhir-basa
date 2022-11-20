@@ -30,6 +30,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/vendor/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/vendor/animate/animate.min.css">
     <link rel="stylesheet" href="{{ asset('/') }}website/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{{ asset('website/vendor/toastr/toastr.min.css') }}">
      <!-- Default CSS -->
      <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/style.min.css">
      <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/custom.css">
@@ -714,13 +715,49 @@
     <script src="{{asset('/')}}website/vendor/jquery.countdown/jquery.countdown.min.js"></script>
     <script src="{{asset('/')}}website/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
     <script src="{{asset('/')}}website/vendor/skrollr/skrollr.min.js"></script>
+    <script src="{{ asset('website/vendor/toastr/toastr.min.js') }}"></script>
 
     <!-- Swiper JS -->
     <script src="{{asset('/')}}website/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Main JS -->
     <script src="{{asset('/')}}website/assets/js/main.js"></script>
+    <script>
+        @if(Session::has('update'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+            toastr.success("{{ session('update') }}");
+        @endif
 
+        @if(Session::has('message'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+            toastr.success("{{ session('message') }}");
+        @endif
+        @if(Session::has('success'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+            toastr.success("{{ session('success') }}");
+        @endif
+        
+        @if(Session::has('error'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+            toastr.error("{{ session('error') }}");
+        @endif
+    </script>
 
     <script>
          function addToCard(id) {
@@ -730,18 +767,14 @@
                 type: "get",
                 dataType: "json",
                 success:function(res) {
-                    let new_time = new Date().getTime();
+                    // let new_time = new Date().getTime();
         
-                    localStorage.setItem('cartTime',new_time);
-                    // cartAllData();
+                    // localStorage.setItem('cartTime',new_time);
+                    cartAllData();
                     // $('#details-btn'+id).show();
                     // $('#addCart'+id).hide();
                 }
             })
-            // var overlay_1 = $('.overlay-1'+id).hide();
-            // $('.overlay-2'+id).show();
-            // $('#add-btn'+id).remove();
-            // $('#increment_decrement_part').show();
         }
         // ajax card delete
         function deleteCard(id) {
@@ -757,7 +790,7 @@
         }
 
         function cartAllData() {
-            var cartSubtotal = $('#cartSubtotal').val();
+            // var cartSubtotal = $('#cartSubtotal').val();
         
             $.ajax({
                 url:"{{route('cart.alldata')}}",
@@ -780,7 +813,7 @@
                 dataType: "json",
                 success:function(res) {
                     $('#cart-count').text(res.total_item);
-                    $('#cartSubtotal').text(res.total_amount);
+                    $('#cartSubtotal').text(res.total_amount+'TK');
                 }
            })
           }

@@ -10,11 +10,14 @@
 
                 <!-- End of Dropdown Menu -->
                 <!-- <span class="divider d-lg-show"></span> -->
-                <a href="my-account.html" class="d-lg-show">My Account</a>
-                <a href="{{route('customer.login')}}" class="d-lg-show login sign-in"><i
+                @if(Auth::guard('customer')->user())
+                <a href="{{ route('customer.panel') }}" class="d-lg-show">My Account</a>
+                @else
+                <a href="{{ route('customer.login') }}" class="d-lg-show login sign-in"><i
                         class="w-icon-account"></i>Sign In</a>
                 <span class="delimiter d-lg-show">/</span>
-                <a href="website/ajax/login.html" class="ml-0 d-lg-show login register">Register</a>
+                <a href="{{ route('customer.signup') }}" class="ml-0 d-lg-show login register">Register</a>
+                @endif
             </div>
         </div>
     </div>
@@ -67,6 +70,9 @@
                             <a href="#" class="btn-close">Close<i class="w-icon-long-arrow-right"></i></a>
                         </div>
                         <div id="productCartList" class="products">
+                            @php
+                                $cartAll = \Cart::getContent();
+                            @endphp
                             @foreach ($cartAll as $item)
                                 <div class="product product-cart">
                                     <div class="product-detail">
@@ -91,7 +97,7 @@
 
                         <div class="cart-total">
                             <label>Subtotal:</label>
-                            <span id="cartSubtotal" class="price">{{ \Cart::getTotal() }}</span>
+                            <span id="cartSubtotal" class="price">{{ \Cart::getTotal() }}TK</span>
                         </div>
 
                         <div class="cart-action">

@@ -21,7 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->text('image');
             $table->integer('rank_id');
             $table->string('status',1)->default('a');
-            $table->string('is_popular', 1)->nullable();
+            $table->tinyInteger('is_popular', 1)->nullable();
             $table->string('save_by', 3);
             $table->string('updated_by', 3)->nullable();
             $table->string('ip_address', 15);

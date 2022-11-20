@@ -33,34 +33,34 @@ class CustomerController extends Controller
     public function AuthCheck(Request $request)
     {
         $request->validate([
-            'userphone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:11',
+            // 'userphone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:11',
+            'email' => 'required',
             'password' => 'required',
-            
         ]);
         $credential = $request->only('password');
-        $credential['phone'] = $request->userphone;
+        $credential['email'] = $request->email;
         if (Auth::guard('customer')->attempt($credential)) {
             session()->flash('message', 'Login Successfully !');
-            // return redirect()->route('customer.panel');
-             return redirect()->route('checkout.user');
+            return redirect()->route('customer.panel');
+            //  return redirect()->route('checkout.user');
             // return back();
 
         } else {
-            Session::flash('error', 'Mobile number or password not match');
+            Session::flash('error', 'Email or password not match');
             return redirect()->back();
         }
 
     }
-    public function signUp(){
+    public function signUp() {
         if (Auth::guard('customer')->check()){
             Session::flash('message', 'You have already login');
             return redirect()->route('checkout.user');
         }
         else{
-            $district = District::all();
-            $thana = Thana::all();
-            $area = Area::all();
-            return view('website.customer.signup',compact('district','thana','area'));
+            // $district = District::all();
+            // $thana = Thana::all();
+            // $area = Area::all();
+            return view('website.customer.signup');
         }
         
     }
@@ -73,35 +73,23 @@ class CustomerController extends Controller
             'name' => 'required|min:3|max:100',
             'phone' => 'required|unique:customers|regex:/^01[13-9][\d]{8}$/|min:11',
             'password' => 'required|string|min:1',
-            'district_id' => 'required',
-            'thana_id' => 'required',
-            'area_id' => 'required',
             'ip_address' => 'max:15'
         ]);
-        $otp = rand(1000,9999);
-        $message = "জেনিভিয়া এক্সপ্রেস শপ অ্যাকাউন্ট রেজিস্টার পিন $otp .দয়া করে এটা শেয়ার করবেন না।";
         $customer = new Customer();
         $code = 'C' . $this->generateCode('Customer');
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->address = $request->address;
-        $customer->district_id = $request->district_id;
-        $customer->thana_id = $request->thana_id;
-        $customer->area_id = $request->area_id;
-        $customer->username = $request->phone;
         $customer->password = Hash::make($request->password);
         $customer->ip_address = $request->ip();
         $customer->code = $code;
         $customer->save_by = 0;
-        $customer->otp = $otp;
         $customer->updated_by = 0;
         $customer->save();
-        $phone = $customer->phone;
         if($customer){
-            $this->send_sms($phone, $message);
-            Session::put('phone', $phone);
-            return redirect()->route('customer.otp')->with('success','PIN sent successfully your mobile number.Don`t refresh the page');
+            Session::flash('message', 'Welcome');
+            return redirect()->route('customer.panel');          
         }
     }
     public function acccountOpenOtp(){
@@ -152,7 +140,7 @@ class CustomerController extends Controller
             
             if ($request->hasFile('profile_picture')) {
                 $image_path = public_path('uploads/customer/' . $customer->profile_picture);
-                $image_path_thumb = public_path('uploads/customer/' . $customer->thum_picture);
+                $image_path_thumb = public_path('uploads/customer/thumb/' . $customer->thum_picture);
                 if (file_exists($image_path)) {
                     @unlink($image_path);
                     $Image = $request->file('profile_picture');
@@ -164,7 +152,7 @@ class CustomerController extends Controller
                     @unlink($image_path_thumb);
                     $Image = $request->file('profile_picture');
                     $newImage = rand(0000, 9999) . $Image->getClientOriginalName();
-                    Image::make($Image)->save('uploads/customer/' . $newImage);
+                    Image::make($Image)->save('uploads/customer/thumb/' . $newImage);
                     $customer->thum_picture = $newImage;
                 }
             }
@@ -226,9 +214,8 @@ class CustomerController extends Controller
 
     public function customerPanel()
     {
-
         if (Auth::guard('customer')->check()) {
-            $order = Order::with('orderDetails')->where('customer_id', Auth::guard('customer')->user()->id)->where('customerDelete', 'a')->latest()->get();
+            $order = Order::with('orderDetails')->where('customer_id', Auth::guard('customer')->user()->id)->latest()->get();
             return view('website.customer.dashboard', compact('order'));
         } else {
             return redirect()->route('home');
@@ -238,7 +225,6 @@ class CustomerController extends Controller
 
     public function invoice($id)
     {
-        // return 'ok';
         if (Auth::guard('customer')->check()) {
             $total_amount = Order::where('id',$id)->first()->total_amount;
             $shipping_cost = Order::where('id',$id)->first()->shipping_cost;
