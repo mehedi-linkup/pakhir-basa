@@ -21,7 +21,7 @@ class CartController extends Controller
     {
     //    dd($request->all());
             $total_item = \Cart::getContent()->count();
-            if($total_item <100){
+            if($total_item < 100){
                 \Cart::add([
                     'id' => $request->id,
                     'name' => $request->name,
@@ -40,7 +40,7 @@ class CartController extends Controller
 
     public function addToCartAjax(Request $request,$id)
     {
-       $product = Product::where('id',$id)->first();
+       $product = Product::where('id', $id)->first();
        
        $total_item = \Cart::getContent()->count();
        if($total_item <100){
