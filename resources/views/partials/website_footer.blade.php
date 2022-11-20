@@ -32,8 +32,8 @@
                     <div class="widget">
                         <h3 class="widget-title">Company</h3>
                         <ul class="widget-body">
-                            <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact-us.html">Contact Us</a></li>
+                            <li><a href="{{route('about.website')}}">About Us</a></li>
+                            <li><a href="{{route('web.contact')}}">Contact Us</a></li>
                             <li><a href="#">Order History</a></li>
                         </ul>
                     </div>
@@ -44,7 +44,7 @@
                         <ul class="widget-body">
                             <li><a href="#">Track My Order</a></li>
                             <li><a href="cart.html">View Cart</a></li>
-                            <li><a href="login.html">Sign In</a></li>
+                            <li><a href="{{route('customer.login')}}">Sign In</a></li>
                             <li><a href="#">Help</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                         </ul>
@@ -64,7 +64,7 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-left">
-                <p class="copyright">Copyright © 2022 Pakhir Basa. All Rights Reserved.</p>
+                <p class="copyright">Copyright © 2022 All Rights Reserved Pakhir Basa.Developed By- <a href="https://linktechbd.com/" target="_blank">Link_Up Technology</a></p>
             </div>
             <div class="footer-right">
                 <span class="payment-label mr-lg-8">We're using safe payment for</span>
