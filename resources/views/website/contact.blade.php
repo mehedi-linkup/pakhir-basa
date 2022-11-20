@@ -168,6 +168,7 @@
                     <div class="col-lg-6 mb-8">
                         <h4 class="title mb-3">Send Us a Message</h4>
                         <form class="form contact-us-form" action="{{route('contact.Store')}}" method="post">
+                            @csrf
                             <div class="form-group">
                                 <label for="sender_name">Your Name</label>
                                 <input type="text" id="username" name="sender_name"
@@ -202,53 +203,14 @@
         </div>
 
         <!-- Google Maps - Go to the bottom of the page to change settings and map location. -->
-        <div class="google-map contact-google-map" id="googlemaps"></div>
+        <div class="google-map contact-google-map" id="googlemaps">
+            <iframe src="{{$content->map}}" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
         <!-- End Map Section -->
     </div>
     <!-- End of PageContent -->
 </main>
 <!-- End of Main -->
 
-
-{{-- <section class="bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-12 p-3">
-                <div class="getInTouch">
-                    <h3 class="text-success pb-3">Get In Touch</h3>
-                    <form action="{{route('contact.Store')}}" method="post">
-                        @csrf
-                        <div class="d-flex">
-                            <input type="text" name="sender_name" placeholder="Name *" required class="w-50 me-3 form-control">
-                             <input type="text" name="phone" placeholder="Phone *" required class="w-50 form-control">
-                        </div>
-                        <div class="d-flex py-3">
-                            <input type="email" name="email" placeholder="Email" class="w-50 me-3 form-control">
-                             <input type="text" name="subject" placeholder="Subject" class="w-50  form-control">
-                        </div>
-                        <div class="d-flex">
-                            <textarea  rows="5" name="message" class="form-control" placeholder="Your Message"></textarea>
-                        </div>
-                        <div class="mt-3">
-                            <button type="submit" class="btn btn-success" >Send Message</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-6 col-12 p-3">
-                <div class="getInTouch">
-                    <h3 class="text-success pb-3">Contact Us</h3>
-                    {!!$content->about_description!!}
-                    <ul class="fa-ul py-3">
-                        <li><i class="fa-li fas fa-fax text-success"></i>{{$content->address}}</li>
-                        <li><i class="fa-li fas fa-phone text-success"></i>{{$content->phone_1}}</li>
-                        <li><i class="fa-li fas fa-phone text-success"></i>{{$content->phone_2}}</li>
-                        <li><i class="fa-li fas fa-envelope text-success"></i>{{$content->email}}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> --}}
 
 @endsection

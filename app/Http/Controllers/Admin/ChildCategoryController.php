@@ -49,6 +49,9 @@ class ChildCategoryController extends Controller
             $childcategory->image = $this->imageUpload($request, 'image', 'uploads/childcategory');
             $childcategory->save_by = 1;
             $childcategory->ip_address = $request->ip();
+            if (!empty($request->is_popular)) {
+                $childcategory->is_popular = $request->is_popular;
+            }
             $childcategory->save();
             if ($childcategory) {
                 Session::flash('success', 'childcategory added successfully');
@@ -100,6 +103,7 @@ class ChildCategoryController extends Controller
             $childcategory->slug = $slug;
             $childcategory->image = $childcategoryImage;
             $childcategory->updated_by = 1;
+            $childcategory->is_popular = $request->is_popular;
             $childcategory->save();
             if ($childcategory) {
                 Session::flash('success', 'childcategory Update Successfully');

@@ -17,6 +17,7 @@ class PublicMessageController extends Controller
 
     public function contactStore(Request $request)
     {
+        // return $request->all();
         $request->validate([
             'sender_name' => 'required|max:50',
             'phone' => 'required|max:15',

@@ -38,6 +38,7 @@ class CreateCompanyProfilesTable extends Migration
             $table->string('youtube')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('instagram')->nullable();
+            $table->longText('map')->nullable();
             // welcome note
             $table->string('welcome_title', 100)->nullable();
             $table->text('welcome_note')->nullable();

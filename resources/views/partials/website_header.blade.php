@@ -32,16 +32,10 @@
                     class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
                     <div class="select-box">
                         <select id="category" name="category">
-                            <option value="">All Categories</option>
-                            <option value="4">Fashion</option>
-                            <option value="5">Furniture</option>
-                            <option value="6">Shoes</option>
-                            <option value="7">Sports</option>
-                            <option value="8">Games</option>
-                            <option value="9">Computers</option>
-                            <option value="10">Electronics</option>
-                            <option value="11">Kitchen</option>
-                            <option value="12">Clothing</option>
+                            <option value="" label="All Categories"></option>
+                            @foreach ($category as $item)
+                            <option value="">{{$item->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <input type="text" class="form-control" name="search" id="search" placeholder="Search in..."
@@ -127,24 +121,23 @@
                             <ul class="menu vertical-menu category-menu">
                                 @foreach ($category as $item)
                                 <li>
-                                    <a href="shop-fullwidth-banner.html">
-                                        {{-- <i class="w-icon-tshirt2"></i> --}}
-                                        {{ $item->name }}
-                                    </a>
+                                    <a href="{{route('shop.banner')}}">{{ $item->name }} </a>
                                     @if(count($item->SubCategory) > 0)
                                     <ul class="megamenu">
                                         @foreach ($item->SubCategory as $item1)
                                         <li>
-                                            <h4 class="menu-title">{{ $item1->name }}</h4>
+                                            <a class="menu-title" href="#">{{ $item1->name }}</a>
+                                            {{-- <h4 class="menu-title">{{ $item1->name }}</h4> --}}
                                             <hr class="divider">
                                             @if(is_array($item1->childcategory))
                                             <ul>
                                                 @foreach ($item1->childcategory as $item2)
-                                                <li><a href="shop-fullwidth-banner.html">{{ $item2->name }}</a></li>
+                                                <li><a href="{{route('shop.banner')}}">{{ $item2->name }}</a></li>
                                                 @endforeach
                                             </ul>
                                             @endif
                                         </li>
+                                   
                                         @endforeach
                                     </ul> 
                                     @endif

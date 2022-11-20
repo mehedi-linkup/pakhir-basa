@@ -53,6 +53,7 @@ class ContentController extends Controller
         $company->youtube = $request->youtube;
         $company->linkedin = $request->linkedin;
         $company->instagram = $request->instagram;
+        $company->map = $request->map;
         $company->news_headline = $request->news_headline;
         $company->updated_by = Auth::user()->id;
         $company->logo = $companyLogo;

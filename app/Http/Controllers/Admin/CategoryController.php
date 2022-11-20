@@ -72,6 +72,9 @@ class CategoryController extends Controller
             $category->image = $imageNameWithPath;
             $category->save_by = Auth::user()->id;
             $category->ip_address = $request->ip();
+            if (!empty($request->is_popular)) {
+                $category->is_popular = $request->is_popular;
+            }
             $category->save();
 
             if ($category) {
@@ -156,6 +159,7 @@ class CategoryController extends Controller
             $category->updated_by = Auth::user()->user_id;;
             $category->ip_address = $request->ip();
             $category->image = $categoryImage;
+            $category->is_popular = $request->is_popular;
             $category->save();
             if ($category) {
                 Session::flash('success', 'category Update Successfully');

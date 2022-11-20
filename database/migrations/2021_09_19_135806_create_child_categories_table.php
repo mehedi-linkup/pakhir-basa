@@ -26,6 +26,7 @@ class CreateChildCategoriesTable extends Migration
             $table->string('slug', 130);
             $table->text('image');
             $table->string('status', 1)->default('a');
+            $table->string('is_popular', 1)->nullable();
             $table->string('save_by', 10);
             $table->string('updated_by', 3)->nullable();
             $table->string('ip_address', 15);
