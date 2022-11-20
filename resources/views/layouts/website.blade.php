@@ -726,23 +726,65 @@
          function addToCard(id) {
             var url = "/cart-add/"+id;
             $.ajax({
-                    url: url,
-                    type: "get",
-                    dataType: "json",
-                    success:function(res) {
-                        let new_time = new Date().getTime();
-            
-                        localStorage.setItem('cartTime',new_time);
-                        cartAllData();
-                        $('#details-btn'+id).show();
-                        $('#addCart'+id).hide();
-                    }
-                })
-            var overlay_1 = $('.overlay-1'+id).hide();
-            $('.overlay-2'+id).show();
-            $('#add-btn'+id).remove();
-            $('#increment_decrement_part').show();
+                url: url,
+                type: "get",
+                dataType: "json",
+                success:function(res) {
+                    let new_time = new Date().getTime();
+        
+                    localStorage.setItem('cartTime',new_time);
+                    // cartAllData();
+                    // $('#details-btn'+id).show();
+                    // $('#addCart'+id).hide();
+                }
+            })
+            // var overlay_1 = $('.overlay-1'+id).hide();
+            // $('.overlay-2'+id).show();
+            // $('#add-btn'+id).remove();
+            // $('#increment_decrement_part').show();
         }
+        // ajax card delete
+        function deleteCard(id) {
+        var url = "/remove/"+id;
+        $.ajax({
+            url:url,
+            type:"get",
+            dataType: "json",
+            success:function(res){
+                cartAllData();
+            }
+            })
+        }
+
+        function cartAllData() {
+            var cartSubtotal = $('#cartSubtotal').val();
+        
+            $.ajax({
+                url:"{{route('cart.alldata')}}",
+                type:"get",
+                dataType: "json",
+                success:function(res) {
+                    var data = "";
+                    $.each(res, function(key, value) {
+                        data = data + '<div class="product product-cart"><div class="product-detail"><a href="product-default.html" class="product-name">'+value.name+'</a><div class="price-box"><span class="product-quantity">'+value.quantity+'</span><span class="product-price">'+value.price+'TK</span></div></div><figure class="product-media"><a href="product-default.html"><img src="uploads/product/thumbnail/'+value.attributes.image+'" alt="'+value.attributes.slug+'" height="84" width="94" /></a></figure><button class="btn btn-link btn-close" onclick="deleteCard('+value.id+')" aria-label="button"><i class="fas fa-times"></i></button></div>'
+                    })
+                    $('#productCartList').html(data);
+                    cartcontent();
+                }
+            })
+        }
+        function cartcontent() {
+           $.ajax({
+            url:"{{route('cart.content')}}",
+                type:"get",
+                dataType: "json",
+                success:function(res) {
+                    $('#cart-count').text(res.total_item);
+                    $('#cartSubtotal').text(res.total_amount);
+                }
+           })
+          }
+
     </script>
 </body>
 

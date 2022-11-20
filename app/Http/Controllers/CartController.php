@@ -21,7 +21,7 @@ class CartController extends Controller
     {
     //    dd($request->all());
             $total_item = \Cart::getContent()->count();
-            if($total_item < 100){
+            if($total_item < 100) {
                 \Cart::add([
                     'id' => $request->id,
                     'name' => $request->name,
@@ -52,7 +52,7 @@ class CartController extends Controller
                 'price' => $product->price,
                 'quantity' => 1,
                 'attributes' => array(
-                    'image' => $product->image,
+                    'image' => $product->thum_image,
                     'slug' => $product->slug,
                 )
             ]);
@@ -190,7 +190,7 @@ class CartController extends Controller
         return response()->json($cart);
     }
 
-   public function decrement($id){
+   public function decrement($id) {
         $product = Product::where('id',$id)->first();
         foreach(\Cart::getContent() as $item){
             if($item->quantity == 1){
@@ -212,7 +212,7 @@ class CartController extends Controller
             } 
         }
        
-        $cart = 'data updated successfully';
+        $cart = 'Data Updated Successfully';
         return response()->json($cart);
     }
      public function increment($id){
