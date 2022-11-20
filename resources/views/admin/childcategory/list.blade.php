@@ -20,6 +20,7 @@
                                 <th>SL</th>
                                 <th>Category</th>
                                 <th>Subcategory</th>
+                                <th>Child category</th>
                                 <th>Image</th>
                                 <th>Action</th>
                             </tr>
@@ -29,7 +30,7 @@
                             <tr>
                                 <td class="text-center">{{ $key+1 }}</td>
                                 <td>{{ $item->Category->name }}</td>
-                                <td>{{ $item->Category->name }}</td>
+                                <td>{{ $item->subcategory->name }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td class="text-center"><img src="{{ asset($item->image) }}" class="tbl-image" alt=""></td>
                                 <td>
