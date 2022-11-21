@@ -125,7 +125,7 @@
                                       <select name="category_id" id="category_id" class="custom-select js-example-basic-multiple form-control my-select my-form-control @error('category_id') is-invalid @enderror" data-live-search="true" >
                                         <option  data-tokens="ketchup mustard">Select Category</option>
                                             @foreach ($category as $item)
-                                              <option value="{{ $item->id }}" {{ $item->id == $product->category_id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                              <option value="{{ $item->id }}" {{ $item->id == $product->category_id ? 'selected' : old('category_id') }}>{{ $item->name }}</option>
                                             @endforeach
                                       </select>
                                       <div class="input-group-append">
@@ -146,7 +146,7 @@
                                       <div class="input-group input-group-sm">
                                       <select name="sub_category_id" id="sub_category_id" class="js-example-basic-multiple form-control my-form-control @error('sub_category_id') is-invalid @enderror " data-live-search="true" >
                                         @foreach ($subcategory as $item)
-                                        <option value="{{ $item->id }}" {{ $item->id == $product->subcategory_id ? 'selected' : '' }} data-tokens="ketchup mustard">Select Sub Category</option>
+                                        <option value="{{ $item->id }}" {{ $item->id == $product->subcategory_id ? 'selected' : old('subcategory_id')  }} data-tokens="ketchup mustard">Select Sub Category</option>
                                         @endforeach
                                     </select>
                                     <div class="input-group-append">
@@ -167,7 +167,7 @@
                                         <select name="child_category_id" id="child_category_id"
                                             class="js-example-basic-multiple form-control my-form-control @error('child_category_id') is-invalid @enderror ">
                                             @foreach ($childcategory as $item)
-                                            <option data-tokens="ketchup mustard" value="" {{$item->id == $product->child_category_id ? 'selected' : ''}}>Select Child
+                                            <option data-tokens="ketchup mustard" value="" {{$item->id == $product->child_category_id ? 'selected' : old('child_category_id') }}>Select Child
                                               Category</option>
                                             @endforeach
                                         </select>
@@ -295,57 +295,108 @@
   });
 </script>
 <script>
-    $(document).ready(function(){
-           $("select[name='category_id']").on('change', function(){
-               var category_id =$(this).val();
-               product(category_id)
-           });
-       });
-       var categoryId = "<?php echo $product->category_id ?>";
-       product(categoryId);
-       function product(id) {
-           var subcategoryId = id;
-           if(subcategoryId != 0 && subcategoryId != undefined) {
-               $.ajax({
-                   url:"{{ url('product/subcategory/list')}}/"+ subcategoryId,
-                   type :"GET",
-                   dataType:"json",
-                   success:function(data){
-                   $('#sub_category_id').empty();
-                       $.each(data, function(key,value){
-                       $("#sub_category_id").append('<option value="'+value.id+'">'+value.name+'</option>');
-                       });
-                   }
-               });
-           }
-       }
+    // $(document).ready(function(){
+    //        $("select[name='category_id']").on('change', function(){
+    //            var category_id =$(this).val();
+    //            product(category_id)
+    //        });
+    //    });
+    //    var categoryId = "<?php echo $product->category_id ?>";
+    //    product(categoryId);
+    //    function product(id) {
+    //        var subcategoryId = id;
+    //        if(subcategoryId != 0 && subcategoryId != undefined) {
+    //            $.ajax({
+    //                url:"{{ url('/subcategory/list')}}/"+ subcategoryId,
+    //                type :"GET",
+    //                dataType:"json",
+    //                success:function(data){
+    //                $('#sub_category_id').empty();
+    //                    $.each(data, function(key,value){
+    //                    $("#sub_category_id").append('<option value="'+value.id+'">'+value.name+'</option>');
+    //                    });
+    //                }
+    //            });
+    //        }
+    //    }
 
 
-       $(document).ready(function() {
-           $("select[name='sub_category_id']").on('change', function(){
-               var sub_category_id =$(this).val();
-               product(sub_category_id)
-           });
-       });
-       var subcategoryId = "<?php echo $product->sub_category_id ?>";
-       product(subcategoryId);
-       function product(id) {
-           var childcategoryId = id;
-           if(childcategoryId != 0 && childcategoryId != undefined) {
-               $.ajax({
-                   url:"{{ url('product/childcategory/list')}}/"+ childcategoryId,
-                   type :"GET",
-                   dataType:"json",
-                   success:function(data){
-                   $('#child_category_id').empty();
-                       $.each(data, function(key,value){
-                       $("#childcategoryId").append('<option value="'+value.id+'">'+value.name+'</option>');
-                       });
-                   }
-               });
-           }
-       }
+      //  $(document).ready(function() {
+      //      $("select[name='sub_category_id']").on('change', function(){
+      //          var sub_category_id =$(this).val();
+      //          product(sub_category_id)
+      //      });
+      //  });
+      //  var subcategoryId = "<?php echo $product->sub_category_id ?>";
+      //  product(subcategoryId);
+      //  function product(id) {
+      //      var childcategoryId = id;
+      //      if(childcategoryId != 0 && childcategoryId != undefined) {
+      //          $.ajax({
+      //              url:location.origin +"/childcategory/list/"+ childcategoryId,
+      //              type :"GET",
+      //              dataType:"json",
+      //              beforeSend: () => {
+      //                   $('#childcategoryId').html("");
+      //               },
+      //              success:function(data){
+      //              $('#child_category_id').empty();
+      //                  $.each(data, function(key,value){
+      //                  $("#childcategoryId").append('<option value="'+value.id+'">'+value.name+'</option>');
+      //                  });
+      //              }
+      //          });
+      //      }
+      //  }
    </script>
+   {{-- get sub and child category --}}
+   <script>
+    $(document).ready(function() {
+        $("select[name='category_id']").on('change', function() {
+            let category_id = $(this).val();
+            $.ajax({
+                url: "{{ url('//subcategory/list') }}/" + category_id,
+                dataType: 'JSON',
+                method: 'GET',
+                success: function(res) {
+                    $('#sub_category_id').empty();
+                    $.each(res, function(key, value) {
+                        $('#sub_category_id').append('<option value=" ' + value.id +
+                            ' ">' + value.name + '</option>');
+                    });
+
+                }
+            })
+
+
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $("select[name='sub_category_id']").on('change', function() {
+            let sub_category_id = $(this).val();
+            sub_category_id = parseInt(sub_category_id);
+            $.ajax({
+                url: location.origin + "/childcategory/list/" + sub_category_id,
+                dataType: 'JSON',
+                method: 'GET',
+                beforeSend: () => {
+                    $('#child_category_id').html("");
+                },
+                success: function(res) {
+                    $.each(res, function(key, value) {
+                        $('#child_category_id').append('<option value=" ' + value
+                            .id + ' ">' + value.name + '</option>');
+                    });
+
+                }
+            })
+        });
+    });
+</script>
+
+   {{-- get sub and child category --}}
    <script>
      $(document).on('click', '.close-btn', function () {
            
