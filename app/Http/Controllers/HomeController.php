@@ -13,6 +13,7 @@ use App\Models\CompanyProfile;
 use App\Models\DeliveryTime;
 use App\Models\Management;
 use App\Models\Partner;
+use App\Models\ProductImage;
 use App\Models\Service;
 use App\Models\Size;
 use App\Models\SubCategory;
@@ -42,6 +43,7 @@ class HomeController extends Controller
     public function ProductDetails($slug)
     {
         $product = Product::with('category')->where('slug', $slug)->first();
+        $productImage = ProductImage::where('product_id', $product->id)->get();
         if (isset($product->sub_category_id)) {
             $subCategory_id = $product->sub_category_id;
             $related = Product::where('sub_category_id', '=', $subCategory_id)->where('id', '!=', $product->id)->get();
@@ -49,7 +51,7 @@ class HomeController extends Controller
             $category_id = $product->category_id;
             $related = Product::where('category_id', '=', $product->category->id)->where('id', '!=', $product->id)->limit('12')->get();
         }
-        return view('website.productDetails', compact('product', 'related'));
+        return view('website.productDetails', compact('product', 'productImage', 'related'));
     }
 
 

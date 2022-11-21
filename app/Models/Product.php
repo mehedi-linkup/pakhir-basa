@@ -20,4 +20,10 @@ class Product extends Model
     public function inventory() {
         return $this->hasOne(Inventory::class);
     }
+    public function color() {
+        return $this->belongsTo(Color::class);
+    }
+    public function size() {
+        return $this->belongsTo(Size::class);
+    }
 }
