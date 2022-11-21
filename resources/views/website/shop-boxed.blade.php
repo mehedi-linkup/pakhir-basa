@@ -43,6 +43,11 @@
                         <div class="widget widget-collapsible">
                             <h3 class="widget-title"><span>Price</span></h3>
                             <div class="widget-body">
+                                {{-- <form action="/action_page.php">
+                                    <label for="vol">Volume (between 0 and 50):</label>
+                                    <input type="range" id="vol" name="vol" min="0" max="50">
+                                    <input type="submit">
+                                  </form> --}}
                                 <ul class="filter-items search-ul">
                                     <li><a href="#">$0.00 - $100.00</a></li>
                                     <li><a href="#">$100.00 - $200.00</a></li>
@@ -164,7 +169,7 @@
                     <div class="product-wrap">
                         <div class="product text-center">
                             <figure class="product-media">
-                                <a href="#">
+                                <a href="{{route('product.details',$item->id)}}">
                                     <img src="{{ asset('uploads/product/'.$item->image) }}" alt="{{ $item->name }}" width="300"
                                         height="338" />
                                 </a>

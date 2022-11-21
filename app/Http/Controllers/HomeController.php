@@ -44,7 +44,8 @@ class HomeController extends Controller
         if (isset($product->sub_category_id)) {
             $subCategory_id = $product->sub_category_id;
             $related = Product::where('sub_category_id', '=', $subCategory_id)->where('id', '!=', $product->id)->get();
-        } else {
+        } 
+        else {
             $category_id = $product->category_id;
             $related = Product::where('category_id', '=', $product->category->id)->where('id', '!=', $product->id)->limit('12')->get();
         }

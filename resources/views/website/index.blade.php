@@ -139,7 +139,7 @@
                         <div class="swiper-slide product-col">
                             <div class="product-wrap product text-center">
                                 <figure class="product-media">
-                                    <a href="#">
+                                    <a href="{{route('product.details',$item->id)}}">
                                         <img src="{{ asset('uploads/product/'.$item->image) }}" alt="{{ $item->name }}"
                                             width="216" height="243" />
                                     </a>
