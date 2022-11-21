@@ -17,7 +17,7 @@
            <div class="col-6">
                 <div class="card">
                     <div class="card-header">
-                        <div class="table-head"><i class="fas fa-cogs me-1"></i>subsubcategory Form</div>
+                        <div class="table-head"><i class="fas fa-cogs me-1"></i>Subcategory Form</div>
                     </div>
                         <div class="card-body table-card-body p-3">
                           @if (Session('duplicate'))
