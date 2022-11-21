@@ -149,6 +149,11 @@
                                         <a href="#" class="btn-product-icon btn-quickview w-icon-search"
                                             title="Quickview"></a>
                                     </div>
+                                    @if($item->discount && $item->discount != null)
+                                    <div class="product-label-group">
+                                        <label class="product-label label-discount">{{ $item->discount }}% Off</label>
+                                    </div>
+                                    @endif
                                 </figure>
                                 <div class="product-details">
                                     <h4 class="product-name"><a href="">{{ $item->name }}</a></h4>

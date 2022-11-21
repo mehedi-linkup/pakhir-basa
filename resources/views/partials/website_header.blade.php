@@ -10,11 +10,14 @@
 
                 <!-- End of Dropdown Menu -->
                 <!-- <span class="divider d-lg-show"></span> -->
-                <a href="my-account.html" class="d-lg-show">My Account</a>
-                <a href="{{route('customer.login')}}" class="d-lg-show login sign-in"><i
+                @if(Auth::guard('customer')->user())
+                <a href="{{ route('customer.panel') }}" class="d-lg-show">My Account</a>
+                @else
+                <a href="{{ route('customer.login') }}" class="d-lg-show login sign-in"><i
                         class="w-icon-account"></i>Sign In</a>
                 <span class="delimiter d-lg-show">/</span>
-                <a href="website/ajax/login.html" class="ml-0 d-lg-show login register">Register</a>
+                <a href="{{ route('customer.signup') }}" class="ml-0 d-lg-show login register">Register</a>
+                @endif
             </div>
         </div>
     </div>
@@ -57,7 +60,7 @@
                     <div class="cart-overlay"></div>
                     <a href="#" class="cart-toggle label-down link">
                         <i class="w-icon-cart">
-                            <span class="cart-count">2</span>
+                            <span id="cart-count" class="cart-count">{{ \Cart::getContent()->count(); }}</span>
                         </i>
                         <span class="cart-label">Cart</span>
                     </a>
@@ -66,53 +69,35 @@
                             <span>Shopping Cart</span>
                             <a href="#" class="btn-close">Close<i class="w-icon-long-arrow-right"></i></a>
                         </div>
-                        <div class="products">
-                            <div class="product product-cart">
-                                <div class="product-detail">
-                                    <a href="product-default.html" class="product-name">Beige knitted
-                                        elas<br>tic
-                                        runner shoes</a>
-                                    <div class="price-box">
-                                        <span class="product-quantity">1</span>
-                                        <span class="product-price">$25.68</span>
+                        <div id="productCartList" class="products">
+                            @php
+                                $cartAll = \Cart::getContent();
+                            @endphp
+                            @foreach ($cartAll as $item)
+                                <div class="product product-cart">
+                                    <div class="product-detail">
+                                        <a href="product-default.html" class="product-name">{{ $item->name }}</a>
+                                        <div class="price-box">
+                                            <span class="product-quantity">{{ $item->quantity }}</span>
+                                            <span class="product-price">{{ $item->price }}TK</span>
+                                        </div>
                                     </div>
+                                    <figure class="product-media">
+                                        <a href="product-default.html">
+                                            <img src="{{ asset('uploads/product/thumbnail/'.$item->attributes->image) }}" alt="{{ $item->attributes->slug }}" height="84"
+                                                width="94" />
+                                        </a>
+                                    </figure>
+                                    <button class="btn btn-link btn-close" onclick="deleteCard({{$item->id}})" aria-label="button">
+                                        <i class="fas fa-times"></i>
+                                    </button>
                                 </div>
-                                <figure class="product-media">
-                                    <a href="product-default.html">
-                                        <img src="website/images/cart/product-1.jpg" alt="product" height="84"
-                                            width="94" />
-                                    </a>
-                                </figure>
-                                <button class="btn btn-link btn-close" aria-label="button">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-
-                            <div class="product product-cart">
-                                <div class="product-detail">
-                                    <a href="product-default.html" class="product-name">Blue utility
-                                        pina<br>fore
-                                        denim dress</a>
-                                    <div class="price-box">
-                                        <span class="product-quantity">1</span>
-                                        <span class="product-price">$32.99</span>
-                                    </div>
-                                </div>
-                                <figure class="product-media">
-                                    <a href="product-default.html">
-                                        <img src="website/images/cart/product-2.jpg" alt="product" width="84"
-                                            height="94" />
-                                    </a>
-                                </figure>
-                                <button class="btn btn-link btn-close" aria-label="button">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
+                            @endforeach
                         </div>
 
                         <div class="cart-total">
                             <label>Subtotal:</label>
-                            <span class="price">$58.67</span>
+                            <span id="cartSubtotal" class="price">{{ \Cart::getTotal() }}TK</span>
                         </div>
 
                         <div class="cart-action">

@@ -60,6 +60,7 @@ Route::get('/SubCategory/{slug}', [HomeController::class, 'SubCategoryWise'])->n
 Route::get('/subcategory/list/{slug}',[HomeController::class,'singleSubCategory'])->name('single.subcategory.list');
 Route::get('/allproduct',[HomeController::class,'allProduct'])->name('all.product');
 Route::get('/shop-banner',[HomeController::class,'shopBanner'])->name('shop.banner');
+
 Route::get('/checkout',[HomeController::class,'checkOut'])->name('check.out');
 
 // company profile route

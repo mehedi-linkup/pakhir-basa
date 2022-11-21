@@ -65,7 +65,7 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-left">
-                <p class="copyright">Copyright © 2022 All Rights Reserved Pakhir Basa.Developed By- <a href="https://linktechbd.com/" target="_blank">Link_Up Technology</a></p>
+                <p class="copyright">Copyright © 2022 All Rights Reserved Pakhir Basa. Developed By - <a href="https://linktechbd.com/" target="_blank">Link Up Technology</a></p>
             </div>
             <div class="footer-right">
                 <span class="payment-label mr-lg-8">We're using safe payment for</span>

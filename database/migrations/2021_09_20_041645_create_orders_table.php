@@ -29,6 +29,10 @@ class CreateOrdersTable extends Migration
             $table->decimal('discount_amount', 18, 2)->default(0);
             $table->decimal('service_charge', 18, 2)->default(0);
             $table->decimal('total_amount', 18, 2);
+            $table->string('delivery_date', 255)->nullable();
+            $table->text('pending_msg')->nullable();
+            $table->text('process_msg')->nullable();
+            $table->text('order_note')->nullable();
             $table->string('updated_by', 3);
             $table->string('status')->default('p');
             $table->softDeletes();
