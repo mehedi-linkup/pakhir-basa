@@ -189,7 +189,7 @@
                             <label>Total</label>
                             <span class="ls-50">$100.00</span>
                         </div>
-                        <a href="{{ route('check.out') }}"
+                        <a href="{{ route('checkout.user') }}"
                             class="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout">
                             Proceed to checkout<i class="w-icon-long-arrow-right"></i></a>
                     </div>

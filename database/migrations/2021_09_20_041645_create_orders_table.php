@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')
+            $table->foreignId('customer_id')->nullable()
                     ->constrained('customers')
                     ->onDelete('cascade');
             $table->string('invoice_no', 30);
@@ -33,6 +33,15 @@ class CreateOrdersTable extends Migration
             $table->text('pending_msg')->nullable();
             $table->text('process_msg')->nullable();
             $table->text('order_note')->nullable();
+            $table->foreignId('time_id')->nullable()
+                ->constrained('delivery_times')
+                ->onDelete('cascade');
+            $table->foreignId('area_id')->nullable()
+                ->constrained('areas')
+                ->onDelete('cascade');
+            $table->foreignId('thana_id')->nullable()
+                ->constrained('thanas')
+                ->onDelete('cascade');
             $table->string('updated_by', 3);
             $table->string('status')->default('p');
             $table->softDeletes();
