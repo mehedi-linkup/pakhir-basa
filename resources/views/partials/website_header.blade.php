@@ -31,7 +31,7 @@
                 <a href="{{route('home')}}" class="logo ml-lg-0">
                     <img src="{{ $content->logo }}" alt="logo" width="auto" style="height: 47px" />
                 </a>
-                <form method="get" action="#"
+                <form method="get" action="{{ route('search') }}"
                     class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
                     <div class="select-box">
                         <select id="category" name="category">
@@ -41,7 +41,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <input type="text" class="form-control" name="search" id="search" placeholder="Search in..."
+                    <input type="text" class="form-control search-bar-full keyword " name="q" id="search" placeholder="Search in..."
                         required />
                     <button class="btn btn-search" type="submit"><i class="w-icon-search"></i>
                     </button>

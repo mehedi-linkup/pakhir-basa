@@ -763,7 +763,24 @@
             toastr.error("{{ session('error') }}");
         @endif
     </script>
-
+    <script src="{{ asset('website/vendor/bootstrap3-typeahead.min.js') }}"></script>
+    <script type="text/javascript">
+        var baseUri = "{{ url('/') }}";
+        $('.keyword').typeahead({
+            minLength: 1,
+            source: function (keyword, process) {
+                return $.get(`${baseUri}/get_suggestions/${keyword}`, function (data) {
+                    return process(data);
+                });
+            },
+  
+            updater:function (item) {
+                $(location).attr('href', '/search?q='+item);
+                return item;
+            }
+  
+        });
+    </script>
     <script>
          function addToCard(id) {
             var url = "/cart-add/"+id;
