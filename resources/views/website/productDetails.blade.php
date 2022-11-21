@@ -16,7 +16,7 @@
                 <i class="w-icon-angle-left"></i>
             </a>
             <span class="product-nav-popup">
-                <img src="assets/images/products/product-nav-prev.jpg" alt="Product" width="110"
+                <img src="website/images/products/product-nav-prev.jpg" alt="Product" width="110"
                     height="110" />
                 <span class="product-name">Soft Sound Maker</span>
             </span>
@@ -26,7 +26,7 @@
                 <i class="w-icon-angle-right"></i>
             </a>
             <span class="product-nav-popup">
-                <img src="assets/images/products/product-nav-next.jpg" alt="Product" width="110"
+                <img src="website/images/products/product-nav-next.jpg" alt="Product" width="110"
                     height="110" />
                 <span class="product-name">Fabulous Sound Speaker</span>
             </span>
@@ -39,7 +39,7 @@
 <div class="page-content">
     <div class="container">
         <div class="row gutter-lg">
-            <div class="main-content">
+            <div class="main-content" style="width:100%">
                 <div class="product product-single row">
                     <div class="col-md-6 mb-6">
                         <div class="product-gallery product-gallery-sticky">
@@ -134,7 +134,7 @@
 
                             <div class="product-form product-variation-form product-color-swatch">
                                 <label>Color:</label>
-                                <div class="product-variations">{{ $product->color->name }}</div>
+                                <div class="product-variations">{{ optional($product->color)->name }}</div>
                                 {{-- <div class="d-flex align-items-center product-variations">
                                     <a href="#" class="color" style="background-color: #ffcc01"></a>
                                     <a href="#" class="color" style="background-color: #ca6d00;"></a>
@@ -146,7 +146,7 @@
                             <div class="product-form product-variation-form product-size-swatch">
                                 <label class="mb-1">Size:</label>
                                 <div class="product-variations">
-                                    {{ $product->size->name }}
+                                    {{ optional($product->size)->name }}
                                 </div>
                                 {{-- <div class="flex-wrap d-flex align-items-center product-variations">
                                     <a href="#" class="size">Small</a>
@@ -177,7 +177,7 @@
                                 </div>
                             </div>
 
-                            <div class="social-links-wrapper">
+                            {{-- <div class="social-links-wrapper">
                                 <div class="social-links">
                                     <div class="social-icons social-no-color border-thin">
                                         <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
@@ -196,7 +196,7 @@
                                     <a href="#"
                                         class="btn-product-icon btn-compare btn-icon-left w-icon-compare"><span></span></a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -210,9 +210,6 @@
                             <a href="#product-tab-specification" class="nav-link">Specification</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#product-tab-vendor" class="nav-link">Vendor Info</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="#product-tab-reviews" class="nav-link">Customer Reviews (3)</a>
                         </li>
                     </ul>
@@ -221,29 +218,22 @@
                             <div class="row mb-4">
                                 <div class="col-md-6 mb-5">
                                     <h4 class="title tab-pane-title font-weight-bold mb-2">Detail</h4>
-                                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt arcu cursus vitae congue mauris.
-                                        Sagittis id consectetur purus ut. Tellus rutrum tellus pelle Vel
-                                        pretium lectus quam id leo in vitae turpis massa.</p>
-                                    <ul class="list-type-check">
-                                        <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis
-                                            elit.
-                                        </li>
-                                        <li>Vivamus finibus vel mauris ut vehicula.</li>
-                                        <li>Nullam a magna porttitor, dictum risus nec, faucibus sapien.
-                                        </li>
-                                    </ul>
+                                    <div>
+
+                                        <p class="mb-4">{!! $product->description !!}</p>
+                                    </div>
+                                
                                 </div>
                                 <div class="col-md-6 mb-5">
                                     <div class="banner banner-video product-video br-xs">
                                         <figure class="banner-media">
                                             <a href="#">
-                                                <img src="assets/images/products/video-banner-610x300.jpg"
+                                                <img src="website/images/products/video-banner-610x300.jpg"
                                                     alt="banner" width="610" height="300"
                                                     style="background-color: #bebebe;">
                                             </a>
                                             <a class="btn-play-video btn-iframe"
-                                                href="assets/video/memory-of-a-woman.mp4"></a>
+                                                href="website/video/memory-of-a-woman.mp4"></a>
                                         </figure>
                                     </div>
                                 </div>
@@ -288,73 +278,6 @@
                                     <p>3 Months</p>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="tab-pane" id="product-tab-vendor">
-                            <div class="row mb-3">
-                                <div class="col-md-6 mb-4">
-                                    <figure class="vendor-banner br-sm">
-                                        <img src="assets/images/products/vendor-banner.jpg"
-                                            alt="Vendor Banner" width="610" height="295"
-                                            style="background-color: #353B55;" />
-                                    </figure>
-                                </div>
-                                <div class="col-md-6 pl-2 pl-md-6 mb-4">
-                                    <div class="vendor-user">
-                                        <figure class="vendor-logo mr-4">
-                                            <a href="#">
-                                                <img src="assets/images/products/vendor-logo.jpg"
-                                                    alt="Vendor Logo" width="80" height="80" />
-                                            </a>
-                                        </figure>
-                                        <div>
-                                            <div class="vendor-name"><a href="#">Jone Doe</a></div>
-                                            <div class="ratings-container">
-                                                <div class="ratings-full">
-                                                    <span class="ratings" style="width: 90%;"></span>
-                                                    <span class="tooltiptext tooltip-top"></span>
-                                                </div>
-                                                <a href="#" class="rating-reviews">(32 Reviews)</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ul class="vendor-info list-style-none">
-                                        <li class="store-name">
-                                            <label>Store Name:</label>
-                                            <span class="detail">OAIO Store</span>
-                                        </li>
-                                        <li class="store-address">
-                                            <label>Address:</label>
-                                            <span class="detail">Steven Street, El Carjon, CA 92020, United
-                                                States (US)</span>
-                                        </li>
-                                        <li class="store-phone">
-                                            <label>Phone:</label>
-                                            <a href="#tel:">1234567890</a>
-                                        </li>
-                                    </ul>
-                                    <a href="vendor-dokan-store.html"
-                                        class="btn btn-dark btn-link btn-underline btn-icon-right">Visit
-                                        Store<i class="w-icon-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <p class="mb-5"><strong class="text-dark">L</strong>orem ipsum dolor sit amet,
-                                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore magna aliqua.
-                                Venenatis tellus in metus vulputate eu scelerisque felis. Vel pretium
-                                lectus quam id leo in vitae turpis massa. Nunc id cursus metus aliquam.
-                                Libero id faucibus nisl tincidunt eget. Aliquam id diam maecenas ultricies
-                                mi eget mauris. Volutpat ac tincidunt vitae semper quis lectus. Vestibulum
-                                mattis ullamcorper velit sed. A arcu cursus vitae congue mauris.
-                            </p>
-                            <p class="mb-2"><strong class="text-dark">A</strong> arcu cursus vitae congue
-                                mauris. Sagittis id consectetur purus
-                                ut. Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla.
-                                Diam in
-                                arcu cursus euismod quis. Eget sit amet tellus cras adipiscing enim eu. In
-                                fermentum et sollicitudin ac orci phasellus. A condimentum vitae sapien
-                                pellentesque
-                                habitant morbi tristique senectus et. In dictum non consectetur a erat. Nunc
-                                scelerisque viverra mauris in aliquam sem fringilla.</p>
                         </div>
                         <div class="tab-pane" id="product-tab-reviews">
                             <div class="row mb-4">
@@ -521,7 +444,7 @@
                                             <li class="comment">
                                                 <div class="comment-body">
                                                     <figure class="comment-avatar">
-                                                        <img src="assets/images/agents/1-100x100.png"
+                                                        <img src="website/images/agents/1-100x100.png"
                                                             alt="Commenter Avatar" width="90" height="90">
                                                     </figure>
                                                     <div class="comment-content">
@@ -557,10 +480,10 @@
                                                             <div class="review-image">
                                                                 <a href="#">
                                                                     <figure>
-                                                                        <img src="assets/images/products/default/review-img-1.jpg"
+                                                                        <img src="website/images/products/default/review-img-1.jpg"
                                                                             width="60" height="60"
                                                                             alt="Attachment image of John Doe's review on Electronics Black Wrist Watch"
-                                                                            data-zoom-image="assets/images/products/default/review-img-1-800x900.jpg" />
+                                                                            data-zoom-image="website/images/products/default/review-img-1-800x900.jpg" />
                                                                     </figure>
                                                                 </a>
                                                             </div>
@@ -571,7 +494,7 @@
                                             <li class="comment">
                                                 <div class="comment-body">
                                                     <figure class="comment-avatar">
-                                                        <img src="assets/images/agents/2-100x100.png"
+                                                        <img src="website/images/agents/2-100x100.png"
                                                             alt="Commenter Avatar" width="90" height="90">
                                                     </figure>
                                                     <div class="comment-content">
@@ -607,18 +530,18 @@
                                                             <div class="review-image">
                                                                 <a href="#">
                                                                     <figure>
-                                                                        <img src="assets/images/products/default/review-img-2.jpg"
+                                                                        <img src="website/images/products/default/review-img-2.jpg"
                                                                             width="60" height="60"
                                                                             alt="Attachment image of John Doe's review on Electronics Black Wrist Watch"
-                                                                            data-zoom-image="assets/images/products/default/review-img-2.jpg" />
+                                                                            data-zoom-image="website/images/products/default/review-img-2.jpg" />
                                                                     </figure>
                                                                 </a>
                                                                 <a href="#">
                                                                     <figure>
-                                                                        <img src="assets/images/products/default/review-img-3.jpg"
+                                                                        <img src="website/images/products/default/review-img-3.jpg"
                                                                             width="60" height="60"
                                                                             alt="Attachment image of John Doe's review on Electronics Black Wrist Watch"
-                                                                            data-zoom-image="assets/images/products/default/review-img-3.jpg" />
+                                                                            data-zoom-image="website/images/products/default/review-img-3.jpg" />
                                                                     </figure>
                                                                 </a>
                                                             </div>
@@ -629,7 +552,7 @@
                                             <li class="comment">
                                                 <div class="comment-body">
                                                     <figure class="comment-avatar">
-                                                        <img src="assets/images/agents/3-100x100.png"
+                                                        <img src="website/images/agents/3-100x100.png"
                                                             alt="Commenter Avatar" width="90" height="90">
                                                     </figure>
                                                     <div class="comment-content">
@@ -673,7 +596,7 @@
                                             <li class="comment">
                                                 <div class="comment-body">
                                                     <figure class="comment-avatar">
-                                                        <img src="assets/images/agents/1-100x100.png"
+                                                        <img src="website/images/agents/1-100x100.png"
                                                             alt="Commenter Avatar" width="90" height="90">
                                                     </figure>
                                                     <div class="comment-content">
@@ -709,10 +632,10 @@
                                                             <div class="review-image">
                                                                 <a href="#">
                                                                     <figure>
-                                                                        <img src="assets/images/products/default/review-img-1.jpg"
+                                                                        <img src="website/images/products/default/review-img-1.jpg"
                                                                             width="60" height="60"
                                                                             alt="Attachment image of John Doe's review on Electronics Black Wrist Watch"
-                                                                            data-zoom-image="assets/images/products/default/review-img-1.jpg" />
+                                                                            data-zoom-image="website/images/products/default/review-img-1.jpg" />
                                                                     </figure>
                                                                 </a>
                                                             </div>
@@ -723,7 +646,7 @@
                                             <li class="comment">
                                                 <div class="comment-body">
                                                     <figure class="comment-avatar">
-                                                        <img src="assets/images/agents/2-100x100.png"
+                                                        <img src="website/images/agents/2-100x100.png"
                                                             alt="Commenter Avatar" width="90" height="90">
                                                     </figure>
                                                     <div class="comment-content">
@@ -759,18 +682,18 @@
                                                             <div class="review-image">
                                                                 <a href="#">
                                                                     <figure>
-                                                                        <img src="assets/images/products/default/review-img-2.jpg"
+                                                                        <img src="website/images/products/default/review-img-2.jpg"
                                                                             width="60" height="60"
                                                                             alt="Attachment image of John Doe's review on Electronics Black Wrist Watch"
-                                                                            data-zoom-image="assets/images/products/default/review-img-2-800x900.jpg" />
+                                                                            data-zoom-image="website/images/products/default/review-img-2-800x900.jpg" />
                                                                     </figure>
                                                                 </a>
                                                                 <a href="#">
                                                                     <figure>
-                                                                        <img src="assets/images/products/default/review-img-3.jpg"
+                                                                        <img src="website/images/products/default/review-img-3.jpg"
                                                                             width="60" height="60"
                                                                             alt="Attachment image of John Doe's review on Electronics Black Wrist Watch"
-                                                                            data-zoom-image="assets/images/products/default/review-img-3-800x900.jpg" />
+                                                                            data-zoom-image="website/images/products/default/review-img-3-800x900.jpg" />
                                                                     </figure>
                                                                 </a>
                                                             </div>
@@ -785,7 +708,7 @@
                                             <li class="comment">
                                                 <div class="comment-body">
                                                     <figure class="comment-avatar">
-                                                        <img src="assets/images/agents/3-100x100.png"
+                                                        <img src="website/images/agents/3-100x100.png"
                                                             alt="Commenter Avatar" width="90" height="90">
                                                     </figure>
                                                     <div class="comment-content">
@@ -829,7 +752,7 @@
                                             <li class="comment">
                                                 <div class="comment-body">
                                                     <figure class="comment-avatar">
-                                                        <img src="assets/images/agents/2-100x100.png"
+                                                        <img src="website/images/agents/2-100x100.png"
                                                             alt="Commenter Avatar" width="90" height="90">
                                                     </figure>
                                                     <div class="comment-content">
@@ -865,18 +788,18 @@
                                                             <div class="review-image">
                                                                 <a href="#">
                                                                     <figure>
-                                                                        <img src="assets/images/products/default/review-img-2.jpg"
+                                                                        <img src="website/images/products/default/review-img-2.jpg"
                                                                             width="60" height="60"
                                                                             alt="Attachment image of John Doe's review on Electronics Black Wrist Watch"
-                                                                            data-zoom-image="assets/images/products/default/review-img-2-800x900.jpg" />
+                                                                            data-zoom-image="website/images/products/default/review-img-2-800x900.jpg" />
                                                                     </figure>
                                                                 </a>
                                                                 <a href="#">
                                                                     <figure>
-                                                                        <img src="assets/images/products/default/review-img-3.jpg"
+                                                                        <img src="website/images/products/default/review-img-3.jpg"
                                                                             width="60" height="60"
                                                                             alt="Attachment image of John Doe's review on Electronics Black Wrist Watch"
-                                                                            data-zoom-image="assets/images/products/default/review-img-3-800x900.jpg" />
+                                                                            data-zoom-image="website/images/products/default/review-img-3-800x900.jpg" />
                                                                     </figure>
                                                                 </a>
                                                             </div>
@@ -891,7 +814,7 @@
                                             <li class="comment">
                                                 <div class="comment-body">
                                                     <figure class="comment-avatar">
-                                                        <img src="assets/images/agents/1-100x100.png"
+                                                        <img src="website/images/agents/1-100x100.png"
                                                             alt="Commenter Avatar" width="90" height="90">
                                                     </figure>
                                                     <div class="comment-content">
@@ -927,10 +850,10 @@
                                                             <div class="review-image">
                                                                 <a href="#">
                                                                     <figure>
-                                                                        <img src="assets/images/products/default/review-img-3.jpg"
+                                                                        <img src="website/images/products/default/review-img-3.jpg"
                                                                             width="60" height="60"
                                                                             alt="Attachment image of John Doe's review on Electronics Black Wrist Watch"
-                                                                            data-zoom-image="assets/images/products/default/review-img-3-800x900.jpg" />
+                                                                            data-zoom-image="website/images/products/default/review-img-3-800x900.jpg" />
                                                                     </figure>
                                                                 </a>
                                                             </div>
@@ -945,6 +868,7 @@
                         </div>
                     </div>
                 </div>
+                @isset($related)
                 <section class="related-product-section">
                     <div class="title-link-wrapper mb-4">
                         <h4 class="title">Related Products</h4>
@@ -967,186 +891,43 @@
                         }
                     }">
                         <div class="swiper-wrapper row cols-lg-3 cols-md-4 cols-sm-3 cols-2">
-                            <div class="swiper-slide product">
-                                <figure class="product-media">
-                                    <a href="product-default.html">
-                                        <img src="assets/images/products/default/5.jpg" alt="Product"
-                                            width="300" height="338" />
-                                    </a>
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart w-icon-cart"
-                                            title="Add to cart"></a>
-                                        <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                            title="Add to wishlist"></a>
-                                        <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                            title="Add to Compare"></a>
-                                    </div>
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-quickview" title="Quick View">Quick
-                                            View</a>
-                                    </div>
-                                </figure>
-                                <div class="product-details">
-                                    <h4 class="product-name"><a href="product-default.html">Drone</a></h4>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            <span class="ratings" style="width: 100%;"></span>
-                                            <span class="tooltiptext tooltip-top"></span>
-                                        </div>
-                                        <a href="product-default.html" class="rating-reviews">(3 reviews)</a>
-                                    </div>
-                                    <div class="product-pa-wrapper">
-                                        <div class="product-price">$632.00</div>
-                                    </div>
+                            
+                         @foreach ($related as $item)
+                         <div class="swiper-slide product">
+                            <figure class="product-media">
+                                <a href="product-default.html">
+                                    <img src="{{ asset('uploads/product/'.$item->image) }}" alt="Product"
+                                        width="300" height="338" />
+                                </a>
+                                <div class="product-action-vertical">
+                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart"
+                                        title="Add to cart"></a>
+                                   
                                 </div>
-                            </div>
-                            <div class="swiper-slide product">
-                                <figure class="product-media">
-                                    <a href="product-default.html">
-                                        <img src="assets/images/products/default/6.jpg" alt="Product"
-                                            width="300" height="338" />
-                                    </a>
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart w-icon-cart"
-                                            title="Add to cart"></a>
-                                        <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                            title="Add to wishlist"></a>
-                                        <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                            title="Add to Compare"></a>
-                                    </div>
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-quickview" title="Quick View">Quick
-                                            View</a>
-                                    </div>
-                                </figure>
-                                <div class="product-details">
-                                    <h4 class="product-name"><a href="product-default.html">Official Camera</a>
-                                    </h4>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            <span class="ratings" style="width: 100%;"></span>
-                                            <span class="tooltiptext tooltip-top"></span>
-                                        </div>
-                                        <a href="product-default.html" class="rating-reviews">(3 reviews)</a>
-                                    </div>
-                                    <div class="product-pa-wrapper">
-                                        <div class="product-price">
-                                            <ins class="new-price">$263.00</ins><del
-                                                class="old-price">$300.00</del>
-                                        </div>
-                                    </div>
+                                <div class="product-action">
+                                    <a href="#" class="btn-product btn-quickview" title="Quick View">Quick
+                                        View</a>
                                 </div>
-                            </div>
-                            <div class="swiper-slide product">
-                                <figure class="product-media">
-                                    <a href="product-default.html">
-                                        <img src="assets/images/products/default/6.jpg" alt="Product"
-                                            width="300" height="338" />
-                                    </a>
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart w-icon-cart"
-                                            title="Add to cart"></a>
-                                        <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                            title="Add to wishlist"></a>
-                                        <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                            title="Add to Compare"></a>
+                            </figure>
+                            <div class="product-details">
+                                <h4 class="product-name"><a href="product-default.html">{{$item->name}}</a></h4>
+                                <div class="ratings-container">
+                                    <div class="ratings-full">
+                                        <span class="ratings" style="width: 100%;"></span>
+                                        <span class="tooltiptext tooltip-top"></span>
                                     </div>
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-quickview" title="Quick View">Quick
-                                            View</a>
-                                    </div>
-                                </figure>
-                                <div class="product-details">
-                                    <h4 class="product-name"><a href="product-default.html">Official Camera</a>
-                                    </h4>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            <span class="ratings" style="width: 100%;"></span>
-                                            <span class="tooltiptext tooltip-top"></span>
-                                        </div>
-                                        <a href="product-default.html" class="rating-reviews">(3 reviews)</a>
-                                    </div>
-                                    <div class="product-pa-wrapper">
-                                        <div class="product-price">
-                                            <ins class="new-price">$263.00</ins><del
-                                                class="old-price">$300.00</del>
-                                        </div>
-                                    </div>
+                                    <a href="product-default.html" class="rating-reviews">(3 reviews)</a>
                                 </div>
-                            </div>
-                            <div class="swiper-slide product">
-                                <figure class="product-media">
-                                    <a href="product-default.html">
-                                        <img src="assets/images/products/default/7-1.jpg" alt="Product"
-                                            width="300" height="338" />
-                                        <img src="assets/images/products/default/7-2.jpg" alt="Product"
-                                            width="300" height="338" />
-                                    </a>
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart w-icon-cart"
-                                            title="Add to cart"></a>
-                                        <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                            title="Add to wishlist"></a>
-                                        <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                            title="Add to Compare"></a>
-                                    </div>
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-quickview" title="Quick View">Quick
-                                            View</a>
-                                    </div>
-                                </figure>
-                                <div class="product-details">
-                                    <h4 class="product-name"><a href="product-default.html">Phone Charge Pad</a>
-                                    </h4>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            <span class="ratings" style="width: 80%;"></span>
-                                            <span class="tooltiptext tooltip-top"></span>
-                                        </div>
-                                        <a href="product-default.html" class="rating-reviews">(8 reviews)</a>
-                                    </div>
-                                    <div class="product-pa-wrapper">
-                                        <div class="product-price">$23.00</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide product">
-                                <figure class="product-media">
-                                    <a href="product-default.html">
-                                        <img src="assets/images/products/default/8.jpg" alt="Product"
-                                            width="300" height="338" />
-                                    </a>
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart w-icon-cart"
-                                            title="Add to cart"></a>
-                                        <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                            title="Add to wishlist"></a>
-                                        <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                            title="Add to Compare"></a>
-                                    </div>
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-quickview" title="Quick View">Quick
-                                            View</a>
-                                    </div>
-                                </figure>
-                                <div class="product-details">
-                                    <h4 class="product-name"><a href="product-default.html">Fashionalble
-                                            Pencil</a></h4>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            <span class="ratings" style="width: 100%;"></span>
-                                            <span class="tooltiptext tooltip-top"></span>
-                                        </div>
-                                        <a href="product-default.html" class="rating-reviews">(9 reviews)</a>
-                                    </div>
-                                    <div class="product-pa-wrapper">
-                                        <div class="product-price">$50.00</div>
-                                    </div>
+                                <div class="product-pa-wrapper">
+                                    <div class="product-price">{{$item->price}}Tk</div>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
+                        </div>
                     </div>
                 </section>
+                @endisset
             </div>
             <!-- End of Main Content -->
             <!-- End of Sidebar -->
