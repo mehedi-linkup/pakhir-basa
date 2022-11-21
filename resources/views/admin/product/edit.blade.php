@@ -123,9 +123,9 @@
                                   <div class="col-md-8">
                                     <div class="input-group input-group-sm">
                                       <select name="category_id" id="category_id" class="custom-select js-example-basic-multiple form-control my-select my-form-control @error('category_id') is-invalid @enderror" data-live-search="true" >
-                                        <option  data-tokens="ketchup mustard">Select Category</option>
+                                        {{-- <option  data-tokens="ketchup mustard">Select Category</option> --}}
                                             @foreach ($category as $item)
-                                              <option value="{{ $item->id }}" {{ $item->id == $product->category_id ? 'selected' : old('category_id') }}>{{ $item->name }}</option>
+                                              <option name="category_id" value="{{ $item->id }}" {{ $item->id == $product->category_id ? 'selected' : old('category_id') }}>{{ $item->name }}</option>
                                             @endforeach
                                       </select>
                                       <div class="input-group-append">
@@ -146,7 +146,7 @@
                                       <div class="input-group input-group-sm">
                                       <select name="sub_category_id" id="sub_category_id" class="js-example-basic-multiple form-control my-form-control @error('sub_category_id') is-invalid @enderror " data-live-search="true" >
                                         @foreach ($subcategory as $item)
-                                        <option value="{{ $item->id }}" {{ $item->id == $product->subcategory_id ? 'selected' : old('subcategory_id')  }} data-tokens="ketchup mustard">Select Sub Category</option>
+                                        <option name="sub_category_id" value="{{ $item->id }}" {{ $item->id == $product->sub_category_id ? 'selected' : old('sub_category_id')  }} data-tokens="ketchup mustard">{{$item->name}}</option>
                                         @endforeach
                                     </select>
                                     <div class="input-group-append">
@@ -164,11 +164,9 @@
                                   </div>
                                   <div class="col-md-8 mt-1">
                                     <div class="input-group input-group-sm">
-                                        <select name="child_category_id" id="child_category_id"
-                                            class="js-example-basic-multiple form-control my-form-control @error('child_category_id') is-invalid @enderror ">
+                                        <select name="child_category_id" id="child_category_id" class="js-example-basic-multiple form-control my-form-control @error('child_category_id') is-invalid @enderror ">
                                             @foreach ($childcategory as $item)
-                                            <option data-tokens="ketchup mustard" value="" {{$item->id == $product->child_category_id ? 'selected' : old('child_category_id') }}>Select Child
-                                              Category</option>
+                                            <option name="child_category_id" data-tokens="ketchup mustard" value="{{ $item->id }}" {{$item->id == $product->child_category_id ? 'selected' : old('child_category_id') }}>{{$item->name}}</option>
                                             @endforeach
                                         </select>
                                         <div class="input-group-append">
@@ -321,33 +319,33 @@
     //    }
 
 
-      //  $(document).ready(function() {
-      //      $("select[name='sub_category_id']").on('change', function(){
-      //          var sub_category_id =$(this).val();
-      //          product(sub_category_id)
-      //      });
-      //  });
-      //  var subcategoryId = "<?php echo $product->sub_category_id ?>";
-      //  product(subcategoryId);
-      //  function product(id) {
-      //      var childcategoryId = id;
-      //      if(childcategoryId != 0 && childcategoryId != undefined) {
-      //          $.ajax({
-      //              url:location.origin +"/childcategory/list/"+ childcategoryId,
-      //              type :"GET",
-      //              dataType:"json",
-      //              beforeSend: () => {
-      //                   $('#childcategoryId').html("");
-      //               },
-      //              success:function(data){
-      //              $('#child_category_id').empty();
-      //                  $.each(data, function(key,value){
-      //                  $("#childcategoryId").append('<option value="'+value.id+'">'+value.name+'</option>');
-      //                  });
-      //              }
-      //          });
-      //      }
-      //  }
+       $(document).ready(function() {
+           $("select[name='sub_category_id']").on('change', function(){
+               var sub_category_id =$(this).val();
+               product(sub_category_id)
+           });
+       });
+       var subcategoryId = "<?php echo $product->sub_category_id ?>";
+       product(subcategoryId);
+       function product(id) {
+           var childcategoryId = id;
+           if(childcategoryId != 0 && childcategoryId != undefined) {
+               $.ajax({
+                   url:location.origin +"/childcategory/list/"+ childcategoryId,
+                   type :"GET",
+                   dataType:"json",
+                   beforeSend: () => {
+                        $('#childcategoryId').html("");
+                    },
+                   success:function(data){
+                   $('#child_category_id').empty();
+                       $.each(data, function(key,value){
+                       $("#childcategoryId").append('<option value="'+value.id+'">'+value.name+'</option>');
+                       });
+                   }
+               });
+           }
+       }
    </script>
    {{-- get sub and child category --}}
    <script>
@@ -372,7 +370,7 @@
         });
     });
 </script>
-<script>
+{{-- <script>
     $(document).ready(function() {
         $("select[name='sub_category_id']").on('change', function() {
             let sub_category_id = $(this).val();
@@ -394,7 +392,7 @@
             })
         });
     });
-</script>
+</script> --}}
 
    {{-- get sub and child category --}}
    <script>

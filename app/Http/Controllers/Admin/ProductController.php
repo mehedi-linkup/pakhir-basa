@@ -212,10 +212,10 @@ class ProductController extends Controller
     {
         $color = Color::all();
         $size = Size::all();
-        $category = Category::all();
         $product = Product::with('inventory')->where('slug', $slug)->first();
         $subcategory = Subcategory::where('category_id', $product->category_id)->get();
         $childcategory = ChildCategory::where('subcategory_id', $product->subcategory_id)->get();
+        $category = Category::all();
         return view('admin.product.edit', compact('product', 'subcategory', 'childcategory', 'category','color','size'));
     }
 

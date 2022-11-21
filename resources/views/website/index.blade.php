@@ -241,22 +241,14 @@
         }
     }">
         <div class="swiper-wrapper row gutter-no cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2">
-            @for($i=0; $i <= 5; $i++)
+            @foreach ($partner as $item)
             <div class="swiper-slide brand-col">
                 <figure class="brand-wrapper">
-                    <img src="{{ asset($partner[$i]->image) }}" alt="{{ $partner[$i]->name }}" width="410"
+                    <img src="{{ asset($item->image) }}" alt="{{ $item->name }}" width="410"
                         height="186" />
                 </figure>
             </div>
-            @endfor
-            @for($i=6; $i <= 11; ++$i)
-            <div class="swiper-slide brand-col">
-                <figure class="brand-wrapper">
-                    <img src="{{ asset($partner[$i]->image) }}" alt="{{ $partner[$i]->name }}" width="410"
-                        height="186" />
-                </figure>
-            </div>
-            @endfor
+            @endforeach
         </div>
         {{-- <div class="swiper-wrapper row gutter-no cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2">
            
