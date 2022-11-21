@@ -29,12 +29,13 @@
     <link rel="preload" href="{{ asset('/') }}website/assets/fonts/wolmart87d5.woff?png09e" as="font" type="font/woff" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/vendor/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/vendor/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/vendor/magnific-popup/magnific-popup.min.css">
     <link rel="stylesheet" href="{{ asset('/') }}website/vendor/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="{{ asset('website/vendor/toastr/toastr.min.css') }}">
      <!-- Default CSS -->
      <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/style.min.css">
      <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/custom.css">
-    @yield('website-css')
+        @yield('website-css')
 </head>
 <body class="home">
     <div class="page-wrapper">
@@ -722,6 +723,7 @@
 
     <!-- Main JS -->
     <script src="{{asset('/')}}website/assets/js/main.js"></script>
+    @stack('website-js')
     <script>
         @if(Session::has('update'))
         toastr.options =

@@ -118,7 +118,7 @@
     <div class="product-wrapper-1 appear-animate mb-5">
         <div class="title-link-wrapper pb-1 mb-4">
             <h2 class="title ls-normal text-uppercase mb-0">MOST POPULAR FOR {{ $popcat->name }}</h2>
-            <a href="" class="font-size-normal font-weight-bold ls-25 mb-0">More
+            <a href="{{ route('shop.box') }}" class="font-size-normal font-weight-bold ls-25 mb-0">More
                 Products<i class="w-icon-long-arrow-right"></i></a>
         </div>
         <div class="row">
@@ -140,7 +140,7 @@
                         <div class="swiper-slide product-col">
                             <div class="product-wrap product text-center">
                                 <figure class="product-media">
-                                    <a href="{{route('product.details',$item->id)}}">
+                                    <a href="{{ route('product.details', $item->slug) }}">
                                         <img src="{{ asset('uploads/product/'.$item->image) }}" alt="{{ $item->name }}"
                                             width="216" height="243" />
                                     </a>
