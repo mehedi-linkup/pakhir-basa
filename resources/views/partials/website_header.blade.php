@@ -2,7 +2,7 @@
     <div class="header-top">
         <div class="container">
             <div class="header-left">
-                <p class="welcome-msg">Welcome to Pakhir Basa Store message or remove it!</p>
+                <p class="welcome-msg">Welcome to Pakhir Basa Store</p>
             </div>
             <div class="header-right">
                
@@ -133,11 +133,13 @@
                                         @foreach ($item->SubCategory as $item1)
                                         <li>
                                             <a class="menu-title" href="#">{{ $item1->name }}</a>
-                                            {{-- <h4 class="menu-title">{{ $item1->name }}</h4> --}}
                                             <hr class="divider">
-                                            @if(is_array($item1->childcategory))
+                                            @php
+                                               $childcategory = \App\Models\ChildCategory::where('subcategory_id', $item1->id)->get();
+                                            @endphp
+                                            @if(count($childcategory) > 0)
                                             <ul>
-                                                @foreach ($item1->childcategory as $item2)
+                                                @foreach ($childcategory as $item2)
                                                 <li><a href="{{route('shop.banner')}}">{{ $item2->name }}</a></li>
                                                 @endforeach
                                             </ul>

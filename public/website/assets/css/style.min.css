@@ -14886,8 +14886,8 @@ body .product-popup {
 }
 
 .header-middle {
-  padding-top: 3.2rem;
-  padding-bottom: 3.2rem;
+  padding-top: 2rem;
+  padding-bottom:2rem;
   color: #333;
   background: #fff;
   font-size: 1.2rem;
@@ -16453,7 +16453,9 @@ body .product-popup {
   right: 0.5rem;
 }
 .category-menu .megamenu {
-  min-width: 68.5rem;
+  /* min-width: 68.5rem; */
+  min-width: 40rem;
+
 }
 .category-menu .megamenu > li:not(:last-child) {
   padding: 2.8rem 2rem 0 0rem;
