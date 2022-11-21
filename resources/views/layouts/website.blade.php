@@ -35,7 +35,7 @@
      <!-- Default CSS -->
      <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/style.min.css">
      <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/custom.css">
-        @yield('website-css')
+    @yield('website-css')
 </head>
 <body class="home">
     <div class="page-wrapper">

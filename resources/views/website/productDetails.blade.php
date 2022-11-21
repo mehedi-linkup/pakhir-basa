@@ -1,6 +1,8 @@
 @extends('layouts.website')
 @section('website-css')
-
+<link rel="stylesheet" type="text/css" href="{{asset('/')}}website/vendor/photoswipe/photoswipe.min.css">
+<link rel="stylesheet" type="text/css" href="{{asset('/')}}website/vendor/photoswipe/default-skin/default-skin.min.css">
+@endsection
 @section('website-content')
  <!-- Start of Breadcrumb -->
  <nav class="breadcrumb-nav container">
@@ -1155,7 +1157,6 @@
 @endsection
 
 @push('website-js')
-    <script>
-
-    </script>
+<script src="{{asset('/')}}website/vendor/photoswipe/photoswipe.js"></script>
+<script src="{{asset('/')}}website/vendor/photoswipe/photoswipe-ui-default.js"></script>
 @endpush

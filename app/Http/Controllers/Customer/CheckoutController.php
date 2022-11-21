@@ -26,191 +26,181 @@ use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
+    // public function checkout()
+    // {
+    //     $today = date("D");
+    //     if($today == 'Sat'){
+    //         $time = DeliveryTime::where('group_id',1)->get();
+    //     }
+    //     elseif($today == 'Sun'){
+    //         $time = DeliveryTime::where('group_id',2)->get();
+    //     }
+    //     elseif($today == 'Mon'){
+    //         $time = DeliveryTime::where('group_id',3)->get();
+    //     }
+    //     elseif($today == 'Tue'){
+    //         $time = DeliveryTime::where('group_id',4)->get();
+    //     }
+    //     elseif($today == 'Wed'){
+    //         $time = DeliveryTime::where('group_id',5)->get();
+    //     }
+    //     elseif($today == 'Thu'){
+    //         $time = DeliveryTime::where('group_id',6)->get();
+    //     }
+    //     else{
+    //         $time = DeliveryTime::where('group_id',7)->get();
+    //     }
+
+    //     $sum = 0;
+    //     $price = 0;
+    //     if (Auth::guard('customer')->check()) {
+    //             $offer_product = Product::where('is_offer','1')->get()->pluck('id')->toArray();
+                
+    //             $data = DB::table('orders')
+    //                     ->join('order_details',function($join){
+    //                         $join->on('orders.id','=','order_details.order_id')
+    //                         ->where('orders.customer_id',Auth::guard('customer')->user()->id);
+    //                     })
+    //                     ->get();
+    //             if(count($data) > 0) {
+    //                 $total_offer_buy = $data->sum('quantity');
+    //                 $offer_limit = (int) Offer::first()->offer_limit_qty;
+    //                 $available_qty = $offer_limit - $total_offer_buy;  
+    //             }                       
+
+
+    //         $area = Area::latest()->get();
+    //         $thana = Thana::latest()->get();
+    //         $product = Product::where('is_offer','>','0')->get();
+    //         $sum = 0;
+    //         $offer_product = Product::where('is_offer','1')->get()->pluck('id')->toArray();
+    //         // dd($offer_product);
+            
+    //          $exist_order_tables =OrderDetails::where('customer_id',Auth::guard('customer')->user()->id)->whereDate('created_at', Carbon::today())->get()->pluck('product_id')->toArray();
+            
+    //         // return \Cart::getContent();
+    //         foreach (\Cart::getContent() as $value) {                                    
+    //             $id = $value->id;
+    //             $product = Product::with('inventory')->where('id',$id)->first();
+    //             $stock = $product->inventory->purchase;
+    //             if($stock >= $value->quantity){
+    //                 if(in_array($value->id, $offer_product)){
+            
+    //                     if(in_array($value->id, $exist_order_tables)){    
+    //                         $price = $value->price* $value->quantity;
+    //                         $offer_price = '';
+    //                         foreach (\Cart::getContent() as $item) {
+                                
+    //                             if($item->id == $value->id){
+    //                                 $id = $value->id;
+    //                                 $product = Product::with('inventory')->where('id',$id)->first();
+    //                                 $stock = $product->inventory->purchase;
+    //                                 if($stock >= $value->quantity){
+                                        
+    //                                     $item['attributes']['sum'] = $price;
+                                        
+    //                                 }
+    //                                 $sum += $price;
+    //                             }
+    //                             else {
+    //                                 $sum += '0';
+    //                             }
+    //                         }
+    //                         continue;
+    //                     }
+    //                     else{
+    //                         // dd('nai');
+    //                         if($value->quantity > 1){
+    //                             $discount_product =  Product::where('id',$value->id)->first();
+    //                             $discount = $value->price/100*$discount_product->discount;
+    //                             $discount_price = $discount_product->price - $discount;
+    //                             foreach (\Cart::getContent() as $item) {
+    //                                 if($item->id == $value->id){
+    //                                 $id = $value->id;
+    //                                 $product = Product::with('inventory')->where('id',$id)->first();
+    //                                 $stock = $product->inventory->purchage;
+    //                                 if($stock >= $value->quantity){
+                                        
+    //                                     $item['attributes']['sum'] = $discount_price;
+    //                                     $item['attributes']['offer_price'] = $discount_price;
+    //                                     $item['attributes']['quantity'] = '1';
+    
+    //                                 }
+                                        
+    //                                 }
+    //                                 }
+    //                             $exist_qty = $value->quantity - 1;
+    //                             $second_price = $value->price * $exist_qty;
+    //                             $price = $discount_price + $second_price;
+    //                             $without_discount_price = $price -  $item['attributes']['offer_price'] = $discount_price;
+    //                             $sum += $price;
+    //                             foreach (\Cart::getContent() as $item) {
+    //                                 if($item->id == $value->id){
+    //                                     $id = $value->id;
+    //                                     $product = Product::with('inventory')->where('id',$id)->first();
+    //                                     $stock = $product->inventory->purchage;
+    //                                     if($stock >= $value->quantity){
+    //                                         $item['attributes']['sum'] += $second_price;
+    //                                         $item['attributes']['exist_qty'] = $exist_qty;
+    //                                         $item['attributes']['price'] = $price-$second_price;
+                                            
+    //                                         $sum += $price;
+    //                                     }
+    //                                     else{
+    //                                         $sum += '0';
+    //                                     }
+                                        
+    //                                 }
+    //                                 }
+    //                             continue;
+    //                         } else {
+    //                             $discount_product = Product::where('id', $value->id)->first();
+    //                             $discount = $value->price / 100 * $discount_product->discount;
+    //                             $price = $discount_product->price - $discount;
+                                
+    //                             foreach (\Cart::getContent() as $item) {
+    //                                 if($item->id == $value->id){
+    //                                     $id = $value->id;
+    //                                     $product = Product::with('inventory')->where('id',$id)->first();
+    //                                     $stock = $product->inventory->purchage;
+    //                                     if($stock >= $value->quantity){
+    //                                         $item['attributes']['sum'] = $price;
+    //                                         $item['attributes']['offer_price'] = $price;
+    //                                         $item['attributes']['quantity'] = '1';
+    //                                     }
+    //                                     $sum += $price;
+    //                                 }
+    //                                 else{
+    //                                     $sum += '0';
+    //                                 }
+    //                             }
+    //                             continue;                           
+    //                         }
+    //                     }
+    //                 }
+    //                 $price = $value->quantity * $value->price;
+    //                 foreach (\Cart::getContent() as $item) {
+    //                     if($item->id == $value->id){
+    //                         $item['attributes']['sum'] = $price;
+    //                         $sum += $price;
+    //                     }
+    //                     else{
+    //                         $sum += '0';
+    //                     }
+    //                     }
+    //                 continue;
+    //             }
+    //         } 
+    //         $district = District::all();
+    //         // dd($sum);
+    //         return view('website.customer.checkout',compact('area','product','sum','price','thana','district','time'));
+    //     } else {
+    //         return redirect()->route('customer.login');
+    //     }
+    // }
     public function checkout()
     {
-        $today = date("D");
-        if($today == 'Sat'){
-            $time = DeliveryTime::where('group_id',1)->get();
-        }
-        elseif($today == 'Sun'){
-            $time = DeliveryTime::where('group_id',2)->get();
-        }
-        elseif($today == 'Mon'){
-            $time = DeliveryTime::where('group_id',3)->get();
-        }
-        elseif($today == 'Tue'){
-            $time = DeliveryTime::where('group_id',4)->get();
-        }
-        elseif($today == 'Wed'){
-            $time = DeliveryTime::where('group_id',5)->get();
-        }
-        elseif($today == 'Thu'){
-            $time = DeliveryTime::where('group_id',6)->get();
-        }
-        else{
-            $time = DeliveryTime::where('group_id',7)->get();
-        }
-
-        $sum = 0;
-        $price = 0;
-        if (Auth::guard('customer')->check()) {
-                $offer_product = Product::where('is_offer','1')->get()->pluck('id')->toArray();
-                
-                $data = DB::table('orders')
-                        ->join('order_details',function($join){
-                            $join->on('orders.id','=','order_details.order_id')
-                            ->where('order_details.customer_id',Auth::guard('customer')->user()->id);
-                        })
-                        ->get();
-                $total_offer_buy = $data->sum('quantity');
-                $offer_limit = (int) Offer::first()->offer_limit_qty;
-                $available_qty = $offer_limit - $total_offer_buy;  
-
-
-            $area = Area::latest()->get();
-            $thana = Thana::latest()->get();
-            $product = Product::where('is_offer','>','0')->get();
-            $sum = 0;
-            $offer_product = Product::where('is_offer','1')->get()->pluck('id')->toArray();
-            // dd($offer_product);
-            
-             $exist_order_tables =OrderDetails::where('customer_id',Auth::guard('customer')->user()->id)->whereDate('created_at', Carbon::today())->get()->pluck('product_id')->toArray();
-            
-            // return \Cart::getContent();
-            foreach (\Cart::getContent() as $value) {                                    
-                        $id = $value->id;
-                        $product = Product::with('inventory')->where('id',$id)->first();
-                        $stock = $product->inventory->purchage;
-                        if($stock >= $value->quantity){
-                            if(in_array($value->id, $offer_product)){
-                    
-                                if(in_array($value->id,$exist_order_tables)){
-                                    
-                                       
-                                        $price = $value->price* $value->quantity;
-                                        $offer_price = '';
-                                        foreach (\Cart::getContent() as $item) {
-                                            
-                                            if($item->id == $value->id){
-                                                $id = $value->id;
-                                                $product = Product::with('inventory')->where('id',$id)->first();
-                                                $stock = $product->inventory->purchage;
-                                                if($stock >= $value->quantity){
-                                                    
-                                                    $item['attributes']['sum'] = $price;
-                                                    
-                                                }
-                                                $sum += $price;
-                                            }
-                                            else {
-                                                $sum += '0';
-                                            }
-                                           }
-                                    
-                                   
-                                       
-                                    continue;
-                                }
-                                else{
-                                    // dd('nai');
-                                    if($value->quantity >1){
-                                        $discount_product =  Product::where('id',$value->id)->first();
-                                        $discount = $value->price/100*$discount_product->discount;
-                                        $discount_price = $discount_product->price - $discount;
-                                        foreach (\Cart::getContent() as $item) {
-                                           if($item->id == $value->id){
-                                            $id = $value->id;
-                                            $product = Product::with('inventory')->where('id',$id)->first();
-                                            $stock = $product->inventory->purchage;
-                                            if($stock >= $value->quantity){
-                                               
-                                                $item['attributes']['sum'] = $discount_price;
-                                                $item['attributes']['offer_price'] = $discount_price;
-                                                $item['attributes']['quantity'] = '1';
-            
-                                            }
-                                             
-                                           }
-                                          }
-                                        $exist_qty = $value->quantity - 1;
-                                        $second_price = $value->price * $exist_qty;
-                                        $price = $discount_price + $second_price;
-                                        $without_discount_price = $price -  $item['attributes']['offer_price'] = $discount_price;
-                                        $sum += $price;
-                                        foreach (\Cart::getContent() as $item) {
-                                            if($item->id == $value->id){
-                                                $id = $value->id;
-                                                $product = Product::with('inventory')->where('id',$id)->first();
-                                                $stock = $product->inventory->purchage;
-                                                if($stock >= $value->quantity){
-                                                    $item['attributes']['sum'] += $second_price;
-                                                    $item['attributes']['exist_qty'] = $exist_qty;
-                                                    $item['attributes']['price'] = $price-$second_price;
-                                                    
-                                                    $sum += $price;
-                                                }
-                                                else{
-                                                    $sum += '0';
-                                                }
-                                               
-                                            }
-                                           }
-                                        continue;
-                                        
-                                    }else{
-            
-                                        $discount_product = Product::where('id',$value->id)->first();
-                                        $discount = $value->price/100*$discount_product->discount;
-                                        $price = $discount_product->price - $discount;
-                                        
-                                        foreach (\Cart::getContent() as $item) {
-                                            if($item->id == $value->id){
-                                                $id = $value->id;
-                                                $product = Product::with('inventory')->where('id',$id)->first();
-                                                $stock = $product->inventory->purchage;
-                                                if($stock >= $value->quantity){
-                                                    $item['attributes']['sum'] = $price;
-                                                    $item['attributes']['offer_price'] = $price;
-                                                    $item['attributes']['quantity'] = '1';
-                                                   
-                                                    
-                                                }
-                                                $sum += $price;
-                                            }
-                                            else{
-                                                $sum += '0';
-                                            }
-                                           }
-                                           
-                                        continue;                           
-                                    
-                                    }
-                                }
-                            
-                            }
-            
-            
-                            $price = $value->quantity * $value->price;
-                            foreach (\Cart::getContent() as $item) {
-                                if($item->id == $value->id){
-                                    $item['attributes']['sum'] = $price;
-                                    $sum += $price;
-                                }
-                                else{
-                                    $sum += '0';
-                                }
-                               }
-                            continue;
-                        }
-                
-                
-            } 
-            $district = District::all();
-            // dd($sum);
-            return view('website.customer.checkout',compact('area','product','sum','price','thana','district','time'));
-        } else {
-            return redirect()->route('customer.login');
-        }
+        return view('website.checkout');
     }
 
     public function orderStore(Request $request)

@@ -26,12 +26,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($cartItems as $item)
                         <tr>
                             <td class="product-thumbnail">
                                 <div class="p-relative">
-                                    <a href="product-default.html">
+                                    @php
+                                        $productSlug = \App\Models\Product::find($item->id);
+                                    @endphp
+                                    <a href="{{ route('product.details', $productSlug->slug) }}">
                                         <figure>
-                                            <img src="assets/images/shop/12.jpg" alt="product"
+                                            <img src="{{ asset('uploads/product/thumbnail/'.$item->attributes->image) }}" alt="{{ $item->attributes->slug }}"
                                                 width="300" height="338">
                                         </figure>
                                     </a>
@@ -40,51 +44,23 @@
                                 </div>
                             </td>
                             <td class="product-name">
-                                <a href="product-default.html">
-                                    Classic Simple Backpack
+                                <a href="{{ route('product.details', $productSlug->slug) }}">
+                                    {{ $item->name }} 
                                 </a>
                             </td>
-                            <td class="product-price"><span class="amount">$40.00</span></td>
+                            <td class="product-price"><span class="amount">{{ $item->price }}</span></td>
                             <td class="product-quantity">
                                 <div class="input-group">
-                                    <input class="quantity form-control" type="number" min="1" max="100000">
+                                    <input class="quantity form-control" type="number" min="1" max="100000" value="{{ $item->quantity }}">
                                     <button class="quantity-plus w-icon-plus"></button>
                                     <button class="quantity-minus w-icon-minus"></button>
                                 </div>
                             </td>
                             <td class="product-subtotal">
-                                <span class="amount">$40.00</span>
+                                <span class="amount">{{ $item->price * $item->quantity }}</span>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="product-thumbnail">
-                                <div class="p-relative">
-                                    <a href="product-default.html">
-                                        <figure>
-                                            <img src="assets/images/shop/13.jpg" alt="product"
-                                                width="300" height="338">
-                                        </figure>
-                                    </a>
-                                    <button class="btn btn-close"><i class="fas fa-times"></i></button>
-                                </div>
-                            </td>
-                            <td class="product-name">
-                                <a href="product-default.html">
-                                    Smart Watch
-                                </a>
-                            </td>
-                            <td class="product-price"><span class="amount">$60.00</span></td>
-                            <td class="product-quantity">
-                                <div class="input-group">
-                                    <input class="quantity form-control" type="number" min="1" max="100000">
-                                    <button class="quantity-plus w-icon-plus"></button>
-                                    <button class="quantity-minus w-icon-minus"></button>
-                                </div>
-                            </td>
-                            <td class="product-subtotal">
-                                <span class="amount">$60.00</span>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
 
@@ -189,7 +165,7 @@
                             <label>Total</label>
                             <span class="ls-50">$100.00</span>
                         </div>
-                        <a href="{{ route('checkout.user') }}"
+                        <a href="{{ route('checkout.index') }}"
                             class="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout">
                             Proceed to checkout<i class="w-icon-long-arrow-right"></i></a>
                     </div>

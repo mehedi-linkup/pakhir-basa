@@ -61,8 +61,6 @@ Route::get('/subcategory/list/{slug}',[HomeController::class,'singleSubCategory'
 Route::get('/allproduct',[HomeController::class,'allProduct'])->name('all.product');
 Route::get('/shop-banner',[HomeController::class,'shopBanner'])->name('shop.banner');
 
-Route::get('/checkout',[HomeController::class,'checkOut'])->name('check.out');
-
 // company profile route
 
 Route::get('/about-us', [HomeController::class, 'aboutWebsite'])->name('about.website');
@@ -127,7 +125,8 @@ Route::get('/cart/increment/{id}',[CartController::class,'increment'])->name('in
 Route::get('/cart-remove-auto',[CartController::class,'cartRemoveAuto'])->name('cart.remove.auto');
 // Checkout route
 
-Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.user');
+// Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.user');
+Route::get('/checkout',[CheckoutController::class,'checkout'])->name('checkout.index');
 Route::post('/orderStore', [CheckoutController::class, 'orderStore'])->name('orderStore');
 Route::get('/customer/order/cancel/{id}',[OrderCancelController::class,'cancel'])->name('customer.order.cancel');
 

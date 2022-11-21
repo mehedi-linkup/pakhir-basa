@@ -58,7 +58,7 @@
                 </div>
                 <div class="dropdown cart-dropdown cart-offcanvas mr-0 mr-lg-2">
                     <div class="cart-overlay"></div>
-                    <a href="#" class="cart-toggle label-down link">
+                    <a href="" class="cart-toggle label-down link">
                         <i class="w-icon-cart">
                             <span id="cart-count" class="cart-count">{{ \Cart::getContent()->count(); }}</span>
                         </i>
@@ -67,7 +67,7 @@
                     <div class="dropdown-box">
                         <div class="cart-header">
                             <span>Shopping Cart</span>
-                            <a href="#" class="btn-close">Close<i class="w-icon-long-arrow-right"></i></a>
+                            <a href="" class="btn-close">Close<i class="w-icon-long-arrow-right"></i></a>
                         </div>
                         <div id="productCartList" class="products">
                             @php
@@ -101,8 +101,8 @@
                         </div>
 
                         <div class="cart-action">
-                            <a href="" class="btn btn-dark btn-outline btn-rounded">View Cart</a>
-                            <a href="{{route('checkout.user')}}" class="btn btn-primary  btn-rounded">Checkout</a>
+                            <a href="{{ route('cart.list') }}" class="btn btn-dark btn-outline btn-rounded">View Cart</a>
+                            <a href="{{route('checkout.index')}}" class="btn btn-primary  btn-rounded">Checkout</a>
                         </div>
                     </div>
                     <!-- End of Dropdown Box -->

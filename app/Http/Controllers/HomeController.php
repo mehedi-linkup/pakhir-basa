@@ -71,10 +71,6 @@ class HomeController extends Controller
     {
         return view('website.shopBanner');
     }
-    public function checkOut()
-    {
-        return view('website.checkout');
-    }
 
 
 

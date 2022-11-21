@@ -372,7 +372,7 @@ input {
     <div class="step-forms">
        
         <h5 class="text-center">Order Summery </h5>
-        @if($sum < $offer->minimum_order_amount)
+        @if($sum < @$offer->minimum_order_amount)
         <p class="text-danger note-summery py-2"><b>Note:</b> Minimum order amount {{$offer->minimum_order_amount}}</p>
         @endif
         <table class="table table-bordered px-3">
@@ -422,7 +422,7 @@ input {
             </tbody>
         </table>
 
-        <div class="btns-group"> <a href="#" class="my-btn btn-prev">Previous</a> @if( $sum >= $offer->minimum_order_amount )
+        <div class="btns-group"> <a href="#" class="my-btn btn-prev">Previous</a> @if( $sum >= @$offer->minimum_order_amount )
             
             <input type="submit" value="Place Order" id="submit-form" class="my-btn" /> 
            
