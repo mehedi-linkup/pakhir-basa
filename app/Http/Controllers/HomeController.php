@@ -84,7 +84,7 @@ class HomeController extends Controller
         $category_list = Category::where('slug', $slug)->first();
         $categories = Category::all();
         $category_wise_product = $category_list->product()->inRandomOrder()->get();
-        return view('website.category', compact('categories', 'category_wise_product', 'centerBigAds', 'category_list'));
+        return view('website.shop-boxed', compact('categories', 'category_wise_product', 'centerBigAds', 'category_list'));
     }
     public function singleSubCategory($slug)
     {

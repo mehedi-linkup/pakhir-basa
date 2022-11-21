@@ -32,6 +32,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/vendor/magnific-popup/magnific-popup.min.css">
     <link rel="stylesheet" href="{{ asset('/') }}website/vendor/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="{{ asset('website/vendor/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('/')}}website/vendor/photoswipe/photoswipe.min.css">
      <!-- Default CSS -->
      <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/style.min.css">
      <link rel="stylesheet" type="text/css" href="{{ asset('/') }}website/assets/css/custom.css">
@@ -712,14 +713,16 @@
     <script src="{{asset('/')}}website/vendor/jquery/jquery.min.js"></script>
     <script src="{{asset('/')}}website/vendor/jquery.plugin/jquery.plugin.min.js"></script>
     <script src="{{asset('/')}}website/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="{{asset('/')}}website/vendor/zoom/jquery.zoom.js"></script>
     <script src="{{asset('/')}}website/vendor/jquery.countdown/jquery.countdown.min.js"></script>
     <script src="{{asset('/')}}website/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
     <script src="{{asset('/')}}website/vendor/skrollr/skrollr.min.js"></script>
     <script src="{{ asset('website/vendor/toastr/toastr.min.js') }}"></script>
-
+    
     <!-- Swiper JS -->
     <script src="{{asset('/')}}website/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="{{asset('website/vendor/zoom/jquery.zoom.js')}}"></script>
+    <script src="{{asset('website/vendor/photoswipe/photoswipe.min.js')}}"></script>
+    <script src="{{asset('website/vendor/photoswipe/photoswipe-ui-default.min.js')}}"></script>
 
     <!-- Main JS -->
     <script src="{{asset('/')}}website/assets/js/main.js"></script>

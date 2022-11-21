@@ -52,7 +52,7 @@
                     <a href="tel:#" class="w-icon-call"></a>
                     <div class="call-info d-lg-show">
                         <h4 class="chat font-weight-normal font-size-md text-normal ls-normal text-light mb-0">
-                            <a href="mailto:" class="text-capitalize">Live Chat</a> or :</h4>
+                            <a href="mailto:" class="text-capitalize">Call </a> Us :</h4>
                         <a href="tel:{{$content->phone_1}}" class="phone-number font-weight-bolder ls-50">{{$content->phone_1}}</a>
                     </div>
                 </div>
