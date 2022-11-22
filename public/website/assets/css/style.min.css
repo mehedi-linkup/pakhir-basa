@@ -15154,7 +15154,22 @@ body .product-popup {
 .header-search.hs-round.hs-expanded .form-control {
   border-radius: 0;
 }
-
+.header-search .typeahead.dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+  display: none;
+  min-width: 41rem;
+  padding: 1rem 1rem;
+  margin: 0;
+  font-size: 1.6rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgb(51 102 153 / 30%);
+  border-radius: 0rem;
+}
 .dir-up.hs-toggle .input-wrapper {
   top: auto;
   bottom: 100%;

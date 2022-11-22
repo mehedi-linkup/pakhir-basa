@@ -764,12 +764,18 @@
         @endif
     </script>
     <script src="{{ asset('website/vendor/bootstrap3-typeahead.min.js') }}"></script>
-    <script type="text/javascript">
+    <script>
+        // function SearchProduct(id) {
+        //     catId = id;
+        //     $('#keyword').val('');
+        //     console.log(catId)
+        // }
         var baseUri = "{{ url('/') }}";
         $('.keyword').typeahead({
             minLength: 1,
             source: function (keyword, process) {
-                return $.get(`${baseUri}/get_suggestions/${keyword}`, function (data) {
+                let catId = $('#category').val();
+                return $.get(`${baseUri}/get_suggestions/${keyword}/${catId}`, function (data) {
                     return process(data);
                 });
             },

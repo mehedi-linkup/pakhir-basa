@@ -61,7 +61,7 @@ Route::get('/subcategory/list/{slug}',[HomeController::class,'singleSubCategory'
 Route::get('/allproduct',[HomeController::class,'allProduct'])->name('all.product');
 Route::get('/shop-banner',[HomeController::class,'shopBanner'])->name('shop.banner');
 // search route
-Route::get('/get_suggestions/{k}', [HomeController::class, 'getSearchSuggestions'])->name('searh.product');
+Route::get('/get_suggestions/{k}/{id?}', [HomeController::class, 'getSearchSuggestions'])->name('searh.product');
 Route::get('/search', [HomeController::class, 'productSearch'])->name('search');
 
 // company profile route

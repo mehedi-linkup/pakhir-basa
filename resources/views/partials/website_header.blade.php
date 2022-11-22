@@ -29,7 +29,7 @@
                 <a href="#" class="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle">
                 </a>
                 <a href="{{route('home')}}" class="logo ml-lg-0">
-                    <img src="{{ $content->logo }}" alt="logo" width="auto" style="height: 47px" />
+                    <img src="{{ asset($content->logo) }}" alt="logo" width="auto" style="height: 47px" />
                 </a>
                 <form method="get" action="{{ route('search') }}"
                     class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
@@ -37,12 +37,13 @@
                         <select id="category" name="category">
                             <option value="" label="All Categories"></option>
                             @foreach ($category as $item)
-                            <option value="">{{$item->name}}</option>
+                            <option value="{{ $item->id }}">{{$item->name}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <input type="text" class="form-control search-bar-full keyword " name="q" id="search" placeholder="Search in..."
-                        required />
+                    <input type="search" name="q"
+                            class="form-control search-box keyword" id="keyword"
+                            autocomplete="off" placeholder="search products...">
                     <button class="btn btn-search" type="submit"><i class="w-icon-search"></i>
                     </button>
                 </form>

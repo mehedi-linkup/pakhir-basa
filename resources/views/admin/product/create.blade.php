@@ -236,7 +236,7 @@
                                                 <div class="col-md-3 mt-1">
                                                     <select
                                                         class="js-example-basic-multiple form-control my-select my-form-control @error('size_id') is-invalid @enderror "
-                                                        data-live-search="true" name="size_id">
+                                                        data-live-search="true" name="size_id" multiple>
                                                         <option data-tokens="ketchup mustard" value="">Select Size</option>
                                                         @foreach ($size as $item)
                                                             <option value="{{ $item->id }}">{{ $item->name }}
@@ -255,7 +255,7 @@
                                                 <div class="col-md-4 mt-1">
                                                     <select
                                                         class="js-example-basic-multiple form-control my-select my-form-control @error('color_id') is-invalid @enderror"
-                                                        data-live-search="true" name="color_id">
+                                                        data-live-search="true" name="color_id" multiple>
                                                         <option data-tokens="ketchup mustard" value="">Select Color</option>
                                                         @foreach ($color as $item)
                                                             <option value="{{ $item->id }}">{{ $item->name }}

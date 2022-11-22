@@ -151,21 +151,30 @@ class HomeController extends Controller
     }
 
     // search
-    public function getSearchSuggestions($keyword)
+    public function getSearchSuggestions($keyword, $id=null)
     {
-        $product = Product::select('name')
+        if($id) {
+            $product = Product::select('name')
             ->where('name', 'like', "%$keyword%")
+            ->where('category_id', $id)
             ->get()->toArray();
+            $mergedArray = $product;
+        } else {
+            $product = Product::select('name')
+                ->where('name', 'like', "%$keyword%")
+                ->get()->toArray();
+    
+            $category = Category::select('name as name')
+                ->where('name', 'like', "%$keyword%")
+                ->get()->toArray();
+    
+            $subcategory = SubCategory::select('name as name')
+                ->where('name', 'like', "%$keyword%")
+                ->get()->toArray();
 
-        $category = Category::select('name as name')
-            ->where('name', 'like', "%$keyword%")
-            ->get()->toArray();
+            $mergedArray = array_merge($product, $category, $subcategory);
+        }
 
-        $subcategory = SubCategory::select('name as name')
-            ->where('name', 'like', "%$keyword%")
-            ->get()->toArray();
-
-        $mergedArray = array_merge($product, $category, $subcategory);
 
         $search_results = [];
 
@@ -181,15 +190,14 @@ class HomeController extends Controller
         if (request()->query('q')) {
 
             $categories = Category::all();
-            $centerBigAds = Ad::where('status', 'a')->where('position', '4')->take(1)->get();
-            $leftAds = Ad::where('status', 'a')->where('position', '1')->latest()->take(1)->get();
+            // $centerBigAds = Ad::where('status', 'a')->where('position', '4')->take(1)->get();
+            // $leftAds = Ad::where('status', 'a')->where('position', '1')->latest()->take(1)->get();
 
             $keyword = request()->query('q');
             $search_result = Product::Where('name', 'like', "%$keyword%")->get();
 
-            return view('website.search', compact('search_result', 'keyword', 'leftAds', 'centerBigAds', 'categories'));
+            return view('website.search', compact('search_result', 'keyword', 'categories'));
         }
-
         return redirect()->back();
     }
 
