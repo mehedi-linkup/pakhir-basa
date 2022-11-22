@@ -163,11 +163,11 @@
                                 <a href="{{ route('shop.box') }}">Shop</a>
                             </li>
                             <li>
-                                <a href="{{route('about.website')}}">Pages</a>
+                                <a href="{{route('about.website')}}">About Us</a>
                                 <ul>
 
-                                    <li><a href="{{route('about.website')}}">About Us</a></li>
-                                    <li><a href="{{route('about.website')}}">Privacy Policy</a></li>
+                                    <li><a href="{{route('privacy.website')}}">Privacy Policy </a></li>
+                                    <li><a href="{{route('trams.website')}}">Terms & Condition</a></li>
                                 </ul>
                             </li>
                             <li>

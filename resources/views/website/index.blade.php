@@ -225,6 +225,7 @@
     <div class="swiper-container swiper-theme brands-wrapper mb-9 appear-animate" data-swiper-options="{
         'spaceBetween': 0,
         'slidesPerView': 2,
+        'autoplay': true,
         'breakpoints': {
             '576': {
                 'slidesPerView': 3

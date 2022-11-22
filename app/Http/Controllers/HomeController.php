@@ -145,6 +145,10 @@ class HomeController extends Controller
         $management = Management::all();
         return view('website.about', compact('management', 'service'));
     }
+    public function privacyWebsite()
+    {
+        return view('website.privacy');
+    }
     public function tramsCondition()
     {
         return view('website.trams_condition');

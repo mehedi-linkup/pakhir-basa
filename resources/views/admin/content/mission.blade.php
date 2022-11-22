@@ -4,7 +4,7 @@
 <main>
    <div class="container ">
     <div class="heading-title p-2 my-2">
-        <span class="my-3 heading "><i class="fas fa-home"></i> <a class="" href="{{route('admin.index')}}">Home</a> >Mission & Vission</span>
+        <span class="my-3 heading "><i class="fas fa-home"></i> <a class="" href="{{route('admin.index')}}">Home</a> Privacy & Condition</span>
     </div>
     <div class="card mb-3">
         <div class="card-header">
@@ -17,13 +17,13 @@
                 <div class="row">
                     
                     <div class="col-md-3">
-                        <label>Mission Vission Title</label>
+                        <label>Privacy Policy Title</label>
                     </div>
                     <div class="col-md-9">
                         <input type="text" value="{{$company->mission_vision_title}}" name="mission_vision_title" class="form-control">
                     </div>
                     <div class="col-md-3">
-                        <label>Mission Vission Description</label>
+                        <label>Privacy Policy Description</label>
                     </div>
                     <div class="col-md-9">
                         {{-- <div class="form-control" id="editor">

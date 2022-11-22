@@ -284,7 +284,7 @@
                             @endif 
                             @if ($p->page->name == 'mission')
                                 @if($p->page->status == 1)
-                                    <a class="nav-link {{($route == 'mission')?'active':''}}" href="{{ route('mission') }}"><i class="fas fa-angle-right"></i>&nbsp;Mission-Vission</a>
+                                    <a class="nav-link {{($route == 'mission')?'active':''}}" href="{{ route('mission') }}"><i class="fas fa-angle-right"></i>&nbsp;Privacy & Condition</a>
                                 @endif
                             @endif
                             @if ($p->page->name == 'managment.index')

@@ -44,8 +44,9 @@
                         <h4 class="widget-title">My Account</h4>
                         <ul class="widget-body">
                             <li><a href="#">Track My Order</a></li>
-                            <li><a href="cart.html">View Cart</a></li>
+                            <li><a href="{{ route('cart.list') }}">View Cart</a></li>
                             <li><a href="{{route('customer.login')}}">Sign In</a></li>
+                            <li><a href="{{ route('customer.signup') }}">Register</a></li>
                             <li><a href="#">Help</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                         </ul>

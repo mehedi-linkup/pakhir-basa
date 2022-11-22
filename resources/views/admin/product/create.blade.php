@@ -106,12 +106,52 @@
                                                     <strong><label>Stock<span class="color-red">*</span> </label> <span
                                                             class="my-label">:</span> </strong>
                                                 </div>
+                                                
 
                                                 <div class="col-md-8">
                                                     <input type="number" name="purchase" id="purchase"
                                                         value="{{ old('purchase') }}"
                                                         class="form-control my-form-control @error('purchase') is-invalid @enderror">
                                                     @error('stock')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <strong><label>Product Size</label> <span
+                                                            class="my-label">:</span> </strong>
+                                                </div>
+                                                <div class="col-md-8 my-1">
+                                                    <select
+                                                        class="js-example-basic-multiple form-control my-select my-form-control @error('size_id') is-invalid @enderror "
+                                                        data-live-search="true" name="size_id" multiple >
+                                                        <option data-tokens="ketchup mustard" value="">Select Size</option>
+                                                        @foreach ($size as $item)
+                                                            <option value="{{ $item->id }}" >{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('size_id')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <strong><label>Color</label></strong>
+                                                </div>
+                                                <div class="col-md-8 my-1">
+                                                    <select
+                                                        class="js-example-basic-multiple form-control my-select my-form-control @error('color_id') is-invalid @enderror"
+                                                        data-live-search="true" name="color_id" multiple>
+                                                        <option data-tokens="ketchup mustard" value="">Select Color</option>
+                                                        @foreach ($color as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('color_id')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -229,45 +269,8 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <strong><label>Product Size</label> <span
-                                                            class="my-label">:</span> </strong>
-                                                </div>
-                                                <div class="col-md-3 mt-1">
-                                                    <select
-                                                        class="js-example-basic-multiple form-control my-select my-form-control @error('size_id') is-invalid @enderror "
-                                                        data-live-search="true" name="size_id">
-                                                        <option data-tokens="ketchup mustard" value="">Select Size</option>
-                                                        @foreach ($size as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('size_id')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <strong><label>Color</label></strong>
-                                                </div>
-                                                <div class="col-md-4 mt-1">
-                                                    <select
-                                                        class="js-example-basic-multiple form-control my-select my-form-control @error('color_id') is-invalid @enderror"
-                                                        data-live-search="true" name="color_id">
-                                                        <option data-tokens="ketchup mustard" value="">Select Color</option>
-                                                        @foreach ($color as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('color_id')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
+                                             
+                                           
                                                 <div class="col-md-4">
                                                     <strong><label> Product Is</label> <span class="my-label">:</span>
                                                     </strong>
