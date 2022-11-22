@@ -242,12 +242,9 @@
                                 {!! $item->short_details !!}
                             </ul>
                             <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to Cart"><i
+                                <a href="#" class="btn-product btn-cart" onclick="addToCard({{$item->id}})" title="Add to Cart"><i
                                         class="w-icon-cart"></i> Add To Cart</a>
-                                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                    title="Add to wishlist"></a>
-                                <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                    title="Compare"></a>
+                             
                             </div>
                         </div>
                     </div>
@@ -256,9 +253,9 @@
                 <div class="toolbox toolbox-pagination justify-content-between">
                     <p class="showing-info mb-2 mb-sm-0">
                         {!! $product->links() !!}
-                        {{-- Showing<span>1-12 of 60</span>Products --}}
+                        Showing<span>1-12 of 60</span>Products
                     </p>
-                    {{-- <ul class="pagination">
+                    <ul class="pagination">
                         <li class="prev disabled">
                             <a href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
                                 <i class="w-icon-long-arrow-left"></i>Prev
@@ -275,7 +272,7 @@
                                 Next<i class="w-icon-long-arrow-right"></i>
                             </a>
                         </li>
-                    </ul> --}}
+                    </ul>
                 </div>
             </div>
             <!-- End of Shop Main Content -->

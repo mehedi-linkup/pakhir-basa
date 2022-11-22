@@ -153,6 +153,10 @@ class HomeController extends Controller
     {
         return view('website.trams_condition');
     }
+    public function trackOrder()
+    {
+        return view('website.track');
+    }
 
     // search
     public function getSearchSuggestions($keyword, $id=null)

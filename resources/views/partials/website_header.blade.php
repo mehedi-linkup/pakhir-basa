@@ -157,13 +157,13 @@
                     </div>
                     <nav class="main-nav">
                         <ul class="menu active-underline">
-                            <li class="active">
+                            <li class="{{ (request()->is('/')) ? 'active' : '' }}">
                                 <a href="{{route('home')}}">Home</a>
                             </li>
-                            <li>
+                            <li class="{{ (request()->is('shop')) ? 'active' : '' }}">
                                 <a href="{{ route('shop.box') }}">Shop</a>
                             </li>
-                            <li>
+                            <li class="{{ (request()->is('about-us')) ? 'active' : '' }}">
                                 <a href="{{route('about.website')}}">About Us</a>
                                 <ul>
 
@@ -171,7 +171,7 @@
                                     <li><a href="{{route('trams.website')}}">Terms & Condition</a></li>
                                 </ul>
                             </li>
-                            <li>
+                            <li class="{{ (request()->is('contact')) ? 'active' : '' }}">
                                 <a href="{{route('web.contact')}}">Contact Us</a>
                               
                             </li>
@@ -179,7 +179,7 @@
                     </nav>
                 </div>
                 <div class="header-right">
-                    <a href="#" class="d-xl-show"><i class="w-icon-map-marker mr-1"></i>Track Order</a>
+                    <a href="{{route('track.order')}}" class="d-xl-show"><i class="w-icon-map-marker mr-1"></i>Track Order</a>
                 </div>
             </div>
         </div>

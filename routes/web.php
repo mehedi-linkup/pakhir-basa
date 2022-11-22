@@ -64,6 +64,8 @@ Route::get('/shop-banner',[HomeController::class,'shopBanner'])->name('shop.bann
 Route::get('/get_suggestions/{k}/{id?}', [HomeController::class, 'getSearchSuggestions'])->name('searh.product');
 Route::get('/search', [HomeController::class, 'productSearch'])->name('search');
 
+Route::get('/track-order',[HomeController::class,'trackOrder'])->name('track.order');
+
 // company profile route
 
 Route::get('/about-us', [HomeController::class, 'aboutWebsite'])->name('about.website');

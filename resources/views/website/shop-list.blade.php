@@ -201,12 +201,7 @@
                                 {!! $item->short_details !!}
                             </div>
                             <div class="product-action">
-                                <a href="product-default.html" class="btn-product btn-cart"
-                                    title="Add to Cart"><i class="w-icon-cart"></i>Select Options</a>
-                                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                                    title="Add to wishlist"></a>
-                                <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                                    title="Compare"></a>
+                                <a href="#!" class="btn-product btn-cart" onclick="addToCard({{$item->id}})" title="Add to Cart"><i class="w-icon-cart"></i>Add to Cart</a>
                             </div>
                         </div>
                     </div>
