@@ -67,6 +67,7 @@ Route::get('/search', [HomeController::class, 'productSearch'])->name('search');
 // company profile route
 
 Route::get('/about-us', [HomeController::class, 'aboutWebsite'])->name('about.website');
+Route::get('/privacy-policy', [HomeController::class, 'privacyWebsite'])->name('privacy.website');
 Route::get('/trams-and-condition', [HomeController::class, 'tramsCondition'])->name('trams.website');
 
 // news and event
@@ -305,8 +306,8 @@ Route::post('/login',[AuthController::class, 'authCheck'])->name('login.check');
         Route::post('/about/update/{company}',[ContentController::class,'aboutUpdate'])->name('about.update');
         
         // mission vission route
-        Route::get('/mission/vision',[ContentController::class,'mission'])->name('mission')->middleware('check');
-        Route::post('/mission/vision/update',[ContentController::class,'missionUpdate'])->name('mission.update');
+        Route::get('/privacy/condition',[ContentController::class,'mission'])->name('mission')->middleware('check');
+        Route::post('/privacy/condition/update',[ContentController::class,'missionUpdate'])->name('mission.update');
         
         // refund route
         Route::get('/refund',[ContentController::class,'refund'])->name('refund')->middleware('check');

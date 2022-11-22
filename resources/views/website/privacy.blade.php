@@ -5,7 +5,7 @@
     <!-- Start of Page Header -->
     <div class="page-header">
         <div class="container">
-            <h1 class="page-title mb-0">About Us</h1>
+            <h1 class="page-title mb-0">Privacy And Policy</h1>
         </div>
     </div>
     <!-- End of Page Header -->
@@ -15,7 +15,7 @@
         <div class="container">
             <ul class="breadcrumb">
                 <li><a href="{{route('home')}}">Home</a></li>
-                <li>About Us</li>
+                <li>Privacy And Policy</li>
             </ul>
         </div>
     </nav>
@@ -25,7 +25,7 @@
     <div class="page-content">
         <div class="container">
             <div>
-                {!! $content->about_description !!}
+                {!! $content->mission_vision !!}
             </div>
     </div>
 </main>

@@ -87,6 +87,38 @@
                                           </span> 
                                         @enderror
                                   </div>
+                                  <div class="col-md-4">
+                                    <strong><label>Product Size</label> <span class="my-label">:</span> </strong>
+                                  </div>
+                                  <div class="col-md-8 mt-1">
+                                    <select class="js-example-basic-multiple form-control my-select my-form-control @error('size_id') is-invalid @enderror " data-live-search="true" name="size_id">
+                                      <option  data-tokens="ketchup mustard" value="">Select Size</option>
+                                        @foreach ($size as $item)
+                                        <option value="{{$item->id}}" {{ $item->id == $product->size_id ? 'selected' : '' }}>{{$item->name}}</option>   
+                                        @endforeach
+                                    </select>
+                                        @error('size_id')
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span> 
+                                        @enderror
+                                  </div>
+                                  <div class="col-md-4">
+                                    <strong><label>Color</label></strong>
+                                  </div>
+                                  <div class="col-md-8 mt-1">
+                                    <select class="js-example-basic-multiple form-control my-select my-form-control @error('color_id') is-invalid @enderror" data-live-search="true" name="color_id">
+                                      <option  data-tokens="ketchup mustard" value="">Select Color</option>
+                                      @foreach ($color as $item)
+                                      <option value="{{$item->id}}"  {{ $item->id == $product->color_id ? 'selected' : '' }} >{{$item->name}}</option>
+                                      @endforeach   
+                                    </select>
+                                        @error('color_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span> 
+                                        @enderror
+                                  </div>
 
                                     <div class="col-md-4">
                                         <strong><label>Short Description</label> <span class="my-label">:</span> </strong>
@@ -181,38 +213,7 @@
                                         </span>
                                     @enderror
                                   </div>
-                                  <div class="col-md-4">
-                                    <strong><label>Product Size</label> <span class="my-label">:</span> </strong>
-                                  </div>
-                                  <div class="col-md-3 mt-1">
-                                    <select class="js-example-basic-multiple form-control my-select my-form-control @error('size_id') is-invalid @enderror " data-live-search="true" name="size_id">
-                                      <option  data-tokens="ketchup mustard" value="">Select Size</option>
-                                        @foreach ($size as $item)
-                                        <option value="{{$item->id}}" {{ $item->id == $product->size_id ? 'selected' : '' }}>{{$item->name}}</option>   
-                                        @endforeach
-                                    </select>
-                                        @error('size_id')
-                                          <span class="invalid-feedback" role="alert">
-                                              <strong>{{ $message }}</strong>
-                                          </span> 
-                                        @enderror
-                                  </div>
-                                  <div class="col-md-1">
-                                    <strong><label>Color</label></strong>
-                                  </div>
-                                  <div class="col-md-4 mt-1">
-                                    <select class="js-example-basic-multiple form-control my-select my-form-control @error('color_id') is-invalid @enderror" data-live-search="true" name="color_id">
-                                      <option  data-tokens="ketchup mustard" value="">Select Color</option>
-                                      @foreach ($color as $item)
-                                      <option value="{{$item->id}}"  {{ $item->id == $product->color_id ? 'selected' : '' }} >{{$item->name}}</option>
-                                      @endforeach   
-                                    </select>
-                                        @error('color_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span> 
-                                        @enderror
-                                  </div>
+                            
                                   <div class="col-md-4">
                                     <strong><label> Product Is</label> <span class="my-label">:</span> </strong>
                                   </div>
@@ -293,30 +294,30 @@
   });
 </script>
 <script>
-    // $(document).ready(function(){
-    //        $("select[name='category_id']").on('change', function(){
-    //            var category_id =$(this).val();
-    //            product(category_id)
-    //        });
-    //    });
-    //    var categoryId = "<?php echo $product->category_id ?>";
-    //    product(categoryId);
-    //    function product(id) {
-    //        var subcategoryId = id;
-    //        if(subcategoryId != 0 && subcategoryId != undefined) {
-    //            $.ajax({
-    //                url:"{{ url('/subcategory/list')}}/"+ subcategoryId,
-    //                type :"GET",
-    //                dataType:"json",
-    //                success:function(data){
-    //                $('#sub_category_id').empty();
-    //                    $.each(data, function(key,value){
-    //                    $("#sub_category_id").append('<option value="'+value.id+'">'+value.name+'</option>');
-    //                    });
-    //                }
-    //            });
-    //        }
-    //    }
+    $(document).ready(function(){
+           $("select[name='category_id']").on('change', function(){
+               var category_id =$(this).val();
+               product(category_id)
+           });
+       });
+       var categoryId = "<?php echo $product->category_id ?>";
+       product(categoryId);
+       function product(id) {
+           var subcategoryId = id;
+           if(subcategoryId != 0 && subcategoryId != undefined) {
+               $.ajax({
+                   url:"{{ url('/subcategory/list')}}/"+ subcategoryId,
+                   type :"GET",
+                   dataType:"json",
+                   success:function(data){
+                   $('#sub_category_id').empty();
+                       $.each(data, function(key,value){
+                       $("#sub_category_id").append('<option value="'+value.id+'">'+value.name+'</option>');
+                       });
+                   }
+               });
+           }
+       }
 
 
        $(document).ready(function() {
@@ -347,54 +348,6 @@
            }
        }
    </script>
-   {{-- get sub and child category --}}
-   <script>
-    $(document).ready(function() {
-        $("select[name='category_id']").on('change', function() {
-            let category_id = $(this).val();
-            $.ajax({
-                url: "{{ url('//subcategory/list') }}/" + category_id,
-                dataType: 'JSON',
-                method: 'GET',
-                success: function(res) {
-                    $('#sub_category_id').empty();
-                    $.each(res, function(key, value) {
-                        $('#sub_category_id').append('<option value=" ' + value.id +
-                            ' ">' + value.name + '</option>');
-                    });
-
-                }
-            })
-
-
-        });
-    });
-</script>
-{{-- <script>
-    $(document).ready(function() {
-        $("select[name='sub_category_id']").on('change', function() {
-            let sub_category_id = $(this).val();
-            sub_category_id = parseInt(sub_category_id);
-            $.ajax({
-                url: location.origin + "/childcategory/list/" + sub_category_id,
-                dataType: 'JSON',
-                method: 'GET',
-                beforeSend: () => {
-                    $('#child_category_id').html("");
-                },
-                success: function(res) {
-                    $.each(res, function(key, value) {
-                        $('#child_category_id').append('<option value=" ' + value
-                            .id + ' ">' + value.name + '</option>');
-                    });
-
-                }
-            })
-        });
-    });
-</script> --}}
-
-   {{-- get sub and child category --}}
    <script>
      $(document).on('click', '.close-btn', function () {
            

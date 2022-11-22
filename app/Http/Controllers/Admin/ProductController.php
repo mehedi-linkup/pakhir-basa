@@ -57,7 +57,7 @@ class ProductController extends Controller
 
     public function getChildcategory($id)
     {
-        $childCategory = ChildCategory::where('subcategory_id', $id)->get();
+        $childCategory = ChildCategory::where('sub_category_id', $id)->get();
         return response()->json($childCategory);
     }
 
@@ -300,12 +300,12 @@ class ProductController extends Controller
                 }
             }
     
-            // if ($request->purchase) {
+            if ($request->purchase) {
                 // dd($$request->purchase);
                 $inventory = Inventory::where('product_id',$product->id)->first();
                 $inventory->purchase = $request->purchase;
                 $inventory->save();
-            // }
+            }
             if($product){
                 Session::flash('success', 'Product update successfully');
                 return redirect()->route('product.index');
