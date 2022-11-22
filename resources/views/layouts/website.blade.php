@@ -696,7 +696,7 @@
                                 <a href="#" class="social-icon social-youtube fab fa-linkedin-in"></a>
                             </div>
                         </div>
-                        <span class="divider d-xs-show"></span>
+                        {{-- <span class="divider d-xs-show"></span>
                         <div class="product-link-wrapper d-flex">
                             <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"><span></span></a>
                             <a href="#"

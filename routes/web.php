@@ -65,6 +65,8 @@ Route::get('/get_suggestions/{k}/{id?}', [HomeController::class, 'getSearchSugge
 Route::get('/search', [HomeController::class, 'productSearch'])->name('search');
 Route::get('/quickview/{id}', [HomeController::class, 'productViewAjax'])->name('product.quickview');
 
+Route::get('/track-order',[HomeController::class,'trackOrder'])->name('track.order');
+
 // company profile route
 
 Route::get('/about-us', [HomeController::class, 'aboutWebsite'])->name('about.website');

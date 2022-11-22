@@ -5,3 +5,126 @@
     border-radius: 0.3rem;
     padding: 6px 10px;
 }
+.elementor-template-full-width .row>[data-elementor-type] {
+    flex: 1 1 100%;
+    margin-bottom: 40px;
+    padding-right: 15px;
+    padding-left: 15px;
+    max-width: 100%;
+    width: 100%;
+}
+.elementor-section-boxed.wd-negative-gap>.elementor-container {
+    max-width: none;
+}
+.elementor-section.wd-negative-gap>.elementor-column-gap-default {
+    margin-right: -10px;
+    margin-left: -10px;
+}
+.elementor-column.elementor-col-100, .elementor-column[data-col="100"] {
+    width: 100%;
+}
+.elementor-element {
+    --widgets-spacing: 20px;
+}
+.elementor-column {
+    position: relative;
+    min-height: 1px;
+    display: flex;
+}
+.elementor-10388 .elementor-element.elementor-element-e0762ab > .elementor-element-populated {
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.3);
+    margin: 0em 0em 5em 0em;
+    --e-column-margin-right: 0em;
+    --e-column-margin-left: 0em;
+    padding: 70px 70px 70px 70px;
+}
+.elementor-widget-wrap {
+    position: relative;
+    width: 100%;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.track_order {
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+}
+.track_order p:first-child {
+    margin-bottom: 30px;
+    max-width: 100%;
+    width: 100%;
+    font-size: 110%;
+}
+.track_order p {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.track_order .form-row {
+    float: none;
+    width: auto;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #242424;
+    font-weight: 400;
+}
+input[type=search], input[type=number], input[type=url], input[type=tel], input[type=text], input[type=password], input[type=date], input[type=email], select, textarea {
+    padding: 0 15px;
+    max-width: 100%;
+    width: 100%;
+    height: 42px;
+    border: 2px solid rgba(0,0,0,.1);
+    border-radius: 5px;
+    color: var(--wd-form-color);
+    background-color: transparent;
+    box-shadow: none;
+    vertical-align: middle;
+    font-size: 14px;
+    transition: border-color .5s ease;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.track_order .button {
+    min-width: 130px;
+    margin-top: 15px;
+}
+button[name=track] {
+    border-radius: 35px;
+    color:#fff;
+    box-shadow: none;
+    background-color: rgb(247,33,33);
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    -ms-border-radius: 35px;
+    -o-border-radius: 35px;
+}
+.btn, .button, [type=button], [type=submit], button {
+    padding: 12px 20px;
+    font-size: 13px;
+    line-height: 18px;
+    background-color: #F3F3F3;
+    color: #3E3E3E;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    outline: 0;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-shadow: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color .25s ease,background-color .25s ease,border-color .25s ease,box-shadow .25s ease,opacity .25s ease;
+}
