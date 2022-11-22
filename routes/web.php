@@ -63,6 +63,7 @@ Route::get('/shop-banner',[HomeController::class,'shopBanner'])->name('shop.bann
 // search route
 Route::get('/get_suggestions/{k}/{id?}', [HomeController::class, 'getSearchSuggestions'])->name('searh.product');
 Route::get('/search', [HomeController::class, 'productSearch'])->name('search');
+Route::get('/quickview/{id}', [HomeController::class, 'productViewAjax'])->name('product.quickview');
 
 // company profile route
 
@@ -78,9 +79,6 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('web.contact');
 Route::post('/contact-store', [PublicMessageController::class, 'contactStore'])->name('contact.Store');
 // Subscriber store
 Route::post('/subscriber-store', [SubscriberController::class, 'subscriberList'])->name('subscriber.Store');
-
-
-
 
 
 

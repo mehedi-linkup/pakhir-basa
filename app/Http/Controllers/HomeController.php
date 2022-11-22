@@ -29,7 +29,7 @@ class HomeController extends Controller
         $banner = Banner::latest()->get();
         $product = Product::latest()->get();
         $topcategory = Category::with('SubCategory')->orderBy('rank_id', 'ASC')->get();
-        $popularcategory = Category::where('is_popular', 1)->orderBy('rank_id', 'ASC')->get();
+        $popularcategory = Category::with('product')->where('is_popular', 1)->orderBy('rank_id', 'ASC')->get();
         $recent = Product::latest()->take(24)->get();
         $popular = Product::latest()->where('is_popular', '1')->limit(24)->get();
         $new_arrival = Product::where('is_arrival', '1')->get();
@@ -120,6 +120,20 @@ class HomeController extends Controller
         return view('website.subcategory', compact('subcategory', 'categories', 'subcategory_wise_product', 'centerBigAds', 'leftAds'));
     }
 
+    public function productViewAjax($id)
+    {
+        $product = Product::with(['category', 'subcategory'])->findOrFail($id);
+        $color = $product->color_id;
+        $product_color = explode(',',$color);
+        $size = $product->size_id;
+        $produt_size = explode(',',$size);
+        
+        return response()->json([
+            'product' => $product,
+            'color' => $product_color,
+            'size' => $produt_size
+        ]);
+    }
     public function newsEvent()
     {
         $news = Blog::latest()->get();

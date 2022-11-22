@@ -115,6 +115,7 @@
 
 <div class="container">
     @foreach ($popularcategory as $key => $popcat)
+    @if(count($popcat->product) > 0)
     <div class="product-wrapper-1 appear-animate mb-5">
         <div class="title-link-wrapper pb-1 mb-4">
             <h2 class="title ls-normal text-uppercase mb-0">MOST POPULAR FOR {{ $popcat->name }}</h2>
@@ -136,59 +137,62 @@
                     }
                 }">
                     <div class="swiper-wrapper row cols-xl-4 cols-lg-3 cols-2">
-                       @foreach ($product as $item)
-                        <div class="swiper-slide product-col">
-                            <div class="product-wrap product text-center">
-                                <figure class="product-media">
-                                    <a href="{{ route('product.details', $item->slug) }}">
-                                        <img src="{{ asset('uploads/product/'.$item->image) }}" alt="{{ $item->name }}"
-                                            width="216" height="243" />
-                                    </a>
-                                    <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
-                                            title="Add to cart"></a>
-                                        <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                                            title="Quickview"></a>
-                                    </div>
-                                    @if($item->discount && $item->discount != null)
-                                    <div class="product-label-group">
-                                        <label class="product-label label-discount">{{ $item->discount }}% Off</label>
-                                    </div>
-                                    @endif
-                                </figure>
-                                <div class="product-details">
-                                    <h4 class="product-name"><a href="">{{ $item->name }}</a></h4>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            <span class="ratings" style="width: 60%;"></span>
-                                            <span class="tooltiptext tooltip-top"></span>
+                       
+                        @foreach ($popcat->product as $item)
+                            <div class="swiper-slide product-col">
+                                <div class="product-wrap product text-center">
+                                    <figure class="product-media">
+                                        <a href="{{ route('product.details', $item->slug) }}">
+                                            <img src="{{ asset('uploads/product/'.$item->image) }}" alt="{{ $item->name }}"
+                                                width="216" height="243" />
+                                        </a>
+                                        <div class="product-action-vertical">
+                                            <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
+                                                title="Add to cart"></a>
+                                            <a href="" class="btn-product-icon btn-quickview w-icon-search" onclick="quickView({{$item->id}})"
+                                                title="Quickview"></a>
                                         </div>
-                                        {{-- <a href="product-default.html" class="rating-reviews">(3
-                                            reviews)</a> --}}
-                                    </div>
-                                    <div class="product-price">
                                         @if($item->discount && $item->discount != null)
-                                        @php
-                                            $newPrice = $item->price / 100;
-                                            $newPrice = $newPrice * $item->discount;
-                                            $newPrice = $item->price - $newPrice;
-                                        @endphp
-                                        <ins class="new-price">{{ $newPrice  }}</ins><del
-                                            class="old-price">{{ $item->price }}</del>
-                                        @else
-                                        {{ $item->price }}
+                                        <div class="product-label-group">
+                                            <label class="product-label label-discount">{{ $item->discount }}% Off</label>
+                                        </div>
                                         @endif
+                                    </figure>
+                                    <div class="product-details">
+                                        <h4 class="product-name"><a href="">{{ $item->name }}</a></h4>
+                                        <div class="ratings-container">
+                                            <div class="ratings-full">
+                                                <span class="ratings" style="width: 60%;"></span>
+                                                <span class="tooltiptext tooltip-top"></span>
+                                            </div>
+                                            {{-- <a href="product-default.html" class="rating-reviews">(3
+                                                reviews)</a> --}}
+                                        </div>
+                                        <div class="product-price">
+                                            @if($item->discount && $item->discount != null)
+                                            @php
+                                                $newPrice = $item->price / 100;
+                                                $newPrice = $newPrice * $item->discount;
+                                                $newPrice = $item->price - $newPrice;
+                                            @endphp
+                                            <ins class="new-price">{{ $newPrice  }}</ins><del
+                                                class="old-price">{{ $item->price }}</del>
+                                            @else
+                                            {{ $item->price }}
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>                           
-                       @endforeach
+                            </div>                           
+                        @endforeach
+                       
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
         </div>
     </div>
+    @endif
     @endforeach
    
     <!-- End of Product Wrapper 1 -->

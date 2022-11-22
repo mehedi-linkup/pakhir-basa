@@ -686,7 +686,7 @@
                         </button>
                     </div>
 
-                    <div class="social-links-wrapper">
+                    {{-- <div class="social-links-wrapper">
                         <div class="social-links">
                             <div class="social-icons social-no-color border-thin">
                                 <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
@@ -702,7 +702,7 @@
                             <a href="#"
                                 class="btn-product-icon btn-compare btn-icon-left w-icon-compare"><span></span></a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -765,11 +765,6 @@
     </script>
     <script src="{{ asset('website/vendor/bootstrap3-typeahead.min.js') }}"></script>
     <script>
-        // function SearchProduct(id) {
-        //     catId = id;
-        //     $('#keyword').val('');
-        //     console.log(catId)
-        // }
         var baseUri = "{{ url('/') }}";
         $('.keyword').typeahead({
             minLength: 1,
@@ -788,6 +783,13 @@
         });
     </script>
     <script>
+
+        function quickView(id) {
+            console.log(id);
+        }
+        
+    </script>
+    <script>
          function addToCard(id) {
             var url = "/cart-add/"+id;
             $.ajax({
@@ -795,12 +797,7 @@
                 type: "get",
                 dataType: "json",
                 success:function(res) {
-                    // let new_time = new Date().getTime();
-        
-                    // localStorage.setItem('cartTime',new_time);
                     cartAllData();
-                    // $('#details-btn'+id).show();
-                    // $('#addCart'+id).hide();
                 }
             })
         }
@@ -811,9 +808,9 @@
             url:url,
             type:"get",
             dataType: "json",
-            success:function(res){
-                cartAllData();
-            }
+                success:function(res){
+                    cartAllData();
+                }
             })
         }
 
