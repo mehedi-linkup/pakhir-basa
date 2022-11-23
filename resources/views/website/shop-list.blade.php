@@ -156,11 +156,11 @@
                                 <option value="36">Show 36</option>
                             </select>
                         </div>
-                        <div class="toolbox-item toolbox-layout">
-                            <a href="{{ route('shop.box', ['shop_view'=>'shop box']) }}" class="icon-mode-grid btn-layout active">
+                        <div class="toolbox-item toolbox-layout" id="toolbox">
+                            <a href="{{ route('shop.box', ['shop_view'=>'shop box']) }}" class="icon-mode-grid btn-layout active ">
                                 <i class="w-icon-grid"></i>
                             </a>
-                            <a href="{{ route('shop.box', ['shop_view'=>'shop list']) }}" class="icon-mode-list btn-layout">
+                            <a href="{{ route('shop.box', ['shop_view'=>'shop list']) }}" class="icon-mode-list btn-layout ">
                                 <i class="w-icon-list"></i>
                             </a>
                             <a href="{{ route('shop.box', ['shop_view'=>'shop list sidebar']) }}" class="icon-mode-list btn-layout">
