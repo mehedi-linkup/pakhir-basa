@@ -43,12 +43,12 @@
                     <div class="widget">
                         <h4 class="widget-title">My Account</h4>
                         <ul class="widget-body">
-                            <li><a href="#">Track My Order</a></li>
+                            <li><a href="{{route('track.order')}}">Track My Order</a></li>
                             <li><a href="{{ route('cart.list') }}">View Cart</a></li>
                             <li><a href="{{route('customer.login')}}">Sign In</a></li>
                             <li><a href="{{ route('customer.signup') }}">Register</a></li>
                             <li><a href="#">Help</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="{{route('privacy.website')}}">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                         <ul class="widget-body">
                             <li><a href="#">Support Center</a></li>
                             <li><a href="#">Shipping</a></li>
-                            <li><a href="#">Term and Conditions</a></li>
+                            <li><a href="{{route('trams.website')}}">Term and Conditions</a></li>
                         </ul>
                     </div>
                 </div>
