@@ -47,7 +47,7 @@ $.extend($.easing, {
             }),
             (Wolmart.getCookie = function (t) {
                 for (var e = t + "=", i = document.cookie.split(";"), a = 0; a < i.length; ++a) {
-                    for (var n = i[a]; " " == n.charAt(0); ) n = n.substring(1);
+                    for (var n = i[a]; " " == n.charAt(0);) n = n.substring(1);
                     if (0 == n.indexOf(e)) return n.substring(e.length, n.length);
                 }
                 return "";
@@ -167,7 +167,7 @@ $.extend($.easing, {
             (Wolmart.windowResized = function (e) {
                 return (
                     e == Wolmart.resizeTimeStamp ||
-                        (void 0 === window.innerHeight && (window.innerWidth = t(window).width() + Wolmart.getScrollbarWidth()),
+                    (void 0 === window.innerHeight && (window.innerWidth = t(window).width() + Wolmart.getScrollbarWidth()),
                         (Wolmart.resizeChanged = Wolmart.canvasWidth != window.innerWidth),
                         (Wolmart.canvasWidth = window.innerWidth),
                         (Wolmart.resizeTimeStamp = e)),
@@ -217,23 +217,23 @@ $.extend($.easing, {
                             a = this.$el;
                         i > this.top && this.isWrap
                             ? ((this.height = a[0].offsetHeight),
-                              a.hasClass("fixed") || a.parent().css("height", this.height + "px"),
-                              a.hasClass("fix-top")
-                                  ? (a.css("margin-top", e.offsetTop + "px"), (this.zIndex = this.options.max_index - e.index))
-                                  : a.hasClass("fix-bottom")
-                                  ? (a.css("margin-bottom", e.offsetBottom + "px"), (this.zIndex = this.options.max_index - e.index))
-                                  : a.css({ transition: "opacity .5s", "z-index": this.zIndex }),
-                              this.options.scrollMode
-                                  ? ((this.scrollPos >= i && a.hasClass("fix-top")) || (this.scrollPos <= i && a.hasClass("fix-bottom"))
+                                a.hasClass("fixed") || a.parent().css("height", this.height + "px"),
+                                a.hasClass("fix-top")
+                                    ? (a.css("margin-top", e.offsetTop + "px"), (this.zIndex = this.options.max_index - e.index))
+                                    : a.hasClass("fix-bottom")
+                                        ? (a.css("margin-bottom", e.offsetBottom + "px"), (this.zIndex = this.options.max_index - e.index))
+                                        : a.css({ transition: "opacity .5s", "z-index": this.zIndex }),
+                                this.options.scrollMode
+                                    ? ((this.scrollPos >= i && a.hasClass("fix-top")) || (this.scrollPos <= i && a.hasClass("fix-bottom"))
                                         ? (a.addClass("fixed"), this.onFixed && this.onFixed(), a.hasClass("product-sticky-content") && Wolmart.$body.addClass("addtocart-fixed"))
                                         : (a.removeClass("fixed").css("margin-top", "").css("margin-bottom", ""), this.onUnfixed && this.onUnfixed(), a.hasClass("product-sticky-content") && Wolmart.$body.removeClass("addtocart-fixed")),
-                                    (this.scrollPos = i))
-                                  : (a.addClass("fixed"), this.onFixed && this.onFixed()),
-                              a.is(".fixed.fix-top") ? ((e.offsetTop += a[0].offsetHeight), (Wolmart.sticky_top_height = e.offsetTop)) : a.is(".fixed.fix-bottom") && (e.offsetBottom += a[0].offsetHeight))
+                                        (this.scrollPos = i))
+                                    : (a.addClass("fixed"), this.onFixed && this.onFixed()),
+                                a.is(".fixed.fix-top") ? ((e.offsetTop += a[0].offsetHeight), (Wolmart.sticky_top_height = e.offsetTop)) : a.is(".fixed.fix-bottom") && (e.offsetBottom += a[0].offsetHeight))
                             : (a.parent().css("height", ""),
-                              a.removeClass("fixed").css({ "margin-top": "", "margin-bottom": "", "z-index": "" }),
-                              this.onUnfixed && this.onUnfixed(),
-                              a.hasClass("product-sticky-content") && Wolmart.$body.removeClass("addtocart-fixed"));
+                                a.removeClass("fixed").css({ "margin-top": "", "margin-bottom": "", "z-index": "" }),
+                                this.onUnfixed && this.onUnfixed(),
+                                a.hasClass("product-sticky-content") && Wolmart.$body.removeClass("addtocart-fixed"));
                     }),
                     Wolmart.$window.on("wolmart_complete", function () {
                         window.addEventListener("scroll", i, { passive: !0 }),
@@ -280,9 +280,9 @@ $.extend($.easing, {
                             e.imagesLoaded(function () {
                                 n.customInitHeight && e.height(e.height()),
                                     n.customDelay &&
-                                        Wolmart.call(function () {
-                                            e.isotope(n);
-                                        }, parseInt(n.customDelay)),
+                                    Wolmart.call(function () {
+                                        e.isotope(n);
+                                    }, parseInt(n.customDelay)),
                                     e.isotope(n);
                             });
                     });
@@ -307,12 +307,12 @@ $.extend($.easing, {
             (Wolmart.ratingTooltip = function (t) {
                 for (
                     var e = Wolmart.byClass("ratings-full", t || document.body),
-                        i = e.length,
-                        a = function () {
-                            var t = parseInt(this.firstElementChild.style.width.slice(0, -1)) / 20;
-                            this.lastElementChild.innerText = t ? t.toFixed(2) : t;
-                        },
-                        n = 0;
+                    i = e.length,
+                    a = function () {
+                        var t = parseInt(this.firstElementChild.style.width.slice(0, -1)) / 20;
+                        this.lastElementChild.innerText = t ? t.toFixed(2) : t;
+                    },
+                    n = 0;
                     n < i;
                     ++n
                 )
@@ -348,30 +348,30 @@ $.extend($.easing, {
                         o = a.closest(".accordion");
                     e.preventDefault(),
                         0 === o.find(".collapsing").length &&
-                            0 === o.find(".expanding").length &&
-                            (n.hasClass("expanded")
-                                ? o.hasClass("radio-type") || i(n)
-                                : n.hasClass("collapsed") &&
-                                  (o.find(".expanded").length > 0
-                                      ? Wolmart.isIE
-                                          ? i(o.find(".expanded"), function () {
-                                                i(n);
-                                            })
-                                          : (i(o.find(".expanded")), i(n))
-                                      : i(n)));
+                        0 === o.find(".expanding").length &&
+                        (n.hasClass("expanded")
+                            ? o.hasClass("radio-type") || i(n)
+                            : n.hasClass("collapsed") &&
+                            (o.find(".expanded").length > 0
+                                ? Wolmart.isIE
+                                    ? i(o.find(".expanded"), function () {
+                                        i(n);
+                                    })
+                                    : (i(o.find(".expanded")), i(n))
+                                : i(n)));
                 });
                 var i = function (t, i) {
                     var a = t.closest(".card").find(e);
                     t.hasClass("expanded")
                         ? (a.removeClass("collapse").addClass("expand"),
-                          t.addClass("collapsing").slideUp(300, function () {
-                              t.removeClass("expanded collapsing").addClass("collapsed"), i && i();
-                          }))
+                            t.addClass("collapsing").slideUp(300, function () {
+                                t.removeClass("expanded collapsing").addClass("collapsed"), i && i();
+                            }))
                         : t.hasClass("collapsed") &&
-                          (a.removeClass("expand").addClass("collapse"),
-                          t.addClass("expanding").slideDown(300, function () {
-                              t.removeClass("collapsed expanding").addClass("expanded"), i && i();
-                          }));
+                        (a.removeClass("expand").addClass("collapse"),
+                            t.addClass("expanding").slideDown(300, function () {
+                                t.removeClass("collapsed expanding").addClass("expanded"), i && i();
+                            }));
                 };
             }),
             (Wolmart.animationOptions = { name: "fadeIn", duration: "1.2s", delay: ".2s" }),
@@ -551,13 +551,13 @@ $.extend($.easing, {
             }),
             (Wolmart.Minipopup =
                 ((i = 0),
-                (a = []),
-                (n = !1),
-                (o = []),
-                (s = !1),
-                (r = function () {
-                    if (!n) for (var t = 0; t < o.length; ++t) (o[t] -= 200) <= 0 && this.close(t--);
-                }),
+                    (a = []),
+                    (n = !1),
+                    (o = []),
+                    (s = !1),
+                    (r = function () {
+                        if (!n) for (var t = 0; t < o.length; ++t) (o[t] -= 200) <= 0 && this.close(t--);
+                    }),
                 {
                     init: function () {
                         var i = document.createElement("div");
@@ -628,22 +628,22 @@ $.extend($.easing, {
                 }),
                     "ontouchstart" in document
                         ? (e.find(".search-toggle").on("click", function (t) {
-                              e.toggleClass("show");
-                          }),
-                          Wolmart.$body.on("click", function (t) {
-                              e.removeClass("show");
-                          }),
-                          e.on("click", function (t) {
-                              t.preventDefault(), t.stopPropagation();
-                          }))
+                            e.toggleClass("show");
+                        }),
+                            Wolmart.$body.on("click", function (t) {
+                                e.removeClass("show");
+                            }),
+                            e.on("click", function (t) {
+                                t.preventDefault(), t.stopPropagation();
+                            }))
                         : e
-                              .find(".form-control")
-                              .on("focusin", function (t) {
-                                  e.addClass("show");
-                              })
-                              .on("focusout", function (t) {
-                                  e.removeClass("show");
-                              });
+                            .find(".form-control")
+                            .on("focusin", function (t) {
+                                e.addClass("show");
+                            })
+                            .on("focusout", function (t) {
+                                e.removeClass("show");
+                            });
             }),
             (Wolmart.scrollTo = function (e, i) {
                 var a = void 0 === i ? 0 : i;
@@ -663,8 +663,8 @@ $.extend($.easing, {
     })(jQuery),
     (function (t) {
         var e = function (t) {
-                t.preventDefault(), Wolmart.$body.addClass("mmenu-active");
-            },
+            t.preventDefault(), Wolmart.$body.addClass("mmenu-active");
+        },
             i = function (t) {
                 t.preventDefault(), Wolmart.$body.removeClass("mmenu-active");
             },
@@ -716,9 +716,9 @@ $.extend($.easing, {
                             var n = Wolmart.byClass("sidebar");
                             n.length &&
                                 (e.find(".dropdown-box").css("width", n[0].offsetWidth - 20),
-                                Wolmart.$window.on("resize", function () {
-                                    e.find(".dropdown-box").css("width", n[0].offsetWidth - 20);
-                                }));
+                                    Wolmart.$window.on("resize", function () {
+                                        e.find(".dropdown-box").css("width", n[0].offsetWidth - 20);
+                                    }));
                         }
                     }
                 },
@@ -778,11 +778,11 @@ $.extend($.easing, {
             return this.init(t, e);
         }
         var i = function (t) {
-                var e = this.wrapperEl,
-                    i = e.getAttribute("class");
-                if ((i.match(/row|gutter\-\w\w|cols\-\d|cols\-\w\w-\d/g) && e.setAttribute("class", i.replace(/row|gutter\-\w\w|cols\-\d|cols\-\w\w-\d/g, "").replace(/\s+/, " ")), e.classList.contains("animation-slider")))
-                    for (var a = e.children, n = a.length, o = 0; o < n; ++o) a[o].setAttribute("data-index", o + 1);
-            },
+            var e = this.wrapperEl,
+                i = e.getAttribute("class");
+            if ((i.match(/row|gutter\-\w\w|cols\-\d|cols\-\w\w-\d/g) && e.setAttribute("class", i.replace(/row|gutter\-\w\w|cols\-\d|cols\-\w\w-\d/g, "").replace(/\s+/, " ")), e.classList.contains("animation-slider")))
+                for (var a = e.children, n = a.length, o = 0; o < n; ++o) a[o].setAttribute("data-index", o + 1);
+        },
             a = function (t) {
                 var e,
                     i = this.firstElementChild.firstElementChild.children,
@@ -802,7 +802,7 @@ $.extend($.easing, {
                     this.paused || i.trigger("autoplayStart"), this.pause(), (this.currentTime = 0);
                 }),
                     a.length &&
-                        (!0 === i.data("slider").options.autoplay && i.trigger("autoplayStop"),
+                    (!0 === i.data("slider").options.autoplay && i.trigger("autoplayStop"),
                         a.each(function () {
                             this.paused && this.play();
                         }));
@@ -912,13 +912,13 @@ $.extend($.easing, {
                         c.hasClass("animation-slider") && o.call(this),
                         c.hasClass("animation-slider") && this.slider.on("resize", s).on("transitionStart", r.bind(this)).on("transitionEnd", l.bind(this)),
                         h.length &&
-                            (this.slider.on("transitionEnd", function () {
-                                var t = this.activeIndex;
-                                h.children("a:nth-child(" + ++t + ")")
-                                    .addClass("active")
-                                    .siblings()
-                                    .removeClass("active");
-                            }),
+                        (this.slider.on("transitionEnd", function () {
+                            var t = this.activeIndex;
+                            h.children("a:nth-child(" + ++t + ")")
+                                .addClass("active")
+                                .siblings()
+                                .removeClass("active");
+                        }),
                             h.children("a").on("click", function (e) {
                                 e.preventDefault();
                                 var i = t(this);
@@ -935,8 +935,8 @@ $.extend($.easing, {
                     n
                         ? new e(i, a)
                         : Wolmart.call(function () {
-                              new e(i, a);
-                          });
+                            new e(i, a);
+                        });
                 });
             }),
             (Wolmart.slider.pgToggle = function () {
@@ -961,7 +961,7 @@ $.extend($.easing, {
                 (a.$sidebar = t("." + e)),
                 (a.isNavigation = !1),
                 a.$sidebar.length &&
-                    ((a.isNavigation = a.$sidebar.hasClass("sidebar-fixed") && a.$sidebar.parent().hasClass("toolbox-wrap")),
+                ((a.isNavigation = a.$sidebar.hasClass("sidebar-fixed") && a.$sidebar.parent().hasClass("toolbox-wrap")),
                     a.isNavigation && ((i = i.bind(this)), Wolmart.$window.on("resize", i)),
                     Wolmart.$window.on("resize", function (t) {
                         Wolmart.windowResized(t.timeStamp) && Wolmart.$body.removeClass(e + "-active");
@@ -986,14 +986,14 @@ $.extend($.easing, {
                     if (
                         (e.isNavigation &&
                             (a || e.$sidebar.find(".filter-clean").hide(),
-                            e.$sidebar.siblings(".toolbox").children(":not(:first-child)").fadeToggle("fast"),
-                            e.$sidebar
-                                .find(".sidebar-content")
-                                .stop()
-                                .animate({ height: "toggle", "margin-bottom": a ? "toggle" : -6 }, function () {
-                                    t(this).css("margin-bottom", ""), a && e.$sidebar.find(".filter-clean").fadeIn("fast");
-                                })),
-                        e.$sidebar.hasClass("shop-sidebar"))
+                                e.$sidebar.siblings(".toolbox").children(":not(:first-child)").fadeToggle("fast"),
+                                e.$sidebar
+                                    .find(".sidebar-content")
+                                    .stop()
+                                    .animate({ height: "toggle", "margin-bottom": a ? "toggle" : -6 }, function () {
+                                        t(this).css("margin-bottom", ""), a && e.$sidebar.find(".filter-clean").fadeIn("fast");
+                                    })),
+                            e.$sidebar.hasClass("shop-sidebar"))
                     ) {
                         var n = t(".main-content .product-wrapper");
                         n.length && n.hasClass("product-lists") && n.toggleClass("row cols-xl-2", !a);
@@ -1024,14 +1024,14 @@ $.extend($.easing, {
                                 i.is(a.parent())
                                     ? (!n && i.addClass("opened"), e.stopPropagation())
                                     : (a.parent().toggleClass("active"),
-                                      a.parent().hasClass("active")
-                                          ? (t(".selected-items").children().length < 2 && t(".selected-items").show(),
-                                            t('<a href="#" class="selected-item">' + a.text().split("(")[0] + '<i class="w-icon-times-solid"></i></a>')
-                                                .insertBefore(".selected-items .filter-clean")
-                                                .hide()
-                                                .fadeIn()
-                                                .data("link", a.parent()))
-                                          : t(".selected-items > .selected-item")
+                                        a.parent().hasClass("active")
+                                            ? (t(".selected-items").children().length < 2 && t(".selected-items").show(),
+                                                t('<a href="#" class="selected-item">' + a.text().split("(")[0] + '<i class="w-icon-times-solid"></i></a>')
+                                                    .insertBefore(".selected-items .filter-clean")
+                                                    .hide()
+                                                    .fadeIn()
+                                                    .data("link", a.parent()))
+                                            : t(".selected-items > .selected-item")
                                                 .filter(function (t, e) {
                                                     return e.innerText == a.text().split("(")[0];
                                                 })
@@ -1089,18 +1089,18 @@ $.extend($.easing, {
                         i.hasClass("disabled")
                             ? alert("Please select some product options before adding this product to your cart.")
                             : (i.toggleClass("added").addClass("load-more-overlay loading"),
-                              setTimeout(function () {
-                                  i.removeClass("load-more-overlay loading"),
-                                      Wolmart.Minipopup.open({
-                                          productClass: " product-cart",
-                                          name: a.find(".product-name, .product-title").text(),
-                                          nameLink: a.find(".product-name > a, .product-title > a").attr("href"),
-                                          imageSrc: a.find(".product-media img, .product-image:first-child img").attr("src"),
-                                          imageLink: a.find(".product-name > a").attr("href"),
-                                          message: "<p>has been added to cart:</p>",
-                                          actionTemplate: '<a href="'+ window.location.origin + "/cart" +'" class="btn btn-rounded btn-sm">View Cart</a><a href="'+ window.location.origin + "/checkout" +'" class="btn btn-dark btn-rounded btn-sm">Checkout</a>',
-                                      });
-                              }, 500));
+                                setTimeout(function () {
+                                    i.removeClass("load-more-overlay loading"),
+                                        Wolmart.Minipopup.open({
+                                            productClass: " product-cart",
+                                            name: a.find(".product-name, .product-title").text(),
+                                            nameLink: a.find(".product-name > a, .product-title > a").attr("href"),
+                                            imageSrc: a.find(".product-media img, .product-image:first-child img").attr("src"),
+                                            imageLink: a.find(".product-name > a").attr("href"),
+                                            message: "<p>has been added to cart:</p>",
+                                            actionTemplate: '<a href="' + window.location.origin + "/cart" + '" class="btn btn-rounded btn-sm">View Cart</a><a href="' + window.location.origin + "/checkout" + '" class="btn btn-dark btn-rounded btn-sm">Checkout</a>',
+                                        });
+                                }, 500));
                     }),
                     Wolmart.$body.on("click", ".product:not(.product-single) .btn-wishlist", function (e) {
                         e.preventDefault();
@@ -1111,23 +1111,23 @@ $.extend($.easing, {
                             }, 500);
                     }),
                     (e = t(".product-popup")).length &&
-                        Wolmart.$body.on("click", ".btn-quickview", function (i) {
-                            i.preventDefault(),
-                                Wolmart.popup(
-                                    {
-                                        items: { src: e[0].outerHTML },
-                                        callbacks: {
-                                            open: function () {
-                                                Wolmart.productSingle(t(".mfp-product .product-single"));
-                                            },
-                                            close: function () {
-                                                t(".mfp-product .swiper-container").data("slider").destroy();
-                                            },
+                    Wolmart.$body.on("click", ".btn-quickview", function (i) {
+                        i.preventDefault(),
+                            Wolmart.popup(
+                                {
+                                    items: { src: e[0].outerHTML },
+                                    callbacks: {
+                                        open: function () {
+                                            Wolmart.productSingle(t(".mfp-product .product-single"));
+                                        },
+                                        close: function () {
+                                            t(".mfp-product .swiper-container").data("slider").destroy();
                                         },
                                     },
-                                    "quickview"
-                                );
-                        }),
+                                },
+                                "quickview"
+                            );
+                    }),
                     (function () {
                         var e,
                             i = [],
@@ -1140,7 +1140,7 @@ $.extend($.easing, {
                             (t(".page-wrapper").append(
                                 '<div class="compare-popup">                    <div class="container">                        <div class="compare-title">                            <h4 class="title title-center">Compare Products</h4>                        </div>                        <ul class="compare-product-list list-style-none">                            <li></li><li></li><li></li><li></li>                        </ul>                        <a href="#" class="btn btn-clean">Clean All</a>                        <a href="compare.html" class="btn btn-dark btn-rounded">Start Compare !</a>                    </div>                </div>                <div class="compare-popup-overlay">                </div>'
                             ),
-                            (a = t(".page-wrapper > .compare-popup"))),
+                                (a = t(".page-wrapper > .compare-popup"))),
                             Wolmart.$body
                                 .on("click", ".product .btn-compare", function (o) {
                                     var s = t(this);
@@ -1362,8 +1362,8 @@ $.extend($.easing, {
                 n.isOpen
                     ? n.content
                         ? setTimeout(function () {
-                              Wolmart.popup(i, a);
-                          }, 5e3)
+                            Wolmart.popup(i, a);
+                        }, 5e3)
                         : t.magnificPopup.close()
                     : t.magnificPopup.open(t.extend(!0, {}, e.defaults, a ? e.presets[a] : {}, i)),
                     Wolmart.$body.on("mousedown", ".mfp-wrap", o),
@@ -1378,16 +1378,16 @@ $.extend($.easing, {
             return this.init(t);
         }
         var i = function () {
-                this.$wrapper.find(".product-details").css("height", window.innerWidth > 767 ? this.$wrapper.find(".product-gallery")[0].clientHeight : "");
-            },
+            this.$wrapper.find(".product-details").css("height", window.innerWidth > 767 ? this.$wrapper.find(".product-gallery")[0].clientHeight : "");
+        },
             a = function (e) {
                 var i = t(this);
                 i.hasClass("added") ||
                     (e.preventDefault(),
-                    i.addClass("load-more-overlay loading"),
-                    setTimeout(function () {
-                        i.removeClass("load-more-overlay loading").toggleClass("w-icon-heart").toggleClass("w-icon-heart-full").addClass("added").attr("href", "wishlist.html");
-                    }, 500));
+                        i.addClass("load-more-overlay loading"),
+                        setTimeout(function () {
+                            i.removeClass("load-more-overlay loading").toggleClass("w-icon-heart").toggleClass("w-icon-heart-full").addClass("added").attr("href", "wishlist.html");
+                        }, 500));
             },
             n = function (e) {
                 e.preventDefault(), Wolmart.scrollTo(t('.product-tabs > .nav a[href="' + this.getAttribute("href") + '"]').trigger("click"));
@@ -1412,27 +1412,27 @@ $.extend($.easing, {
                         Wolmart.slider(t.$thumbsWrap, {}, !0);
                 })(o),
                 document.body.classList.contains("home") ||
-                    (s.parent().hasClass("product-gallery-video") &&
-                        (o.isQuickView || s.append('<a href="#" class="product-gallery-btn product-degree-viewer" title="Product 360 Degree Gallery"><i class="w-icon-rotate-3d"></i></a>'),
+                (s.parent().hasClass("product-gallery-video") &&
+                    (o.isQuickView || s.append('<a href="#" class="product-gallery-btn product-degree-viewer" title="Product 360 Degree Gallery"><i class="w-icon-rotate-3d"></i></a>'),
                         o.isQuickView || s.append('<a href="#" class="product-gallery-btn product-video-viewer" title="Product Video Thumbnail"><i class="w-icon-movie"></i></a>'))),
                 o.$wrapper.on("click", ".btn-wishlist", a),
                 o.$wrapper.on("click", ".rating-reviews", n),
                 "complete" === Wolmart.status && (Wolmart.slider(s, { thumbs: { swiper: o.$thumbsWrap.data("slider") } }), Wolmart.initQtyInput(e.find(".quantity"))),
                 s.length &&
-                    window.addEventListener(
-                        "resize",
-                        function () {
-                            Wolmart.requestTimeout(function () {
-                                null != s.data("slider") && (s.data("slider").update(), o.$thumbsWrap.data("slider").update());
-                            }, 100);
-                        },
-                        { passive: !0 }
-                    ),
+                window.addEventListener(
+                    "resize",
+                    function () {
+                        Wolmart.requestTimeout(function () {
+                            null != s.data("slider") && (s.data("slider").update(), o.$thumbsWrap.data("slider").update());
+                        }, 100);
+                    },
+                    { passive: !0 }
+                ),
                 o.$wrapper.find(".product-single-swiper").on("initialized.slider", function (e) {
                     t(e.target).find(".product-image").zoom(Wolmart.zoomImageOptions);
                 }),
                 o.$wrapper.find(".product-thumbs-sticky").length &&
-                    ((o.isStickyScrolling = !1), o.$wrapper.on("click", ".product-thumb:not(.active)", o.clickStickyThumbnail.bind(this)), window.addEventListener("scroll", o.scrollStickyThumbnail.bind(this), { passive: !0 })),
+                ((o.isStickyScrolling = !1), o.$wrapper.on("click", ".product-thumb:not(.active)", o.clickStickyThumbnail.bind(this)), window.addEventListener("scroll", o.scrollStickyThumbnail.bind(this), { passive: !0 })),
                 (function (e) {
                     (e.$selects = e.$wrapper.find(".product-variations select")),
                         (e.$items = e.$wrapper.find(".product-variations")),
@@ -1524,10 +1524,10 @@ $.extend($.easing, {
                 (i = n.closest(".review-image").length
                     ? n.closest(".review-image").find("img")
                     : o.find(".product-single-swiper").length
-                    ? o.find(".product-single-swiper .swiper-slide:not(.cloned) img:first-child")
-                    : o.find(".product-gallery-carousel").length
-                    ? o.find(".product-gallery-carousel .swiper-slide:not(.cloned) img")
-                    : o.find(".product-image img:first-child")).length
+                        ? o.find(".product-single-swiper .swiper-slide:not(.cloned) img:first-child")
+                        : o.find(".product-gallery-carousel").length
+                            ? o.find(".product-gallery-carousel .swiper-slide:not(.cloned) img")
+                            : o.find(".product-image img:first-child")).length
             ) {
                 a = i
                     .map(function () {
@@ -1598,47 +1598,47 @@ $.extend($.easing, {
                     i.find(".product-qty-form").before(n), window.addEventListener("resize", o, { passive: !0 }), o();
                 })(".product-sticky-content"),
                 document.body.classList.contains("home") ||
-                    Wolmart.$body
-                        .on("click", ".product-image-full", e)
-                        .on("click", ".review-image img", e)
-                        .on("click", ".product-video-viewer", i)
-                        .on("click", ".product-degree-viewer", function (e) {
-                            e.preventDefault(e),
-                                t.fn.ThreeSixty &&
-                                    (function (t) {
-                                        t.preventDefault(),
-                                            Wolmart.popup({
-                                                type: "inline",
-                                                mainClass: "product-popupbox wm-fade product-360-popup",
-                                                preloader: !1,
-                                                items: { src: '<div class="product-gallery-degree">\t\t\t\t\t\t<div class="w-loading"><i></i></div>\t\t\t\t\t\t<ul class="product-degree-images"></ul>\t\t\t\t\t</div>' },
-                                                callbacks: {
-                                                    open: function () {
-                                                        this.container
-                                                            .find(".product-gallery-degree")
-                                                            .ThreeSixty({
-                                                                imagePath: "assets/images/products/video/",
-                                                                filePrefix: "360-",
-                                                                ext: ".jpg",
-                                                                totalFrames: 18,
-                                                                endFrame: 18,
-                                                                currentFrame: 1,
-                                                                imgList: this.container.find(".product-degree-images"),
-                                                                progress: ".w-loading",
-                                                                height: 500,
-                                                                width: 830,
-                                                                navigation: !0,
-                                                            });
-                                                    },
-                                                    beforeClose: function () {
-                                                        this.container.empty();
-                                                    },
-                                                },
-                                            });
-                                    })(e);
-                        })
-                        .on("click", ".rating-form .rating-stars > a", a)
-                        .on("click", ".product-single:not(.product-popup) .btn-cart", n);
+                Wolmart.$body
+                    .on("click", ".product-image-full", e)
+                    .on("click", ".review-image img", e)
+                    .on("click", ".product-video-viewer", i)
+                    .on("click", ".product-degree-viewer", function (e) {
+                        e.preventDefault(e),
+                            t.fn.ThreeSixty &&
+                            (function (t) {
+                                t.preventDefault(),
+                                    Wolmart.popup({
+                                        type: "inline",
+                                        mainClass: "product-popupbox wm-fade product-360-popup",
+                                        preloader: !1,
+                                        items: { src: '<div class="product-gallery-degree">\t\t\t\t\t\t<div class="w-loading"><i></i></div>\t\t\t\t\t\t<ul class="product-degree-images"></ul>\t\t\t\t\t</div>' },
+                                        callbacks: {
+                                            open: function () {
+                                                this.container
+                                                    .find(".product-gallery-degree")
+                                                    .ThreeSixty({
+                                                        imagePath: "assets/images/products/video/",
+                                                        filePrefix: "360-",
+                                                        ext: ".jpg",
+                                                        totalFrames: 18,
+                                                        endFrame: 18,
+                                                        currentFrame: 1,
+                                                        imgList: this.container.find(".product-degree-images"),
+                                                        progress: ".w-loading",
+                                                        height: 500,
+                                                        width: 830,
+                                                        navigation: !0,
+                                                    });
+                                            },
+                                            beforeClose: function () {
+                                                this.container.empty();
+                                            },
+                                        },
+                                    });
+                            })(e);
+                    })
+                    .on("click", ".rating-form .rating-stars > a", a)
+                    .on("click", ".product-single:not(.product-popup) .btn-cart", n);
         };
     })(jQuery),
     (function (t) {
@@ -1659,26 +1659,26 @@ $.extend($.easing, {
                     var e = t(this);
                     e.hasClass("enabled")
                         ? (e.removeClass("enabled").addClass("disabled"),
-                          (e.children("p")[0].innerHTML = "Show Code: Disabled"),
-                          t(".show-code-action").each(function () {
-                              var e = t(this);
-                              e.removeClass("show-code-added"),
-                                  setTimeout(function () {
-                                      e[0].removeChild(e[0].lastElementChild);
-                                  }, 300);
-                          }))
+                            (e.children("p")[0].innerHTML = "Show Code: Disabled"),
+                            t(".show-code-action").each(function () {
+                                var e = t(this);
+                                e.removeClass("show-code-added"),
+                                    setTimeout(function () {
+                                        e[0].removeChild(e[0].lastElementChild);
+                                    }, 300);
+                            }))
                         : (e.removeClass("disabled").addClass("enabled"),
-                          (e.children("p")[0].innerHTML = "Show Code: Enabled"),
-                          t(".show-code-action").each(function () {
-                              var e = t(this),
-                                  i = document.createElement("span");
-                              (i.className = "show-code"),
-                                  i.appendChild(document.createTextNode("</>")),
-                                  this.appendChild(i),
-                                  setTimeout(function () {
-                                      e.addClass("show-code-added");
-                                  }, 200);
-                          }));
+                            (e.children("p")[0].innerHTML = "Show Code: Enabled"),
+                            t(".show-code-action").each(function () {
+                                var e = t(this),
+                                    i = document.createElement("span");
+                                (i.className = "show-code"),
+                                    i.appendChild(document.createTextNode("</>")),
+                                    this.appendChild(i),
+                                    setTimeout(function () {
+                                        e.addClass("show-code-added");
+                                    }, 200);
+                            }));
                 }),
                 Wolmart.$body.on("click", ".show-code", function (e) {
                     e.stopPropagation();
@@ -1742,8 +1742,8 @@ $.extend($.easing, {
                     d = new Date(r, l + 1, 0),
                     p = c.getDay();
                 if (a.settings.fixedStartDay) {
-                    for (p = a.settings.dayNumber; c.getDay() != p; ) c.setDate(c.getDate() - 1);
-                    for (; d.getDay() != (p + 7) % 7; ) d.setDate(d.getDate() + 1);
+                    for (p = a.settings.dayNumber; c.getDay() != p;) c.setDate(c.getDate() - 1);
+                    for (; d.getDay() != (p + 7) % 7;) d.setDate(d.getDate() + 1);
                 }
                 for (var u = p; u < p + 7; u++) {
                     var m = t("<th>" + a.settings.days[u % 7].substring(0, a.settings.dayExcerpt) + "</th>");

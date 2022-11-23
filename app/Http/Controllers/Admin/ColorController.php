@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ColorController extends Controller
 {
@@ -98,5 +99,15 @@ class ColorController extends Controller
     {
         Color::where('id', $id)->delete();
         return back()->with('success', 'Country deleted successfully');
+    }
+    public function colorAjax($id) {
+        try {
+            $color = Color::find($id);
+            $color = $color->name;
+            return response()->json($color);
+            
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

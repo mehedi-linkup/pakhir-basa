@@ -15,6 +15,8 @@
     <div class="container">
         <div class="row gutter-lg mb-10">
             <div class="col-lg-8 pr-lg-4 mb-6">
+                <form id="cartUpdate" action="{{ route('cart.update') }}" method="post">
+                    @csrf
                 <table class="shop-table cart-table">
                     <thead>
                         <tr>
@@ -45,19 +47,20 @@
                             </td>
                             <td class="product-name">
                                 <a href="{{ route('product.details', $productSlug->slug) }}">
-                                    {{ $item->name }} 
+                                    {{ $item->name }}
                                 </a>
                             </td>
-                            <td class="product-price"><span class="amount">{{ $item->price }}</span></td>
+                            <td id="product-price-{{ $item->id }}" data-price="{{ $item->price }}" class="product-price"><span class="amount">{{ $item->price }}</span></td>
                             <td class="product-quantity">
                                 <div class="input-group">
-                                    <input class="quantity form-control" type="number" min="1" max="100000" value="{{ $item->quantity }}">
-                                    <button class="quantity-plus w-icon-plus"></button>
-                                    <button class="quantity-minus w-icon-minus"></button>
+                                    <input type="hidden" name="cart_id[]" value="{{ $item->id }}">
+                                    <input id="quantity-mod-{{ $item->id }}" class="quantity-mod form-control" type="number" name="quantity[]" min="1" max="100000" value="{{ $item->quantity }}" onkeyup="quantityValue({{$item->id}})">
+                                    <button type="button" id="quantity-plus-{{ $item->id }}" class="quantity-plus-mod w-icon-plus" onclick="valueAdd({{ $item->id }})"></button>
+                                    <button type="button" id="quantity-minus-{{ $item->id }}" class="quantity-minus-mod w-icon-minus" onclick="valueMinus({{ $item->id }})"></button>
                                 </div>
                             </td>
                             <td class="product-subtotal">
-                                <span class="amount">{{ $item->price * $item->quantity }}</span>
+                                <span id="quantity-amount-{{$item->id}}" class="amount">{{ $item->price * $item->quantity }}</span>
                             </td>
                         </tr>
                         @endforeach
@@ -66,10 +69,10 @@
 
                 <div class="cart-action mb-6">
                     <a href="#" class="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i class="w-icon-long-arrow-left"></i>Continue Shopping</a>
-                    <button type="submit" class="btn btn-rounded btn-default btn-clear" name="clear_cart" value="Clear Cart">Clear Cart</button> 
-                    <button type="submit" class="btn btn-rounded btn-update" name="update_cart" value="Update Cart">Update Cart</button>
+                    <button type="submit" id="clear_cart" class="btn btn-rounded btn-default btn-clear" name="clear_cart" value="Clear Cart">Clear Cart</button> 
+                    <button type="submit" id="update_cart" class="btn btn-rounded btn-update" name="update_cart" value="Update Cart">Update Cart</button>
                 </div>
-
+                </form>
                 <form class="coupon">
                     <h5 class="title coupon-title font-weight-bold text-uppercase">Coupon Discount</h5>
                     <input type="text" class="form-control mb-4" placeholder="Enter coupon code here..." required />
@@ -80,14 +83,14 @@
                 <div class="sticky-sidebar">
                     <div class="cart-summary mb-4">
                         <h3 class="cart-title text-uppercase">Cart Totals</h3>
-                        <div class="cart-subtotal d-flex align-items-center justify-content-between">
+                        {{-- <div class="cart-subtotal d-flex align-items-center justify-content-between">
                             <label class="ls-25">Subtotal</label>
                             <span>$100.00</span>
-                        </div>
+                        </div> --}}
 
                         <hr class="divider">
 
-                        <ul class="shipping-methods mb-2">
+                        {{-- <ul class="shipping-methods mb-2">
                             <li>
                                 <label
                                     class="shipping-title text-dark font-weight-bold">Shipping</label>
@@ -119,9 +122,9 @@
                                         $5.00</label>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> --}}
 
-                        <div class="shipping-calculator">
+                        {{-- <div class="shipping-calculator">
                             <p class="shipping-destination lh-1">Shipping to <strong>CA</strong>.</p>
 
                             <form class="shipping-calculator-form">
@@ -158,12 +161,12 @@
                                 <button type="submit" class="btn btn-dark btn-outline btn-rounded">Update
                                     Totals</button>
                             </form>
-                        </div>
+                        </div> --}}
 
-                        <hr class="divider mb-6">
+                        {{-- <hr class="divider mb-6"> --}}
                         <div class="order-total d-flex justify-content-between align-items-center">
                             <label>Total</label>
-                            <span class="ls-50">$100.00</span>
+                            <span id="order-total" class="ls-50">{{ \Cart::getTotal()}}</span>
                         </div>
                         <a href="{{ route('checkout.index') }}"
                             class="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout">
@@ -175,3 +178,36 @@
     </div>
 </div>
 @endsection
+@push('website-js')
+    <script>
+        function valueAdd(id) {
+            let quantity = $('#quantity-mod-'+id).val();
+            if(quantity <= 100) {
+                quantity++;
+            }
+            $('#quantity-mod-'+id).val(quantity);
+            quantityValue(id)
+        }
+
+        function valueMinus(id) {
+            let quantity = $('#quantity-mod-'+id).val();
+            if(quantity > 1) {
+                quantity--;
+            }
+            $('#quantity-mod-'+id).val(quantity);
+            quantityValue(id)
+        }
+
+        function quantityValue(id) {
+            let quantityValue = $('#quantity-mod-'+id).val();
+            let productPrice = $('#product-price-'+id).attr("data-price");
+            $('#quantity-amount-'+id).text(quantityValue * productPrice);
+        }
+
+        // $('#update_cart').click(function (e) {
+        //     e.preventDefault();
+        //     console.log('update cart')
+        // });
+
+    </script>
+@endpush

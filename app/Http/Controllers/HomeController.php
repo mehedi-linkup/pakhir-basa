@@ -122,11 +122,13 @@ class HomeController extends Controller
 
     public function productViewAjax($id)
     {
-        $product = Product::with(['category', 'subcategory'])->findOrFail($id);
-        $color = $product->color->name;
-        $product_color = explode(',',$color);
-        $size = $product->size->name;
+        $product = Product::with(['category', 'subcategory', 'productImage'])->findOrFail($id);
+        $color = $product->color_id;
+        $product_colors = explode(',',$color);
+        $product_color = Color::whereIn('id', $product_colors)->get();
+        $size = $product->size_id;
         $product_size = explode(',',$size);
+        $product_size = Size::whereIn('id', $product_size)->get();
         
         return response()->json([
             'product' => $product,

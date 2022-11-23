@@ -545,35 +545,14 @@
             <div class="col-md-6 mb-4 mb-md-0">
                 <div class="product-gallery product-gallery-sticky">
                     <div class="swiper-container product-single-swiper swiper-theme nav-inner">
-                        <div class="swiper-wrapper row cols-1 gutter-no">
-                            <div class="swiper-slide">
+                        <div id="quickview-swiper-wraper" class="swiper-wrapper row cols-1 gutter-no">
+                            {{-- <div class="swiper-slide">
                                 <figure class="product-image">
                                     <img src="{{ asset('/') }}website/images/products/popup/1-440x494.jpg"
                                         data-zoom-image="{{ asset('/') }}website/images/products/popup/1-800x900.jpg"
                                         alt="Water Boil Black Utensil" width="800" height="900">
                                 </figure>
-                            </div>
-                            <div class="swiper-slide">
-                                <figure class="product-image">
-                                    <img src="{{ asset('/') }}website/images/products/popup/2-440x494.jpg"
-                                        data-zoom-image="{{ asset('/') }}website/images/products/popup/2-800x900.jpg"
-                                        alt="Water Boil Black Utensil" width="800" height="900">
-                                </figure>
-                            </div>
-                            <div class="swiper-slide">
-                                <figure class="product-image">
-                                    <img src="{{ asset('/') }}website/images/products/popup/3-440x494.jpg"
-                                        data-zoom-image="{{ asset('/') }}website/images/products/popup/3-800x900.jpg"
-                                        alt="Water Boil Black Utensil" width="800" height="900">
-                                </figure>
-                            </div>
-                            <div class="swiper-slide">
-                                <figure class="product-image">
-                                    <img src="{{ asset('/') }}website/images/products/popup/4-440x494.jpg"
-                                        data-zoom-image="{{ asset('/') }}website/images/products/popup/4-800x900.jpg"
-                                        alt="Water Boil Black Utensil" width="800" height="900">
-                                </figure>
-                            </div>
+                            </div> --}}
                         </div>
                         <button class="swiper-button-next"></button>
                         <button class="swiper-button-prev"></button>
@@ -584,23 +563,11 @@
                             'prevEl': '.swiper-button-prev'
                         }
                     }">
-                        <div class="product-thumbs swiper-wrapper row cols-4 gutter-sm">
-                            <div class="product-thumb swiper-slide">
+                        <div id="quickviewProductThumb" class="product-thumbs swiper-wrapper row cols-4 gutter-sm">
+                            {{-- <div class="product-thumb swiper-slide">
                                 <img src="{{ asset('/') }}website/images/products/popup/1-103x116.jpg" alt="Product Thumb" width="103"
                                     height="116">
-                            </div>
-                            <div class="product-thumb swiper-slide">
-                                <img src="{{ asset('/') }}website/images/products/popup/2-103x116.jpg" alt="Product Thumb" width="103"
-                                    height="116">
-                            </div>
-                            <div class="product-thumb swiper-slide">
-                                <img src="{{ asset('/') }}website/images/products/popup/3-103x116.jpg" alt="Product Thumb" width="103"
-                                    height="116">
-                            </div>
-                            <div class="product-thumb swiper-slide">
-                                <img src="{{ asset('/') }}website/images/products/popup/4-103x116.jpg" alt="Product Thumb" width="103"
-                                    height="116">
-                            </div>
+                            </div> --}}
                         </div>
                         <button class="swiper-button-next"></button>
                         <button class="swiper-button-prev"></button>
@@ -609,7 +576,7 @@
             </div>
             <div class="col-md-6 overflow-hidden p-relative">
                 <div class="product-details scrollable pl-0">
-                    <h2 class="product-title">Electronics Black Wrist Watch</h2>
+                    <h2 id="productTitle" class="product-title"></h2>
                     <div class="product-bm-wrapper">
                         <figure class="brand">
                             <img src="{{ asset('/') }}website/images/products/brand/brand-1.jpg" alt="Brand" width="102" height="48" />
@@ -617,70 +584,70 @@
                         <div class="product-meta">
                             <div class="product-categories">
                                 Category:
-                                <span class="product-category"><a href="#">Electronics</a></span>
+                                <span id="productCategory" class="product-category"><a href="#"></a></span>
                             </div>
                             <div class="product-sku">
-                                SKU: <span>MS46891340</span>
+                                Product Code: <span id="productCode"></span>
                             </div>
                         </div>
                     </div>
 
                     <hr class="product-divider">
 
-                    <div class="product-price">$40.00</div>
+                    <div id="productPrice" class="product-price"></div>
 
-                    <div class="ratings-container">
+                    {{-- <div class="ratings-container">
                         <div class="ratings-full">
                             <span class="ratings" style="width: 80%;"></span>
                             <span class="tooltiptext tooltip-top"></span>
                         </div>
                         <a href="#" class="rating-reviews">(3 Reviews)</a>
-                    </div>
+                    </div> --}}
 
-                    <div class="product-short-desc">
-                        <ul class="list-type-check list-style-none">
+                    <div id="productShortDesc" class="product-short-desc">
+                        {{-- <ul class="list-type-check list-style-none">
                             <li>Ultrices eros in cursus turpis massa cursus mattis.</li>
                             <li>Volutpat ac tincidunt vitae semper quis lectus.</li>
                             <li>Aliquam id diam maecenas ultricies mi eget mauris.</li>
-                        </ul>
+                        </ul> --}}
                     </div>
 
                     <hr class="product-divider">
 
-                    <div class="product-form product-variation-form product-color-swatch">
+                    <div class="product-form product-variation-form product-size-swatch">
                         <label>Color:</label>
-                        <div class="d-flex align-items-center product-variations">
-                            <a href="#" class="color" style="background-color: #ffcc01"></a>
+                        <div id="colorName" class="d-flex align-items-center product-variations">
+                            {{-- <a href="#" class="color" style="background-color: #ffcc01"></a>
                             <a href="#" class="color" style="background-color: #ca6d00;"></a>
                             <a href="#" class="color" style="background-color: #1c93cb;"></a>
                             <a href="#" class="color" style="background-color: #ccc;"></a>
-                            <a href="#" class="color" style="background-color: #333;"></a>
+                            <a href="#" class="color" style="background-color: #333;"></a> --}}
                         </div>
                     </div>
                     <div class="product-form product-variation-form product-size-swatch">
                         <label class="mb-1">Size:</label>
-                        <div class="flex-wrap d-flex align-items-center product-variations">
-                            <a href="#" class="size">Small</a>
+                        <div id="sizeName" class="flex-wrap d-flex align-items-center product-variations">
+                            {{-- <a href="#" class="size">Small</a>
                             <a href="#" class="size">Medium</a>
                             <a href="#" class="size">Large</a>
-                            <a href="#" class="size">Extra Large</a>
+                            <a href="#" class="size">Extra Large</a> --}}
                         </div>
-                        <a href="#" class="product-variation-clean">Clean All</a>
+                        {{-- <a href="#" class="product-variation-clean">Clean All</a> --}}
                     </div>
 
-                    <div class="product-variation-price">
+                    {{-- <div class="product-variation-price">
                         <span></span>
-                    </div>
+                    </div> --}}
 
                     <div class="product-form">
                         <div class="product-qty-form">
                             <div class="input-group">
-                                <input class="quantity form-control" type="number" min="1" max="10000000">
+                                <input id="quantityId" class="quantity form-control" type="number" min="1" max="10000000">
                                 <button class="quantity-plus w-icon-plus"></button>
                                 <button class="quantity-minus w-icon-minus"></button>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-cart">
+                        <button id="QuickaddToCart" class="btn btn-primary btn-cart" onclick="">
                             <i class="w-icon-cart"></i>
                             <span>Add to Cart</span>
                         </button>
@@ -772,56 +739,72 @@
                 dataType: "json",
                 success: function(data) {
                     console.log(data);
-                    // $('#pname').text(data.product.name_en);
-                    // $('#price').text(data.product.selling_price);
-                    // $('#pcode').text(data.product.product_code);
-                    // $('#pcategory').text(data.product.category.name_en);
-                    // $('#pbrand').text(data.product.brand.name_en);
-                    // $('#pimage').attr('src', '/backend/images/products/' + data.product.product_image);
-                    // $('#product_id').val(id);
-                    // $('#qty').val(1);
-                    
-                    // //product price
-                    // if(data.product.discount_price == null){
-                    //     $('#price').text('');
-                    //     $('#oldprice').text('');
-                    //     $('#price').text(data.product.selling_price);
-                    // }else{
-                    //     $('#price').text(data.product.discount_price);
-                    //     $('#oldprice').text(data.product.selling_price);
-                    // }
-                    
-                    // //stock
-                    // if (data.product.quantity > 0) {
-                    //     $('#aviable').text('');
-                    //     $('#stockout').text('');
-                    //     $('#aviable').text('aviable');
-                    // } else {
-                    //     $('#aviable').text('');
-                    //     $('#stockout').text('');
-                    //     $('#stockout').text('stockout');
-                    // }
+                    $('#productTitle').text(data.product.name);
+                    $('#productCategory').text(data.product.category.name);
+                    $('#productCode').text(data.product.code);
+                    //product price
+                    if(data.product.discount) {
+                        let original_price = data.product.price;
+                        let discount = data.product.discount;
+                        let new_price = data.product.price - ((data.product.price / 100) * discount);
+                        $('#productPrice').text(new_price);
+                    } else {
+                        $('#productPrice').text(data.product.price);
+                    }
+                    $('#productShortDesc').html(data.product.short_details);
+                    // Color 
+                    let colorText = "";
+                    $.each(data.color, function(key, value) {
+                        colorText += '<a href="#" class="size" style="background-color: #ffcc01">' + value.name +'</a>';
+                    });
+                    $('#colorName').html(colorText);
+                   
+                    let sizeText = "";
+                    $.each(data.size, function(key, value) {
+                        sizeText += '<a href="#" class="size">'+ value.name +'</a>';                           
+                    });
+                    $('#sizeName').html(sizeText);
 
-                    
-                    // //color
-                    // $('select[name="color"]').empty();
-                    // $.each(data.color, function(key, value) {
-                    //     $('select[name="color"]').append('<option value="' + value + '">' + value +
-                    //         '</option>')
-                    // })
-                    // //size
-                    // $('select[name="size"]').empty();
-                    // $.each(data.size, function(key, value) {
-                    //     $('select[name="size"]').append('<option value="' + value + '">' + value +
-                    //         '</option>')
-                    //     if (data.size == "") {
-                    //         $('#sizeArea').hide();
-                    //     } else {
-                    //         $('#sizeArea').show();
-                    //     }
-                    // })
+                    $('#QuickaddToCart').attr("onclick","addToCard("+ id +")");
+
+                    if(data.product.product_image.length > 0) {
+                        let slideImage = "";
+                        $.each(data.product.product_image, function(key, value) {
+                            slideImage += '<div class="swiper-slide"><figure class="product-image"><img src="'+ window.location.origin +'/uploads/otherImage/' + value.otherImage +'" data-zoom-image="'+ window.location.origin+'/uploads/otherImage/'+value.otherImage+'" alt="Image Name" width="800" height="900"></figure></div>'
+                        })
+
+                        $('#quickview-swiper-wraper').html(slideImage);
+
+                        let sliderThumb = "";
+                        $.each(data.product.product_image, function(key, value) {
+                            sliderThumb += '<div class="product-thumb swiper-slide"><img src="'+ window.location.origin +'/uploads/otherImage/' + value.otherImage +'" alt="Product Thumb" width="103" height="116"></div>';
+                        })
+                        $('#quickviewProductThumb').html(sliderThumb);
+                        Wolmart.slider(".swiper-container"),
+                        Wolmart.call(Wolmart.slider.pgToggle),
+                        Wolmart.$window.on("resize", function () {
+                            Wolmart.call(Wolmart.slider.pgToggle);
+                        });
+                    }
                 }
             });
+        }
+        function updateCart(id) {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            let url = "/update-cart-ajax";
+            $.ajax({
+                url: url,
+                type: "post",
+                data: {
+                    _token: CSRF_TOKEN,
+                    id: id,
+                    quantity: $('#quantityId').val() 
+                },
+                dataType: "json", 
+                success: function(res) {
+                    console.log(res);
+                }
+            })
         }
     </script>
     <script>
