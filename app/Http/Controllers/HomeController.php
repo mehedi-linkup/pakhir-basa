@@ -123,15 +123,15 @@ class HomeController extends Controller
     public function productViewAjax($id)
     {
         $product = Product::with(['category', 'subcategory'])->findOrFail($id);
-        $color = $product->color_id;
+        $color = $product->color->name;
         $product_color = explode(',',$color);
-        $size = $product->size_id;
-        $produt_size = explode(',',$size);
+        $size = $product->size->name;
+        $product_size = explode(',',$size);
         
         return response()->json([
             'product' => $product,
             'color' => $product_color,
-            'size' => $produt_size
+            'size' => $product_size
         ]);
     }
     public function newsEvent()
