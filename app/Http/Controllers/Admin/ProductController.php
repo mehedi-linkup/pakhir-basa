@@ -57,7 +57,7 @@ class ProductController extends Controller
 
     public function getChildcategory($id)
     {
-        $childCategory = ChildCategory::where('sub_category_id', $id)->get();
+        $childCategory = ChildCategory::where('subcategory_id', $id)->get();
         return response()->json($childCategory);
     }
 
@@ -73,14 +73,13 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|max:100',
             'category_id' => 'required',
-            'size_id' => 'max:3',
-            'color_id' => 'max:3',
             // 'sub_category_id' => 'required',
             'price' => 'required|max:10|regex:/^\d+(\.\d{1,2})?$/',
-            'image' => 'required|image|mimes:jpg,png,gif,bmp|max:500',
-            'otherImage' => 'max:500',
+            'image' => 'required|image|mimes:jpg,png,gif,bmp',
+            'otherImage' => 'image|mimes:jpg,png,gif,bmp',
             'purchase' => 'required|min:1|max:10',
         ]);
+       
         $slug = Str::slug($request->name . '-' . time());
         $i = 0;
         while (true) {
@@ -175,11 +174,6 @@ class ProductController extends Controller
             // return back();
             throw $th;
         }
-        // try {
-        //     //code...
-        // } catch (\Throwable $th) {
-        //     //throw $th;
-        // }
         
     }
 
@@ -244,7 +238,7 @@ class ProductController extends Controller
             'ip_address' => 'max:15',
             'otherImage' => 'max:500',
             'purchase' => 'required',
-            // 'code' => 'max:18|unique:products,id',
+            'code' => 'max:18|unique:products,id',
         ]);
 
             $product = Product::find($id);
@@ -274,6 +268,13 @@ class ProductController extends Controller
                 $product_image = $product->image;
             }
             $slug = Str::slug($request->name . '-' . time());
+
+            $productSize = explode(',', $request->size_id);
+            $product->size_id = $productSize;
+
+            $productColor = explode(',', $request->color_id);
+            $product->color_id = $productColor;
+
             $product->name = $request->name;
             $product->slug = $slug;
             // $product->code = $request->code;

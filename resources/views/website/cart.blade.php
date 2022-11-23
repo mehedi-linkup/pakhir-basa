@@ -65,7 +65,7 @@
                 </table>
 
                 <div class="cart-action mb-6">
-                    <a href="#" class="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i class="w-icon-long-arrow-left"></i>Continue Shopping</a>
+                    <a href="{{ route('shop.box') }}" class="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i class="w-icon-long-arrow-left"></i>Continue Shopping</a>
                     <button type="submit" class="btn btn-rounded btn-default btn-clear" name="clear_cart" value="Clear Cart">Clear Cart</button> 
                     <button type="submit" class="btn btn-rounded btn-update" name="update_cart" value="Update Cart">Update Cart</button>
                 </div>
@@ -121,7 +121,7 @@
                             </li>
                         </ul>
 
-                        <div class="shipping-calculator">
+                        {{-- <div class="shipping-calculator">
                             <p class="shipping-destination lh-1">Shipping to <strong>CA</strong>.</p>
 
                             <form class="shipping-calculator-form">
@@ -158,7 +158,7 @@
                                 <button type="submit" class="btn btn-dark btn-outline btn-rounded">Update
                                     Totals</button>
                             </form>
-                        </div>
+                        </div> --}}
 
                         <hr class="divider mb-6">
                         <div class="order-total d-flex justify-content-between align-items-center">

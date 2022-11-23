@@ -61,7 +61,7 @@
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <p class="form-row mt-3"><button type="submit"
-                                                                            class="button wp-element-button" name="track"
+                                                                            class="button wp-element-button form-control" name="track"
                                                                             value="Track">Track</button></p>
                                                                     </div>
                                                                 </div>
