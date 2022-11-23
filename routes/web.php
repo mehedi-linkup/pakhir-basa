@@ -63,7 +63,7 @@ Route::get('/shop-banner',[HomeController::class,'shopBanner'])->name('shop.bann
 // search route
 Route::get('/get_suggestions/{k}/{id?}', [HomeController::class, 'getSearchSuggestions'])->name('searh.product');
 Route::get('/search', [HomeController::class, 'productSearch'])->name('search');
-Route::get('/quickview/{id}', [HomeController::class, 'productViewAjax'])->name('product.quickview');
+Route::get('/product/quickview/{id}', [HomeController::class, 'productViewAjax'])->name('product.quickview');
 
 Route::get('/track-order',[HomeController::class,'trackOrder'])->name('track.order');
 

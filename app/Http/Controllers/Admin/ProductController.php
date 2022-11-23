@@ -95,8 +95,15 @@ class ProductController extends Controller
         try{
             // DB::beginTransaction();
             $productCode = $this->generateCode('Product', 'P');
-
+            
             $product = new Product();
+
+            $productSize = implode(',', $request->size_id);
+            $product->size_id = $productSize;
+
+            $productColor = implode(',', $request->color_id);
+            $product->color_id = $productColor;
+
             $product->name = $request->name;
             $product->slug = $slug;
             $product->code = $productCode;
@@ -105,8 +112,6 @@ class ProductController extends Controller
             $product->child_category_id = $request->child_category_id;
             $product->price = $request->price;
             $product->discount = $request->discount;
-            $product->size_id = $request->size_id;
-            $product->color_id = $request->color_id;
             $product->is_popular = $request->is_popular ?? 0;
             $product->is_arrival = $request->is_arrival ?? 0;
             $product->is_offer = $request->is_offer ?? 0;

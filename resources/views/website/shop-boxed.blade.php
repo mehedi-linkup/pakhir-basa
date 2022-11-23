@@ -169,10 +169,10 @@
                                         height="338" />
                                 </a>
                                 <div class="product-action-horizontal">
-                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
+                                    <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
                                         title="Add to cart"></a>
-                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                                        title="Quick View"></a>
+                                    <a href="" class="btn-product-icon btn-quickview w-icon-search"
+                                        title="Quick View" onclick="quickView({{$item->id}})"></a>
                                 </div>
                             </figure>
                             <div class="product-details">

@@ -685,24 +685,6 @@
                             <span>Add to Cart</span>
                         </button>
                     </div>
-
-                    {{-- <div class="social-links-wrapper">
-                        <div class="social-links">
-                            <div class="social-icons social-no-color border-thin">
-                                <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
-                                <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
-                                <a href="#" class="social-icon social-pinterest fab fa-pinterest-p"></a>
-                                <a href="#" class="social-icon social-whatsapp fab fa-whatsapp"></a>
-                                <a href="#" class="social-icon social-youtube fab fa-linkedin-in"></a>
-                            </div>
-                        </div>
-                        {{-- <span class="divider d-xs-show"></span>
-                        <div class="product-link-wrapper d-flex">
-                            <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"><span></span></a>
-                            <a href="#"
-                                class="btn-product-icon btn-compare btn-icon-left w-icon-compare"><span></span></a>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -782,12 +764,65 @@
   
         });
     </script>
-    <script>
+    <script>    
+        function quickView(id){
+            $.ajax({
+                type: "GET",
+                url: "product/quickview/"+id,
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                    // $('#pname').text(data.product.name_en);
+                    // $('#price').text(data.product.selling_price);
+                    // $('#pcode').text(data.product.product_code);
+                    // $('#pcategory').text(data.product.category.name_en);
+                    // $('#pbrand').text(data.product.brand.name_en);
+                    // $('#pimage').attr('src', '/backend/images/products/' + data.product.product_image);
+                    // $('#product_id').val(id);
+                    // $('#qty').val(1);
+                    
+                    // //product price
+                    // if(data.product.discount_price == null){
+                    //     $('#price').text('');
+                    //     $('#oldprice').text('');
+                    //     $('#price').text(data.product.selling_price);
+                    // }else{
+                    //     $('#price').text(data.product.discount_price);
+                    //     $('#oldprice').text(data.product.selling_price);
+                    // }
+                    
+                    // //stock
+                    // if (data.product.quantity > 0) {
+                    //     $('#aviable').text('');
+                    //     $('#stockout').text('');
+                    //     $('#aviable').text('aviable');
+                    // } else {
+                    //     $('#aviable').text('');
+                    //     $('#stockout').text('');
+                    //     $('#stockout').text('stockout');
+                    // }
 
-        function quickView(id) {
-            console.log(id);
+                    
+                    // //color
+                    // $('select[name="color"]').empty();
+                    // $.each(data.color, function(key, value) {
+                    //     $('select[name="color"]').append('<option value="' + value + '">' + value +
+                    //         '</option>')
+                    // })
+                    // //size
+                    // $('select[name="size"]').empty();
+                    // $.each(data.size, function(key, value) {
+                    //     $('select[name="size"]').append('<option value="' + value + '">' + value +
+                    //         '</option>')
+                    //     if (data.size == "") {
+                    //         $('#sizeArea').hide();
+                    //     } else {
+                    //         $('#sizeArea').show();
+                    //     }
+                    // })
+                }
+            });
         }
-        
     </script>
     <script>
          function addToCard(id) {
