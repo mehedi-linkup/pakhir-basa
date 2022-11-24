@@ -125,7 +125,7 @@
                     <div class="toolbox-left">
                         <a href="#" class="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
                             btn-icon-left"><i class="w-icon-category"></i><span>Filters</span></a>
-                        <div class="toolbox-item toolbox-sort select-box text-dark">
+                        {{-- <div class="toolbox-item toolbox-sort select-box text-dark">
                             <label>Sort By :</label>
                             <select name="orderby" class="form-control">
                                 <option value="default" selected="selected">Default sorting</option>
@@ -135,17 +135,17 @@
                                 <option value="price-low">Sort by pric: low to high</option>
                                 <option value="price-high">Sort by price: high to low</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="toolbox-right">
-                        <div class="toolbox-item toolbox-show select-box">
+                        {{-- <div class="toolbox-item toolbox-show select-box">
                             <select name="count" class="form-control">
                                 <option value="9">Show 9</option>
                                 <option value="12" selected="selected">Show 12</option>
                                 <option value="24">Show 24</option>
                                 <option value="36">Show 36</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="toolbox-item toolbox-layout" id="toolbox">
                             <a href="{{ route('shop.box', ['shop_view'=>'shop box']) }}" class="icon-mode-grid btn-layout active ">
                                 <i class="w-icon-grid"></i>
@@ -163,7 +163,7 @@
                     @foreach ($product as $item)
                     <div class="product product-list product-select">
                         <figure class="product-media">
-                            <a href="product-default.html">
+                            <a href="{{ route('product.details', $item->slug) }}">
                                 <img src="{{ 'uploads/product/'.$item->image }}" alt="{{ $item->name }}" width="330"
                                     height="338" />
                             </a>
@@ -177,14 +177,14 @@
                                 <a href="shop-banner-sidebar.html">{{ @$item->category ? $item->category->name : '' }}</a>
                             </div>
                             <h4 class="product-name">
-                                <a href="product-default.html">{{ $item->name }}</a>
+                                <a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a>
                             </h4>
                             {{-- <div class="ratings-container">
                                 <div class="ratings-full">
                                     <span class="ratings" style="width: 100%;"></span>
                                     <span class="tooltiptext tooltip-top"></span>
                                 </div>
-                                <a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
+                                <a href="{{ route('product.details', $item->slug) }}" class="rating-reviews">(3 Reviews)</a>
                             </div> --}}
                             <div class="product-price">{{ $item->price }} TK</div>
                             <div class="product-desc">

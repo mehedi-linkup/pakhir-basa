@@ -35,7 +35,7 @@
                         <ul class="widget-body">
                             <li><a href="{{route('about.website')}}">About Us</a></li>
                             <li><a href="{{route('web.contact')}}">Contact Us</a></li>
-                            <li><a href="#">Order History</a></li>
+                            <li><a href="{{ route('shop.box') }}">shop</a></li>
                         </ul>
                     </div>
                 </div>
@@ -43,12 +43,10 @@
                     <div class="widget">
                         <h4 class="widget-title">My Account</h4>
                         <ul class="widget-body">
-                            <li><a href="{{route('track.order')}}">Track My Order</a></li>
                             <li><a href="{{ route('cart.list') }}">View Cart</a></li>
                             <li><a href="{{route('customer.login')}}">Sign In</a></li>
                             <li><a href="{{ route('customer.signup') }}">Register</a></li>
-                            <li><a href="#">Help</a></li>
-                            <li><a href="{{route('privacy.website')}}">Privacy Policy</a></li>
+                
                         </ul>
                     </div>
                 </div>
@@ -56,8 +54,8 @@
                     <div class="widget">
                         <h4 class="widget-title">Customer Service</h4>
                         <ul class="widget-body">
-                            <li><a href="#">Support Center</a></li>
                             <li><a href="#">Shipping</a></li>
+                            <li><a href="{{route('privacy.website')}}">Privacy Policy</a></li>
                             <li><a href="{{route('trams.website')}}">Term and Conditions</a></li>
                         </ul>
                     </div>
