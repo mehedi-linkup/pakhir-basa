@@ -269,7 +269,7 @@
                                 <button class="quantity-minus w-icon-minus"></button>
                             </div>
                         </div>
-                        <button id="QuickaddToCart" class="btn btn-primary btn-cart" onclick="addToCard({{$item->id}})">
+                        <button id="QuickaddToCart" class="btn btn-primary btn-cart" onclick="">
                             <i class="w-icon-cart"></i>
                             <span>Add to Cart</span>
                         </button>
