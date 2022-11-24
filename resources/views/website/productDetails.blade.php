@@ -16,9 +16,19 @@
                 <i class="w-icon-angle-left"></i>
             </a>
             <span class="product-nav-popup">
-                <img src="website/images/products/product-nav-prev.jpg" alt="Product" width="110"
+                <img src="{{ asset('uploads/product/'.$product->image) }}" alt="Product" width="110"
                     height="110" />
-                <span class="product-name">Soft Sound Maker</span>
+
+
+                    {{-- <?php 
+
+                        $wishCount  = $this->db->query("SELECT COUNT(*) as wishCount FROM wishlist_products WHERE customer_id = '$product->id'")->row()->wishCount;
+
+                    ?> --}}
+
+
+                    
+                <span class="product-name">{{ $product->name }}</span>
             </span>
         </li>
         <li class="product-nav-next">
@@ -26,9 +36,9 @@
                 <i class="w-icon-angle-right"></i>
             </a>
             <span class="product-nav-popup">
-                <img src="website/images/products/product-nav-next.jpg" alt="Product" width="110"
+                <img src="{{ asset('uploads/product/'.$product->image) }}" alt="Product" width="110"
                     height="110" />
-                <span class="product-name">Fabulous Sound Speaker</span>
+                <span class="product-name">{{ $product->name }}</span>
             </span>
         </li>
     </ul>
@@ -176,27 +186,6 @@
                                     </button>
                                 </div>
                             </div>
-
-                            {{-- <div class="social-links-wrapper">
-                                <div class="social-links">
-                                    <div class="social-icons social-no-color border-thin">
-                                        <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
-                                        <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
-                                        <a href="#"
-                                            class="social-icon social-pinterest fab fa-pinterest-p"></a>
-                                        <a href="#" class="social-icon social-whatsapp fab fa-whatsapp"></a>
-                                        <a href="#"
-                                            class="social-icon social-youtube fab fa-linkedin-in"></a>
-                                    </div>
-                                </div>
-                                <span class="divider d-xs-show"></span>
-                                <div class="product-link-wrapper d-flex">
-                                    <a href="#"
-                                        class="btn-product-icon btn-wishlist w-icon-heart"><span></span></a>
-                                    <a href="#"
-                                        class="btn-product-icon btn-compare btn-icon-left w-icon-compare"><span></span></a>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -209,14 +198,14 @@
                         <li class="nav-item">
                             <a href="#product-tab-specification" class="nav-link">Specification</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="#product-tab-reviews" class="nav-link">Customer Reviews (3)</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="product-tab-description">
                             <div class="row mb-4">
-                                <div class="col-md-6 mb-5">
+                                <div class="col-md-12 mb-5">
                                     <h4 class="title tab-pane-title font-weight-bold mb-2">Detail</h4>
                                     <div>
 
@@ -224,39 +213,7 @@
                                     </div>
                                 
                                 </div>
-                                <div class="col-md-6 mb-5">
-                                    <div class="banner banner-video product-video br-xs">
-                                        <figure class="banner-media">
-                                            <a href="#">
-                                                <img src="website/images/products/video-banner-610x300.jpg"
-                                                    alt="banner" width="610" height="300"
-                                                    style="background-color: #bebebe;">
-                                            </a>
-                                            <a class="btn-play-video btn-iframe"
-                                                href="website/video/memory-of-a-woman.mp4"></a>
-                                        </figure>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row cols-md-3">
-                                <div class="mb-3">
-                                    <h5 class="sub-title font-weight-bold"><span class="mr-3">1.</span>Free
-                                        Shipping &amp; Return</h5>
-                                    <p class="detail pl-5">We offer free shipping for products on orders
-                                        above 50$ and offer free delivery for all orders in US.</p>
-                                </div>
-                                <div class="mb-3">
-                                    <h5 class="sub-title font-weight-bold"><span>2.</span>Free and Easy
-                                        Returns</h5>
-                                    <p class="detail pl-5">We guarantee our products and you could get back
-                                        all of your money anytime you want in 30 days.</p>
-                                </div>
-                                <div class="mb-3">
-                                    <h5 class="sub-title font-weight-bold"><span>3.</span>Special Financing
-                                    </h5>
-                                    <p class="detail pl-5">Get 20%-50% off items over 50$ for a month or
-                                        over 250$ for a year with our special credit card.</p>
-                                </div>
+                        
                             </div>
                         </div>
                         <div class="tab-pane" id="product-tab-specification">
@@ -280,7 +237,7 @@
                             </ul>
                         </div>
                         <div class="tab-pane" id="product-tab-reviews">
-                            <div class="row mb-4">
+                            {{-- <div class="row mb-4">
                                 <div class="col-xl-4 col-lg-5 mb-4">
                                     <div class="ratings-wrapper">
                                         <div class="avg-rating-container">
@@ -416,9 +373,9 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="tab tab-nav-boxed tab-nav-outline tab-nav-center">
+                            {{-- <div class="tab tab-nav-boxed tab-nav-outline tab-nav-center">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
                                         <a href="#show-all" class="nav-link active">Show All</a>
@@ -864,7 +821,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

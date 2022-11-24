@@ -46,24 +46,15 @@
                     <div class="widget widget-collapsible">
                         <h3 class="widget-title"><span>All Categories</span></h3>
                         <ul class="widget-body filter-items search-ul">
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Babies</a></li>
-                            <li><a href="#">Beauty</a></li>
-                            <li><a href="#">Decoration</a></li>
-                            <li><a href="#">Electronics</a></li>
-                            <li><a href="#">Fashion</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Furniture</a></li>
-                            <li><a href="#">Kitchen</a></li>
-                            <li><a href="#">Medical</a></li>
-                            <li><a href="#">Sports</a></li>
-                            <li><a href="#">Watches</a></li>
+                            @foreach ($category as $item)
+                            <li><a href="#">{{ $item->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <!-- End of Collapsible Widget -->
 
                     <!-- Start of Collapsible Widget -->
-                    <div class="widget widget-collapsible">
+                    {{-- <div class="widget widget-collapsible">
                         <h3 class="widget-title"><span>Price</span></h3>
                         <div class="widget-body">
                             <ul class="filter-items search-ul">
@@ -80,7 +71,7 @@
                                     href="#" class="btn btn-primary btn-rounded">Go</a>
                             </form>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- End of Collapsible Widget -->
 
                     <!-- Start of Collapsible Widget -->
@@ -96,7 +87,7 @@
                     <!-- End of Collapsible Widget -->
 
                     <!-- Start of Collapsible Widget -->
-                    <div class="widget widget-collapsible">
+                    {{-- <div class="widget widget-collapsible">
                         <h3 class="widget-title"><span>Brand</span></h3>
                         <ul class="widget-body filter-items item-check mt-1">
                             <li><a href="#">Elegant Auto Group</a></li>
@@ -107,11 +98,11 @@
                             <li><a href="#">Skysuite Tech</a></li>
                             <li><a href="#">Sterling</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <!-- End of Collapsible Widget -->
 
                     <!-- Start of Collapsible Widget -->
-                    <div class="widget widget-collapsible">
+                    {{-- <div class="widget widget-collapsible">
                         <h3 class="widget-title"><span>Color</span></h3>
                         <ul class="widget-body filter-items item-check mt-1">
                             <li><a href="#">Black</a></li>
@@ -122,7 +113,7 @@
                             <li><a href="#">Orange</a></li>
                             <li><a href="#">Yellow</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <!-- End of Collapsible Widget -->
                 </div>
                 <!-- End of Sidebar Content -->

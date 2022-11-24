@@ -12047,6 +12047,9 @@ body .product-popup {
   .row .main-content {
     max-width: calc( 100% - 31rem );
   }
+  /* .row .main-contente {
+    max-width: calc( 100% );
+  } */
 
   .shop-sidebar.sidebar-fixed .sidebar-content {
     padding: 0 0 2rem;

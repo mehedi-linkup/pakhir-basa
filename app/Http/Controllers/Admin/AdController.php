@@ -41,16 +41,16 @@ class AdController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'title' => 'required|max:100',
-            'position' => 'required',
+            'header' => 'required',
             'image' => 'required|max:1000||Image|mimes:jpg,png,jpeg,bmp',
             'ip_address' => 'max:15'
         ]);
 
         try {
             $ad = new Ad();
+            $ad->header = $request->header;
             $ad->title = $request->title;
-            $ad->position = $request->position;
+            $ad->discount = $request->discount;
             $ad->image = $this->imageUpload($request, 'image', 'uploads/ad');
             $ad->save_by = Auth::user()->id;
             $ad->ip_address = $request->ip();
@@ -99,7 +99,7 @@ class AdController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'title' => 'required|max:100',
+            'header' => 'required|max:191',
             'image' => 'Image|mimes:jpg,png,jpeg,bmp',
             'ip_address' => 'max:15'
         ]);
@@ -115,8 +115,9 @@ class AdController extends Controller
             $adImage = $ad->image;
         }
 
+        $ad->header = $request->header;
         $ad->title = $request->title;
-        $ad->position = $request->position;
+        $ad->discount = $request->discount;
         $ad->updated_by = Auth::user()->user_id;;
         $ad->ip_address = $request->ip();
         $ad->image = $adImage;

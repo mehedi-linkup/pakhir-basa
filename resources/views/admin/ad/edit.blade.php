@@ -19,6 +19,17 @@
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-3">
+                                <label>Header</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" name="header" value="{{ $ad->header }}" class="form-control  @error('header') is-invalid @enderror">
+                                @error('header')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-3">
                                 <label>Title</label>
                             </div>
                             <div class="col-md-9">
@@ -30,17 +41,14 @@
                                 @enderror
                             </div>
                             <div class="col-md-3">
-                                <label>Ad Position & Ad Size *</label>
+                                <label>Discount</label>
                             </div>
                             <div class="col-md-9">
-                                <select name="position" id="" class="form-control form-control-sm @error('position') is-invalid @enderror">
-                                    <option value=" ">Select Ad & Position & Size </option>
-                                    <option value="5" {{ $ad->position == 'Full-(785*180)' ? 'selected' : '' }}>Full-(785*180)</option>
-                                </select>
-                                @error('position')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <input type="number" name="discount" value="{{ $ad->discount }}" class="form-control  @error('discount') is-invalid @enderror">
+                                @error('discount')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                         </div>

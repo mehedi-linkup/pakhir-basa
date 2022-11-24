@@ -17,6 +17,16 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-12 mb-2">
+                                    <label for="hrader"> Header <span class="text-danger">*</span> </label>
+                                        <input type="text" name="header" value="{{ old('header') }}"  class="form-control form-control-sm shadow-none @error('header') is-invalid @enderror" id="name" placeholder="Enter header">
+                                     
+                                    @error('header')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 mb-2">
                                     <label for="name"> Title <span class="text-danger">*</span> </label>
                                     <input type="text" name="title" value="{{ old('title') }}"  class="form-control form-control-sm shadow-none @error('title') is-invalid @enderror" id="name" placeholder="Enter Title">
                                         @error('title')
@@ -25,18 +35,17 @@
                                             </span>
                                         @enderror
                                 </div>
+                           
                                 <div class="col-md-12 mb-2">
-                                    <label for="position"> Ad Position & Size <span class="text-danger">*</span> </label>
-                                    <select name="position" id="" class="form-control form-control-sm @error('position') is-invalid @enderror">
-                                        <option value=" ">Select Ad & Position & Size </option>
-                                        <option value="5">Full-Big-785*180</option>
-                                    </select>
-                                    @error('position')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <label for="name"> Discount <span class="text-danger">*</span> </label>
+                                    <input type="number" name="discount" value="{{ old('discount') }}"  class="form-control form-control-sm shadow-none @error('discount') is-invalid @enderror" id="name" placeholder="Enter Discount Rate">
+                                        @error('discount')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                 </div>
+                            
                                 <div class="col-md-12">
                                     <label for="image"> Image</label>
                                             <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" type="file" size="100" name="image" onchange="readURL(this);">
@@ -66,8 +75,9 @@
                         <thead class="text-center bg-light">
                             <tr>
                                 <th>SL</th>
+                                <th>Hrader</th>
                                 <th>Title</th>
-                                <th>Ad Position</th>
+                                <th>Discount</th>
                                 <th>image</th> 
                                 <th>Status</th>
                                 <th>Action</th>
@@ -77,8 +87,9 @@
                             @foreach ($ads as $key=> $item)
                             <tr>
                                 <td class="text-center">{{ $key+1 }}</td>
+                                <td>{{$item->header}}</td>
                                 <td>{{ $item->title }}</td>
-                                <td>{{$item->position}}</td>
+                                <td>{{$item->discount}}</td>
                                 <td class="text-center"><img src="{{ asset($item->image) }}" class="tbl-image" alt=""></td>
                                 <td class="text-center">
                                     @if ($item->status == 'd')

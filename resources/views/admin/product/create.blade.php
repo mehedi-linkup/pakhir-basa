@@ -125,7 +125,7 @@
                                                 <div class="col-md-8 my-1">
                                                     <select
                                                         class="js-example-basic-multiple form-control my-select my-form-control @error('size_id') is-invalid @enderror "
-                                                        data-live-search="true" name="size_id" multiple >
+                                                        data-live-search="true" name="size_id[]" multiple >
                                                         <option data-tokens="ketchup mustard" value="">Select Size</option>
                                                         @foreach ($size as $item)
                                                             <option value="{{ $item->id }}" >{{ $item->name }}
@@ -144,7 +144,7 @@
                                                 <div class="col-md-8 my-1">
                                                     <select
                                                         class="js-example-basic-multiple form-control my-select my-form-control @error('color_id') is-invalid @enderror"
-                                                        data-live-search="true" name="color_id" multiple>
+                                                        data-live-search="true" name="color_id[]" multiple>
                                                         <option data-tokens="ketchup mustard" value="">Select Color</option>
                                                         @foreach ($color as $item)
                                                             <option value="{{ $item->id }}">{{ $item->name }}
@@ -477,8 +477,61 @@
             }
         }
     </script>
+     {{-- <script>
+        $(document).ready(function() {
+            $("select[name='category_id']").on('change', function() {
+                let category_id = $(this).val();
+                $.ajax({
+                    url: "{{ url('/product/subcategory/list') }}/" + category_id,
+                    dataType: 'JSON',
+                    method: 'GET',
+                    success: function(res) {
+                        $('#sub_category_id').empty();
+                        $.each(res, function(key, value) {
+                            $('#sub_category_id').append('<option value=" ' + value.id +
+                                ' ">' + value.name + '</option>');
+                        });
+
+                    }
+                })
+
+
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("select[name='sub_category_id']").on('change', function() {
+                let sub_category_id = $(this).val();
+                sub_category_id = parseInt(sub_category_id);
+                $.ajax({
+                    url: location.origin + "/product/childcategory/list/" + sub_category_id,
+                    dataType: 'JSON',
+                    method: 'GET',
+                    beforeSend: () => {
+                        $('#child_category_id').html("");
+                    },
+                    success: function(res) {
+                      console.log(res);
+                        $.each(res, function(key, value) {
+                            $('#child_category_id').append('<option value=" ' + value
+                                .id + ' ">' + value.name + '</option>');
+                        });
+
+                    }
+                })
+            });
+        });
+    </script> --}}
+    
 
     <script>
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     }
+        //     }); 
+
         $(document).ready(function() {
             $("select[name='category_id']").on('change', function() {
                 var category_id = $(this).val();
@@ -500,12 +553,16 @@
 
         $(document).ready(function() {
             $("select[name='sub_category_id']").on('change', function() {
-                var subcategory_id = $(this).val();
+                var sub_category_id = $(this).val();
                 $.ajax({
-                    url: "{{ url('product/childcategory/list/') }}/" + subcategory_id,
-                    dataType: "json",
-                    method: "GET",
+                    url: location.origin + "/product/childcategory/list/" + sub_category_id,
+                    dataType: 'JSON',
+                    method: 'GET',
+                    beforeSend: () => {
+                        $('#child_category_id').html("");
+                    },
                     success: function(data) {
+                        console.log(data);
                         $('#child_category_id').empty();
                         $.each(data, function(key, value) {
                             $('#child_category_id').append('<option value="' + value.id +
