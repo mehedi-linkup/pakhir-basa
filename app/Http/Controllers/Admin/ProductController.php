@@ -70,16 +70,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $request->validate([
-            'name' => 'required|max:100',
-            'category_id' => 'required',
-            // 'sub_category_id' => 'required',
-            'price' => 'required|max:10|regex:/^\d+(\.\d{1,2})?$/',
-            'image' => 'required|image|mimes:jpg,png,gif,bmp',
-            'otherImage' => 'image|mimes:jpg,png,gif,bmp',
-            'purchase' => 'required|min:1|max:10',
-        ]);
-       
+        // $request->validate([
+        //     'name' => 'required|max:100',
+        //     'category_id' => 'required',
+        //     // 'sub_category_id' => 'required',
+        //     'price' => 'required|max:10|regex:/^\d+(\.\d{1,2})?$/',
+        //     'image' => 'required|image|mimes:jpg,png,gif,bmp',
+        //     'otherImage' => 'image|mimes:jpg,png,gif,bmp',
+        //     'purchase' => 'required|min:1|max:10',
+        // ]);
+        // return $request;
         $slug = Str::slug($request->name . '-' . time());
         $i = 0;
         while (true) {
@@ -100,10 +100,9 @@ class ProductController extends Controller
             $productSize = implode(',', $request->size_id);
             $product->size_id = $productSize;
 
-            $productColor = implode(',', $request->color_id);
-            $product->color_id = $productColor;
-
+            
             $product->name = $request->name;
+            $product->color_id = $request->color_id;
             $product->slug = $slug;
             $product->code = $productCode;
             $product->category_id = $request->category_id;
@@ -170,8 +169,8 @@ class ProductController extends Controller
         }
         catch (\Throwable $th) {
             DB::rollBack();
-            Session::flash('faild', 'Product added faild');
-            // return back();
+            // Session::flash('faild', 'Product added faild');
+            // // return back();
             throw $th;
         }
         
