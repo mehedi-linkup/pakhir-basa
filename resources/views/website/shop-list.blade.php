@@ -78,10 +78,9 @@
                     <div class="widget widget-collapsible">
                         <h3 class="widget-title"><span>Size</span></h3>
                         <ul class="widget-body filter-items item-check mt-1">
-                            <li><a href="#">Extra Large</a></li>
-                            <li><a href="#">Large</a></li>
-                            <li><a href="#">Medium</a></li>
-                            <li><a href="#">Small</a></li>
+                            @foreach ($size as $item)
+                            <li><a href="#">{{ $item->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <!-- End of Collapsible Widget -->

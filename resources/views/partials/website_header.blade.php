@@ -128,7 +128,7 @@
                             <ul class="menu vertical-menu category-menu">
                                 @foreach ($category as $item)
                                 <li>
-                                    <a href="{{route('shop.banner')}}">{{ $item->name }} </a>
+                                    <a href="{{route('categoryWise.list',$item->id)}}">{{ $item->name }} </a>
                                     @if(count($item->SubCategory) > 0)
                                     <ul class="megamenu">
                                         @foreach ($item->SubCategory as $item1)

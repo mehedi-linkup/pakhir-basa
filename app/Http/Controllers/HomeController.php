@@ -74,13 +74,23 @@ class HomeController extends Controller
 
 
 
-    public function CategoryWise($slug)
+    public function CategoryWise(Request $request, $slug)
     {
-        $centerBigAds = Ad::where('status', 'a')->where('position', '4')->inRandomOrder()->limit(1)->get();
-        $category_list = Category::where('slug', $slug)->first();
-        $categories = Category::all();
-        $category_wise_product = $category_list->product()->inRandomOrder()->get();
-        return view('website.shop-boxed', compact('categories', 'category_wise_product', 'centerBigAds', 'category_list'));
+        $product = Product::latest()->paginate(12);
+        $size = Size::latest()->get();
+        $color = Color::latest()->get();
+        if ($request->query('shop_view') == 'shop list sidebar') {
+            return view('website.shop-list-sidebar', compact('product', 'size', 'color'));
+        } else if ($request->query('shop_view') == 'shop list') {
+            return view('website.shop-list', compact('product', 'size', 'color'));
+        } else {
+            return view('website.shop-boxed', compact('product', 'size', 'color'));
+        }
+        // $centerBigAds = Ad::where('status', 'a')->where('position', '4')->inRandomOrder()->limit(1)->get();
+        // $category_list = Category::where('slug', $slug)->first();
+        // $categories = Category::all();
+        // $category_wise_product = $category_list->product()->inRandomOrder()->get();
+        // return view('website.shop-boxed', compact('categories', 'category_wise_product', 'centerBigAds', 'category_list'));
     }
     public function singleSubCategory($slug)
     {
