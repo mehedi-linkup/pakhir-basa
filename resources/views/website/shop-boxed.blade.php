@@ -166,7 +166,7 @@
                             <figure class="product-media">
                                 <a href="{{ route('product.details', $item->slug) }}">
                                     <img src="{{ asset('uploads/product/'.$item->image) }}" alt="{{ $item->name }}" width="300"
-                                        height="300" />
+                                        height="338" />
                                 </a>
                                 <div class="product-action-horizontal">
                                     <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"

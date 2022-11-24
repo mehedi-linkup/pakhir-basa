@@ -103,4 +103,7 @@ button[name=track] {
     -ms-border-radius: 35px;
     -o-border-radius: 35px;
 }
+.product-media img {
+    height: 300px !important;
+}
 
