@@ -66,6 +66,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label>Name *</label>
+                                    <input type="hidden" name="customer_id" value="{{ @Auth::guard('customer')->user()->id }}">
                                     <input type="text" class="form-control form-control-md" name="name" value="{{ @Auth::guard('customer')->user()->name }}"
                                       placeholder="Enter Name" required>
 
@@ -131,7 +132,7 @@
                         </div>
                         
                         <div class="form-group mt-3">
-                            <label for="order-notes">Address *</label>
+                            <label for="address">Address *</label>
                             <textarea class="form-control mb-0" id="address" name="address" cols="30"
                                 rows="4"
                                 placeholder="Enter Address">{{ @Auth::guard('customer')->user()->address }}</textarea>
@@ -218,8 +219,8 @@
                             </div>
                         </div> --}}
                         <div class="form-group mt-3">
-                            <label for="order-notes">Order notes (optional)</label>
-                            <textarea class="form-control mb-0" id="order-notes" name="order-notes" cols="30"
+                            <label for="order-note">Order notes (optional)</label>
+                            <textarea class="form-control mb-0" id="order-note" name="order-note" cols="30"
                                 rows="4"
                                 placeholder="Notes about your order, e.g special notes for delivery"></textarea>
                         </div>

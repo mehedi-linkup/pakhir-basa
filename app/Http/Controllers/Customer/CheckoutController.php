@@ -213,11 +213,8 @@ class CheckoutController extends Controller
 
     public function orderStore(Request $request)
     {
-        return $request;
         if (Auth::guard('customer')->check()){
-           
             $sum = 0;
-            
             $last_invoice_no =  Order::whereDate('created_at', today())->latest()->take(1)->pluck('invoice_no');
             if(count($last_invoice_no) > 0){
                 $invoice_no = $last_invoice_no[0] + 1;
@@ -225,19 +222,23 @@ class CheckoutController extends Controller
                 $invoice_no = date('ymd') .'000001';
             }
             $area = Area::where('id',$request->area_id)->first();
-            $area_amount = $area->amount;
+            if($area) {
+                $area_amount = $area->amount;
+            } else {
+                $area_amount = "";
+            }
             // dd($area_amount);
             try {
                 DB::beginTransaction();
                 $order = new Order();
                 $order->invoice_no = $invoice_no;
                 $order->customer_id = Auth::guard('customer')->user()->id;
-                $order->customer_name = $request->customer_name;
-                $order->customer_mobile = $request->customer_mobile;
-                $order->customer_email = $request->customer_email;
+                $order->customer_name = $request->name;
+                $order->customer_mobile = $request->phone;
+                $order->customer_email = $request->email;
                 $order->area_id = $request->area_id;
-                $order->shipping_address = $request->shipping_address;
-                $order->billing_address = $request->billing_address;
+                $order->shipping_address = $request->address;
+                // $order->billing_address = $request->billing_address;
                 $order->shipping_cost = $area_amount;
                 $order->total_amount = $request->total_amount + $area_amount;
                 $order->order_note = $request->order_note;
@@ -249,7 +250,7 @@ class CheckoutController extends Controller
 
                 $offer_product = Product::where('is_offer','1')->get()->pluck('id')->toArray();
                 // dd($offer_product);
-                $exist_order_tables =OrderDetails::where('customer_id',Auth::guard('customer')->user()->id)->whereDate('created_at', Carbon::today())->get()->pluck('product_id')->toArray();
+                $exist_order_tables =OrderDetails::where('customer_id', Auth::guard('customer')->user()->id)->whereDate('created_at', Carbon::today())->get()->pluck('product_id')->toArray();
             
                 foreach (\Cart::getContent() as $value) {
                 
@@ -272,7 +273,6 @@ class CheckoutController extends Controller
                                 $orderDetails->total_price     = $price;
                                 $orderDetails->save();
                                 $sum += $price;
-    
                                 $inventory           = Inventory::where('product_id',$value->id)->first();
                                 $inventory->sales    = $value->quantity;
                                 $inventory->purchage = $inventory->purchage - $value->quantity;
@@ -345,18 +345,12 @@ class CheckoutController extends Controller
                                     $inventory->purchage  = $inventory->purchage - $value->quantity;
                                     $inventory->sales     = $inventory->sales + $value->quantity;
                                     $inventory->save();
-    
                                     // dd('offer 1 ');
                                     continue;
                                 }
-                              
-                                
-                            
                             }
                         }
-                    
                     }
-                    
                             $id            = $value->id;
                             $product       = Product::with('inventory')->where('id',$id)->first();
                            
@@ -419,14 +413,7 @@ class CheckoutController extends Controller
                     \Cart::clear();
                     return redirect()->route('home');
                     
-                }
-
-               
-                // if($sum<1){
-                //     DB::commit();
-                // }
-             
-               
+                } 
 
             } 
             catch (Exception $e) {
