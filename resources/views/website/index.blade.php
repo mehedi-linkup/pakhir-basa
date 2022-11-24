@@ -165,7 +165,7 @@
                                                 <span class="ratings" style="width: 60%;"></span>
                                                 <span class="tooltiptext tooltip-top"></span>
                                             </div>
-                                            {{-- <a href="product-default.html" class="rating-reviews">(3
+                                            {{-- <a href="{{ route('product.details', $item->slug) }}" class="rating-reviews">(3
                                                 reviews)</a> --}}
                                         </div>
                                         <div class="product-price">
@@ -215,7 +215,7 @@
                             <span
                                 class="text-dark bg-white font-weight-bold ls-50 pl-1 pr-1 d-inline-block">{{$item->title}}</p>
                     </div>
-                    <a href="shop-banner-sidebar.html"
+                    <a href="{{route('shop.box')}}"
                         class="btn btn-white btn-outline btn-rounded btn-icon-right mb-3">Shop Now<i
                             class="w-icon-long-arrow-right"></i></a>
                 </div>

@@ -17,7 +17,7 @@
             @foreach ($search_result as $item)
             <div class="product product-list">
                 <figure class="product-media">
-                    <a href="product-default.html">
+                    <a href="{{ route('product.details', $item->slug) }}">
                         <img src="{{ asset('uploads/product/'.$item->image) }}" alt="{{ $item->name }}" width="330"
                             height="338" />
                     </a>
@@ -31,14 +31,14 @@
                         <a href="shop-banner-sidebar.html">{{ @$item->category ? $item->category->name : '' }}</a>
                     </div>
                     <h4 class="product-name">
-                        <a href="product-default.html">{{ $item->name }}</a>
+                        <a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a>
                     </h4>
                     {{-- <div class="ratings-container">
                         <div class="ratings-full">
                             <span class="ratings" style="width: 100%;"></span>
                             <span class="tooltiptext tooltip-top"></span>
                         </div>
-                        <a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
+                        <a href="{{ route('product.details', $item->slug) }}" class="rating-reviews">(3 Reviews)</a>
                     </div> --}}
                     <div class="product-price">{{ $item->price }}</div>
                     <ul class="product-desc">

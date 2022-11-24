@@ -142,17 +142,17 @@
 
                             <hr class="product-divider">
 
-                            <div class="product-form product-variation-form product-color-swatch">
+                            {{-- <div class="product-form product-variation-form product-color-swatch">
                                 <label>Color:</label>
                                 <div class="product-variations">{{ optional($product->color)->name }}</div>
-                                {{-- <div class="d-flex align-items-center product-variations">
+                                <div class="d-flex align-items-center product-variations">
                                     <a href="#" class="color" style="background-color: #ffcc01"></a>
                                     <a href="#" class="color" style="background-color: #ca6d00;"></a>
                                     <a href="#" class="color" style="background-color: #1c93cb;"></a>
                                     <a href="#" class="color" style="background-color: #ccc;"></a>
                                     <a href="#" class="color" style="background-color: #333;"></a>
-                                </div> --}}
-                            </div>
+                                </div>
+                            </div> --}}
                             <div class="product-form product-variation-form product-size-swatch">
                                 <label class="mb-1">Size:</label>
                                 <div class="product-variations">
@@ -180,7 +180,7 @@
                                             <button class="quantity-minus w-icon-minus"></button>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-cart">
+                                    <button class="btn btn-primary btn-cart" onclick="addToCard({{$product->id}})">
                                         <i class="w-icon-cart"></i>
                                         <span>Add to Cart</span>
                                     </button>
@@ -852,7 +852,7 @@
                          @foreach ($related as $item)
                          <div class="swiper-slide product">
                             <figure class="product-media">
-                                <a href="product-default.html">
+                                <a href="{{ route('product.details', $item->slug) }}">
                                     <img src="{{ asset('uploads/product/'.$item->image) }}" alt="Product"
                                         width="300" height="338" />
                                 </a>
@@ -867,13 +867,13 @@
                                 </div>
                             </figure>
                             <div class="product-details">
-                                <h4 class="product-name"><a href="product-default.html">{{$item->name}}</a></h4>
+                                <h4 class="product-name"><a href="{{ route('product.details', $item->slug) }}">{{$item->name}}</a></h4>
                                 <div class="ratings-container">
                                     <div class="ratings-full">
                                         <span class="ratings" style="width: 100%;"></span>
                                         <span class="tooltiptext tooltip-top"></span>
                                     </div>
-                                    <a href="product-default.html" class="rating-reviews">(3 reviews)</a>
+                                    <a href="{{ route('product.details', $item->slug) }}" class="rating-reviews">(3 reviews)</a>
                                 </div>
                                 <div class="product-pa-wrapper">
                                     <div class="product-price">{{$item->price}}Tk</div>

@@ -77,14 +77,14 @@
                             @foreach ($cartAll as $item)
                                 <div class="product product-cart">
                                     <div class="product-detail">
-                                        <a href="product-default.html" class="product-name">{{ $item->name }}</a>
+                                        <a href="#" class="product-name">{{ $item->name }}</a>
                                         <div class="price-box">
                                             <span class="product-quantity">{{ $item->quantity }}</span>
                                             <span class="product-price">{{ $item->price }}TK</span>
                                         </div>
                                     </div>
                                     <figure class="product-media">
-                                        <a href="product-default.html">
+                                        <a href="#">
                                             <img src="{{ asset('uploads/product/thumbnail/'.$item->attributes->image) }}" alt="{{ $item->attributes->slug }}" height="84"
                                                 width="94" />
                                         </a>
@@ -185,3 +185,88 @@
         </div>
     </div>
 </header>
+
+
+
+
+<!-- Start of Mobile Menu -->
+<div class="mobile-menu-wrapper">
+    <div class="mobile-menu-overlay"></div>
+    <!-- End of .mobile-menu-overlay -->
+
+    <a href="#" class="mobile-menu-close"><i class="close-icon"></i></a>
+    <!-- End of .mobile-menu-close -->
+
+    <div class="mobile-menu-container scrollable">
+        <form action="#" method="get" class="input-wrapper">
+            <input type="text" class="form-control" name="search" autocomplete="off" placeholder="Search"
+                required />
+            <button class="btn btn-search" type="submit">
+                <i class="w-icon-search"></i>
+            </button>
+        </form>
+        <!-- End of Search Form -->
+        <div class="tab">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a href="#main-menu" class="nav-link active">Main Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#categories" class="nav-link">Categories</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="main-menu">
+                <ul class="mobile-menu">
+                    <li><a href="{{route('home')}}">Home</a></li>
+                    <li>
+                        <a href="{{ route('shop.box') }}">Shop</a>
+                    </li>
+                    <li class="">
+                        <a href="{{route('about.website')}}">About Us</a>
+                        <ul>
+
+                            <li><a href="{{route('privacy.website')}}">Privacy Policy </a></li>
+                            <li><a href="{{route('trams.website')}}">Terms & Condition</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{route('web.contact')}}">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane" id="categories">
+                <ul class="mobile-menu">
+                    @foreach ($category as $item)
+                                <li>
+                                    <a href="{{route('categoryWise.list',$item->id)}}">{{ $item->name }} </a>
+                                    @if(count($item->SubCategory) > 0)
+                                    <ul class="megamenu">
+                                        @foreach ($item->SubCategory as $item1)
+                                        <li>
+                                            <a class="menu-title" href="#">{{ $item1->name }}</a>
+                                            <hr class="divider">
+                                            @php
+                                               $childcategory = \App\Models\ChildCategory::where('subcategory_id', $item1->id)->get();
+                                            @endphp
+                                            @if(count($childcategory) > 0)
+                                            <ul>
+                                                @foreach ($childcategory as $item2)
+                                                <li><a href="{{route('shop.banner')}}">{{ $item2->name }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                            @endif
+                                        </li>
+                                   
+                                        @endforeach
+                                    </ul> 
+                                    @endif
+                                </li> 
+                                @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Mobile Menu -->
