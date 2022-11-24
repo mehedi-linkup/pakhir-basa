@@ -119,7 +119,7 @@ class CheckoutController extends Controller
     //                                 if($item->id == $value->id){
     //                                 $id = $value->id;
     //                                 $product = Product::with('inventory')->where('id',$id)->first();
-    //                                 $stock = $product->inventory->purchage;
+    //                                 $stock = $product->inventory->purchase;
     //                                 if($stock >= $value->quantity){
                                         
     //                                     $item['attributes']['sum'] = $discount_price;
@@ -139,7 +139,7 @@ class CheckoutController extends Controller
     //                                 if($item->id == $value->id){
     //                                     $id = $value->id;
     //                                     $product = Product::with('inventory')->where('id',$id)->first();
-    //                                     $stock = $product->inventory->purchage;
+    //                                     $stock = $product->inventory->purchase;
     //                                     if($stock >= $value->quantity){
     //                                         $item['attributes']['sum'] += $second_price;
     //                                         $item['attributes']['exist_qty'] = $exist_qty;
@@ -163,7 +163,7 @@ class CheckoutController extends Controller
     //                                 if($item->id == $value->id){
     //                                     $id = $value->id;
     //                                     $product = Product::with('inventory')->where('id',$id)->first();
-    //                                     $stock = $product->inventory->purchage;
+    //                                     $stock = $product->inventory->purchase;
     //                                     if($stock >= $value->quantity){
     //                                         $item['attributes']['sum'] = $price;
     //                                         $item['attributes']['offer_price'] = $price;
@@ -214,219 +214,219 @@ class CheckoutController extends Controller
 
     public function orderStore(Request $request)
     {
-        if (Auth::guard('customer')->check()){
-            $sum = 0;
-            $last_invoice_no =  Order::whereDate('created_at', today())->latest()->take(1)->pluck('invoice_no');
-            if(count($last_invoice_no) > 0){
-                $invoice_no = $last_invoice_no[0] + 1;
-            } else {
-                $invoice_no = date('ymd') .'000001';
-            }
-            $area = Area::where('id',$request->area_id)->first();
-            if($area) {
-                $area_amount = $area->amount;
-            } else {
-                $area_amount = "";
-            }
-            // dd($area_amount);
-            try {
-                DB::beginTransaction();
-                $order = new Order();
-                $order->invoice_no = $invoice_no;
-                $order->customer_id = Auth::guard('customer')->user()->id;
-                $order->customer_name = $request->name;
-                $order->customer_mobile = $request->phone;
-                $order->customer_email = $request->email;
-                $order->area_id = $request->area_id;
-                $order->shipping_address = $request->address;
-                // $order->billing_address = $request->billing_address;
-                $order->shipping_cost = $area_amount;
-                $order->total_amount = $request->total_amount + $area_amount;
-                $order->order_note = $request->order_note;
-                $order->delivery_date = $request->delivery_date;
-                $order->thana_id = $request->thana_id;
-                $order->time_id = $request->time_id;
-                $order->ip_address = $request->ip();
-                $order->save();
+        $request->validate([
+            'thana_id' => 'required',
+            'area_id' => 'required',
+            'ip_address' => 'max:15'
+        ]);
 
-                $offer_product = Product::where('is_offer','1')->get()->pluck('id')->toArray();
-                // dd($offer_product);
+        $sum = 0;
+        $last_invoice_no =  Order::whereDate('created_at', today())->latest()->take(1)->pluck('invoice_no');
+        if(count($last_invoice_no) > 0){
+            $invoice_no = $last_invoice_no[0] + 1;
+        } else {
+            $invoice_no = date('ymd') .'000001';
+        }
+        $area = Area::where('id',$request->area_id)->first();
+        if($area) {
+            $area_amount = $area->amount;
+        } else {
+            $area_amount = "";
+        }
+        try {
+            DB::beginTransaction();
+            $order = new Order();
+            $order->invoice_no = $invoice_no;
+            $order->customer_id = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : '';
+            $order->customer_name = $request->name;
+            $order->customer_mobile = $request->phone;
+            $order->customer_email = $request->email;
+            $order->area_id = $request->area_id;
+            // $order->shipping_address = $request->address;
+            $order->billing_address = $request->address;
+            $order->shipping_cost = $area_amount;
+            $order->total_amount = $request->total_amount + $area_amount;
+            $order->order_note = $request->order_note;
+            $order->delivery_date = $request->delivery_date;
+            $order->thana_id = $request->thana_id;
+            $order->time_id = $request->time_id;
+            $order->ip_address = $request->ip();
+            $order->save();
+
+            $offer_product = Product::where('is_offer','1')->get()->pluck('id')->toArray();
+            // dd($offer_product);
+            if(Auth::guard('customer')->user()) {
                 $exist_order_tables =OrderDetails::where('customer_id', Auth::guard('customer')->user()->id)->whereDate('created_at', Carbon::today())->get()->pluck('product_id')->toArray();
-            
-                foreach (\Cart::getContent() as $value) {
-                
-                    if(in_array($value->id, $offer_product)){
+            }
+        
+            foreach (\Cart::getContent() as $value) {
+                if(in_array($value->id, $offer_product)){
+                    
+                    if(in_array($value->id, $exist_order_tables)) {
+                        $id = $value->id;
+                        $product = Product::with('inventory')->where('id',$id)->first();
                         
-                        if(in_array($value->id,$exist_order_tables)){
-                            $id = $value->id;
-                            $product = Product::with('inventory')->where('id',$id)->first();
-                           
-                            $stock = $product->inventory->purchage;
-                            if($stock >= $value->quantity){
-                                $price = $value->price* $value->quantity;
-                                $orderDetails                  = new OrderDetails();
-                                $orderDetails->order_id        = $order->id;
-                                $orderDetails->product_id      = $value->id;
-                                $orderDetails->product_name    = $value->name;
-                                $orderDetails->customer_id     = Auth::guard('customer')->user()->id;
-                                $orderDetails->price           = $value->price;
-                                $orderDetails->quantity        = $value->quantity;
-                                $orderDetails->total_price     = $price;
-                                $orderDetails->save();
-                                $sum += $price;
-                                $inventory           = Inventory::where('product_id',$value->id)->first();
-                                $inventory->sales    = $value->quantity;
-                                $inventory->purchage = $inventory->purchage - $value->quantity;
-                                $inventory->sales    = $inventory->sales + $value->quantity;
-                                $inventory->save();
-                                continue;
-                            }
-                        }
-                        else{
-                            // dd('nai');
-                            $id = $value->id;
-                            $product = Product::with('inventory')->where('id',$id)->first();
-                       
-                             $stock = $product->inventory->purchage;
-                            if($stock + 1 > $value->quantity){
-                                if($value->quantity >1){
-                                    $discount_product = Product::where('id',$value->id)->first();
-                                    $discount = $value->price/100*$discount_product->discount;
-                                    $discount_price               = $discount_product->price - $discount;
-                                    $exist_qty                    = $value->quantity - 1;
-                                    $second_price                 = $value->price * $exist_qty;
-                                    $price                        = $discount_price + $second_price;
-                                    $orderDetails                 = new OrderDetails();
-                                    $orderDetails->order_id       = $order->id;
-                                    $orderDetails->product_id     = $value->id;
-                                    $orderDetails->product_name   = $value->name;
-                                    $orderDetails->customer_id    = Auth::guard('customer')->user()->id;
-                                    $orderDetails->price          = $value->price;
-                                    $orderDetails->offer_price    = $value->attributes->offer_price;
-                                    $orderDetails->offer_quantity = $value->attributes->quantity;
-                                    $orderDetails->quantity       = $value->quantity;
-                                    $orderDetails->total_price    = $price ;
-                                    $orderDetails->save();
-                                    $inventory                    = Inventory::where('product_id',$value->id)->first();
-                                    $inventory->sales             = $value->quantity;
-                                    $inventory->purchage          = $inventory->purchage - $value->quantity;
-                                    $inventory->sales             = $inventory->sales + $value->quantity;
-                                    $inventory->save();
-                                    $sum += $price;
-                                    continue;
-                                    //  dd('offer 1 er beshi');
-                            }
-                            
-                                
-                            
-                            }else{
-                                // dd('1 order ache');
-                                $id = $value->id;
-                                $product = Product::with('inventory')->where('id',$id)->first();
-                               
-                                   $stock = $product->inventory->purchage;
-                                if($stock >= $value->quantity){
-                                    $discount_product            = Product::where('id',$value->id)->first();
-                                    $discount                    = $value->price/100*$discount_product->discount;
-                                    $price                       = $discount_product->price - $discount;
-                                    $orderDetails                = new OrderDetails();
-                                    $orderDetails->order_id      = $order->id;
-                                    $orderDetails->product_id    = $value->id;
-                                    $orderDetails->product_name  = $value->name;
-                                    $orderDetails->customer_id   = Auth::guard('customer')->user()->id;
-                                    $orderDetails->offer_price   = $value->attributes->offer_price;
-                                    $orderDetails->price         = $value->price;
-                                    $orderDetails->quantity      = $value->quantity;
-                                    $orderDetails->offer_quantity= $value->attributes->quantity;
-                                    $orderDetails->total_price   = $price;
-                                    $orderDetails->save();
-                                    $sum += $price;
-                                    $inventory            = Inventory::where('product_id',$value->id)->first();
-                                    $inventory->sales     = $value->quantity;
-                                    $inventory->purchage  = $inventory->purchage - $value->quantity;
-                                    $inventory->sales     = $inventory->sales + $value->quantity;
-                                    $inventory->save();
-                                    // dd('offer 1 ');
-                                    continue;
-                                }
-                            }
+                        $stock = $product->inventory->purchase;
+                        if($stock >= $value->quantity) {
+                            $price = $value->price * $value->quantity;
+                            $orderDetails                  = new OrderDetails();
+                            $orderDetails->order_id        = $order->id;
+                            $orderDetails->product_id      = $value->id;
+                            $orderDetails->product_name    = $value->name;
+                            $orderDetails->customer_id     = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : '';
+                            $orderDetails->price           = $value->price;
+                            $orderDetails->quantity        = $value->quantity;
+                            $orderDetails->total_price     = $price;
+                            $orderDetails->save();
+                            $sum += $price;
+                            $inventory           = Inventory::where('product_id',$value->id)->first();
+                            $inventory->sales    = $value->quantity;
+                            $inventory->purchase = $inventory->purchase - $value->quantity;
+                            $inventory->sales    = $inventory->sales + $value->quantity;
+                            $inventory->save();
+                            continue;
                         }
                     }
-                            $id            = $value->id;
-                            $product       = Product::with('inventory')->where('id',$id)->first();
-                           
-                            $stock         = $product->inventory->purchage;
+                    else{
+                        // dd('nai');
+                        $id = $value->id;
+                        $product = Product::with('inventory')->where('id',$id)->first();
+                    
+                            $stock = $product->inventory->purchase;
+                        if($stock + 1 > $value->quantity){
+                            if($value->quantity >1){
+                                $discount_product = Product::where('id',$value->id)->first();
+                                $discount = $value->price / 100 * $discount_product->discount;
+                                $discount_price = $discount_product->price - $discount;
+                                $exist_qty                    = $value->quantity - 1;
+                                $second_price                 = $value->price * $exist_qty;
+                                $price                        = $discount_price + $second_price;
+                                $orderDetails                 = new OrderDetails();
+                                $orderDetails->order_id       = $order->id;
+                                $orderDetails->product_id     = $value->id;
+                                $orderDetails->product_name   = $value->name;
+                                $orderDetails->customer_id    = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : '';
+                                $orderDetails->price          = $value->price;
+                                $orderDetails->offer_price    = $value->attributes->offer_price;
+                                $orderDetails->offer_quantity = $value->attributes->quantity;
+                                $orderDetails->quantity       = $value->quantity;
+                                $orderDetails->total_price    = $price ;
+                                $orderDetails->save();
+                                $inventory                    = Inventory::where('product_id',$value->id)->first();
+                                $inventory->sales             = $value->quantity;
+                                $inventory->purchase          = $inventory->purchase - $value->quantity;
+                                $inventory->sales             = $inventory->sales + $value->quantity;
+                                $inventory->save();
+                                $sum += $price;
+                                continue;
+                                //  dd('offer 1 er beshi');
+                        }
+                        
                             
+                        
+                        } else{
+                            // dd('1 order ache');
+                            $id = $value->id;
+                            $product = Product::with('inventory')->where('id',$id)->first();
+                            
+                            $stock = $product->inventory->purchase;
                             if($stock >= $value->quantity){
+                                $discount_product            = Product::where('id',$value->id)->first();
+                                $discount                    = $value->price/100*$discount_product->discount;
+                                $price                       = $discount_product->price - $discount;
                                 $orderDetails                = new OrderDetails();
                                 $orderDetails->order_id      = $order->id;
                                 $orderDetails->product_id    = $value->id;
                                 $orderDetails->product_name  = $value->name;
-                                $orderDetails->customer_id   = Auth::guard('customer')->user()->id;
+                                $orderDetails->customer_id   = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : '';
+                                $orderDetails->offer_price   = $value->attributes->offer_price;
                                 $orderDetails->price         = $value->price;
                                 $orderDetails->quantity      = $value->quantity;
-                                $price                       = $value->quantity * $value->price;
+                                $orderDetails->offer_quantity= $value->attributes->quantity;
                                 $orderDetails->total_price   = $price;
                                 $orderDetails->save();
                                 $sum += $price;
-                                $inventory                   = Inventory::where('product_id',$value->id)->first();
-                                $inventory->purchage         = $inventory->purchage - $value->quantity;
-                                $inventory->sales            = $inventory->sales + $value->quantity;
+                                $inventory            = Inventory::where('product_id',$value->id)->first();
+                                $inventory->sales     = $value->quantity;
+                                $inventory->purchase  = $inventory->purchase - $value->quantity;
+                                $inventory->sales     = $inventory->sales + $value->quantity;
                                 $inventory->save();
+                                // dd('offer 1 ');
                                 continue;
-                                
                             }
-                   
-                    
+                        }
+                    }
                 }
-
-                $order2 = Order::where('id',$order->id)->first();
-                $order2->total_amount = $sum + $area_amount;
-                $order2->save();
-                if($sum<1){
-                  Order::where('id',$order->id)->delete();
-                  $customer_phone     = Auth::guard('customer')->user()->phone;
-                  $name               = Auth::guard('customer')->user()->name;
-                  $customer_id        = Auth::guard('customer')->user()->code;
-                  $message            = "$name .Sorry! Your order product out of stock. Your are most valuable for us. ";
-                  
-                  $this->send_sms($customer_phone , $message);
-                  DB::commit();
-                  Session::flash('error', 'order submit failed');
-                  \Cart::clear();
-                  return redirect()->route('home');
-                }else{
-                    $company            = CompanyProfile::first();
-                    $admin_phone        = $company->phone_3;
-                    $admin_phone_2      = $company->phone_4;
-                    $admin_phone_3      = $company->phone_5;
-                    $customer_phone     = Auth::guard('customer')->user()->phone;
-                    $name               = Auth::guard('customer')->user()->name;
-                    $customer_id        = Auth::guard('customer')->user()->code;
-                    $msg                = " Order submit  $name . Invoice No. $order->invoice_no";
-                    $message            = "$name .Your order submited successfully. Invoice No. $order->invoice_no";
-                    $this->send_sms($admin_phone , $msg);
-                    $this->send_sms($admin_phone_2 , $msg);
-                    $this->send_sms($admin_phone_3 , $msg);
-                    $this->send_sms($customer_phone , $message);
-                    DB::commit();
-                    Session::flash('message', 'order Submit successfully');
-                    \Cart::clear();
-                    return redirect()->route('home');
-                    
-                } 
-
-            } 
-            catch (Exception $e) {
-                DB::rollBack();
-                Session::flash('faild', 'order Submit faild');
-                return back();
+                        $id            = $value->id;
+                        $product       = Product::with('inventory')->where('id',$id)->first();
+                        
+                        $stock         = $product->inventory->purchase;
+                        
+                        if($stock >= $value->quantity){
+                            $orderDetails                = new OrderDetails();
+                            $orderDetails->order_id      = $order->id;
+                            $orderDetails->product_id    = $value->id;
+                            $orderDetails->product_name  = $value->name;
+                            $orderDetails->customer_id   = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : '';
+                            $orderDetails->price         = $value->price;
+                            $orderDetails->quantity      = $value->quantity;
+                            $price                       = $value->quantity * $value->price;
+                            $orderDetails->total_price   = $price;
+                            $orderDetails->save();
+                            $sum += $price;
+                            $inventory                   = Inventory::where('product_id',$value->id)->first();
+                            $inventory->purchase         = $inventory->purchase - $value->quantity;
+                            $inventory->sales            = $inventory->sales + $value->quantity;
+                            $inventory->save();
+                            continue;
+                            
+                        }
+                
+                
             }
 
-        }
-        else{
-            return redirect()->route('customer.login');
-        }
+            $order2 = Order::where('id',$order->id)->first();
+            $order2->total_amount = $sum + $area_amount;
+            $order2->save();
+            if($sum<1){
+                Order::where('id',$order->id)->delete();
+                $customer_phone     = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->phone : $request->phone;
+                $name               = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->name : $request->name;
+                $customer_id        = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->code : "";
+                $message            = "$name .Sorry! Your order product out of stock. Your are most valuable for us. ";
+                
+                DB::commit();
+                Session::flash('error', 'Order submit failed...May be out of stock');
+                \Cart::clear();
+                return redirect()->route('home');
+            }else{
+                $company            = CompanyProfile::first();
+                $admin_phone        = $company->phone_3;
+                $admin_phone_2      = $company->phone_4;
+                $admin_phone_3      = $company->phone_5;
+                $customer_phone     = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->phone: $request->phone;
+                $name               = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->name : $request->name;
+                $customer_id        = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->code : '';
+                // $msg                = " Order submit  $name . Invoice No. $order->invoice_no";
+                // $message            = "$name .Your order submited successfully. Invoice No. $order->invoice_no";
+                // $this->send_sms($admin_phone , $msg);
+                // $this->send_sms($admin_phone_2 , $msg);
+                // $this->send_sms($admin_phone_3 , $msg);
+                // $this->send_sms($customer_phone , $message);
+                DB::commit();
+                Session::flash('success', 'Order Submit successfully');
+                \Cart::clear();
+                return redirect()->route('home');
+                
+            } 
 
+        } 
+        catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+            // return $e->getMessage();
+            // Session::flash('error', 'order submit faild');
+            // return back();
+        }
     }
 }

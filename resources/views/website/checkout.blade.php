@@ -71,7 +71,7 @@
                                       placeholder="Enter Name" required>
 
                                     @error('name')
-                                      <span class="invalid-feedback" role="alert">
+                                      <span class="text-danger" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
                                     @enderror
@@ -83,7 +83,7 @@
                             <input type="text" class="form-control form-control-md" name="phone" value="{{ @Auth::guard('customer')->user()->phone }}" placeholder="Enter Email">
 
                             @error('phone')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -93,7 +93,7 @@
                             <input type="email" class="form-control form-control-md" name="email" value="{{ @Auth::guard('customer')->user()->email }}" placeholder="Enter Email">
 
                             @error('email')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -109,7 +109,7 @@
                                 </select>
                             </div>
                             @error('thana_id')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -124,7 +124,7 @@
                                     @endforeach
                                 </select>
                                 @error('area_id')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -151,7 +151,7 @@
                                             placeholder="Enter Name"  required>
     
                                         @error('name')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -163,7 +163,7 @@
                                 <input type="text" class="form-control form-control-md" name="phone" value="" placeholder="Enter Email">
     
                                 @error('phone')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -173,7 +173,7 @@
                                 <input type="email" class="form-control form-control-md" name="email" value="" placeholder="Enter Email">
     
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -189,7 +189,7 @@
                                     </select>
                                 </div>
                                 @error('thana_id')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -204,7 +204,7 @@
                                         @endforeach
                                     </select>
                                     @error('area_id')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror

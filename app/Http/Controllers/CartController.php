@@ -40,7 +40,12 @@ class CartController extends Controller
     public function addToCartAjax(Request $request,$id)
     {
        $product = Product::where('id', $id)->first();
-       
+        
+       $offer_price = "";
+       if($product->discount || $product->discount != '') {
+            $offer_price = $product->price - (($product->price / 100) * $product->discount);
+       }
+
        $total_item = \Cart::getContent()->count();
        if($total_item <100){
         
@@ -51,6 +56,7 @@ class CartController extends Controller
                 'price' => $product->price,
                 'quantity' => 1,
                 'attributes' => array(
+                    'offer_price' => $offer_price,
                     'image' => $product->thum_image,
                     'slug' => $product->slug,
                 )
