@@ -116,6 +116,7 @@ Route::get('/cart-add/{id}', [CartController::class, 'addToCartAjax'])->name('ca
 Route::get('/cart-add/update/{id}', [CartController::class, 'addToCartAjaxUpdate'])->name('cart.increment.ajax.update');
 Route::post('/cart-buy', [CartController::class, 'buyToCart'])->name('cart.buy');
 Route::post('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/update-cart-ajax', [CartController::class, 'updateCartAjax'])->name('cart.update.ajax');
 Route::post('/remove', [CartController::class, 'removeCart'])->name('cart.remove');
 Route::post('/clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
@@ -277,14 +278,13 @@ Route::post('/login',[AuthController::class, 'authCheck'])->name('login.check');
         Route::get('/color/edit/{id}',[ColorController::class,'edit'])->name('color.edit')->middleware('check');
         Route::put('/color/update/{id}',[ColorController::class,'update'])->name('color.update');
         Route::delete('/color/{id}',[ColorController::class,'destroy'])->name('color.destroy');
+        Route::get('/getcolor/{id}', [ColorController::class,'colorAjax'])->name('get.color');
         // size route
         Route::get('/size',[SizeController::class,'index'])->name('size.index')->middleware('check');
         Route::post('/size/store',[SizeController::class,'store'])->name('size.store');
         Route::get('/size/edit/{id}',[SizeController::class,'edit'])->name('size.edit')->middleware('check');
         Route::put('/size/update/{id}',[SizeController::class,'update'])->name('size.update');
         Route::delete('/size/{id}',[SizeController::class,'destroy'])->name('size.destroy');
-
-
 
     });
     // Website related all route here
@@ -369,8 +369,7 @@ Route::post('/login',[AuthController::class, 'authCheck'])->name('login.check');
 
     });
         // setting all route here
-    Route::prefix('setting')->group(function(){
-
+    Route::prefix('setting')->group(function() {
             // time set route
             Route::get('/time-set',[TimeSetController::class,'setTime'])->name('set-time');
             Route::post('/time-set-store',[TimeSetController::class,'setTimeStore'])->name('set-time.store');

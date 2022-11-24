@@ -63,7 +63,7 @@ class CartController extends Controller
        }
     //    
     }
-
+    
     public function addToCartAjaxUpdate(Request $request,$id)
     {
 
@@ -135,7 +135,29 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
-        $total_item = \Cart::getContent()->count();
+       $total_item = \Cart::getContent()->count();
+            if($total_item <100){
+                foreach ($request->cart_id as $key => $item) {
+                    \Cart::update(
+                        $item,
+                        [
+                            'quantity' => [
+                                'relative' => false,
+                                'value' => $request->quantity[$key]
+                            ],
+                        ]
+                    );
+                }
+            }
+       
+        session()->flash('update', 'Cart is Updated Successfully !');
+
+        return redirect()->back();
+    }
+    public function updateCartAjax(Request $request)
+    {
+        try {
+            $total_item = \Cart::getContent()->count();
             if($total_item <100){
                 \Cart::update(
                     $request->id,
@@ -147,12 +169,12 @@ class CartController extends Controller
                     ]
                 );
             }
-       
-        session()->flash('update', 'Cart is Updated Successfully !');
-
-        return redirect()->back();
+        return response()->json([ $request->id, $request->quantity ]);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+        
     }
-
 
     public function removeCart(Request $request)
     {
