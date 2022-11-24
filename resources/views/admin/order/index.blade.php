@@ -39,7 +39,7 @@
                                     <td>@if(isset($order->customer_name)){{$order->customer_name}}@endif</td>
                                     <td>{{$order->total_amount}}</td>
                                     <td>
-                                        @if(Auth::user()->action_process == 1)
+                                        @if(Auth::user()->role == 1)
                                             @if ($order->status == 'p')
                                             <a href="{{route('order.pending',$order->id)}}" id="procesing" onclick="processing({{$order->id}})" class="btn btn-edit procesing" data-bs-toggle="modal" data-bs-target="#myModal">Pending</a>
 
@@ -48,13 +48,13 @@
                                     
                                     </td>
                                     <td class="text-center">
-                                        @if(Auth::user()->action_create == 1)
+                                        @if(Auth::user()->role == 1)
                                             @if ($order->status == 'p')
                                             <a href="{{route('offer.pending',$order->id)}}" onclick="return confirm('are you sure! Order on Offer Pending')" class="btn btn-edit " >Offer Pending</a>
                                             <a href="{{route('share.sale',$order->id)}}" onclick="return confirm('are you sure! This order sent to share sale')" class="btn btn-edit " >Share Sale</a>
                                             @endif
                                         @endif
-                                            <form action="{{route('product.order.delete',$order->id)}}" method="post">
+                                            <form action="{{route('product.order.delete', $order->id)}}" method="post">
                                                 @csrf
                                                 @if(Auth::user()->action_view == 1)
                                                     <a href="{{route('invoice.admin',$order->id)}}" class="btn btn-edit"><i class="fas fa-eye"></i></a>
