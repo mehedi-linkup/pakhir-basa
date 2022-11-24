@@ -15,7 +15,7 @@
  <div class="page-content">
     <div class="container">
         <!-- Start of Shop Banner -->
-        {{-- <div class="shop-default-banner banner d-flex align-items-center mb-5 br-xs"
+        <div class="shop-default-banner banner d-flex align-items-center mb-5 br-xs"
             style="background-image: url(assets/images/shop/banner1.jpg); background-color: #FFC74E;">
             <div class="banner-content">
                 <h4 class="banner-subtitle font-weight-bold">Accessories Collection</h4>
@@ -24,7 +24,7 @@
                 <a href="shop-banner-sidebar.html" class="btn btn-dark btn-rounded btn-icon-right">Discover
                     Now<i class="w-icon-long-arrow-right"></i></a>
             </div>
-        </div> --}}
+        </div>
         <!-- End of Shop Banner -->
 
         <!-- Start of Shop Category -->
@@ -105,7 +105,7 @@
                         <!-- End of Collapsible Widget -->
 
                         <!-- Start of Collapsible Widget -->
-                        <div class="widget widget-collapsible">
+                        {{-- <div class="widget widget-collapsible">
                             <h3 class="widget-title"><span>Price</span></h3>
                             <div class="widget-body">
                                 <ul class="filter-items search-ul">
@@ -123,7 +123,7 @@
                                         class="btn btn-primary btn-rounded">Go</a>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- End of Collapsible Widget -->
 
                         <!-- Start of Collapsible Widget -->
