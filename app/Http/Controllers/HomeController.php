@@ -34,7 +34,7 @@ class HomeController extends Controller
         $popular = Product::latest()->where('is_popular', '1')->limit(24)->get();
         $new_arrival = Product::where('is_arrival', '1')->get();
         $home = Product::where('category_id', '8')->inRandomOrder()->limit(12)->get();
-        $fullAd = Ad::where('status', 'a')->where('position', '5')->inRandomOrder()->limit(1)->get();
+        $fullAd = Ad::where('status', 'a')->inRandomOrder()->limit(1)->get();
         $partner = Partner::latest()->get();
         // $cartAll = \Cart::getContent();
         return view('website.index', compact('banner', 'popularcategory', 'topcategory', 'product', 'new_arrival', 'fullAd', 'popular', 'home', 'recent', 'partner'));
