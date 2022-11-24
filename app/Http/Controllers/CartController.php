@@ -135,24 +135,40 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
-       $total_item = \Cart::getContent()->count();
-            if($total_item <100){
-                foreach ($request->cart_id as $key => $item) {
-                    \Cart::update(
-                        $item,
-                        [
-                            'quantity' => [
-                                'relative' => false,
-                                'value' => $request->quantity[$key]
-                            ],
-                        ]
-                    );
+        try {
+            if($request->cartDeleteId != null || $request->cartDeleteId != "") {
+                \Cart::remove($request->cartDeleteId);
+                session()->flash('remove', 'Item Cart Remove Successfully!');
+                return redirect()->route('cart.list');
+            } else {
+                if($request->clear_cart != null || $request->clear_cart) {
+                    \Cart::clear();
+                    session()->flash('remove', 'All Items Clear Successfully!');
+                    return redirect()->route('cart.list');
+                } else {
+                    $total_item = \Cart::getContent()->count();
+                    if($total_item <100){
+                        foreach ($request->cart_id as $key => $item) {
+                            \Cart::update(
+                                $item,
+                                [
+                                    'quantity' => [
+                                        'relative' => false,
+                                        'value' => $request->quantity[$key]
+                                    ],
+                                ]
+                            );
+                        }
+                    }
+                    session()->flash('update', 'Cart is Updated Successfully !');
+                    return redirect()->back();
                 }
             }
-       
-        session()->flash('update', 'Cart is Updated Successfully !');
-
-        return redirect()->back();
+        } catch (\Throwable $th) {
+             return $th;   
+        }
+      
+        
     }
     public function updateCartAjax(Request $request)
     {

@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Session;
@@ -200,12 +201,19 @@ class CheckoutController extends Controller
     // }
     public function checkout()
     {
-        return view('website.checkout');
+        if(\Cart::getContent()->count() > 0) {
+            $area = Area::latest()->get();
+            $thana = Thana::latest()->get();
+            $cartItems = \Cart::getContent();
+            return view('website.checkout', compact('cartItems', 'area', 'thana'));
+        } else {
+            return redirect()->route('');
+        }
     }
 
     public function orderStore(Request $request)
     {
-    //    dd($request->all());
+        return $request;
         if (Auth::guard('customer')->check()){
            
             $sum = 0;
@@ -219,8 +227,6 @@ class CheckoutController extends Controller
             $area = Area::where('id',$request->area_id)->first();
             $area_amount = $area->amount;
             // dd($area_amount);
-
-            
             try {
                 DB::beginTransaction();
                 $order = new Order();
@@ -245,7 +251,6 @@ class CheckoutController extends Controller
                 // dd($offer_product);
                 $exist_order_tables =OrderDetails::where('customer_id',Auth::guard('customer')->user()->id)->whereDate('created_at', Carbon::today())->get()->pluck('product_id')->toArray();
             
-
                 foreach (\Cart::getContent() as $value) {
                 
                     if(in_array($value->id, $offer_product)){
@@ -275,8 +280,6 @@ class CheckoutController extends Controller
                                 $inventory->save();
                                 continue;
                             }
-                            
-                           
                         }
                         else{
                             // dd('nai');

@@ -4,16 +4,24 @@
  <nav class="breadcrumb-nav">
     <div class="container">
         <ul class="breadcrumb shop-breadcrumb bb-no">
-            <li class="active"><a href="cart.html">Shopping Cart</a></li>
-            <li><a href="checkout.html">Checkout</a></li>
-            <li><a href="order.html">Order Complete</a></li>
+            <li class="active"><a href="{{ route('cart.list') }}">Shopping Cart</a></li>
+            <li><a>Checkout</a></li>
+            <li><a>Order Complete</a></li>
         </ul>
     </div>
 </nav>
 <!-- End of Breadcrumb -->
+
 <div class="page-content cart">
     <div class="container">
-        <div class="row gutter-lg mb-10">
+        @if(Cart::isEmpty())
+        <div class="order-success text-center font-weight-bolder text-dark">
+            <i class="fas fa-check"></i>
+            Your cart is empty.
+        </div>
+        @else
+        <!-- End of Order Success -->
+        <div class="row gutter-lg mb-5">
             <div class="col-lg-8 pr-lg-4 mb-6">
                 <form id="cartUpdate" action="{{ route('cart.update') }}" method="post">
                     @csrf
@@ -28,6 +36,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <input id="cartDeleteId" type="hidden" name="cartDeleteId" value="">
                         @foreach ($cartItems as $item)
                         <tr>
                             <td class="product-thumbnail">
@@ -41,7 +50,8 @@
                                                 width="300" height="338">
                                         </figure>
                                     </a>
-                                    <button type="submit" class="btn btn-close"><i
+                                    
+                                    <button type="submit" class="btn btn-close" onclick="cartDelete({{$item->id}})"><i
                                             class="fas fa-times"></i></button>
                                 </div>
                             </td>
@@ -73,11 +83,11 @@
                     <button type="submit" id="update_cart" class="btn btn-rounded btn-update" name="update_cart" value="Update Cart">Update Cart</button>
                 </div>
                 </form>
-                <form class="coupon">
+                {{-- <form class="coupon">
                     <h5 class="title coupon-title font-weight-bold text-uppercase">Coupon Discount</h5>
                     <input type="text" class="form-control mb-4" placeholder="Enter coupon code here..." required />
                     <button class="btn btn-dark btn-outline btn-rounded">Apply Coupon</button>
-                </form>
+                </form> --}}
             </div>
             <div class="col-lg-4 sticky-sidebar-wrapper">
                 <div class="sticky-sidebar">
@@ -175,11 +185,15 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 </div>
 @endsection
 @push('website-js')
     <script>
+        function cartDelete(id) {
+            let something = $('#cartDeleteId').val(id);
+        }
         function valueAdd(id) {
             let quantity = $('#quantity-mod-'+id).val();
             if(quantity <= 100) {
@@ -203,7 +217,7 @@
             let productPrice = $('#product-price-'+id).attr("data-price");
             $('#quantity-amount-'+id).text(quantityValue * productPrice);
         }
-
+        
         // $('#update_cart').click(function (e) {
         //     e.preventDefault();
         //     console.log('update cart')

@@ -686,14 +686,24 @@
             toastr.success("{{ session('update') }}");
         @endif
 
+        @if(Session::has('remove'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+            toastr.warning("{{ session('remove') }}");
+        @endif
+
         @if(Session::has('message'))
         toastr.options =
         {
             "closeButton" : true,
             "progressBar" : true
         }
-            toastr.success("{{ session('message') }}");
+            toastr.info("{{ session('message') }}");
         @endif
+
         @if(Session::has('success'))
         toastr.options =
         {

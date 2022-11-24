@@ -34,15 +34,16 @@
                             <label>Password *</label>
                             <input type="password" class="form-control" name="password" id="password" required>
                         </div>
-                        <div class="form-checkbox d-flex align-items-center justify-content-between">
+                        {{-- <div class="form-checkbox d-flex align-items-center justify-content-between">
                             <input type="checkbox" class="custom-checkbox" id="remember1" name="remember1" required="">
                             <label for="remember1">Remember me</label>
-                            {{-- <a href="#">Last your password?</a> --}}
-                        </div>
-                        <button type="submit" class="btn btn-primary sign-in">Sign In</button>
-    
+                            <a href="#">Last your password?</a>
+                        </div> --}}
+                        <button type="submit" class="btn btn-primary w-100 sign-in">Sign In</button>
+
                     </form>
                 </div>
+                <a href="{{ route('customer.signup') }}" class="text-center mt-4">Not Register? Sign Up Here</a>
                </div>          
             </div>
                    

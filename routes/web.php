@@ -130,7 +130,7 @@ Route::get('/cart-remove-auto',[CartController::class,'cartRemoveAuto'])->name('
 
 // Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.user');
 Route::get('/checkout',[CheckoutController::class,'checkout'])->name('checkout.index');
-Route::post('/orderStore', [CheckoutController::class, 'orderStore'])->name('orderStore');
+Route::post('/order-store', [CheckoutController::class, 'orderStore'])->name('order.store');
 Route::get('/customer/order/cancel/{id}',[OrderCancelController::class,'cancel'])->name('customer.order.cancel');
 
 

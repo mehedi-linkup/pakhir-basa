@@ -133,6 +133,7 @@
                                             </span>
                                         </div>
                                     </form>
+                                    <a href="{{ route('customer.login') }}" class="text-center mt-4">Already registered ? Click here to login</a>
                                 </div>
                             </div>
                         </div>

@@ -7,7 +7,7 @@
             <ul class="breadcrumb shop-breadcrumb bb-no">
                 <li class="passed"><a href="{{ route('cart.list') }}">Shopping Cart</a></li>
                 <li class="active"><a href="{{ route('checkout.index') }}">Checkout</a></li>
-                <li><a href="">Order Complete</a></li>
+                <li><a>Order Complete</a></li>
             </ul>
         </div>
     </nav>
@@ -17,196 +17,206 @@
     <!-- Start of PageContent -->
     <div class="page-content">
         <div class="container">
+            @if(!Auth::guard('customer')->user())
             <div class="login-toggle">
-                Returning customer? <a href="#"
+                Returning customer? <a href=""
                     class="show-login font-weight-bold text-uppercase text-dark">Login</a>
             </div>
-            <form class="login-content">
-                <p>If you have shopped with us before, please enter your details below. 
-                    If you are a new customer, please proceed to the Billing section.</p>
+            @endif
+            <form class="login-content" action="{{ route('customer.auth') }}" method="POST">
+                @csrf
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group">
-                            <label>Username or email *</label>
-                            <input type="text" class="form-control form-control-md" name="name"
+                            <label>Email *</label>
+                            <input type="email" class="form-control form-control-md" name="email" id="email" 
                                 required>
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
                             <label>Password *</label>
-                            <input type="text" class="form-control form-control-md" name="password"
+                            <input type="password" class="form-control form-control-md" name="password" id="password"
                                 required>
                         </div>
                     </div>
                 </div>
-                <div class="form-group checkbox">
-                    <input type="checkbox" class="custom-checkbox" id="remember" name="remember">
-                    <label for="remember" class="mb-0 lh-2">Remember me</label>
-                    <a href="#" class="ml-3">Last your password?</a>
-                </div>
-                <button class="btn btn-rounded btn-login">Login</button>
+                <button type="submit" class="btn btn-rounded btn-login">Login</button>
             </form>
-            <div class="coupon-toggle">
+            {{-- <div class="coupon-toggle">
                 Have a coupon? <a href="#"
                     class="show-coupon font-weight-bold text-uppercase text-dark">Enter your
                     code</a>
-            </div>
-            <div class="coupon-content mb-4">
+            </div> --}}
+            {{-- <div class="coupon-content mb-4">
                 <p>If you have a coupon code, please apply it below.</p>
                 <div class="input-wrapper-inline">
                     <input type="text" name="coupon_code" class="form-control form-control-md mr-1 mb-2" placeholder="Coupon code" id="coupon_code">
                     <button type="submit" class="btn button btn-rounded btn-coupon mb-2" name="apply_coupon" value="Apply coupon">Apply Coupon</button>
                 </div>
-            </div>
-            <form class="form checkout-form" action="#" method="post">
+            </div> --}}
+            <form class="form checkout-form" action="{{ route('order.store') }}" method="post">
+                @csrf
                 <div class="row mb-9">
                     <div class="col-lg-7 pr-lg-4 mb-4">
                         <h3 class="title billing-title text-uppercase ls-10 pt-1 pb-3 mb-0">
                             Billing Details
                         </h3>
                         <div class="row gutter-sm">
-                            <div class="col-xs-6">
+                            <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label>First name *</label>
-                                    <input type="text" class="form-control form-control-md" name="firstname"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <label>Last name *</label>
-                                    <input type="text" class="form-control form-control-md" name="lastname"
-                                        required>
+                                    <label>Name *</label>
+                                    <input type="text" class="form-control form-control-md" name="name" value="{{ @Auth::guard('customer')->user()->name }}"
+                                      placeholder="Enter Name" required>
+
+                                    @error('name')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Company name (optional)</label>
-                            <input type="text" class="form-control form-control-md" name="company-name">
+                            <label>Phone Number</label>
+                            <input type="text" class="form-control form-control-md" name="phone" value="{{ @Auth::guard('customer')->user()->phone }}" placeholder="Enter Email">
+
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <label>Country / Region *</label>
+                            <label>Email Address</label>
+                            <input type="email" class="form-control form-control-md" name="email" value="{{ @Auth::guard('customer')->user()->email }}" placeholder="Enter Email">
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Thana</label>
                             <div class="select-box">
-                                <select name="country" class="form-control form-control-md">
-                                    <option value="default" selected="selected">United States
-                                        (US)
-                                    </option>
-                                    <option value="uk">United Kingdom (UK)</option>
-                                    <option value="us">United States</option>
-                                    <option value="fr">France</option>
-                                    <option value="aus">Australia</option>
+                                <select name="thana_id" class="form-control form-control-md">
+                                    <option value="">Select Thana</option>
+                                    @foreach ($thana as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
+                            @error('thana_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <label>Street address *</label>
-                            <input type="text" placeholder="House number and street name"
-                                class="form-control form-control-md mb-2" name="street-address-1" required>
-                            <input type="text" placeholder="Apartment, suite, unit, etc. (optional)"
-                                class="form-control form-control-md" name="street-address-2" required>
-                        </div>
-                        <div class="row gutter-sm">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Town / City *</label>
-                                    <input type="text" class="form-control form-control-md" name="town" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>ZIP *</label>
-                                    <input type="text" class="form-control form-control-md" name="zip" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>State *</label>
-                                    <div class="select-box">
-                                        <select name="country" class="form-control form-control-md">
-                                            <option value="default" selected="selected">California</option>
-                                            <option value="uk">United Kingdom (UK)</option>
-                                            <option value="us">United States</option>
-                                            <option value="fr">France</option>
-                                            <option value="aus">Australia</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Phone *</label>
-                                    <input type="text" class="form-control form-control-md" name="phone" required>
-                                </div>
+                            <label>Area</label>
+                            <div class="select-box">
+                                <select name="area_id" class="form-control form-control-md">
+                                    <option value="" selected="selected">Select Area</option>
+                                    @foreach ($area as $item)
+                                    <option value="{{ $item->id }} {{ @Auth::guard('customer')->user()->area_id == $item->id ? 'selected' : '' }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('area_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
-                        <div class="form-group mb-7">
-                            <label>Email address *</label>
-                            <input type="email" class="form-control form-control-md" name="email" required>
+                        
+                        <div class="form-group mt-3">
+                            <label for="order-notes">Address *</label>
+                            <textarea class="form-control mb-0" id="address" name="address" cols="30"
+                                rows="4"
+                                placeholder="Enter Address">{{ @Auth::guard('customer')->user()->address }}</textarea>
                         </div>
-                        <div class="form-group checkbox-toggle pb-2">
+                        {{-- <div class="form-group checkbox-toggle pb-2">
                             <input type="checkbox" class="custom-checkbox" id="shipping-toggle"
                                 name="shipping-toggle">
                             <label for="shipping-toggle">Ship to a different address?</label>
-                        </div>
-                        <div class="checkbox-content">
+                        </div> --}}
+                        {{-- <div class="checkbox-content">
                             <div class="row gutter-sm">
-                                <div class="col-xs-6">
+                                <div class="col-xs-12">
                                     <div class="form-group">
-                                        <label>First name *</label>
-                                        <input type="text" class="form-control form-control-md" name="firstname"
-                                            required>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label>Last name *</label>
-                                        <input type="text" class="form-control form-control-md" name="lastname"
-                                            required>
+                                        <label>Name *</label>
+                                        <input type="text" class="form-control form-control-md" name="name" value=""
+                                            placeholder="Enter Name"  required>
+    
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Company name (optional)</label>
-                                <input type="text" class="form-control form-control-md" name="company-name">
+                                <label>Phone Number</label>
+                                <input type="text" class="form-control form-control-md" name="phone" value="" placeholder="Enter Email">
+    
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label>Country / Region *</label>
+                                <label>Email Address</label>
+                                <input type="email" class="form-control form-control-md" name="email" value="" placeholder="Enter Email">
+    
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Thana</label>
                                 <div class="select-box">
-                                    <select name="country" class="form-control form-control-md">
-                                        <option value="default" selected="selected">United States
-                                            (US)
-                                        </option>
-                                        <option value="uk">United Kingdom (UK)</option>
-                                        <option value="us">United States</option>
-                                        <option value="fr">France</option>
-                                        <option value="aus">Australia</option>
+                                    <select name="thana_id" class="form-control form-control-md">
+                                        <option value="">Select Thana</option>
+                                        @foreach ($thana as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+                                @error('thana_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label>Street address *</label>
-                                <input type="text" placeholder="House number and street name"
-                                    class="form-control form-control-md mb-2" name="street-address-1" required>
-                                <input type="text" placeholder="Apartment, suite, unit, etc. (optional)"
-                                    class="form-control form-control-md" name="street-address-2" required>
-                            </div>
-                            <div class="row gutter-sm">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Town / City *</label>
-                                        <input type="text" class="form-control form-control-md" name="town" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Postcode *</label>
-                                        <input type="text" class="form-control form-control-md" name="postcode" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Country (optional)</label>
-                                        <input type="text" class="form-control form-control-md" name="zip" required>
-                                    </div>
+                                <label>Area</label>
+                                <div class="select-box">
+                                    <select name="area_id" class="form-control form-control-md">
+                                        <option value="" selected="selected">Select Area</option>
+                                        @foreach ($area as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('area_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
-                        </div>
-
+                            
+                            <div class="form-group mt-3">
+                                <label for="order-notes">Address *</label>
+                                <textarea class="form-control mb-0" id="address" name="address" cols="30"
+                                    rows="4"
+                                    placeholder="Enter Address"></textarea>
+                            </div>
+                        </div> --}}
                         <div class="form-group mt-3">
                             <label for="order-notes">Order notes (optional)</label>
                             <textarea class="form-control mb-0" id="order-notes" name="order-notes" cols="30"
@@ -221,74 +231,69 @@
                                 <table class="order-table">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">
+                                            <th>
                                                 <b>Product</b>
+                                            </th>
+                                            <th>
+                                                <b>Unit Price</b>
+                                            </th>
+                                            <th class="text-right">
+                                                <b>Product Price</b>
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($cartItems as $item)
                                         <tr class="bb-no">
-                                            <td class="product-name">Palm Print Jacket <i
+                                            <td class="product-name"> {{ $item->name }} <i
                                                     class="fas fa-times"></i> <span
-                                                    class="product-quantity">1</span></td>
-                                            <td class="product-total">$40.00</td>
+                                                    class="product-quantity">{{ $item->quantity }}</span></td>
+                                            <td class="product-name">{{ $item->price }}</td>
+                                            <td class="product-total">{{ $item->quantity * $item->price }}</td>
                                         </tr>
-                                        <tr class="bb-no">
-                                            <td class="product-name">Brown Backpack <i class="fas fa-times"></i>
-                                                <span class="product-quantity">1</span></td>
-                                            <td class="product-total">$60.00</td>
-                                        </tr>
+                                        @endforeach
                                         <tr class="cart-subtotal bb-no">
                                             <td>
                                                 <b>Subtotal</b>
                                             </td>
+                                            <td></td>
                                             <td>
-                                                <b>$100.00</b>
+                                                <b id="cartTotal">{{ \Cart::getTotal() }}</b>
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
-                                        <tr class="shipping-methods">
+                                        {{-- <tr class="shipping-methods">
                                             <td colspan="2" class="text-left">
                                                 <h4 class="title title-simple bb-no mb-1 pb-0 pt-3">Shipping
                                                 </h4>
                                                 <ul id="shipping-method" class="mb-4">
                                                     <li>
                                                         <div class="custom-radio">
-                                                            <input type="radio" id="free-shipping"
-                                                                class="custom-control-input" name="shipping">
-                                                            <label for="free-shipping"
-                                                                class="custom-control-label color-dark">Free
-                                                                Shipping</label>
+                                                            <input type="radio" id="inside_dhaka"
+                                                                class="custom-control-input" name="shipping" onclick="priceTotal(this.shipcharge)">
+                                                            <label for="inside_dhaka"
+                                                                class="custom-control-label color-dark">Inside Dhaka (Delivery Charge: 70TK)</label>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="custom-radio">
-                                                            <input type="radio" id="local-pickup"
-                                                                class="custom-control-input" name="shipping">
-                                                            <label for="local-pickup"
-                                                                class="custom-control-label color-dark">Local
-                                                                Pickup</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="custom-radio">
-                                                            <input type="radio" id="flat-rate"
-                                                                class="custom-control-input" name="shipping">
-                                                            <label for="flat-rate"
-                                                                class="custom-control-label color-dark">Flat
-                                                                rate: $5.00</label>
+                                                            <input type="radio" id="outside_dhaka"
+                                                                class="custom-control-input" name="shipping" onclick="priceTotal(this.shipcharge)">
+                                                            <label for="outside_dhaka"
+                                                                class="custom-control-label color-dark">Outside Dhaka (Delivery Charge: 120TK)</label>
                                                         </div>
                                                     </li>
                                                 </ul>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr class="order-total">
                                             <th>
                                                 <b>Total</b>
                                             </th>
+                                            <td></td>
                                             <td>
-                                                <b>$100.00</b>
+                                                <b id="priceTotal">{{ \Cart::getTotal() }}</b>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -360,5 +365,12 @@
     </div>
     <!-- End of PageContent -->
 </main>
-    
 @endsection
+@push('website-js')
+    <script>
+        function priceTotal(number) {
+            let priceTotal = $('#cartTotal').text();
+            console.log(number)
+        }
+    </script>
+@endpush
