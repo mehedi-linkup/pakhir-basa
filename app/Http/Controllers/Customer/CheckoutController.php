@@ -207,7 +207,8 @@ class CheckoutController extends Controller
             $cartItems = \Cart::getContent();
             return view('website.checkout', compact('cartItems', 'area', 'thana'));
         } else {
-            return redirect()->route('');
+            Session::flash('message', 'Add Product First');
+            return redirect()->route('cart.list');
         }
     }
 
