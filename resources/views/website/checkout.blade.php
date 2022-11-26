@@ -63,7 +63,7 @@
                             Billing Details
                         </h3>
                         <div class="row gutter-sm">
-                            <div class="col-xs-12">
+                            <div class="col-xs-6">
                                 <div class="form-group">
                                     <label>Name *</label>
                                     <input type="hidden" name="customer_id" value="{{ @Auth::guard('customer')->user()->id }}">
@@ -77,43 +77,50 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="text" class="form-control form-control-md" name="phone" value="{{ @Auth::guard('customer')->user()->phone }}" placeholder="Enter Email">
-
-                            @error('phone')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" class="form-control form-control-md" name="email" value="{{ @Auth::guard('customer')->user()->email }}" placeholder="Enter Email">
-
-                            @error('email')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Thana</label>
-                            <div class="select-box">
-                                <select name="thana_id" class="form-control form-control-md">
-                                    <option value="">Select Thana</option>
-                                    @foreach ($thana as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="text" class="form-control form-control-md" name="phone" value="{{ @Auth::guard('customer')->user()->phone }}" placeholder="Enter Email">
+        
+                                    @error('phone')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                            @error('thana_id')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" class="form-control form-control-md" name="email" value="{{ @Auth::guard('customer')->user()->email }}" placeholder="Enter Email">
+        
+                                    @error('email')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label>Thana</label>
+                                    <div class="select-box">
+                                        <select name="thana_id" class="form-control form-control-md">
+                                            <option value="">Select Thana</option>
+                                            @foreach ($thana as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('thana_id')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
+                   
                         <div class="form-group">
                             <label>Area</label>
                             <div class="select-box">
@@ -220,9 +227,9 @@
                         </div> --}}
                         <div class="form-group mt-3">
                             <label for="order-note">Order notes (optional)</label>
-                            <textarea class="form-control mb-0" id="order-note" name="order-note" cols="30"
-                                rows="4"
-                                placeholder="Notes about your order, e.g special notes for delivery"></textarea>
+                            <textarea class="form-control mb-0" id="order_note" name="order_note" cols="30"
+                                rows="3"
+                                placeholder="Notes about your order, e.g special notes for delivery">{{ @Auth::guard('customer')->user()->order_note }}</textarea>
                         </div>
                     </div>
                     <div class="col-lg-5 mb-4 sticky-sidebar-wrapper">
@@ -327,7 +334,7 @@
                                         </div> --}}
                                         <div class="card">
                                             <div class="card-header">
-                                                <a href="#delivery" class="expand active" >Cash on delivery</a>
+                                                <a href="#delivery" class="expand collapse" >Cash on delivery</a>
                                             </div>
                                             <div id="delivery" class="card-body collapsed">
                                                 <p class="mb-0">

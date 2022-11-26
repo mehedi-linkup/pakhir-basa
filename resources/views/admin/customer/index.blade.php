@@ -57,7 +57,7 @@
                               <select class="js-example-basic-multiple form-control my-form-control mr-2  @error('area_id') is-invalid @enderror" id="area_id" data-live-search="true" name="area_id">
                                 <option value=" ">Select Area</option>
                                 @foreach ($areas as $area)
-                                    <option value="{{$area->id}}">{{$area->name}}</option>  
+                                    <option value="{{$area->id}}">{{$area->area_id}}</option>  
                                 @endforeach
                             </select>
                               <div class="input-group-append">
@@ -238,6 +238,7 @@ function allData(){
                     $('#addressError').text('');
                     $('#address').removeClass('is-invalid');
                     $('#usernameError').text('');
+                    $('#username').removeClass('is-invalid');
                     $('#password').removeClass('is-invalid');
                     $('#passwordError').text('');
                     $('#password').removeClass('is-invalid');

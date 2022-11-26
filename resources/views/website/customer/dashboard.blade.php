@@ -1,20 +1,13 @@
 @extends('layouts.website')
 @section('website-content')
 
-    <!-- Start of Page Header -->
-    <div class="page-header">
+     <!-- Start of Breadcrumb -->
+     <nav class="breadcrumb-nav">
         <div class="container">
-            <h1 class="page-title mb-0">My Account</h1>
-        </div>
-    </div>
-    <!-- End of Page Header -->
-
-    <!-- Start of Breadcrumb -->
-    <nav class="breadcrumb-nav">
-        <div class="container">
-            <ul class="breadcrumb">
-                <li><a href="{{route('home')}}">Home</a></li>
-                <li>My account</li>
+            <ul class="breadcrumb shop-breadcrumb bb-no">
+                <li class="passed"><a href="{{ route('home') }}">Home</a></li>
+                <li class="active"><a href="{{ route('checkout.index') }}">My Account</a></li>
+                {{-- <li><a>Order Complete</a></li> --}}
             </ul>
         </div>
     </nav>
