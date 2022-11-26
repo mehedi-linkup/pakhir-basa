@@ -24,6 +24,7 @@ class CreateCompanyProfilesTable extends Migration
             $table->string('email', 50)->nullable();
             $table->string('address');
             $table->text('news_headline')->nullable();
+            $table->longText('map');
             $table->string('logo')->nullable();
 
             $table->string('office_time')->nullable();

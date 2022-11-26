@@ -40,7 +40,7 @@
                                 <td>@if(isset($order->user->name)){{$order->user->name}}@endif</td>
                                 <td>{{$order->total_amount}}</td>
                                 <td>
-                                    @if(Auth::user()->action_process == 1)
+                                    @if(Auth::user()->status == 1)
                                         @if ($order->status == 'op')
                                         <a href="#"  onclick="pending({{$order->id}})" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-edit">Offer Pending</a>
                                         @endif
@@ -50,13 +50,13 @@
                                     
                                         <form action="{{route('product.order.delete',$order->id)}}" method="post">
                                             @csrf
-                                            @if(Auth::user()->action_view == 1)
+                                            @if(Auth::user()->status == 1)
                                                 <a href="{{route('invoice.admin',$order->id)}}" class="btn btn-edit"><i class="fas fa-eye"></i></a>
                                             @endif
-                                            @if(Auth::user()->action_edit == 1)
+                                            @if(Auth::user()->status == 1)
                                                 <a href="{{route('order.details.edit',$order->id)}}" class="btn btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
                                             @endif
-                                            @if(Auth::user()->action_delete == 1)
+                                            @if(Auth::user()->status == 1)
                                                 <button href="" type="submit" class="btn btn-delete" title="Cancel" onclick="return confirm('Are you sure you want to cancel this order?');"><i class="fas fa-window-close"></i></button>
                                             @endif
                                         </form>

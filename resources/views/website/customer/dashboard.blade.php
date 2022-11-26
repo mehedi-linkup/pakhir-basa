@@ -13,7 +13,7 @@
     <nav class="breadcrumb-nav">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a href="demo1.html">Home</a></li>
+                <li><a href="{{route('home')}}">Home</a></li>
                 <li>My account</li>
             </ul>
         </div>
@@ -25,18 +25,22 @@
             <div class="tab tab-vertical row gutter-lg">
                 <ul class="nav nav-tabs mb-6" role="tablist">
                     <li class="nav-item">
-                        <a href="#account-dashboard" class="nav-link active">Dashboard</a>
+                        <a href="#account-dashboard" class="nav-link active"><i class="fas fa-home"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#account-orders" class="nav-link">Orders</a>
+                        <a href="#account-orders" class="nav-link"> <i class="w-icon-orders"></i> Orders</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#account-addresses" class="nav-link">Addresses</a>
+                        
+                        <a href="#account-addresses" class="nav-link"><i class="w-icon-map-marker"></i> Addresses</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#account-details" class="nav-link">Account details</a>
+                        <a href="#account-details" class="nav-link"> <i class="w-icon-user"></i> Account details</a>
                     </li>
                     <li class="link-item">
+                       
+                            <i class="w-icon-logout"></i>
+                        
                         <a href="{{ route('customerLogout') }}">Logout</a>
                     </li>
                 </ul>
@@ -62,7 +66,7 @@
                         </p>
 
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                            <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 mb-4">
                                 <a href="#account-orders" class="link-to-tab">
                                     <div class="icon-box text-center">
                                         <span class="icon-box-icon icon-orders">
@@ -74,7 +78,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                            <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 mb-4">
                                 <a href="#account-addresses" class="link-to-tab">
                                     <div class="icon-box text-center">
                                         <span class="icon-box-icon icon-address">
@@ -86,7 +90,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                            <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 mb-4">
                                 <a href="#account-details" class="link-to-tab">
                                     <div class="icon-box text-center">
                                         <span class="icon-box-icon icon-account">
@@ -98,7 +102,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                            <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 mb-4">
                                 <a href="{{ route('customerLogout') }}">
                                     <div class="icon-box text-center">
                                         <span class="icon-box-icon icon-logout">
@@ -121,14 +125,14 @@
                                 <h4 class="icon-box-title text-capitalize ls-normal mb-0">Orders</h4>
                             </div>
                         </div>
-                        <table class="shop-table account-orders-table mb-6">
+                        <table class="shop-table account-orders-table mb-6 ">
                             <thead>
                                 <tr>
-                                    <th class="order-id">Order</th>
+                                    <th class="order-id border">Order</th>
                                     <th class="order-date">Date</th>
                                     <th class="shipping-address">shipping-address</th>
                                     <th class="shipping-cost">shipping-cost</th>
-                                    <th class="delivery-data">sdelivery-data</th>
+                                    <th class="delivery-data">delivery-data</th>
                                     <th class="order-status">Status</th>
                                     <th class="order-total">Total</th>
                                     <th class="order-actions">Actions</th>
@@ -176,7 +180,7 @@
                             </tbody>
                         </table>
 
-                        <a href="shop-banner-sidebar.html" class="btn btn-dark btn-rounded btn-icon-right">Go
+                        <a href="{{route('shop.box')}}" class="btn btn-dark btn-rounded btn-icon-right">Go
                             Shop<i class="w-icon-long-arrow-right"></i></a>
                     </div>
 
@@ -311,40 +315,46 @@
                                          @enderror  
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="email">Email *</label>
-                                <input type="text" id="email" name="email" placeholder="Enter email"
-                                    class="form-control form-control-md mb-0" value="{{Auth::guard('customer')->user()->email }}">
-                                @error('email')
-                                    <span class="invalid-feedback text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                 @enderror  
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="address">Address</label>
-                                <textarea name="address" id="address" cols="30" rows="10" class="form-control form-control-md mb-0">{{Auth::guard('customer')->user()->address}}</textarea>
-                                @error('address')
-                                    <span class="invalid-feedback text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror  
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="image">Picture</label>
-                                <input type="file" class="form-control form-control-md mb-0" name="profile_picture" id="image" onchange="readURL(this);">
-                                @error('address')
-                                    <span class="invalid-feedback text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror  
-                            </div>
-                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="email">Email *</label>
+                                        <input type="text" id="email" name="email" placeholder="Enter email"
+                                            class="form-control form-control-md mb-0" value="{{Auth::guard('customer')->user()->email }}">
+                                        @error('email')
+                                            <span class="invalid-feedback text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                         @enderror  
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="address">Address</label>
+                                        <textarea name="address" id="address" cols="30" rows="10" class="form-control form-control-md mb-0">{{Auth::guard('customer')->user()->address}}</textarea>
+                                        @error('address')
+                                            <span class="invalid-feedback text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror  
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="image">Picture</label>
+                                        <input type="file" class="form-control form-control-md mb-0" name="profile_picture" id="image" onchange="readURL(this);">
+                                        @error('address')
+                                            <span class="invalid-feedback text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror  
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
-                                    <img src="#" alt="" id="previewImage" class="customer-image" style="width: 110px">
+                                    <img src="#" alt="" id="previewImage" class="customer-image" style="width: 110px; height:100px;">
                                 </div>
                             </div>
+                        
+                           
                             {{-- <h4 class="title title-password ls-25 font-weight-bold">Password change</h4>
                             <div class="form-group">
                                 <label class="text-dark" for="cur-password">Current Password leave blank to leave unchanged</label>

@@ -5,7 +5,7 @@
     <div class="container">
         <ul class="breadcrumb shop-breadcrumb bb-no">
             <li class="active"><a href="{{ route('cart.list') }}">Shopping Cart</a></li>
-            <li><a>Checkout</a></li>
+            <li><a href="{{route('checkout.index')}}">Checkout</a></li>
             <li><a>Order Complete</a></li>
         </ul>
     </div>

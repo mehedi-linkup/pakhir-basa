@@ -32,6 +32,7 @@ class CreateOrdersTable extends Migration
             $table->string('delivery_date', 255)->nullable();
             $table->text('pending_msg')->nullable();
             $table->text('process_msg')->nullable();
+            $table->text('way_msg')->nullable();
             $table->text('order_note')->nullable();
             $table->foreignId('time_id')->nullable()
                 ->constrained('delivery_times')

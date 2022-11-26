@@ -104,3 +104,7 @@ button[name=track] {
     -o-border-radius: 35px;
 }
 
+#account-orders .account-orders-table td {
+    padding-top: 1.1rem;
+    padding-bottom: 1.1rem;
+}

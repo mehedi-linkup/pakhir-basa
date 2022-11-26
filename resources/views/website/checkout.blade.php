@@ -303,7 +303,7 @@
                                 <div class="payment-methods" id="payment_method">
                                     <h4 class="title font-weight-bold ls-25 pb-0 mb-1">Payment Methods</h4>
                                     <div class="accordion payment-accordion">
-                                        <div class="card">
+                                        {{-- <div class="card">
                                             <div class="card-header">
                                                 <a href="#cash-on-delivery" class="collapse">Direct Bank Transfor</a>
                                             </div>
@@ -314,8 +314,8 @@
                                                     Your order will not be shipped until the funds have cleared in our account.
                                                 </p>
                                             </div>
-                                        </div>
-                                        <div class="card">
+                                        </div> --}}
+                                        {{-- <div class="card">
                                             <div class="card-header">
                                                 <a href="#payment" class="expand">Check Payments</a>
                                             </div>
@@ -324,10 +324,10 @@
                                                     Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.
                                                 </p>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="card">
                                             <div class="card-header">
-                                                <a href="#delivery" class="expand">Cash on delivery</a>
+                                                <a href="#delivery" class="expand active" >Cash on delivery</a>
                                             </div>
                                             <div id="delivery" class="card-body collapsed">
                                                 <p class="mb-0">
@@ -335,7 +335,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="card p-relative">
+                                        {{-- <div class="card p-relative">
                                             <div class="card-header">
                                                 <a href="#paypal" class="expand">Paypal</a>
                                             </div>
@@ -350,7 +350,7 @@
                                                     don't have a PayPal account.
                                                 </p>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
 
