@@ -138,7 +138,7 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                                <div class="col-md-4">
+                                                {{-- <div class="col-md-4">
                                                     <strong><label>Color</label></strong>
                                                 </div>
                                                 <div class="col-md-8 my-1">
@@ -156,7 +156,7 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="col-md-4">
                                                     <strong><label>Short Description</label> <span
