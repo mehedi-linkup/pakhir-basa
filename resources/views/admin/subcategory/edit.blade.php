@@ -56,7 +56,7 @@
                             </div>
                     </div>
                     <div class="group">
-                        <input type="checkbox" name="is_popular" id="is_popular" {{ !empty($subcategory->is_popular) ? 'checked' : ''}}  value="p" title="is popular">
+                        <input type="checkbox" name="is_popular" id="is_popular" {{ !empty($subcategory->is_popular) ? 'checked' : ''}}  value="1" title="is popular">
                         <label for="is_popular">Is popular</label>
                        </div>
                     <div class="col-md-12">

@@ -79,9 +79,9 @@
 
                                   <div class="col-md-8">
                                     
-                                      <input type="number" name="purchage" id="purchage" value="{{$product->inventory['purchage'] }}"  placeholder="Enter Stock" class="form-control my-form-control @error('purchage') is-invalid @enderror">      
+                                      <input type="number" name="purchase" id="purchase" value="{{$product->inventory['purchase'] }}"  placeholder="Enter Stock" class="form-control my-form-control @error('purchase') is-invalid @enderror">      
                                      
-                                          @error('purchage')
+                                          @error('purchase')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
                                           </span> 
@@ -91,7 +91,7 @@
                                     <strong><label>Product Size</label> <span class="my-label">:</span> </strong>
                                   </div>
                                   <div class="col-md-8 mt-1">
-                                    <select class="js-example-basic-multiple form-control my-select my-form-control @error('size_id') is-invalid @enderror " data-live-search="true" name="size_id[]" multiple>
+                                    <select class="js-example-basic-multiple form-control my-select my-form-control @error('size_id') is-invalid @enderror " data-live-search="true" name="size_id">
                                       <option  data-tokens="ketchup mustard" value="">Select Size</option>
                                         @foreach ($size as $item)
                                         <option value="{{$item->id}}" {{ $item->id == $product->size_id ? 'selected' : '' }}>{{$item->name}}</option>   
@@ -107,7 +107,7 @@
                                     <strong><label>Color</label></strong>
                                   </div>
                                   <div class="col-md-8 mt-1">
-                                    <select class="js-example-basic-multiple form-control my-select my-form-control @error('color_id') is-invalid @enderror" data-live-search="true" name="color_id[]" multiple>
+                                    <select class="js-example-basic-multiple form-control my-select my-form-control @error('color_id') is-invalid @enderror" data-live-search="true" name="color_id">
                                       <option  data-tokens="ketchup mustard" value="">Select Color</option>
                                       @foreach ($color as $item)
                                       <option value="{{$item->id}}"  {{ $item->id == $product->color_id ? 'selected' : '' }} >{{$item->name}}</option>
@@ -176,43 +176,43 @@
                                   </div>
                                     <div class="col-md-8 mt-1">
                                       <div class="input-group input-group-sm">
-                                      <select name="sub_category_id" id="sub_category_id" class="js-example-basic-multiple form-control my-form-control @error('sub_category_id') is-invalid @enderror " data-live-search="true" >
-                                        @foreach ($subcategory as $item)
-                                        <option name="sub_category_id" value="{{ $item->id }}" {{ $item->id == $product->sub_category_id ? 'selected' : old('sub_category_id')  }} data-tokens="ketchup mustard">{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="input-group-append">
-                                      <a class="border rounded my-select my-form-control py-0 px-2" href="{{ route('subcategory.index') }}" target="_blank"><i class="fas fa-plus"></i></a>
-                                    </div>
-                                  </div>
-                                        @error('sub_category_id')
-                                          <span class="invalid-feedback" role="alert">
-                                              <strong>{{ $message }}</strong>
-                                          </span> 
-                                        @enderror
-                                  </div>
-                                  <div class="col-md-4">
-                                    <strong><label>Child Category</label><span class="my-label">:</span></strong>
-                                  </div>
-                                  <div class="col-md-8 mt-1">
-                                    <div class="input-group input-group-sm">
-                                        <select name="child_category_id" id="child_category_id" class="js-example-basic-multiple form-control my-form-control @error('child_category_id') is-invalid @enderror ">
-                                            @foreach ($childcategory as $item)
-                                            <option name="child_category_id" data-tokens="ketchup mustard" value="{{ $item->id }}" {{$item->id == $product->child_category_id ? 'selected' : old('child_category_id') }}>{{$item->name}}</option>
-                                            @endforeach
+                                        <select name="sub_category_id" id="sub_category_id" class="form-control @error('sub_category_id') is-invalid @enderror ">
+                                          @foreach ($subcategory as $item)
+                                          <option value="{{ $item->id }}" {{ $item->id == $product->sub_category_id ? 'selected' : old('sub_category_id')  }} >{{$item->name}}</option>
+                                          @endforeach
                                         </select>
                                         <div class="input-group-append">
-                                            <a class="border rounded my-select my-form-control py-0 px-2"
-                                                href="{{ route('childcategory.index') }}"
-                                                target="_blank"><i class="fas fa-plus"></i></a>
+                                          <a class="border rounded my-select my-form-control py-0 px-2" href="{{ route('subcategory.index') }}" target="_blank"><i class="fas fa-plus"></i></a>
                                         </div>
-                                    </div>
-                                    @error('child_category_id')
+                                      </div>
+                                      @error('sub_category_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                  </div>
+                                        </span> 
+                                      @enderror
+                                    </div>
+                                    <div class="col-md-4">
+                                      <strong><label>Child Category</label><span class="my-label">:</span></strong>
+                                    </div>
+                                    <div class="col-md-8 mt-1">
+                                      <div class="input-group input-group-sm">
+                                          <select name="child_category_id" id="child_category_id" class="js-example-basic-multiple form-control my-form-control @error('child_category_id') is-invalid @enderror ">
+                                              @foreach ($childcategory as $item)
+                                              <option value="{{ $item->id }}" {{$item->id == $product->child_category_id ? 'selected' : old('child_category_id') }}>{{$item->name}}</option>
+                                              @endforeach
+                                          </select>
+                                          <div class="input-group-append">
+                                              <a class="border rounded my-select my-form-control py-0 px-2"
+                                                  href="{{ route('childcategory.index') }}"
+                                                  target="_blank"><i class="fas fa-plus"></i></a>
+                                          </div>
+                                      </div>
+                                      @error('child_category_id')
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span>
+                                      @enderror
+                                    </div>
                             
                                   <div class="col-md-4">
                                     <strong><label> Product Is</label> <span class="my-label">:</span> </strong>
@@ -293,31 +293,31 @@
       }
   });
 </script>
-{{-- <script>
-    $(document).ready(function(){
-           $("select[name='category_id']").on('change', function(){
-               var category_id =$(this).val();
-               product(category_id)
-           });
-       });
-       var categoryId = "<?php echo $product->category_id ?>";
-       product(categoryId);
-       function product(id) {
-           var subcategoryId = id;
-           if(subcategoryId != 0 && subcategoryId != undefined) {
-               $.ajax({
-                   url:"{{ url('/product/subcategory/list')}}/"+ subcategoryId,
-                   type :"GET",
-                   dataType:"json",
-                   success:function(data){
-                   $('#sub_category_id').empty();
-                       $.each(data, function(key,value){
-                       $("#sub_category_id").append('<option value="'+value.id+'">'+value.name+'</option>');
-                       });
-                   }
-               });
-           }
-       }
+<script>
+    // $(document).ready(function(){
+    //        $("select[name='category_id']").on('change', function(){
+    //            var category_id =$(this).val();
+    //            product(category_id)
+    //        });
+    //    });
+    //    var categoryId = "<?php echo $product->category_id ?>";
+    //    product(categoryId);
+    //    function product(id) {
+    //        var subcategoryId = id;
+    //        if(subcategoryId != 0 && subcategoryId != undefined) {
+    //            $.ajax({
+    //                url:"{{ url('/product/subcategory/list')}}/"+ subcategoryId,
+    //                type :"GET",
+    //                dataType:"json",
+    //                success:function(data){
+    //                $('#sub_category_id').empty();
+    //                    $.each(data, function(key,value){
+    //                    $("#sub_category_id").append('<option value="'+value.id+'">'+value.name+'</option>');
+    //                    });
+    //                }
+    //            });
+    //        }
+    //    }
 
 
        $(document).ready(function() {
@@ -336,63 +336,62 @@
                    type :"GET",
                    dataType:"json",
                    beforeSend: () => {
-                        $('#childcategoryId').html("");
+                        $('#child_category_id').html("");
                     },
                    success:function(data){
-                   $('#child_category_id').empty();
+                    $('#child_category_id').empty();
                        $.each(data, function(key,value){
-                       $("#childcategoryId").append('<option value="'+value.id+'">'+value.name+'</option>');
+                       $("#child_category_id").append('<option value="'+value.id+'">'+value.name+'</option>');
                        });
                    }
                });
            }
        }
-   </script> --}}
+   </script>
         <script>
           $(document).ready(function() {
               $("select[name='category_id']").on('change', function() {
                   let category_id = $(this).val();
                   $.ajax({
-                      url: "{{ url('/subcategory-all') }}/" + category_id,
+                      url: "{{ url('product/subcategory/list/') }}/" + category_id,
                       dataType: 'JSON',
                       method: 'GET',
                       success: function(res) {
                           $('#sub_category_id').empty();
+                          $('#child_category_id').empty();
                           $.each(res, function(key, value) {
-                              $('#sub_category_id').append('<option value=" ' + value.id +
-                                  ' ">' + value.name + '</option>');
+                              $('#sub_category_id').append('<option value="' + value.id +'">' + value.name + '</option>');
                           });
   
                       }
                   })
-  
-  
               });
+              // $("select[name='sub_category_id']").on('change', function() {
+              //     let sub_category_id = $(this).val();
+              //     sub_category_id = parseInt(sub_category_id);
+              //     $.ajax({
+              //         url: location.origin + "product/childcategory/list/" + sub_category_id,
+              //         dataType: 'JSON',
+              //         method: 'GET',
+              //         beforeSend: () => {
+              //             $('#child_category_id').html("");
+              //         },
+              //         success: function(res) {
+              //           // console.log(res);
+              //             $.each(res, function(key, value) {
+              //                 $('#child_category_id').append('<option value=" ' + value
+              //                     .id + ' ">' + value.name + '</option>');
+              //             });
+  
+              //         }
+              //     })
+              // });
           });
       </script>
       <script>
-          $(document).ready(function() {
-              $("select[name='sub_category_id']").on('change', function() {
-                  let sub_category_id = $(this).val();
-                  sub_category_id = parseInt(sub_category_id);
-                  $.ajax({
-                      url: location.origin + "/childcategory/list//" + sub_category_id,
-                      dataType: 'JSON',
-                      method: 'GET',
-                      beforeSend: () => {
-                          $('#child_category_id').html("");
-                      },
-                      success: function(res) {
-                        // console.log(res);
-                          $.each(res, function(key, value) {
-                              $('#child_category_id').append('<option value=" ' + value
-                                  .id + ' ">' + value.name + '</option>');
-                          });
-  
-                      }
-                  })
-              });
-          });
+         
+              
+         
       </script>
    <script>
      $(document).on('click', '.close-btn', function () {

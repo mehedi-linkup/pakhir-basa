@@ -69,16 +69,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // $request->validate([
-        //     'name' => 'required|max:100',
-        //     'category_id' => 'required',
-        //     // 'sub_category_id' => 'required',
-        //     'price' => 'required|max:10|regex:/^\d+(\.\d{1,2})?$/',
-        //     'image' => 'required|image|mimes:jpg,png,gif,bmp',
-        //     'otherImage' => 'image|mimes:jpg,png,gif,bmp',
-        //     'purchase' => 'required|min:1|max:10',
-        // ]);
+        
+        $request->validate([
+            'name' => 'required|max:100',
+            'category_id' => 'required',
+            // 'sub_category_id' => 'required',
+            'price' => 'required|max:10|regex:/^\d+(\.\d{1,2})?$/',
+            'image' => 'required|image|mimes:jpg,png,gif,bmp',
+            'otherImage*' => 'mimes:jpg,png,gif,bmp,webp,jpeg',
+            'purchase' => 'required|min:1|max:10',
+        ]);
         // return $request;
         $slug = Str::slug($request->name . '-' . time());
         $i = 0;
@@ -96,13 +96,9 @@ class ProductController extends Controller
             $productCode = $this->generateCode('Product', 'P');
             
             $product = new Product();
-
-            $productSize = implode(',', $request->size_id);
-            $product->size_id = $productSize;
-
-            
             $product->name = $request->name;
             $product->color_id = $request->color_id;
+            $product->size_id = $request->size_id;
             $product->slug = $slug;
             $product->code = $productCode;
             $product->category_id = $request->category_id;
@@ -124,7 +120,7 @@ class ProductController extends Controller
 
             $product->image = $mainImage;
             $product->thum_image = $thumbImage;
-            $product->save_by = 1;
+            $product->save_by = Auth::user()->id;
             $product->ip_address = $request->ip();
             $product->save();
 
@@ -191,8 +187,8 @@ class ProductController extends Controller
     {
         try {
             $removeImage = ProductImage::find($id);
-            if (!empty($removeImage->otherImage) && file_exists($removeImage->otherImage)) {
-                unlink($removeImage->otherImage);
+            if (!empty('uploads/otherImage/'.$removeImage->otherImage) && file_exists('uploads/otherImage/'.$removeImage->otherImage)) {
+                unlink('uploads/otherImage/'.$removeImage->otherImage);
             }
             $removeImage->delete();
             return true;
@@ -268,11 +264,11 @@ class ProductController extends Controller
             }
             $slug = Str::slug($request->name . '-' . time());
 
-            $productSize = explode(',', $request->size_id);
-            $product->size_id = $productSize;
+            // $productSize = explode(',', $request->size_id);
+            $product->size_id = $request->size_id;
 
-            $productColor = explode(',', $request->color_id);
-            $product->color_id = $productColor;
+            // $productColor = explode(',', $request->color_id);
+            $product->color_id = $request->color_id;
 
             $product->name = $request->name;
             $product->slug = $slug;
@@ -295,12 +291,19 @@ class ProductController extends Controller
             $product->save();
     
             // multiple image
-            $productImages = $this->imageUpload($request, 'otherImage', 'uploads/otherImage');
-            if (is_array($productImages) && count($productImages)) {
-                foreach ($productImages as $image) {
+            // $productImages = $this->otherimageUpload($request, 'otherImage', 'uploads/otherImage');
+
+            $productImage = $request->file('otherImage');
+            if(is_array($productImage) && count($productImage) > 0) {
+                foreach ($productImage as $key => $image) {
+                    $name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                    $extention = $image->getClientOriginalExtension();
+                    $imageName = $name . '_' . uniqId() . '.' . $extention;
+                    $image->move('uploads/otherImage', $imageName);            
+
                     $imagePath = new ProductImage();
                     $imagePath->product_id = $product->id;
-                    $imagePath->otherImage = $image;
+                    $imagePath->otherImage = $imageName;
                     $imagePath->save();
                 }
             }
@@ -320,10 +323,17 @@ class ProductController extends Controller
                 return redirect()->back();
             }
         
-            }
-
-            
-        
+        }
+    }
+    public function otherimageUpload($request, $name, $directory)
+    {
+        $doUpload = function ($image) use ($directory) {
+            $name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+            $extention = $image->getClientOriginalExtension();
+            $imageName = $name . '_' . uniqId() . '.' . $extention;
+            $image->move($directory, $imageName);
+            return $imageName;
+        };
     }
     /**
      * Remove the specified resource from storage.

@@ -412,8 +412,8 @@
                             sliderThumb += '<div class="product-thumb swiper-slide"><img src="'+ window.location.origin +'/uploads/otherImage/' + value.otherImage +'" alt="Product Thumb" width="103" height="116"></div>';
                         })
                         $('#quickviewProductThumb').html(sliderThumb);
-                        Wolmart.slider(".swiper-container"),
-                        Wolmart.call(Wolmart.slider.pgToggle),
+                        Wolmart.slider(".swiper-container")
+                        Wolmart.call(Wolmart.slider.pgToggle)
                         Wolmart.$window.on("resize", function () {
                             Wolmart.call(Wolmart.slider.pgToggle);
                         });
@@ -430,7 +430,7 @@
                 data: {
                     _token: CSRF_TOKEN,
                     id: id,
-                    quantity: $('#quantityId').val() 
+                    quantity: $('#quantityId').val()
                 },
                 dataType: "json", 
                 success: function(res) {
@@ -458,7 +458,7 @@
             url:url,
             type:"get",
             dataType: "json",
-                success:function(res){
+                success:function(res) {
                     cartAllData();
                 }
             })

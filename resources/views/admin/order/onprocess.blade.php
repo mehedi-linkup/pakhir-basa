@@ -41,7 +41,7 @@
                                    <td>@if(isset($order->delivery_date)){{$order->delivery_date}} @endif ,@if(isset($order->deliveryTime->time)) {{$order->deliveryTime->time}} @endif</td>
                                     <td>{{$order->total_amount}}</td>
                                     <td>
-                                        @if(Auth::user()->action_process == 1)
+                                        @if(Auth::user()->status == 1)
                                             @if ($order->status == 'on')
                                             <a href="{{route('order.process',$order->id)}}" id="procesing" onclick="processing({{$order->id}})" class="btn btn-edit procesing" data-bs-toggle="modal" data-bs-target="#myModal">Process</a>
                                             @endif
@@ -51,10 +51,10 @@
                                         
                                             <form action="{{route('product.order.delete',$order->id)}}" method="post">
                                                 @csrf
-                                             @if(Auth::user()->action_view == 1)
+                                             @if(Auth::user()->status == 1)
                                                 <a href="{{route('invoice.admin',$order->id)}}" class="btn btn-edit"><i class="fas fa-eye"></i></a>
                                             @endif
-                                            @if(Auth::user()->action_delete == 1)
+                                            @if(Auth::user()->status == 1)
                                                 <button  type="submit" class="btn btn-delete" title="Cancel" onclick="return confirm('Are you sure you want to cancel this order?');"><i class="fas fa-window-close"></i></button>
                                             @endif
                                         </form>

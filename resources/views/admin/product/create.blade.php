@@ -125,10 +125,10 @@
                                                 <div class="col-md-8 my-1">
                                                     <select
                                                         class="js-example-basic-multiple form-control my-select my-form-control @error('size_id') is-invalid @enderror "
-                                                        data-live-search="true" name="size_id[]" multiple >
+                                                        data-live-search="true" name="size_id">
                                                         <option data-tokens="ketchup mustard" value="">Select Size</option>
                                                         @foreach ($size as $item)
-                                                            <option value="{{ $item->id }}" >{{ $item->name }}
+                                                            <option value="{{ $item->id }}" {{ old('size_id') == $item->id ? 'selected' : '' }} >{{ $item->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -209,17 +209,17 @@
                                                                     {{ $item->name }}</option>
                                                             @endforeach
                                                         </select>
+                                                        @error('category_id')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                         <div class="input-group-append">
                                                             <a class="border rounded my-select my-form-control py-0 px-2"
                                                                 href="{{ route('category.index') }}" target="_blank"><i
                                                                     class="fas fa-plus"></i></a>
                                                         </div>
                                                     </div>
-                                                    @error('category_id')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
                                                 </div>
 
                                                 <div class="col-md-4">
@@ -298,7 +298,7 @@
                                                 <div class="col-md-2 mt-1">
                                                     <input type="checkbox" name="is_popular" value="1"
                                                         {{ old('is_popular') == '1' ? 'checked' : '' }}
-                                                        class="@error('is_featured') is-invalid @enderror" id="">
+                                                        class="@error('is_popular') is-invalid @enderror" id="">
                                                     @error('is_popular')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -311,7 +311,7 @@
                                                             class="my-label">:</span> </strong>
                                                 </div>
                                                 <div class="col-md-8 mt-1">
-                                                    <textarea name="description" class="form-control" id="description" cols="30" rows="3"></textarea>
+                                                    <textarea name="description" class="form-control @error('description') is-invalid @enderror " id="description" cols="30" rows="3"></textarea>
                                                     @error('description')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -323,8 +323,13 @@
                                                     </strong>
                                                 </div>
                                                 <div class="col-md-8 mt-1">
-                                                    <input type="file" class=" form-control form-control-sm" maxlength="5"
+                                                    <input type="file" class=" form-control form-control-sm @error('otherImage') is-invalid @enderror" maxlength="5"
                                                         id="otherImage" name="otherImage[]" multiple />
+                                                        @error('otherImage')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                 </div>
                                             </div>
                                         </div>

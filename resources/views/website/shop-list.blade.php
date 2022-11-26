@@ -169,7 +169,7 @@
                             </a>
                             <div class="product-action-vertical">
                                 <a href="#" class="btn-product-icon btn-quickview w-icon-search"
-                                    title="Quick View"></a>
+                                    title="Quick View" onclick="quickView({{$item->id}})"></a>
                             </div>
                         </figure>
                         <div class="product-details">

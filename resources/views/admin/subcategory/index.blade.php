@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                             <div class="group">
-                                <input type="checkbox" name="is_popular" id="is_popular" value="p" title="is popular">
+                                <input type="checkbox" name="is_popular" id="is_popular" value="1" title="is popular">
                                 <label for="is_popular">Is popular</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
