@@ -45,7 +45,7 @@
                             <span class="text-dark font-weight-bold">{{ Auth::guard('customer')->user()->name }}</span>
                             (not
                             <span class="text-dark font-weight-bold">{{ Auth::guard('customer')->user()->name }}</span>?
-                            <a href="#" class="text-primary">Log out</a>)
+                            <a href="{{ route('customerLogout') }}" class="text-primary">Log out</a>)
                         </p>
 
                         <p class="mb-4">
@@ -346,24 +346,6 @@
                                     <img src="#" alt="" id="previewImage" class="customer-image" style="width: 110px; height:100px;">
                                 </div>
                             </div>
-                        
-                           
-                            {{-- <h4 class="title title-password ls-25 font-weight-bold">Password change</h4>
-                            <div class="form-group">
-                                <label class="text-dark" for="cur-password">Current Password leave blank to leave unchanged</label>
-                                <input type="password" class="form-control form-control-md"
-                                    id="cur-password" name="cur_password">
-                            </div>
-                            <div class="form-group">
-                                <label class="text-dark" for="new-password">New Password leave blank to leave unchanged</label>
-                                <input type="password" class="form-control form-control-md"
-                                    id="new-password" name="new_password">
-                            </div>
-                            <div class="form-group mb-10">
-                                <label class="text-dark" for="conf-password">Confirm Password</label>
-                                <input type="password" class="form-control form-control-md"
-                                    id="conf-password" name="conf_password">
-                            </div> --}}
                             <button type="submit" class="btn btn-dark btn-rounded btn-sm mb-4">Save Changes</button>
                         </form>
                     </div>

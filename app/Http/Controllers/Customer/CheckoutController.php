@@ -218,7 +218,7 @@ class CheckoutController extends Controller
             'thana_id' => 'required',
             'ip_address' => 'max:15'
         ]);
-
+        
         $sum = 0;
         $last_invoice_no =  Order::whereDate('created_at', today())->latest()->take(1)->pluck('invoice_no');
         if(count($last_invoice_no) > 0){
@@ -236,7 +236,7 @@ class CheckoutController extends Controller
             DB::beginTransaction();
             $order = new Order();
             $order->invoice_no = $invoice_no;
-            $order->customer_id = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : '';
+            $order->customer_id = $request->customer_id;
             $order->customer_name = $request->name;
             $order->customer_mobile = $request->phone;
             $order->customer_email = $request->email;
@@ -256,6 +256,8 @@ class CheckoutController extends Controller
             // dd($offer_product);
             if(Auth::guard('customer')->user()) {
                 $exist_order_tables =OrderDetails::where('customer_id', Auth::guard('customer')->user()->id)->whereDate('created_at', Carbon::today())->get()->pluck('product_id')->toArray();
+            } else {
+                $exist_order_tables = [];
             }
         
             foreach (\Cart::getContent() as $value) {
@@ -272,7 +274,7 @@ class CheckoutController extends Controller
                             $orderDetails->order_id        = $order->id;
                             $orderDetails->product_id      = $value->id;
                             $orderDetails->product_name    = $value->name;
-                            $orderDetails->customer_id     = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : '';
+                            $orderDetails->customer_id     = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : null;
                             $orderDetails->price           = $value->price;
                             $orderDetails->quantity        = $value->quantity;
                             $orderDetails->total_price     = $price;
@@ -287,7 +289,6 @@ class CheckoutController extends Controller
                         }
                     }
                     else{
-                        // dd('nai');
                         $id = $value->id;
                         $product = Product::with('inventory')->where('id',$id)->first();
                     
@@ -304,7 +305,7 @@ class CheckoutController extends Controller
                                 $orderDetails->order_id       = $order->id;
                                 $orderDetails->product_id     = $value->id;
                                 $orderDetails->product_name   = $value->name;
-                                $orderDetails->customer_id    = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : '';
+                                $orderDetails->customer_id    = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : null;
                                 $orderDetails->price          = $value->price;
                                 $orderDetails->offer_price    = $value->attributes->offer_price;
                                 $orderDetails->offer_quantity = $value->attributes->quantity;
@@ -331,13 +332,13 @@ class CheckoutController extends Controller
                             $stock = $product->inventory->purchase;
                             if($stock >= $value->quantity){
                                 $discount_product            = Product::where('id',$value->id)->first();
-                                $discount                    = $value->price/100*$discount_product->discount;
+                                $discount                    = $value->price / 100 * $discount_product->discount;
                                 $price                       = $discount_product->price - $discount;
                                 $orderDetails                = new OrderDetails();
                                 $orderDetails->order_id      = $order->id;
                                 $orderDetails->product_id    = $value->id;
                                 $orderDetails->product_name  = $value->name;
-                                $orderDetails->customer_id   = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : '';
+                                $orderDetails->customer_id   = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : null;
                                 $orderDetails->offer_price   = $value->attributes->offer_price;
                                 $orderDetails->price         = $value->price;
                                 $orderDetails->quantity      = $value->quantity;
@@ -366,7 +367,7 @@ class CheckoutController extends Controller
                             $orderDetails->order_id      = $order->id;
                             $orderDetails->product_id    = $value->id;
                             $orderDetails->product_name  = $value->name;
-                            $orderDetails->customer_id   = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : '';
+                            $orderDetails->customer_id   = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : null;
                             $orderDetails->price         = $value->price;
                             $orderDetails->quantity      = $value->quantity;
                             $price                       = $value->quantity * $value->price;
@@ -391,7 +392,7 @@ class CheckoutController extends Controller
                 Order::where('id',$order->id)->delete();
                 $customer_phone     = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->phone : $request->phone;
                 $name               = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->name : $request->name;
-                $customer_id        = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->code : "";
+                $customer_id        = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : null;
                 $message            = "$name .Sorry! Your order product out of stock. Your are most valuable for us. ";
                 
                 DB::commit();
