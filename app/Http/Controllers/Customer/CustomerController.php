@@ -51,6 +51,24 @@ class CustomerController extends Controller
         }
 
     }
+    public function AuthCheckInPage(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $credential = $request->only('password');
+        $credential['email'] = $request->email;
+        if (Auth::guard('customer')->attempt($credential)) {
+            session()->flash('message', 'Login Successfully !');
+            return redirect()->route('checkout.index');
+
+        } else {
+            Session::flash('error', 'Email or password not match');
+            return redirect()->back();
+        }
+
+    }
     public function signUp() {
         if (Auth::guard('customer')->check()){
             Session::flash('message', 'You have already login');
@@ -209,7 +227,7 @@ class CustomerController extends Controller
     {
         Auth::guard('customer')->logout();
         Session::flash('error', 'Logout Successfully');
-        return redirect()->route('home');
+        return redirect()->route('customer.login');
     }
 
     public function customerPanel()
@@ -218,7 +236,7 @@ class CustomerController extends Controller
             $order = Order::with('orderDetails')->where('customer_id', Auth::guard('customer')->user()->id)->latest()->get();
             return view('website.customer.dashboard', compact('order'));
         } else {
-            return redirect()->route('home');
+            return redirect()->route('customer.login');
         }
     }
 

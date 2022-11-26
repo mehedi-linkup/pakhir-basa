@@ -89,6 +89,7 @@ Route::post('/subscriber-store', [SubscriberController::class, 'subscriberList']
 Route::get('/customer', [CustomerCustomerController::class, 'customer'])->name('customer.login');
 Route::get('/customer/signUp', [CustomerCustomerController::class, 'signUp'])->name('customer.signup');
 Route::post('/customer-auth', [CustomerCustomerController::class, 'AuthCheck'])->name('customer.auth');
+Route::post('/customer-auth-inpage', [CustomerCustomerController::class, 'AuthCheckInPage'])->name('customer.auth.page');
 Route::get('/customerPanel', [CustomerCustomerController::class, 'customerPanel'])->name('customer.panel');
 Route::post('/customerStore', [CustomerCustomerController::class, 'customerStore'])->name('customerStore');
 Route::get('/customer-resend-otp', [CustomerCustomerController::class, 'registerResendOtp'])->name('customer.resend.otp');

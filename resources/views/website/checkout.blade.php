@@ -23,7 +23,7 @@
                     class="show-login font-weight-bold text-uppercase text-dark">Login</a>
             </div>
             @endif
-            <form class="login-content" action="{{ route('customer.auth') }}" method="POST">
+            <form class="login-content" action="{{ route('customer.auth.page') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-xs-6">
@@ -57,8 +57,8 @@
             </div> --}}
             <form class="form checkout-form" action="{{ route('order.store') }}" method="post">
                 @csrf
-                <div class="row mb-9">
-                    <div class="col-lg-7 pr-lg-4 mb-4">
+                <div class="row mb-9 justify-content-center">
+                    <div class="col-lg-4 pr-lg-4 mb-4">
                         <h3 class="title billing-title text-uppercase ls-10 pt-1 pb-3 mb-0">
                             Billing Details
                         </h3>
