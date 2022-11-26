@@ -229,7 +229,7 @@
                             <label for="order-note">Order notes (optional)</label>
                             <textarea class="form-control mb-0" id="order_note" name="order_note" cols="30"
                                 rows="3"
-                                placeholder="Notes about your order, e.g special notes for delivery">{{ @Auth::guard('customer')->user()->order_note }}</textarea>
+                                placeholder="Notes about your order, e.g special notes for delivery" >{{ @Auth::guard('customer')->user()->order_note }}</textarea>
                         </div>
                     </div>
                     <div class="col-lg-5 mb-4 sticky-sidebar-wrapper">
