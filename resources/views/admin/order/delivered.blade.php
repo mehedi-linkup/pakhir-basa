@@ -47,10 +47,10 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    @if(Auth::user()->action_view == 1)
+                                    @if(Auth::user()->status == 1)
                                         <a href="{{route('invoice.admin',$order->id)}}" class="btn btn-edit"><i class="fas fa-eye"></i></a>
                                     @endif
-                                    @if(Auth::user()->action_delete == 1)
+                                    @if(Auth::user()->status == 1)
                                         <button class="btn btn-delete" disabled><i class="fa fa-trash"></i></button>
                                     @endif
                                 </td>

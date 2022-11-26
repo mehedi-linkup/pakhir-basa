@@ -216,7 +216,6 @@ class CheckoutController extends Controller
     {
         $request->validate([
             'thana_id' => 'required',
-            'area_id' => 'required',
             'ip_address' => 'max:15'
         ]);
 
@@ -398,7 +397,7 @@ class CheckoutController extends Controller
                 DB::commit();
                 Session::flash('error', 'Order submit failed...May be out of stock');
                 \Cart::clear();
-                return redirect()->route('home');
+                return redirect()->back();
             }else{
                 $company            = CompanyProfile::first();
                 $admin_phone        = $company->phone_3;

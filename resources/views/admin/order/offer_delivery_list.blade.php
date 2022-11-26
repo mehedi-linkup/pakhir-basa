@@ -42,7 +42,7 @@
                                     <td>@if(isset($order->delivery_date)){{ $order->delivery_date}} @endif ,@if(isset($order->deliveryTime->time)) {{$order->deliveryTime->time}} @endif</td>
                                    <td>{{$order->total_amount}}</td>
                                     <td>
-                                        @if(Auth::user()->action_process == 1)
+                                        @if(Auth::user()->status == 1)
                                             @if ($order->status == 'd')
                                             <a href="#" class="btn btn-edit procesing" >Delivered</a>
                                             @endif
@@ -52,10 +52,10 @@
                                        
                                             <form action="{{route('product.order.delete',$order->id)}}" method="post">
                                             @csrf
-                                             @if(Auth::user()->action_view == 1)
+                                             @if(Auth::user()->status == 1)
                                             <a href="{{route('invoice.admin',$order->id)}}" class="btn btn-edit"><i class="fas fa-eye"></i></a>
                                              @endif
-                                             @if(Auth::user()->action_delete == 1)
+                                             @if(Auth::user()->status == 1)
                                                 <a href="{{route('order.soft.delete',$order->id)}}" class="btn btn-delete"><i class="fa fa-trash"></i></a>
                                      
                                              @endif

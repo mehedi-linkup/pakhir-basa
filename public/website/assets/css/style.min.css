@@ -5459,13 +5459,13 @@ blockquote {
 
 .btn-dark {
   color: #fff;
-  border-color: #333;
-  background-color: #333;
+  border-color: #336699;
+  background-color: #336699;
 }
 .btn-dark:hover, .btn-dark:active, .btn-dark:focus {
   color: #fff;
-  border-color: #454545;
-  background-color: #454545;
+  border-color: #333;
+  background-color: #333;
 }
 .btn-dark.btn-solid {
   color: #333;
@@ -19191,10 +19191,12 @@ body .product-popup {
 #account-orders .account-orders-table th {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  border: 1px solid #333;
 }
 #account-orders .account-orders-table td {
   padding-top: 2.1rem;
   padding-bottom: 2.1rem;
+  border: 1px solid #333;
 }
 #account-orders .account-orders-table .order-id {
   padding-left: 1rem;
