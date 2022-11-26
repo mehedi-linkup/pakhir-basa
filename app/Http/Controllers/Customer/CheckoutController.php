@@ -215,7 +215,7 @@ class CheckoutController extends Controller
     public function orderStore(Request $request)
     {
         $request->validate([
-            'thana_id' => 'required',
+            // 'thana_id' => 'required',
             'ip_address' => 'max:15'
         ]);
         
@@ -230,7 +230,7 @@ class CheckoutController extends Controller
         if($area) {
             $area_amount = $area->amount;
         } else {
-            $area_amount = "";
+            $area_amount = 0;
         }
         try {
             DB::beginTransaction();
