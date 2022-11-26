@@ -422,7 +422,7 @@
                         @endif
                             
                         @endforeach
-                        <a class="nav-link {{($route == 'set-time')?'active':''}}" href="{{ route('set-time') }}"><i class="fas fa-angle-right"></i>&nbsp; Time Set</a>
+                        {{-- <a class="nav-link {{($route == 'set-time')?'active':''}}" href="{{ route('set-time') }}"><i class="fas fa-angle-right"></i>&nbsp; Time Set</a> --}}
                        
                     </nav>
                 </div>
