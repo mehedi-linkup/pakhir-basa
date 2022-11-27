@@ -47,10 +47,7 @@
                     <div class="product-action">
                         <a href="#" class="btn-product btn-cart" title="Add to Cart"><i
                                 class="w-icon-cart"></i> Add To Cart</a>
-                        <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
-                            title="Add to wishlist"></a>
-                        <a href="#" class="btn-product-icon btn-compare w-icon-compare"
-                            title="Compare"></a>
+                        
                     </div>
                 </div>
             </div>

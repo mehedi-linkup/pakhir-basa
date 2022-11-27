@@ -72,30 +72,8 @@
                         </div>
                         <!-- End of Collapsible Widget -->
 
-                        <!-- Start of Collapsible Widget -->
-                        <!-- <div class="widget widget-collapsible">
-                            <h3 class="widget-title"><span>Brand</span></h3>
-                            <ul class="widget-body filter-items item-check mt-1">
-                                <li><a href="#">Elegant Auto Group</a></li>
-                                <li><a href="#">Green Grass</a></li>
-                                <li><a href="#">Node Js</a></li>
-                                <li><a href="#">NS8</a></li>
-                                <li><a href="#">Red</a></li>
-                                <li><a href="#">Skysuite Tech</a></li>
-                                <li><a href="#">Sterling</a></li>
-                            </ul>
-                        </div> -->
-                        <!-- End of Collapsible Widget -->
-
-                        <!-- Start of Collapsible Widget -->
-                        {{-- <div class="widget widget-collapsible">
-                            <h3 class="widget-title"><span>Color</span></h3>
-                            <ul class="widget-body filter-items item-check">
-                                @foreach ($color as $item)
-                                <li><a href="#">{{ $item->name }}</a></li>    
-                                @endforeach
-                            </ul>
-                        </div> --}}
+                    
+                   
                         <!-- End of Collapsible Widget -->
                     </div>
                     <!-- End of Sidebar Content -->
@@ -125,27 +103,9 @@
                         <a href="#" class="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
                             btn-icon-left d-block d-lg-none"><i
                                 class="w-icon-category"></i><span>Filters</span></a>
-                        {{-- <div class="toolbox-item toolbox-sort select-box text-dark">
-                            <label>Sort By :</label>
-                            <select name="orderby" class="form-control">
-                                <option value="default" selected="selected">Default sorting</option>
-                                <option value="popularity">Sort by popularity</option>
-                                <option value="rating">Sort by average rating</option>
-                                <option value="date">Sort by latest</option>
-                                <option value="price-low">Sort by pric: low to high</option>
-                                <option value="price-high">Sort by price: high to low</option>
-                            </select>
-                        </div> --}}
+                   
                     </div>
                     <div class="toolbox-right">
-                        {{-- <div class="toolbox-item toolbox-show select-box">
-                            <select name="count" class="form-control">
-                                <option value="9">Show 9</option>
-                                <option value="12" selected="selected">Show 12</option>
-                                <option value="24">Show 24</option>
-                                <option value="36">Show 36</option>
-                            </select>
-                        </div> --}}
                         <div class="toolbox-item toolbox-layout">
                             <a href="{{ route('shop.box', ['shop_view'=>'shop box']) }}" class="icon-mode-grid btn-layout active">
                                 <i class="w-icon-grid"></i>
@@ -182,13 +142,7 @@
                                 <h3 class="product-name">
                                     <a href="#">{{ $item->name }}</a>
                                 </h3>
-                                {{-- <div class="ratings-container">
-                                    <div class="ratings-full">
-                                        <span class="ratings" style="width: 100%;"></span>
-                                        <span class="tooltiptext tooltip-top"></span>
-                                    </div>
-                                    <a href="https://www.portotheme.com/html/wolmart/product.html" class="rating-reviews">(10 reviews)</a>
-                                </div> --}}
+                        
                                 <div class="product-pa-wrapper">
                                     <div class="product-price">
                                         <ins class="new-price">{{ $item->price }} TK</ins>
