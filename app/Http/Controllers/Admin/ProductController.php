@@ -227,10 +227,12 @@ class ProductController extends Controller
             'name' => 'required|max:100',
             'category_id' => 'required',
             'size_id' => 'max:3',
+            'color_id' => 'max:3',
             'price' => 'required|max:18',
-            'image' => 'image|mimes:jpg,png,gif,bmp',
+            'image' => 'image|mimes:jpg,png,gif,bmp|max:500',
             'ip_address' => 'max:15',
-            'otherImage' => 'image|mimes:jpg,png,gif,bmp',
+            'otherImage' => 'max:500',
+            'purchase' => 'required',
             'code' => 'max:18|unique:products,id',
         ]);
 
@@ -262,11 +264,11 @@ class ProductController extends Controller
             }
             $slug = Str::slug($request->name . '-' . time());
 
-            $productSize = explode(',', $request->size_id);
+            // $productSize = explode(',', $request->size_id);
             $product->size_id = $request->size_id;
 
             // $productColor = explode(',', $request->color_id);
-            // $product->color_id = $request->color_id;
+            $product->color_id = $request->color_id;
 
             $product->name = $request->name;
             $product->slug = $slug;
@@ -277,7 +279,7 @@ class ProductController extends Controller
             $product->price = $request->price;
             $product->discount = $request->discount;
             $product->size_id = $request->size_id;
-            // $product->color_id = $request->color_id;
+            $product->color_id = $request->color_id;
             $product->is_popular = $request->is_popular;
             $product->is_arrival = $request->is_arrival;
             $product->is_offer = $request->is_offer;

@@ -89,7 +89,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-12">
                                 <div class="form-group">
                                     <label>Email Address</label>
                                     <input type="email" class="form-control form-control-md" name="email" value="{{ @Auth::guard('customer')->user()->email }}" placeholder="Enter Email">
@@ -101,7 +101,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            {{-- <div class="col-xs-6">
                                 <div class="form-group">
                                     <label>Thana</label>
                                     <div class="select-box">
@@ -118,10 +118,10 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                    
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label>Area</label>
                             <div class="select-box">
                                 <select name="area_id" class="form-control form-control-md">
@@ -136,7 +136,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         
                         <div class="form-group mt-3">
                             <label for="address">Address *</label>

@@ -41,15 +41,19 @@
   <div style=" margin: auto;" >
     <div class="row">
         <div class="col-xs-12">
+          <div class="w-100 mb-3" >
+            <button href="#"  onclick="printDiv('printableArea')" class="btn btn-light btn-sm ml-2"><i class="fa fa-print mr-1"></i>Print</button>
+          </div>
             <div class="card mb-3 px-2" >
                 <div class="card-body " id="printableArea">
                   <p style="text-align:right;font-weight:bold:padding:0;margin:0" id="copy">Office Copy</p>
                     <div>
-                      <div style="display:flex">
-                        <div class="logo-img" style="width: 50%">
-                          <img src="{{asset($content->logo)}}" alt="logo" style="height: 100px;width:100px">
+                      <div style="display:flex; justify-content: space-between">
+                        <div></div>
+                        <div class="logo-img">
+                          <img src="{{asset($content->logo)}}" alt="logo" style="height: 100px;width:100px;object-fit:contain">
                         </div>
-                        <div style="width: 50%">
+                        <div style="display:flex; align-items: center">
                           <h3 style="text-align: right; margin:15px 0px;float:right;font-size:12px">Invoice &nbsp;&nbsp;#{{ $order->invoice_no }}</h3>
                         </div>
                       </div>
@@ -57,27 +61,29 @@
                       <hr class="mt-1 mb-1">
                     </div>
                     <div style="display: flex;width:100%;font-size:12px">
-                      <div style="width: 30%;">
-                        <p class="mt-2 mb-2"><b>{{ $content->company_name }}</b></p>
-                        <p>{{ $content->address }}</p>
-                      </div>
                       <div style="width: 70%;">
-                        <p style="text-align: right;"><b>Invoice to</b></p>
-                        <p style="text-align: right; margin-bottom:0"><strong>Name: </strong>{{ $order->customer_name }}<br><strong>Phone:</strong> {{ $order->customer_mobile }}</p>
+                        <p style="text-align: left;"><b>Invoice to</b></p>
+                        <p style="text-align: left; margin-bottom:0"><strong>Name: </strong>{{ $order->customer_name }}<br><strong>Phone:</strong> {{ $order->customer_mobile }}</p>
                        
-                        <p style="text-align: right; margin-bottom:0">
+                        <p style="text-align: left; margin-bottom:0">
                         <strong> Billing Address:</strong> {{ $order->billing_address }}</p>
-                        <p style="text-align: right; margin-bottom:0">
+                        <p style="text-align: left; margin-bottom:0">
                           @if ($order->shipping_address != Null)
                             <strong> Shipping Address:</strong>  {{ $order->shipping_address }}
                           @else
                           @endif
                       </p>
                       </div>
+                      <div style="width: 30%;">
+                        {{-- <p class="mt-2 mb-2"><b>{{ $content->company_name }}</b></p> --}}
+                        {{-- <p>{{ $content->address }}</p> --}}
+                      </div>
                     </div>
                     <div style="justify-content: space-between;">
                       <div class="col-xs-5 pl-0">
-                        <p style="margin-bottom:5px">Invoice Date : {{ $order->created_at }} ; <span> <b>@if(isset($order->thana->name)){{$order->thana->name}} - {{$order->area->name}} @endif</b></span>;<span><strong> Delivery Date : </strong> 
+                        {{-- <p style="margin-bottom:5px">Invoice Date : {{ $order->created_at }} ; <span> <b>@if(isset($order->thana->name)){{$order->thana->name}} - {{$order->area->name}} @endif</b></span>;<span><strong> Delivery Date : </strong>  --}}
+                          <small style="margin-bottom:5px">Invoice Date : {{ date($order->created_at) }}</small>
+                          {{-- <div>
                           @if(isset($order->delivery_date))
                             {{$order->delivery_date}}
                            @endif</span>;
@@ -85,10 +91,10 @@
                             @if(isset($order->deliveryTime->time))
                             {{$order->deliveryTime->time}}
                             @endif</span>
-                        </p>
+                          </div> --}}
                       </div>
                     </div>
-                    <div class="">
+                    <div class="" style="margin-top: 15px">
                           <table style="border-collapse: collapse;width: 100%;font-size:13px;border:1px solid #000">
                             <thead style=" padding:10px;">
                               <tr style="boder:1px solid #000">
@@ -154,9 +160,7 @@
                     
             </div>
 
-            <div class="container-fluid w-100 mb-3" >
-              <button href="#"  onclick="printDiv('printableArea')" class="btn btn-primary btn-sm float-right ml-2"><i class="fa fa-print mr-1"></i>Print</button>
-            </div>
+            
             
         </div>
     </div>

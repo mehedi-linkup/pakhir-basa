@@ -164,11 +164,11 @@
                                     <a href="#" class="size">Large</a>
                                     <a href="#" class="size">Extra Large</a>
                                 </div> --}}
-                                <a href="" class="product-variation-clean">Clean All</a>
+                                {{-- <a href="" class="product-variation-clean">Clean All</a> --}}
                             </div>
-                            <div class="product-variation-price">
+                            {{-- <div class="product-variation-price">
                                 <span></span>
-                            </div>
+                            </div> --}}
 
                             <div class="fix-bottom product-sticky-content sticky-content">
                                 <div class="product-form container">

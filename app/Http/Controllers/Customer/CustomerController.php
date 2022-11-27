@@ -102,6 +102,7 @@ class CustomerController extends Controller
         $customer->password = Hash::make($request->password);
         $customer->ip_address = $request->ip();
         $customer->code = $code;
+        $customer->status = 'a';
         $customer->save_by = 0;
         $customer->updated_by = 0;
         $customer->save();

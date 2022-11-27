@@ -31,7 +31,7 @@
                                 <div class="col-md-12 ">
                                     <label for="name">Category Name<span class="text-danger">*</span> </label>
                                     <select name="category_id" class="form-control form-control-sm @error('category_id') is-invalid @enderror">
-                                        <option value="">------Select Category-------</option>
+                                        <option value="">Select Category</option>
                                         @foreach ($category as $item)
                                             <option value="{{ $item->id }}" {{ old('category_id') == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                         @endforeach 
@@ -63,10 +63,10 @@
                                         <img class="form-controlo img-thumbnail" src="#" id="previewImage" style="width: 100px;height: 80px; background: #3f4a49;">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="group">
-                                <input type="checkbox" name="is_popular" id="is_popular" value="1" title="is popular">
-                                <label for="is_popular">Is popular</label>
+                                <div class="col-md-12 mt-2">
+                                    <input type="checkbox" name="is_popular" id="is_popular" value="1" title="is popular">
+                                    <label for="is_popular">Is popular</label>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>  

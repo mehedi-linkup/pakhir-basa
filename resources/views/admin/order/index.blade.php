@@ -21,7 +21,7 @@
                                     <th>Invoice No.</th>
                                     <th>Date</th>
                                     <th>Customer Id</th>
-                                    <th>Delivery Date & Time</th>
+                                    {{-- <th>Delivery Date & Time</th> --}}
                                     <th>Customer Name</th>
                                     <th>Price</th>
                                     <th>Status</th>
@@ -35,7 +35,7 @@
                                     <td>{{$order->invoice_no}}</td>
                                     <td>{{date('d M Y',strtotime($order->created_at))}}</td>
                                     <td>@if(isset($order->customer->code)){{$order->customer->code}}@endif</td>
-                                    <td>@if(isset($order->delivery_date)){{ $order->delivery_date}} @endif ,@if(isset($order->deliveryTime->time)) {{$order->deliveryTime->time}} @endif</td>
+                                    {{-- <td>@if(isset($order->delivery_date)){{ $order->delivery_date}} @endif ,@if(isset($order->deliveryTime->time)) {{$order->deliveryTime->time}} @endif</td> --}}
                                     <td>@if(isset($order->customer_name)){{$order->customer_name}}@endif</td>
                                     <td>{{$order->total_amount}}</td>
                                     <td>
@@ -51,7 +51,7 @@
                                         @if(Auth::user()->role == 1)
                                             @if ($order->status == 'p')
                                             <a href="{{route('offer.pending',$order->id)}}" onclick="return confirm('are you sure! Order on Offer Pending')" class="btn btn-edit " >Offer Pending</a>
-                                            <a href="{{route('share.sale',$order->id)}}" onclick="return confirm('are you sure! This order sent to share sale')" class="btn btn-edit " >Share Sale</a>
+                                            {{-- <a href="{{route('share.sale',$order->id)}}" onclick="return confirm('are you sure! This order sent to share sale')" class="btn btn-edit " >Share Sale</a> --}}
                                             @endif
                                         @endif
                                             <form action="{{route('product.order.delete', $order->id)}}" method="post">
