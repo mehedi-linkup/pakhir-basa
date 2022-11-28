@@ -125,7 +125,7 @@
                         <div class="product text-center">
                             <figure class="product-media">
                                 <a href="{{ route('product.details', $item->slug) }}">
-                                    <img src="{{ asset('uploads/product/'.$item->image) }}" alt="{{ $item->name }}" width="300"
+                                    <img src="{{ asset('uploads/product/thumbnail/'.$item->thum_image) }}" alt="{{ $item->name }}" width="300"
                                         height="338" />
                                 </a>
                                 <div class="product-action-horizontal">

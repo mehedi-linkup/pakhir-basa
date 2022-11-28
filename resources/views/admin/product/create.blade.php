@@ -172,7 +172,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <strong><label>Image</label> <span class="my-label">:</span>
+                                                    <strong><label>Image</label><small>(880px X 990px)</small><span class="my-label">:</span>
                                                     </strong>
                                                 </div>
                                                 <div class="col-md-5 mt-1">
@@ -187,7 +187,7 @@
                                                 </div>
                                                 <div class="col-md-3 mt-1">
                                                     <img class="form-controlo img-thumbnail" src="#" id="previewImage"
-                                                        style="width: 100px;height: 80px; background: #3f4a49;">
+                                                        style="width: 100px;height: 120px; background: #3f4a49;">
                                                 </div>
                                             </div>
                                         </div>
@@ -319,7 +319,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <strong><label>Other Image</label> <span class="my-label">:</span>
+                                                    <strong><label>Other Image</label><small>(880px X 990px)</small> <span class="my-label">:</span>
                                                     </strong>
                                                 </div>
                                                 <div class="col-md-8 mt-1">
@@ -600,8 +600,8 @@
                 reader.onload = function(e) {
                     $('#previewImage')
                         .attr('src', e.target.result)
-                        .width(100)
-                        .height(80);
+                        .width(90)
+                        .height(110);
                 };
                 reader.readAsDataURL(input.files[0]);
             }

@@ -90,6 +90,10 @@
                                 }
                             }">
                                 <div class="product-thumbs swiper-wrapper row cols-4 gutter-sm">
+                                    <div class="product-thumb swiper-slide">
+                                        <img src="{{ asset('uploads/product/'.$product->image) }}"
+                                            alt="{{ $product->image }}" width="800" height="900">
+                                    </div>
                                     @if(count($productImage) > 0)
                                     @foreach ($productImage as $item)
                                     <div class="product-thumb swiper-slide">
@@ -217,7 +221,10 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="product-tab-specification">
-                            <ul class="list-none">
+                            <div>
+                                {!! $product->short_details !!}
+                            </div>
+                            {{-- <ul class="list-none">
                                 <li>
                                     <label>Model</label>
                                     <p>Skysuite 320</p>
@@ -234,7 +241,7 @@
                                     <label>Guarantee Time</label>
                                     <p>3 Months</p>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                         <div class="tab-pane" id="product-tab-reviews">
                             {{-- <div class="row mb-4">

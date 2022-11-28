@@ -29,7 +29,7 @@
                 <a href="#" class="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle">
                 </a>
                 <a href="{{route('home')}}" class="logo ml-lg-0">
-                    <img src="{{ asset($content->logo) }}" alt="logo" width="auto" style="height: 47px" />
+                    <img src="{{ asset($content->logo) }}" alt="logo" width="auto" style="width:150px; height:100px" />
                 </a>
                 <form method="get" action="{{ route('search') }}"
                     class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">

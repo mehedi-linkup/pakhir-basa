@@ -147,7 +147,7 @@
                                 <div class="product-wrap product text-center">
                                     <figure class="product-media">
                                         <a href="{{ route('product.details', $item->slug) }}">
-                                            <img src="{{ asset('uploads/product/'.$item->image) }}" alt="{{ $item->name }}"
+                                            <img src="{{ asset('uploads/product/thumbnail/'.$item->thum_image) }}" alt="{{ $item->name }}"
                                                 width="216" height="243" />
                                         </a>
                                         <div class="product-action-vertical">

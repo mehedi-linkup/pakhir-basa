@@ -164,7 +164,7 @@
                     <div class="product product-list product-select">
                         <figure class="product-media">
                             <a href="{{ route('product.details', $item->slug) }}">
-                                <img src="{{ 'uploads/product/'.$item->image }}" alt="{{ $item->name }}" width="330"
+                                <img src="{{ 'uploads/product/thumbnail/'.$item->thum_image }}" alt="{{ $item->name }}" width="330"
                                     height="338" />
                             </a>
                             <div class="product-action-vertical">

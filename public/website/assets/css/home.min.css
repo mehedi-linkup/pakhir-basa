@@ -13039,8 +13039,8 @@ aside .sp-sidebar-banner span {
 }
 
 .header-middle {
-  padding-top: 2.8rem;
-  padding-bottom: 2.8rem;
+  /* padding-top: 2.8rem;
+  padding-bottom: 2.8rem; */
   color: #333;
   background: #fff;
   font-size: 1.2rem;
@@ -15255,7 +15255,7 @@ aside .sp-sidebar-banner span {
   font-size: 4em;
 }
 .intro-slide .banner-title {
-  font-size: 5em;
+  font-size: 4em;
   margin-bottom: 0.1rem;
 }
 .intro-slide p {
@@ -15284,8 +15284,8 @@ aside .sp-sidebar-banner span {
   background-color: #f77c29;
 }
 .intro-slide1 .slide-image {
-  right: 36%;
-  top: 12%;
+  right: 48%;
+  top: 0%;
 }
 
 .intro-slide2 .banner-content {
