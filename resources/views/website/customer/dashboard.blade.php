@@ -125,7 +125,7 @@
                                     <th class="order-date">Date</th>
                                     <th class="shipping-address">shipping-address</th>
                                     <th class="shipping-cost">shipping-cost</th>
-                                    <th class="delivery-data">delivery-data</th>
+                                    {{-- <th class="delivery-data">delivery-data</th> --}}
                                     <th class="order-status">Status</th>
                                     <th class="order-total">Total</th>
                                     <th class="order-actions">Actions</th>
@@ -136,9 +136,10 @@
                                 <tr>
                                     <td class="order-id">#{{$item->invoice_no}}</td>
                                     <td class="order-date">{{$item->created_at->format('d/m/y')}}</td>
-                                    <td class="shipping-address">{{$item->shipping_address}}</td>
+                                    {{-- <td class="shipping-address">{{$item->shipping_address}}</td> --}}
+                                    <td class="shipping-address">{{$item->billing_address}}</td>
                                     <td class="shipping-cost">{{$item->shipping_cost}}</td>
-                                    <td class="delivery-data">@if(isset($item->delivery_date)){{$item->delivery_date}}@endif</td>
+                                    {{-- <td class="delivery-data">@if(isset($item->delivery_date)){{$item->delivery_date}}@endif</td> --}}
                                     <td class="order-status">
                                         @if ($item->status == 'p')
                                         Pending
@@ -154,7 +155,7 @@
                                     </td>
                                     <td class="order-total">
                                         <span class="order-price">{{$item->total_amount}}</span> for
-                                        <span class="order-quantity">{{2}}</span> item
+                                        <span class="order-quantity">{{ \App\Models\OrderDetails::where('order_id', $item->id)->count() }}</span> item
                                     </td>
                                     <td class="order-action">
                                         @if ($item->status == 'c' || $item->status == 'd')
@@ -165,7 +166,7 @@
                                             class="btn btn-outline btn-default btn-block btn-sm btn-rounded">View</a>
                                         @else
                                         <a href="{{route('customer.order.cancel',$item->id)}}"
-                                            class="btn btn-outline btn-default btn-block btn-sm btn-rounded">View</a>
+                                            class="btn btn-danger btn-block btn-sm btn-rounded" title="Cancel Order"><i class="fas fa-backspace"></i></a>
                                         @endif
                                     </td>
                                 </tr>
@@ -192,7 +193,13 @@
                             <div class="col-sm-6 mb-6">
                                 <div class="ecommerce-address billing-address pr-lg-8">
                                     <h4 class="title title-underline ls-25 font-weight-bold">Billing Address</h4>
-                                    <address class="mb-4">
+
+                                    <div>
+                                        <address class="mb-4">
+                                            {{ Auth::guard('customer')->user()->address }}
+                                        </address>
+                                    </div>
+                                    {{-- <address class="mb-4">
                                         <table class="address-table">
                                             <tbody>
                                                 <tr>
@@ -228,14 +235,15 @@
                                     </address>
                                     <a href="#"
                                         class="btn btn-link btn-underline btn-icon-right text-primary">Edit
-                                        your billing address<i class="w-icon-long-arrow-right"></i></a>
+                                        your billing address<i class="w-icon-long-arrow-right"></i></a> --}}
                                 </div>
                             </div>
                             <div class="col-sm-6 mb-6">
                                 <div class="ecommerce-address shipping-address pr-lg-8">
                                     <h4 class="title title-underline ls-25 font-weight-bold">Shipping Address</h4>
                                     <address class="mb-4">
-                                        <table class="address-table">
+                                        {{ Auth::guard('customer')->user()->address }}
+                                        {{-- <table class="address-table">
                                             <tbody>
                                                 <tr>
                                                     <th>Name:</th>
@@ -262,11 +270,11 @@
                                                     <td>92020</td>
                                                 </tr>
                                             </tbody>
-                                        </table>
+                                        </table> --}}
                                     </address>
-                                    <a href="#"
+                                    {{-- <a href="#"
                                         class="btn btn-link btn-underline btn-icon-right text-primary">Edit your
-                                        shipping address<i class="w-icon-long-arrow-right"></i></a>
+                                        shipping address<i class="w-icon-long-arrow-right"></i></a> --}}
                                 </div>
                             </div>
                         </div>

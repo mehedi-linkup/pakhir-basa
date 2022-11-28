@@ -20,7 +20,7 @@ class CustomerController extends Controller
     
     public function customer()
     {
-        if (Auth::guard('customer')->check()){
+        if (Auth::guard('customer')->check()) {
             Session::flash('message', 'You have already login');
             return redirect()->route('checkout.index');
         }

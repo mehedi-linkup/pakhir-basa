@@ -54,9 +54,9 @@
                     <div class="widget">
                         <h4 class="widget-title">Customer Service</h4>
                         <ul class="widget-body">
-                            <li><a href="#">Shipping</a></li>
+                            {{-- <li><a href="#">Shipping</a></li> --}}
                             <li><a href="{{route('privacy.website')}}">Privacy Policy</a></li>
-                            <li><a href="{{route('trams.website')}}">Term and Conditions</a></li>
+                            <li><a href="{{route('terms.website')}}">Term and Conditions</a></li>
                         </ul>
                     </div>
                 </div>
@@ -66,12 +66,12 @@
             <div class="footer-left">
                 <p class="copyright">Copyright © 2022 All Rights Reserved Pakhir Basa. Developed By - <a href="https://linktechbd.com/" target="_blank">Link Up Technology</a></p>
             </div>
-            <div class="footer-right">
+            {{-- <div class="footer-right">
                 <span class="payment-label mr-lg-8">We're using safe payment for</span>
                 <figure class="payment">
                     <img src="{{asset('/')}}website/images/payment.png" alt="payment" width="159" height="25" />
                 </figure>
-            </div>
+            </div> --}}
         </div>
     </div>
 </footer>

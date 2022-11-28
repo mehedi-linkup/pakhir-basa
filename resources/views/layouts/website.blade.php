@@ -474,7 +474,8 @@
                 success:function(res) {
                     var data = "";
                     $.each(res, function(key, value) {
-                        data = data + '<div class="product product-cart"><div class="product-detail"><a href="product-default.html" class="product-name">'+value.name+'</a><div class="price-box"><span class="product-quantity">'+value.quantity+'</span><span class="product-price">'+value.price+'TK</span></div></div><figure class="product-media"><a href="product-default.html"><img src="uploads/product/thumbnail/'+value.attributes.image+'" alt="'+value.attributes.slug+'" height="84" width="94" /></a></figure><button class="btn btn-link btn-close" onclick="deleteCard('+value.id+')" aria-label="button"><i class="fas fa-times"></i></button></div>'
+                        console.log(value)
+                        data = data + '<div class="product product-cart"><div class="product-detail"><a href="" class="product-name">'+value.name+'</a><div class="price-box"><span class="product-quantity">'+value.quantity+'</span><span class="product-price">'+value.price+'TK</span></div></div><figure class="product-media"><a href=""><img src="'+ location.origin +'/uploads/product/thumbnail/'+value.attributes.image+'" alt="'+value.attributes.slug+'" height="84" width="94" /></a></figure><button class="btn btn-link btn-close" onclick="deleteCard('+value.id+')" aria-label="button"><i class="fas fa-times"></i></button></div>'
                     })
                     $('#productCartList').html(data);
                     cartcontent();

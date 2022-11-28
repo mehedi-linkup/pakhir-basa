@@ -71,7 +71,7 @@ Route::get('/track-order',[HomeController::class,'trackOrder'])->name('track.ord
 
 Route::get('/about-us', [HomeController::class, 'aboutWebsite'])->name('about.website');
 Route::get('/privacy-policy', [HomeController::class, 'privacyWebsite'])->name('privacy.website');
-Route::get('/trams-and-condition', [HomeController::class, 'tramsCondition'])->name('trams.website');
+Route::get('/terms-and-conditions', [HomeController::class, 'termCondition'])->name('terms.website');
 
 // news and event
 Route::get('/news-and-event', [HomeController::class, 'newsEvent'])->name('news.list');

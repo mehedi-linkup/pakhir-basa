@@ -175,9 +175,9 @@ class HomeController extends Controller
     {
         return view('website.privacy');
     }
-    public function tramsCondition()
+    public function termCondition()
     {
-        return view('website.trams_condition');
+        return view('website.terms_condition');
     }
     public function trackOrder()
     {

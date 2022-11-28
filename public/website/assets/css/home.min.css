@@ -14608,8 +14608,8 @@ aside .sp-sidebar-banner span {
   right: 0.5rem;
 }
 .category-menu .megamenu {
-  /* min-width: 68.5rem; */
-  min-width: 40rem;
+  min-width: 68.5rem;
+  /* min-width: 40rem; */
 }
 .category-menu .megamenu > li:not(:last-child) {
   padding: 2.8rem 2rem 0 0rem;

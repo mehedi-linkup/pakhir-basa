@@ -24,10 +24,10 @@
                 <div class="sidebar-content scrollable">
                     <!-- Start of Sticky Sidebar -->
                     <div class="sticky-sidebar">
-                        <div class="filter-actions">
+                        {{-- <div class="filter-actions">
                             <label>Filter :</label>
                             <a href="#" class="btn btn-dark btn-link filter-clean">Clean All</a>
-                        </div>
+                        </div> --}}
                         <!-- Start of Collapsible widget -->
                         <div class="widget widget-collapsible">
                             <h3 class="widget-title"><span>All Categories</span></h3>

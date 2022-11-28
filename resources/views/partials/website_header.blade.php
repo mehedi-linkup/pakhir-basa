@@ -167,7 +167,7 @@
                                 <ul>
 
                                     <li><a href="{{route('privacy.website')}}">Privacy Policy </a></li>
-                                    <li><a href="{{route('trams.website')}}">Terms & Condition</a></li>
+                                    <li><a href="{{route('terms.website')}}">Terms & Condition</a></li>
                                 </ul>
                             </li>
                             <li class="{{ (request()->is('contact')) ? 'active' : '' }}">
@@ -227,7 +227,7 @@
                         <ul>
 
                             <li><a href="{{route('privacy.website')}}">Privacy Policy </a></li>
-                            <li><a href="{{route('trams.website')}}">Terms & Condition</a></li>
+                            <li><a href="{{route('terms.website')}}">Terms & Condition</a></li>
                         </ul>
                     </li>
                     <li>

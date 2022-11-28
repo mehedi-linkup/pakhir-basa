@@ -14,7 +14,7 @@
  <!-- Start of Page Content -->
  <div class="page-content">
     <div class="container">
-        <!-- Start of Shop Banner -->
+        {{-- <!-- Start of Shop Banner -->
         <div class="shop-default-banner banner d-flex align-items-center mb-5 br-xs"
             style="background-image: url(assets/images/shop/banner1.jpg); background-color: #FFC74E;">
             <div class="banner-content">
@@ -25,7 +25,7 @@
                     Now<i class="w-icon-long-arrow-right"></i></a>
             </div>
         </div>
-        <!-- End of Shop Banner -->
+        <!-- End of Shop Banner --> --}}
 
         <!-- Start of Shop Category -->
         <div class="shop-default-category category-ellipse-section mb-6">
@@ -89,10 +89,10 @@
                 <div class="sidebar-content scrollable">
                     <!-- Start of Sticky Sidebar -->
                     <div class="sticky-sidebar">
-                        <div class="filter-actions">
+                        {{-- <div class="filter-actions">
                             <label>Filter :</label>
                             <a href="#" class="btn btn-dark btn-link filter-clean">Clean All</a>
-                        </div>
+                        </div> --}}
                         <!-- Start of Collapsible widget -->
                         <div class="widget widget-collapsible">
                             <h3 class="widget-title"><span>All Categories</span></h3>
@@ -234,7 +234,7 @@
                 <div class="toolbox toolbox-pagination justify-content-between">
                     <p class="showing-info mb-2 mb-sm-0">
                         {!! $product->links() !!}
-                        Showing<span>1-12 of 60</span>Products
+                        {{-- Showing<span>1-12 of 60</span>Products --}}
                     </p>
                     <ul class="pagination">
                         <li class="prev disabled">
