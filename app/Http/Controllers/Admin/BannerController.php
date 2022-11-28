@@ -30,8 +30,8 @@ class BannerController extends Controller
         'title' => 'required|max:100',
         'offer_name' => 'required|max:100',
         'offer_link' => 'required|max:120',
-        'image' => 'required|max:1000||Image|mimes:jpg,png,jpeg,bmp',
-        'bgimage' => 'required|max:1000||Image|mimes:jpg,png,jpeg,bmp',
+        'image' => 'required|max:1000||Image|mimes:jpg,png,jpeg,bmp,webp',
+        'bgimage' => 'required|max:1000||Image|mimes:jpg,png,jpeg,bmp,webp',
         'ip_address' => 'max:15'
       ]);
       $banner = new Banner();

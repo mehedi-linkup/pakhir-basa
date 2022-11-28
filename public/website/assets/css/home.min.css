@@ -15185,7 +15185,25 @@ aside .sp-sidebar-banner span {
 .category-dropdown:hover > a, .category-dropdown.show > a {
   background-color: #f1f1f1;
 }
+/* Intro-section */
+.intro-wrapper .swiper-pagination .swiper-pagination-bullet {
+  background-color: #fff;
+  border-color: #fff;
+  opacity: 0.5;
+}
+.intro-wrapper .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  width: 1.8rem;
+  opacity: 1;
+}
 
+@media (min-width: 992px) {
+  .intro-wrapper {
+    margin-left: 30rem;
+  }
+}
+.intro-slide {
+  min-height: 50.9rem;
+}
 /* Intro-section */
 .intro-section .swiper-button-prev, .intro-section .swiper-button-next {
   margin-top: -0.2rem;

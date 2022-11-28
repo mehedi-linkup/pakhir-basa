@@ -127,14 +127,14 @@
                         <!-- End of Collapsible Widget -->
 
                         <!-- Start of Collapsible Widget -->
-                        <div class="widget widget-collapsible">
+                        {{-- <div class="widget widget-collapsible">
                             <h3 class="widget-title"><span>Size</span></h3>
                             <ul class="widget-body filter-items item-check mt-1">
                                 @foreach ($size as $item)
                                 <li><a href="#">{{ $item->name }}</a></li>
                                 @endforeach
                             </ul>
-                        </div>
+                        </div> --}}
                         <!-- End of Collapsible Widget -->
 
                         <!-- Start of Collapsible Widget -->

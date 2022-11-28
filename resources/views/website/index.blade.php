@@ -4,73 +4,77 @@
 @endsection
 @section('website-content')
 <section class="intro-section">
-    <div class="swiper-container swiper-theme nav-inner pg-inner swiper-nav-lg animation-slider pg-xxl-hide nav-xxl-show nav-hide"
-        data-swiper-options="{
-        'slidesPerView': 1,
-        'autoplay': {
-            'delay': 8000,
-            'disableOnInteraction': false
-        }
-    }">
-        <div class="swiper-wrapper">
-            @foreach ($banner as $key => $item)
-            <div class="swiper-slide banner banner-fixed intro-slide intro-slide1"
-            style="background-image: url({{ asset($item->bgimage) }}); background-color: #ebeef2;">
-                <div class="container">
-                    <figure class="slide-image skrollable slide-animate">
-                        <img src="{{ asset($item->image) }}" alt="Banner"
-                            data-bottom-top="transform: translateY(10vh);"
-                            data-top-bottom="transform: translateY(-10vh);" width="474" height="397">
-                    </figure>
-                    <div class="banner-content y-50 text-right">
-                        <h5 class="banner-subtitle font-weight-normal text-default ls-50 lh-1 mb-2 slide-animate"
-                            data-animation-options="{
-                        'name': 'fadeInRightShorter',
-                        'duration': '1s',
-                        'delay': '.2s'
-                    }">
-                            {{ $item->offer_name }}
-                        </h5>
-                        <h3 class="banner-title font-weight-bolder ls-25 lh-1 slide-animate"
-                            data-animation-options="{
-                        'name': 'fadeInRightShorter',
-                        'duration': '1s',
-                        'delay': '.4s'
-                    }">
-                            {{ $item->title }}
-                        </h3>
-                        <div class="font-weight-normal text-default slide-animate" data-animation-options="{
-                        'name': 'fadeInRightShorter',
-                        'duration': '1s',
-                        'delay': '.6s'
+    <div class="container-fluid pr-0">
+        <div class="intro-wrapper">
+            <div class="swiper-container swiper-theme nav-inner pg-inner swiper-nav-lg animation-slider pg-xxl-hide nav-xxl-show nav-hide"
+            data-swiper-options="{
+            'slidesPerView': 1,
+            'autoplay': {
+                'delay': 8000,
+                'disableOnInteraction': false
+            }
+            }">
+                <div class="swiper-wrapper">
+                @foreach ($banner as $key => $item)
+                <div class="swiper-slide banner banner-fixed intro-slide intro-slide1"
+                style="background-image: url({{ asset($item->bgimage) }}); background-color: #ebeef2;">
+                    <div class="container">
+                        <figure class="slide-image skrollable slide-animate">
+                            <img src="{{ asset($item->image) }}" alt="Banner"
+                                data-bottom-top="transform: translateY(10vh);"
+                                data-top-bottom="transform: translateY(-10vh);" width="474" height="397">
+                        </figure>
+                        <div class="banner-content y-50 text-right">
+                            <h5 class="banner-subtitle font-weight-normal text-default ls-50 lh-1 mb-2 slide-animate"
+                                data-animation-options="{
+                            'name': 'fadeInRightShorter',
+                            'duration': '1s',
+                            'delay': '.2s'
                         }">
-                            {!! $item->short_details !!}
+                                {{ $item->offer_name }}
+                            </h5>
+                            <h3 class="banner-title font-weight-bolder ls-25 lh-1 slide-animate"
+                                data-animation-options="{
+                            'name': 'fadeInRightShorter',
+                            'duration': '1s',
+                            'delay': '.4s'
+                        }">
+                                {{ $item->title }}
+                            </h3>
+                            <div class="font-weight-normal text-default slide-animate" data-animation-options="{
+                            'name': 'fadeInRightShorter',
+                            'duration': '1s',
+                            'delay': '.6s'
+                            }">
+                                {!! $item->short_details !!}
+                            </div>
+    
+                            <a href="{{ $item->offer_link }}"
+                                class="btn btn-dark btn-outline btn-rounded btn-icon-right slide-animate"
+                                data-animation-options="{
+                            'name': 'fadeInRightShorter',
+                            'duration': '1s',
+                            'delay': '.8s'
+                        }">SHOP NOW<i class="w-icon-long-arrow-right"></i></a>
+    
                         </div>
-
-                        <a href="{{ $item->offer_link }}"
-                            class="btn btn-dark btn-outline btn-rounded btn-icon-right slide-animate"
-                            data-animation-options="{
-                        'name': 'fadeInRightShorter',
-                        'duration': '1s',
-                        'delay': '.8s'
-                    }">SHOP NOW<i class="w-icon-long-arrow-right"></i></a>
-
+                        <!-- End of .banner-content -->
                     </div>
-                    <!-- End of .banner-content -->
+                    <!-- End of .container -->
+                </div> 
+                @endforeach
                 </div>
-                <!-- End of .container -->
-            </div> 
-            @endforeach
-        </div>
-        <div class="swiper-pagination"></div>
-        <button class="swiper-button-next"></button>
-        <button class="swiper-button-prev"></button>
+                <div class="swiper-pagination"></div>
+                <button class="swiper-button-next"></button>
+                <button class="swiper-button-prev"></button>
+            </div>
+        </div> 
     </div>
     <!-- End of .swiper-container -->
 </section>
 <!-- End of .intro-section -->
 
-<section class="category-section top-category bg-grey pt-10 pb-10 appear-animate">
+{{-- <section class="category-section top-category bg-grey pt-10 pb-10 appear-animate">
     <div class="container pb-2">
         <h2 class="title justify-content-center pt-1 ls-normal mb-5">Top Categories Of All Time</h2>
         <div class="swiper">
@@ -110,7 +114,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- End of .category-section top-category -->
 
 <div class="container">
