@@ -370,7 +370,6 @@
                 url: "product/quickview/"+id,
                 dataType: "json",
                 success: function(data) {
-                    console.log(data);
                     $('#productTitle').text(data.product.name);
                     $('#productCategory').text(data.product.category.name);
                     $('#productCode').text(data.product.code);
@@ -398,26 +397,34 @@
                     $('#sizeName').html(sizeText);
 
                     $('#QuickaddToCart').attr("onclick","addToCard("+ id +")");
-
-                    if(data.product.product_image.length > 0) {
+                    console.log(data.product.product_image.length);
+                    // if(data.product.product_image.length > 0) {
                         let slideImage = "";
-                        $.each(data.product.product_image, function(key, value) {
-                            slideImage += '<div class="swiper-slide"><figure class="product-image"><img src="'+ window.location.origin +'/uploads/otherImage/' + value.otherImage +'" data-zoom-image="'+ window.location.origin+'/uploads/otherImage/'+value.otherImage+'" alt="Image Name" width="800" height="900"></figure></div>'
-                        })
+                        if(data.product.product_image.length > 0) {
+                            $.each(data.product.product_image, function(key, value) {
+                                slideImage += '<div class="swiper-slide"><figure class="product-image"><img src="'+ window.location.origin +'/uploads/otherImage/' + value.otherImage +'" data-zoom-image="'+ window.location.origin+'/uploads/otherImage/'+value.otherImage+'" alt="Image Name" width="800" height="900"></figure></div>'
+                            })
+                        } else {
+                            slideImage += '<div class="swiper-slide"><figure class="product-image"><img src="'+ window.location.origin +'/uploads/product/thumbnail/' + data.product.thum_image +'" data-zoom-image="'+ window.location.origin+'/uploads/product/thumbnail/'+data.product.thum_image+'" alt="Image Name" width="800" height="900"></figure></div>'
+                        }
 
                         $('#quickview-swiper-wraper').html(slideImage);
 
                         let sliderThumb = "";
-                        $.each(data.product.product_image, function(key, value) {
-                            sliderThumb += '<div class="product-thumb swiper-slide"><img src="'+ window.location.origin +'/uploads/otherImage/' + value.otherImage +'" alt="Product Thumb" width="103" height="116"></div>';
-                        })
+                        if(data.product.product_image.length > 0) {
+                            $.each(data.product.product_image, function(key, value) {
+                                sliderThumb += '<div class="product-thumb swiper-slide"><img src="'+ window.location.origin +'/uploads/otherImage/' + value.otherImage +'" alt="Product Thumb" width="103" height="116"></div>';
+                            })
+                        } else {
+                            sliderThumb += '<div class="product-thumb swiper-slide"><img src="'+ window.location.origin +'/uploads/product/thumbnail/' + data.product.thum_image +'" alt="Product Thumb" width="103" height="116"></div>';
+                        }
                         $('#quickviewProductThumb').html(sliderThumb);
                         Wolmart.slider(".swiper-container")
                         Wolmart.call(Wolmart.slider.pgToggle)
                         Wolmart.$window.on("resize", function () {
                             Wolmart.call(Wolmart.slider.pgToggle);
                         });
-                    }
+                    // }
                 }
             });
         }

@@ -56,7 +56,7 @@ Route::get('/product-details/{slug}', [HomeController::class, 'ProductDetails'])
 Route::get('/product-show/{id}', [HomeController::class, 'PopUpProduct'])->name('product.popup');
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop.box');
 Route::get('/category/{id}', [HomeController::class, 'CategoryWise'])->name('categoryWise.list');
-Route::get('/SubCategory/{slug}', [HomeController::class, 'SubCategoryWise'])->name('SubCategoryWise.list');
+Route::get('/SubCategory/{id}', [HomeController::class, 'SubCategoryWise'])->name('SubCategoryWise.list');
 Route::get('/subcategory/list/{slug}',[HomeController::class,'singleSubCategory'])->name('single.subcategory.list');
 Route::get('/allproduct',[HomeController::class,'allProduct'])->name('all.product');
 Route::get('/shop-banner',[HomeController::class,'shopBanner'])->name('shop.banner');

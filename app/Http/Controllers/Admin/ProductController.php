@@ -229,7 +229,7 @@ class ProductController extends Controller
             'size_id' => 'max:3',
             'color_id' => 'max:3',
             'price' => 'required|max:18',
-            'image' => 'image|mimes:jpg,png,gif,bmp|max:500',
+            'image' => 'image|mimes:jpg,png,gif,bmp,webp',
             'ip_address' => 'max:15',
             'otherImage' => 'max:500',
             'purchase' => 'required',

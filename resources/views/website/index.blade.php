@@ -163,15 +163,15 @@
                                         @endif
                                     </figure>
                                     <div class="product-details">
-                                        <h4 class="product-name"><a href="">{{ $item->name }}</a></h4>
-                                        <div class="ratings-container">
+                                        <h4 class="product-name"><a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a></h4>
+                                        {{-- <div class="ratings-container">
                                             <div class="ratings-full">
                                                 <span class="ratings" style="width: 60%;"></span>
                                                 <span class="tooltiptext tooltip-top"></span>
                                             </div>
                                             {{-- <a href="{{ route('product.details', $item->slug) }}" class="rating-reviews">(3
-                                                reviews)</a> --}}
-                                        </div>
+                                                reviews)</a>
+                                        </div> --}}
                                         <div class="product-price">
                                             @if($item->discount && $item->discount != null)
                                             @php
@@ -179,11 +179,12 @@
                                                 $newPrice = $newPrice * $item->discount;
                                                 $newPrice = $item->price - $newPrice;
                                             @endphp
-                                            <ins class="new-price">{{ $newPrice  }}</ins><del
-                                                class="old-price">{{ $item->price }}</del>
+                                            <ins class="new-price">{{ $newPrice  }}TK</ins><del
+                                                class="old-price">{{ $item->price }}TK</del>
                                             @else
-                                            {{ $item->price }}
+                                            {{ $item->price }}TK
                                             @endif
+                                            
                                         </div>
                                     </div>
                                 </div>

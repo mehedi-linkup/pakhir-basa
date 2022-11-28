@@ -84,8 +84,8 @@ class HomeController extends Controller
        
         //     return view('website.category', compact('product', 'size','categories','category_list'));
        
-        $product = Product::where('category_id', $id)->get();        
-        $category_list = Category::where('category_id', $id)->first();
+        $product = Product::where('category_id', $id)->paginate(12);
+        $category_list = Category::where('id', $id)->first();
         $categories = Category::all();
         $category_wise_product = $category_list->product()->inRandomOrder()->get();
         return view('website.shop-boxed', compact('product','categories', 'category_wise_product',  'category_list'));
@@ -118,16 +118,15 @@ class HomeController extends Controller
     }
 
 
-    public function SubCategoryWise($slug)
+    public function SubCategoryWise($id)
     {
-        $subcategory = SubCategory::where('slug', $slug)->first();
+        $subcategory = SubCategory::find($id);
+        $product = Product::where('sub_category_id', $id)->paginate(12);
+        $subcategory_list = Category::where('id', $subcategory->category_id)->first();
         $categories = Category::all();
-        $subcategory_wise_product = $subcategory->product()->inRandomOrder()->get();
-        $centerBigAds = Ad::where('status', 'a')->where('position', '4')->inRandomOrder()->limit(1)->get();
-        $leftAds = Ad::where('status', 'a')->where('position', '1')->inRandomOrder()->limit(1)->get();
-        return view('website.subcategory', compact('subcategory', 'categories', 'subcategory_wise_product', 'centerBigAds', 'leftAds'));
+        $subcategory_wise_product = $subcategory_list->product()->inRandomOrder()->get();
+        return view('website.shop-boxed', compact('product','categories', 'subcategory_wise_product',  'subcategory_list'));
     }
-
     public function productViewAjax($id)
     {
         $product = Product::with(['category', 'subcategory', 'productImage'])->findOrFail($id);

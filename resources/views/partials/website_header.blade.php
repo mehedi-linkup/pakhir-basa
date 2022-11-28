@@ -133,7 +133,7 @@
                                     <ul class="megamenu">
                                         @foreach ($item->SubCategory as $item1)
                                         <li>
-                                            <a class="menu-title" href="">{{ $item1->name }}</a>
+                                            <a class="menu-title" href="{{route('SubCategoryWise.list', $item1->id)}}">{{ $item1->name }}</a>
                                             <hr class="divider">
                                             @php
                                                $childcategory = \App\Models\ChildCategory::where('subcategory_id', $item1->id)->get();

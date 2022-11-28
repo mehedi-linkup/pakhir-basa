@@ -33,7 +33,7 @@
                             <h3 class="widget-title"><span>All Categories</span></h3>
                             <ul class="widget-body filter-items search-ul">
                                 @foreach ($category as $item)
-                                <li><a href="#">{{ $item->name }}</a></li>
+                                <li><a href="{{ route('categoryWise.list', $item->id) }}">{{ $item->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
