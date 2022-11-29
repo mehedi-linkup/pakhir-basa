@@ -92,10 +92,6 @@ class Controller extends BaseController
 
     }
 
-
-
-
-
     public function generateCode($model, $prefix = '')
     {
         $code = "000001";
@@ -108,41 +104,4 @@ class Controller extends BaseController
         }
         return $prefix . $code;
     }
-
-
-     // sms sender
-     public function send_sms($mobileNumber, $message) 
-     {
-         $url = "http://esms.linktechbd.com/smsapi";
- 
-         $data = [
-           "api_key" => "C20086716133ab1005e4d3.66002606",
-           "type" => "unicode",
-           "contacts" => $mobileNumber,
-           "senderid" => "ZENEVIA",
-           "msg" => $message,
-         ];
- 
-         $ch = curl_init();
- 
-         curl_setopt($ch, CURLOPT_URL, $url);
-         curl_setopt($ch, CURLOPT_POST, 1);
-         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-         
-         $response = curl_exec($ch);
- 
-         curl_close($ch);
- 
-         $errorCodes = [1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014];
- 
-         if (in_array($response, $errorCodes)) {
- 
-             return false;
-         }
- 
-         return true;
-     }
- 
 }

@@ -123,7 +123,6 @@ class OrderController extends Controller
         $customer = Order::where('customer_id',$order->customer_id)->first();
         $customer_phone = $customer->customer_mobile;
         $message = "আপনার অর্ডার এখন প্রক্রিয়াকরণ . আপনার চালান নম্বর $order->invoice_no ; $request->message  ";
-        $this->send_sms($customer_phone ,$message);
         return back()->with('success', 'Order Confirm Successfully');
     }
 
@@ -136,7 +135,6 @@ class OrderController extends Controller
         $customer = Order::where('customer_id',$order->customer_id)->first();
         $customer_phone = $customer->customer_mobile;
         $message = "আপনার অর্ডার এখন প্রক্রিয়াকরণ . আপনার চালান নম্বর $order->invoice_no ; ";
-        $this->send_sms($customer_phone ,$message);
         return back()->with('success', 'Offer  Pending Successfully');
         
     }
@@ -180,7 +178,6 @@ class OrderController extends Controller
         $customer = Order::where('customer_id',$order->customer_id)->first();
         $customer_phone = $customer->customer_mobile;
         $message = "আপনার  অর্ডারটি পথে আছে। আপনার চালান নম্বর $order->invoice_no. $admin_msg";
-        $this->send_sms($customer_phone , $message);
         return back()->with('success', 'Order On the way');
     }
      // order prodcess function
@@ -200,7 +197,6 @@ class OrderController extends Controller
          $customer = Order::where('customer_id',$order->customer_id)->first();
          $customer_phone = $customer->customer_mobile;
          $message = "আপনার  অর্ডারটি পথে আছে। আপনার চালান নম্বর $order->invoice_no. $admin_msg";
-         $this->send_sms($customer_phone , $message);
          return back()->with('success', 'Order On the way');
      }
 
@@ -217,8 +213,7 @@ class OrderController extends Controller
         $customer_phone = $customer->customer_mobile;
         $message = "আপনার অর্ডারটি গ্রহণের অপেক্ষায়। আপনার চালান নম্বর। আপনার চালান নম্বর $order->invoice_no";   
 
-
-        $this->send_sms($customer_phone , $message);   
+   
          return back()->with('success', 'Order Delivery Confirm Successfully');
      }
      // order prodcess function
@@ -237,8 +232,7 @@ class OrderController extends Controller
         // $message = "আপনার অর্ডারটি  গ্রহণ করেছেন । আপনার চালান নম্বর $order->invoice_no";   
         $message = "আপনার অর্ডারটি গ্রহণের অপেক্ষায়। আপনার চালান নম্বর $order->invoice_no";   
 
-
-        $this->send_sms($customer_phone , $message);   
+   
          return back()->with('success', 'Order Delivery Confirm Successfully');
      }
 
@@ -252,8 +246,7 @@ class OrderController extends Controller
         $order->save();
         $customer = Order::where('customer_id',$order->customer_id)->first();
         $customer_phone = $customer->customer_mobile;
-        $message = "আপনার অর্ডারটি  গ্রহণ করেছেন । আপনার চালান নম্বর $order->invoice_no";   
-        $this->send_sms($customer_phone , $message);   
+        $message = "আপনার অর্ডারটি  গ্রহণ করেছেন । আপনার চালান নম্বর $order->invoice_no";      
          return back()->with('success', 'Order Delivery Confirm Successfully');
      }
 
@@ -265,8 +258,7 @@ class OrderController extends Controller
         $order->save();
         $customer = Order::where('customer_id',$order->customer_id)->first();
         $customer_phone = $customer->customer_mobile;
-        $message = "আপনার অর্ডারটি  গ্রহণ করেছেন । আপনার চালান নম্বর $order->invoice_no"; 
-        $this->send_sms($customer_phone , $message);   
+        $message = "আপনার অর্ডারটি  গ্রহণ করেছেন । আপনার চালান নম্বর $order->invoice_no";    
          return back()->with('success', 'Order Delivery Confirm Successfully');
      }
       // order delete function
@@ -284,8 +276,7 @@ class OrderController extends Controller
         $order->save();
         $customer = Order::where('customer_id',$order->customer_id)->first();
         $customer_phone = $customer->customer_mobile;
-        $message = "আপনার অর্ডারটি বাতিল করা হয়েছে, আপনার চালান নম্বর $order->invoice_no ";
-        $this->send_sms($customer_phone , $message);  
+        $message = "আপনার অর্ডারটি বাতিল করা হয়েছে, আপনার চালান নম্বর $order->invoice_no ";  
 
         return back()->with('success', 'Order cancel successfully');
      }
@@ -314,7 +305,6 @@ class OrderController extends Controller
         $customer = Order::where('customer_id',$order->customer_id)->first();
         $customer_phone = $customer->customer_mobile;
         $message = "আপনার অর্ডারটি বাতিল করা হয়েছে, আপনার চালান নম্বর $order->invoice_no ";
-        $this->send_sms($customer_phone , $message);
         return redirect()->route('order.index')->with('success', 'Delivery Order Cancel Confirm Successfully');
     }
 
@@ -391,7 +381,6 @@ class OrderController extends Controller
         $order->save();
         $customer_phone = $order->customer_mobile;
         $message = " আপনার অনুরোধে আপনার অর্ডারটি অফার ডেলিভারী করা  হয়েছে, আপনার চালান নম্বর $order->invoice_no $request->message";
-        $this->send_sms($customer_phone , $message);
         return back()->with('success','successfully cancel to pending list');
     }
 
@@ -404,7 +393,6 @@ class OrderController extends Controller
         $order->save();
         $customer_phone = $order->customer_mobile;
         $message = " আপনার অনুরোধে আপনার অর্ডারটি পেন্ডিং এ পাঠানো হয়েছে, আপনার চালান নম্বর $order->invoice_no $request->message";
-        $this->send_sms($customer_phone , $message);
         return back()->with('success','successfully cancel to pending list');
     }
     public function orderProductDelete($id){
