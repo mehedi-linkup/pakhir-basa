@@ -424,8 +424,8 @@ Route::post('/login',[AuthController::class, 'authCheck'])->name('login.check');
             Route::get('/password/change', [UserController::class, 'passwordChange'])->name('password.change');
             Route::post('/password/update', [UserController::class, 'passwordUpdate'])->name('password.update');
 
-            Route::get('/offer',[OfferController::class,'index'])->name('customer.offer');
-            Route::post('/offer/update/{offer}',[OfferController::class,'update'])->name('offer.update');
+            // Route::get('/offer',[OfferController::class,'index'])->name('customer.offer');
+            // Route::post('/offer/update/{offer}',[OfferController::class,'update'])->name('offer.update');
     });
 
         // subscriber route 

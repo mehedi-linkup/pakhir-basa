@@ -410,11 +410,11 @@
                                     <a class="nav-link {{($route == 'permission.index')?'active':''}}"  href="{{ route('permission.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Permission</a>
                                 @endif
                             @endif
-                             @if ($p->page->name == 'customer.offer')
+                             {{-- @if ($p->page->name == 'customer.offer')
                                 @if($p->page->status == 1)
                                     <a class="nav-link {{($route == 'customer.offer')?'active':''}}"  href="{{ route('customer.offer') }}"><i class="fas fa-angle-right"></i>&nbsp;Offer Settings</a>
                                 @endif
-                            @endif
+                            @endif --}}
                             @if ($p->page->name == 'user.phone.edit')
                             @if($p->page->status == 1)
                                 <a class="nav-link {{($route == 'user.phone.edit')?'active':''}}"  href="{{ route('user.phone.edit') }}"><i class="fas fa-angle-right"></i>&nbsp;User Phone Settings</a>
