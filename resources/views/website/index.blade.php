@@ -14,12 +14,16 @@
                 'disableOnInteraction': false
             }
             }">
-                <div class="swiper-wrapper">
+                <div class="swiper-wrapper wrapper">
                 @foreach ($banner as $key => $item)
-                <div class="swiper-slide banner banner-fixed intro-slide intro-slide1"
+                <div class="swiper-slide banner banner-fixed intro-slide intro-slide1 scrollDown"
                 style="background-image: url({{ asset($item->bgimage) }}); background-color: #ebeef2;">
                     <div class="container">
-                        <figure class="slide-image skrollable slide-animate">
+                        <figure class="slide-image skrollable slide-animate"  data-animation-options="{
+                            'name': 'bounceInRight',
+                            'duration': '5s',
+                            'delay': '.2s'
+                        }">
                             <img src="{{ asset($item->image) }}" alt="Banner"
                                 data-bottom-top="transform: translateY(10vh);"
                                 data-top-bottom="transform: translateY(-10vh);" width="474" height="397">
@@ -27,24 +31,24 @@
                         <div class="banner-content y-50 text-right">
                             <h5 class="banner-subtitle font-weight-normal text-default ls-50 lh-1 mb-2 slide-animate"
                                 data-animation-options="{
-                            'name': 'fadeInRightShorter',
-                            'duration': '1s',
+                            'name': 'bounceInLeft',
+                            'duration': '5s',
                             'delay': '.2s'
                         }">
                                 {{ $item->offer_name }}
                             </h5>
                             <h3 class="banner-title font-weight-bolder ls-25 lh-1 slide-animate"
                                 data-animation-options="{
-                            'name': 'fadeInRightShorter',
+                            'name': 'bounceInLeft',
                             'duration': '1s',
                             'delay': '.4s'
                         }">
                                 {{ $item->title }}
                             </h3>
-                            <div class="font-weight-normal text-default slide-animate" data-animation-options="{
-                            'name': 'fadeInRightShorter',
-                            'duration': '1s',
-                            'delay': '.6s'
+                            <div class="font-weight-normal text-default slide-animate word bounce" data-text="Bouncing Text" data-animation-options="{
+                            'name': 'bounceInLeft',
+                            'duration': '5s',
+                            'delay': '.10s'
                             }">
                                 {!! $item->short_details !!}
                             </div>
@@ -52,7 +56,8 @@
                             <a href="{{ $item->offer_link }}"
                                 class="btn btn-dark btn-outline btn-rounded btn-icon-right slide-animate"
                                 data-animation-options="{
-                            'name': 'fadeInRightShorter',
+                            {{-- 'name': 'fadeInRightShorter', --}}
+                            'name': 'bounceInLeft',
                             'duration': '1s',
                             'delay': '.8s'
                         }">SHOP NOW<i class="w-icon-long-arrow-right"></i></a>
@@ -62,6 +67,7 @@
                     </div>
                     <!-- End of .container -->
                 </div> 
+                <div class="placeholder"></div>
                 @endforeach
                 </div>
                 <div class="swiper-pagination"></div>
@@ -141,7 +147,6 @@
                     }
                 }">
                     <div class="swiper-wrapper row cols-xl-4 cols-lg-3 cols-2">
-                       
                         @foreach ($popcat->product as $item)
                             <div class="swiper-slide product-col">
                                 <div class="product-wrap product text-center">
@@ -231,11 +236,12 @@
     <!-- End of Banner Fashion -->
 
 
-    <h2 class="title title-underline mb-4 ls-normal appear-animate">Our Clients</h2>
+    <h2 class="title title-underline mb-4 ls-normal appear-animate">Our Brands</h2>
     <div class="swiper-container swiper-theme brands-wrapper mb-9 appear-animate" data-swiper-options="{
         'spaceBetween': 0,
         'slidesPerView': 2,
         'autoplay': true,
+        'loop': true,
         'breakpoints': {
             '576': {
                 'slidesPerView': 3

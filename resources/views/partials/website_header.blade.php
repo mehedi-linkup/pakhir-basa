@@ -118,7 +118,7 @@
             <div class="inner-wrap">
                 <div class="header-left">
                     <div class="dropdown category-dropdown has-border" data-visible="true">
-                        <a href="#" class="category-toggle text-dark" role="button" data-toggle="dropdown"
+                        <a href="#" class="category-toggle " role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="true" data-display="static"
                             title="Browse Categories">
                             <i class="w-icon-category"></i>
@@ -131,10 +131,10 @@
                                     <a href="{{route('categoryWise.list',$item->id)}}">{{ $item->name }} </a>
                                     @if(count($item->SubCategory) > 0)
                                     <ul class="megamenu">
-                                        @foreach ($item->SubCategory as $item1)
                                         <li>
-                                            <a class="menu-title" href="{{route('SubCategoryWise.list', $item1->id)}}">{{ $item1->name }}</a>
-                                            <hr class="divider">
+                                            @foreach ($item->SubCategory as $item1)
+                                            <a class="menu-title " href="{{route('SubCategoryWise.list', $item1->id)}}">{{ $item1->name }}</a>
+                                            <hr class="divider mb-1">
                                             @php
                                                $childcategory = \App\Models\ChildCategory::where('subcategory_id', $item1->id)->get();
                                             @endphp
@@ -145,8 +145,8 @@
                                                 @endforeach
                                             </ul>
                                             @endif
+                                            @endforeach
                                         </li>                                   
-                                        @endforeach
                                     </ul> 
                                     @endif
                                 </li> 

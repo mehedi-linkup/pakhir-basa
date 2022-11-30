@@ -65,14 +65,14 @@
                         </a> 
                         @endif
                     @endif
-                    @if($p->page->name == 'order.offer.pending')
+                    {{-- @if($p->page->name == 'order.offer.pending')
                         @if($p->page->status == 1)
                         <a class="nav-link {{($route == 'order.offer.pending')?'active':''}}"  href="{{route('order.offer.pending')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-spinner"></i></div>
                            Offer Pending
                             </a> 
                         @endif
-                    @endif
+                    @endif --}}
                     @if($p->page->name == 'offer.onProcess')
                         @if($p->page->status == 1)
                         <a class="nav-link {{($route == 'offer.onProcess')?'active':''}}" href="{{route('offer.onProcess')}}">

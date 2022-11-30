@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="widget">
-                        <h3 class="widget-title">Company</h3>
+                        <h3 class="widget-title pt-5">Company</h3>
                         <ul class="widget-body">
                             <li><a href="{{route('about.website')}}">About Us</a></li>
                             <li><a href="{{route('web.contact')}}">Contact Us</a></li>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="widget">
-                        <h4 class="widget-title">My Account</h4>
+                        <h4 class="widget-title pt-5">My Account</h4>
                         <ul class="widget-body">
                             <li><a href="{{ route('cart.list') }}">View Cart</a></li>
                             <li><a href="{{route('customer.login')}}">Sign In</a></li>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="widget">
-                        <h4 class="widget-title">Customer Service</h4>
+                        <h4 class="widget-title pt-5">Customer Service</h4>
                         <ul class="widget-body">
                             {{-- <li><a href="#">Shipping</a></li> --}}
                             <li><a href="{{route('privacy.website')}}">Privacy Policy</a></li>

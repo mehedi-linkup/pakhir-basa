@@ -50,7 +50,7 @@
                                     <td class="text-center">
                                         @if(Auth::user()->role == 1)
                                             @if ($order->status == 'p')
-                                            <a href="{{route('offer.pending',$order->id)}}" onclick="return confirm('are you sure! Order on Offer Pending')" class="btn btn-edit " >Offer Pending</a>
+                                            {{-- <a href="{{route('offer.pending',$order->id)}}" onclick="return confirm('are you sure! Order on Offer Pending')" class="btn btn-edit " >Offer Pending</a> --}}
                                             {{-- <a href="{{route('share.sale',$order->id)}}" onclick="return confirm('are you sure! This order sent to share sale')" class="btn btn-edit " >Share Sale</a> --}}
                                             @endif
                                         @endif
