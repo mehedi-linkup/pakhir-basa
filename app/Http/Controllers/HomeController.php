@@ -29,15 +29,17 @@ class HomeController extends Controller
         $banner = Banner::latest()->get();
         $product = Product::latest()->get();
         $topcategory = Category::with('SubCategory')->orderBy('rank_id', 'ASC')->get();
+        $topsubcategory = Subcategory::with('product')->latest()->get();
         $popularcategory = Category::with('product')->where('is_popular', 1)->orderBy('rank_id', 'ASC')->get();
         $recent = Product::latest()->take(24)->get();
         $popular = Product::latest()->where('is_popular', '1')->limit(24)->get();
         $new_arrival = Product::where('is_arrival', '1')->get();
+        $offers_product = Product::where('is_offer', '1')->latest()->get();
         $home = Product::where('category_id', '8')->inRandomOrder()->limit(12)->get();
         $fullAd = Ad::where('status', 'a')->inRandomOrder()->limit(1)->get();
         $partner = Partner::latest()->get();
         $cartAll = \Cart::getContent();
-        return view('website.index', compact('banner', 'popularcategory', 'topcategory', 'product', 'new_arrival', 'fullAd', 'popular', 'home', 'recent', 'partner'));
+        return view('website.index', compact('banner', 'popularcategory', 'offers_product', 'topcategory', 'product', 'new_arrival', 'fullAd', 'popular', 'home', 'recent', 'partner', 'topsubcategory'));
     }
 
     public function ProductDetails($slug)
