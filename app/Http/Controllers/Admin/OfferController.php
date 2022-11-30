@@ -11,7 +11,7 @@ class OfferController extends Controller
 {
     public function index(){
 
-        return view('admin.offer.index');
+        return view('admin.offer.index', );
     }
     public function update(Request $request, Offer $offer){
         $offer->minimum_order_amount = $request->minimum_order_amount;

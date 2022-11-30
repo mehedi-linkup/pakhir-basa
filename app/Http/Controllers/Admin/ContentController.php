@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\CompanyProfile;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
@@ -170,19 +171,19 @@ class ContentController extends Controller
     }
 
     public function adminPhone(){
-        return  view('admin.permission.admin_mobile');
+        return view('admin.permission.admin_mobile');
     }
-    public function adminPhoneUpdate(Request $request){
+    public function adminPhoneUpdate(Request $request) {
+
         $this->validate($request, [
-            'phone_3' => 'required|max:11',
-            'phone_4' => 'required|max:11',
-            'phone_5' => 'required|max:11',
+            'phone_1' => 'regex:/(01)[0-9]{9}/',
+            'phone_2' => 'regex:/(01)[0-9]{9}/'
         ]);
-        $company = CompanyProfile::first();
-        $company->phone_3 = $request->phone_3;
-        $company->phone_4 = $request->phone_4;
-        $company->phone_5 = $request->phone_5;
-        $company->save();
+
+        $signUser = User::find(Auth::user()->id);
+        $signUser->phone_1 = $request->phone_1;
+        $signUser->phone_2 = $request->phone_2;
+        $signUser->save();
         return back()->with('success', 'Admin Phone Updated Successfully');
     }
 

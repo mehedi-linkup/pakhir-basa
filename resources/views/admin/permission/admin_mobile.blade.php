@@ -20,39 +20,26 @@
                                 <strong><label>Admin Phone Number 1</label> <span class="float-right">:</span></strong>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" value="{{$content->phone_3}}" class="form-control  @error('phone_3') is-invalid @enderror " name="phone_3" >
+                                <input type="text" value="{{Auth::user()->phone_1}}" class="form-control  @error('phone_1') is-invalid @enderror " name="phone_1" >
+                                @error('phone_1')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
-                            @error('phone_3')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
                         </div>
                         <div class="row">
                             <div class="col-md-5">
                                 <strong><label>Admin Phone Number 2</label> <span class="float-right">:</span></strong>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" value="{{$content->phone_4}}" class="form-control  @error('phone_3') is-invalid @enderror " name="phone_4" >
+                                <input type="text" value="{{Auth::user()->phone_2}}" class="form-control  @error('phone_2') is-invalid @enderror " name="phone_2" >
+                                @error('phone_2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
-                            @error('phone_3')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <strong><label>Admin Phone Number 3</label> <span class="float-right">:</span></strong>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" value="{{$content->phone_5}}" class="form-control  @error('phone_3') is-invalid @enderror " name="phone_5" >
-                            </div>
-                            @error('phone_3')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-end">
