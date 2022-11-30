@@ -499,7 +499,7 @@ a {
   transition: color 0.3s;
 }
 a:hover {
-  color: #1914fe;
+  color: #015c05;
 }
 
 :focus {
@@ -6628,6 +6628,9 @@ textarea {
 
 .select-box option {
   font-size: 1.2rem;
+}
+.select-box option:hover {
+  background-color: #015c05;
 }
 
 @media (-ms-high-contrast: active), (-ms-high-contrast: none) {
@@ -12865,7 +12868,7 @@ aside .sp-sidebar-banner span {
   color: inherit;
 }
 .header a:not(.btn):hover {
-  color: #015c05;
+  /* color: #015c05; */
 }
 
 .header-top,
@@ -13559,9 +13562,13 @@ aside .sp-sidebar-banner span {
   font-size: 8px;
   font-weight: 900;
 }
-.dropdown li.active > a, .dropdown li:hover > a {
+/* .dropdown li.active > a, .dropdown li:hover > a {
   color: #015c05;
-}
+} */
+
+.megamenu .dropdown li > a:hover {
+  color: #015c05;
+} 
 
 .dropdown-box {
   position: absolute;
@@ -14130,7 +14137,7 @@ aside .sp-sidebar-banner span {
   display: flex;
   min-width: 80rem;
   color: #000;
-  background: #eee;
+  background: #fff;
 }
 .megamenu > li {
   -webkit-box-flex: 1;
@@ -15421,6 +15428,9 @@ aside .sp-sidebar-banner span {
   border: 1px solid #eee;
   -webkit-transition: border-color 0.3s;
   transition: border-color 0.3s;
+  -moz-transition: border-color 0.3s;
+  -ms-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
 }
 .single-product .product-title {
   font-size: 2rem;
