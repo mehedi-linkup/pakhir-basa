@@ -19,8 +19,7 @@ class CheckPermission
 
     public function handle(Request $request, Closure $next)
     {
-        $permissions = Permission::with('page')->where('user_id',Auth::user()->id)->get();
-
+        $permissions = Permission::with('page')->where('user_id', Auth::user()->id)->get();
         foreach ($permissions as  $value) {
             if($value->page->status == 1){
                 if($value->page){

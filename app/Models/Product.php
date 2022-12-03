@@ -29,4 +29,7 @@ class Product extends Model
     public function inventory() {
         return $this->hasOne(Inventory::class);
     }
+    public function brand() {
+        return $this->belongsTo(Brand::class);
+    }
 }

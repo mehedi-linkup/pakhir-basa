@@ -99,28 +99,48 @@
                 <!-- End of Shop Banner -->
 
                 <nav class="toolbox sticky-toolbox sticky-content fix-top">
+                    @php
+                        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                        $urlArray = parse_url( $actual_link);
+                        $filterText = parse_str(@$urlArray['query'], $params);
+                        @$queryText = $params['shop_view'];
+                    @endphp
+                    @isset($brandFilter)
                     <div class="toolbox-left">
-                        <a href="#" class="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
-                            btn-icon-left d-block d-lg-none"><i
-                                class="w-icon-category"></i><span>Filters</span></a>
-                   
+                        {{-- <div class="toolbox-item toolbox-sort select-box text-dark">
+                            <label>Sort By :</label>
+                            <select name="orderby" class="form-control">
+                                <option value="default" selected="selected">Default sorting</option>
+                                <option value="popularity">Sort by popularity</option>
+                                <option value="rating">Sort by average rating</option>
+                                <option value="date">Sort by latest</option>
+                                <option value="price-low">Sort by pric: low to high</option>
+                                <option value="price-high">Sort by price: high to low</option>
+                            </select>
+                        </div> --}}
+                        <label>Filtered By :</label>
+                        <a class="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
+                            btn-icon-left"><i class="w-icon-sale"></i><span>{{ $brandFilter->name }}</span>
+                        </a>
                     </div>
+                    @endisset
                     <div class="toolbox-right">
                         <div class="toolbox-item toolbox-layout">
-                            <a href="{{ route('shop.box', ['shop_view'=>'shop box']) }}" class="icon-mode-grid btn-layout active">
+                            <a href="{{ route('shop.box', ['shop_view'=>'shop box']) }}" class="icon-mode-grid btn-layout {{ $queryText == 'shop box' ||  $_SERVER['REQUEST_URI'] ? 'active': ''}}">
                                 <i class="w-icon-grid"></i>
                             </a>
-                            <a href="{{ route('shop.box', ['shop_view'=>'shop list']) }}" class="icon-mode-list btn-layout">
+                            <a href="{{ route('shop.box', ['shop_view'=>'shop list']) }}" class="icon-mode-list btn-layout {{ $queryText == 'shop list' ? 'active': ''}}">
                                 <i class="w-icon-list"></i>
                             </a>
-                            <a href="{{ route('shop.box', ['shop_view'=>'shop list sidebar']) }}" class="icon-mode-list btn-layout">
+                            <a href="{{ route('shop.box', ['shop_view'=>'shop list sidebar']) }}" class="icon-mode-list btn-layout {{ $queryText == 'shop list sidebar' ? 'active': ''}}">
                                 <i class="w-icon-category"></i>
                             </a>
                         </div>
                     </div>
                 </nav>
+               
                 <div class="product-wrapper row cols-md-3 cols-sm-2 cols-2">
-                    @foreach ($product as $item)
+                    @forelse ($product as $item)
                     <div class="product-wrap">
                         <div class="product text-center">
                             <figure class="product-media">
@@ -152,7 +172,12 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div>
+                        No product found
+                    </div>
+                    @endforelse
+                   
                 </div>
 
                 <div class="toolbox toolbox-pagination justify-content-between">

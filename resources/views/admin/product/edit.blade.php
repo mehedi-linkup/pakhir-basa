@@ -213,6 +213,35 @@
                                           </span>
                                       @enderror
                                     </div>
+
+                                  <div class="col-md-4">
+                                    <strong><label>Brands</label><span class="my-label">:</span></strong>
+                                  </div>
+
+                                  <div class="col-md-8 mt-1">
+                                    <div class="input-group input-group-sm">
+                                        <select name="brand_id" id="brand_id"
+                                            class="js-example-basic-multiple form-control my-form-control @error('brand_id') is-invalid @enderror "
+                                            data-live-search="true">
+                                            <option data-tokens="ketchup mustard" value="">Select Brands</option>
+                                            @foreach ($brand as $item)
+                                            <option value="{{ $item->id }}" {{ $item->id == $product->brand_id ? 'selected' : '' }} >{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="input-group-append">
+                                            <a class="border rounded my-select my-form-control py-0 px-2"
+                                                href="{{ route('brand.index') }}"
+                                                target="_blank"><i class="fas fa-plus"></i></a>
+                                        </div>
+                                    </div>
+                                    @error('brand_id')
+                                      <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                      </span>
+                                    @enderror
+                                  </div>
+
+
                             
                                   <div class="col-md-4">
                                     <strong><label> Product Is</label> <span class="my-label">:</span> </strong>

@@ -48,6 +48,9 @@
         <!-- Start of Main-->
         <main class="main">
             @yield('website-content')
+            
+
+            @include('partials.website_brand')
         </main>
         <!-- End of Main -->
 
@@ -168,6 +171,13 @@
                 <div class="product-gallery product-gallery-sticky">
                     <div class="swiper-container product-single-swiper swiper-theme nav-inner">
                         <div id="quickview-swiper-wraper" class="swiper-wrapper row cols-1 gutter-no">
+                            <div class="swiper-slide">
+                                <figure class="product-image">
+                                    <img src="assets/images/products/popup/3-440x494.jpg"
+                                        data-zoom-image="assets/images/products/popup/3-800x900.jpg"
+                                        alt="Water Boil Black Utensil" width="800" height="900">
+                                </figure>
+                            </div>
                             {{-- <div class="swiper-slide">
                                 <figure class="product-image">
                                     <img src="{{ asset('/') }}website/images/products/popup/1-440x494.jpg"
@@ -186,6 +196,10 @@
                         }
                     }">
                         <div id="quickviewProductThumb" class="product-thumbs swiper-wrapper row cols-4 gutter-sm">
+                            <div class="product-thumb swiper-slide">
+                                <img src="assets/images/products/popup/1-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
                             {{-- <div class="product-thumb swiper-slide">
                                 <img src="{{ asset('/') }}website/images/products/popup/1-103x116.jpg" alt="Product Thumb" width="103"
                                     height="116">

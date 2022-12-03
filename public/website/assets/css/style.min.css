@@ -9677,6 +9677,7 @@ body .product-popup {
 .product-media {
   position: relative;
   margin-bottom: 0;
+  padding: 15px;
   -webkit-transition: -webkit-box-shadow 0.35s;
   transition: -webkit-box-shadow 0.35s;
   transition: box-shadow 0.35s;
@@ -9688,6 +9689,10 @@ body .product-popup {
   height: auto;
   -webkit-transition: opacity 0.4s;
   transition: opacity 0.4s;
+  transition: all 0.4s;
+}
+.product:hover .product-media img {
+  transform: scale(1.1);
 }
 .product-media img:last-child {
   position: absolute;

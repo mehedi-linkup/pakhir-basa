@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\ChildCategory;
 use App\Models\Color;
 use App\Models\Inventory;
@@ -45,8 +46,9 @@ class ProductController extends Controller
         $color = Color::all();
         $size = Size::all();
         $category = Category::all();
+        $brand = Brand::latest()->get();
         $product = Product::latest()->get();
-        return view('admin.product.create', compact('category', 'product','color','size'));
+        return view('admin.product.create', compact('category', 'product','color','size', 'brand'));
     }
 
     public function getSubcategory($id)
@@ -104,6 +106,7 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
             $product->sub_category_id = $request->sub_category_id;
             $product->child_category_id = $request->child_category_id;
+            $product->brand_id = $request->brand_id;
             $product->price = $request->price;
             $product->discount = $request->discount;
             $product->is_popular = $request->is_popular ?? 0;
@@ -209,8 +212,9 @@ class ProductController extends Controller
         $product = Product::with('inventory')->where('slug', $slug)->first();
         $subcategory = Subcategory::where('category_id', $product->category_id)->get();
         $childcategory = ChildCategory::where('subcategory_id', $product->subcategory_id)->get();
+        $brand = Brand::latest()->get();
         $category = Category::all();
-        return view('admin.product.edit', compact('product', 'subcategory', 'childcategory', 'category','color','size'));
+        return view('admin.product.edit', compact('product', 'subcategory', 'childcategory', 'category', 'color', 'size', 'brand'));
     }
 
     /**
@@ -280,6 +284,7 @@ class ProductController extends Controller
             $product->discount = $request->discount;
             $product->size_id = $request->size_id;
             $product->color_id = $request->color_id;
+            $product->brand_id = $request->brand_id;
             $product->is_popular = $request->is_popular;
             $product->is_arrival = $request->is_arrival;
             $product->is_offer = $request->is_offer;

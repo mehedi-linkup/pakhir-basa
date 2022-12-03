@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
                     ->onDelete('cascade');
             $table->foreignId('sub_category_id')->nullable() 
                     ->constrained('sub_categories')
-                    ->onDelete('cascade');  
+                    ->onDelete('cascade');
             $table->foreignId('child_category_id')->nullable() 
                 ->constrained('child_categories')
                 ->onDelete('cascade');  
@@ -37,6 +37,9 @@ class CreateProductsTable extends Migration
             $table->foreignId('color_id')->nullable()
                     ->constrained('colors')
                     ->onDelete('cascade');
+            $table->foreignId('brand_id')->nullable()
+                    ->constrained('brands')
+                    ->onDelete('cascade');      
             $table->text('short_details')->nullable();
             $table->text('description')->nullable();
             $table->string('is_popular',1)->nullable();

@@ -125,7 +125,3 @@ button[name=track] {
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
 }
-
-.product-wrap:hover {
-    box-shadow: 0 0 20px rgba(0,0,0,.15);
-  }

@@ -2,12 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Brand;
+use App\Models\Offer;
 use App\Models\Category;
+use App\Models\Purchase;
 use App\Models\Permission;
 use Facade\FlareClient\View;
 use App\Models\CompanyProfile;
-use App\Models\Offer;
-use App\Models\Purchage;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
@@ -44,5 +45,6 @@ class AppServiceProvider extends ServiceProvider
         view()->share('category', Category::take(10)->get());
         view()->share('randCategory', Category::inRandomOrder()->limit(5)->get());
         view()->share('offer', Offer::first());
+        view()->share('brand', Brand::latest()->get());
     }
 }

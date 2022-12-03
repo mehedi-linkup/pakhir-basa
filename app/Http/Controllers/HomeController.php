@@ -4,23 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Ad;
 use App\Models\Area;
-use App\Models\Banner;
 use App\Models\Blog;
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\Color;
-use App\Models\CompanyProfile;
-use App\Models\DeliveryTime;
-use App\Models\Management;
-use App\Models\Partner;
-use App\Models\ProductImage;
-use App\Models\Service;
 use App\Models\Size;
-use App\Models\SubCategory;
 use App\Models\Team;
+use App\Models\Brand;
+use App\Models\Color;
 use App\Models\Thana;
+use App\Models\Banner;
+use App\Models\Partner;
+use App\Models\Product;
+use App\Models\Service;
+use App\Models\Category;
+use App\Models\Management;
+use App\Models\SubCategory;
+use App\Models\DeliveryTime;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use PharIo\Manifest\Manifest;
+use App\Models\CompanyProfile;
+use Illuminate\Support\Facades\URL;
 
 class HomeController extends Controller
 {
@@ -37,9 +39,9 @@ class HomeController extends Controller
         $offers_product = Product::where('is_offer', '1')->latest()->get();
         $home = Product::where('category_id', '8')->inRandomOrder()->limit(12)->get();
         $fullAd = Ad::where('status', 'a')->inRandomOrder()->limit(1)->get();
-        $partner = Partner::latest()->get();
+        // $brand = Brand::latest()->get();
         $cartAll = \Cart::getContent();
-        return view('website.index', compact('banner', 'popularcategory', 'offers_product', 'topcategory', 'product', 'new_arrival', 'fullAd', 'popular', 'home', 'recent', 'partner', 'topsubcategory'));
+        return view('website.index', compact('banner', 'popularcategory', 'offers_product', 'topcategory', 'product', 'new_arrival', 'fullAd', 'popular', 'home', 'recent', 'topsubcategory'));
     }
 
     public function ProductDetails($slug)
@@ -101,16 +103,30 @@ class HomeController extends Controller
 
     public function shop(Request $req)
     {
-        $product = Product::latest()->paginate(12);
         $size = Size::latest()->get();
         $color = Color::latest()->get();
-        if ($req->query('shop_view') == 'shop list sidebar') {
-            return view('website.shop-list-sidebar', compact('product', 'size', 'color'));
-        } else if ($req->query('shop_view') == 'shop list') {
-            return view('website.shop-list', compact('product', 'size', 'color'));
+        $product = Product::latest()->paginate(12);
+        
+        if($req->query('shop_view')) {
+           
+            if ($req->query('shop_view') == 'shop list sidebar') {
+                return view('website.shop-list-sidebar', compact('product', 'size', 'color'));
+            } else if ($req->query('shop_view') == 'shop list') {
+                return view('website.shop-list', compact('product', 'size', 'color'));
+            } else {
+                return view('website.shop-boxed', compact('product', 'size', 'color'));
+            }
+        } else if($req->query('brand_filter')) {
+            $brand_filter = $req->query('brand_filter');
+            $product = Product::where('brand_id', $brand_filter)->paginate(12);
+            $brandFilter = Brand::find($brand_filter);
+            
+            return view('website.shop-boxed', compact('product', 'size', 'color', 'brandFilter'));
         } else {
             return view('website.shop-boxed', compact('product', 'size', 'color'));
         }
+        
+
         // $category = Category::latest()->get();
         // $product = Product::inRandomOrder()->paginate(5);
         // $centerBigAds = Ad::where('status', 'a')->where('position', '4')->inRandomOrder()->limit(1)->get();

@@ -148,14 +148,13 @@
                         @endif
                     @endif
                 @endforeach
-                    <a class="nav-link {{($prefix == 'product')?'':'collapsed'}}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="{{($prefix == 'product')?'true':'false'}}" aria-controls="collapseLayouts">
+                    <a class="nav-link {{($prefix == '/product')? '' : 'collapsed'}}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="{{($prefix == 'product')?'true':'false'}}" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-window-restore"></i></div>
                             Product Info
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                <div class="collapse {{($prefix == 'product')?'collapse show':''}}" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{($prefix == '/product')?'collapse show':''}}" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        
                         @foreach ($permisson as $p)
                             @if ($p->page->name == 'product.create')
                                 @if($p->page->status == 1)
@@ -218,12 +217,12 @@
                         <a class="nav-link {{($route == 'size.index')?'active':''}}" href="{{ route('size.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Size</a> --}}
                     </nav>
                 </div>
-                    <a class="nav-link {{($prefix == 'customer')?'':'collapsed'}}" href="{{ route('customer') }}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
+                    <a class="nav-link {{($prefix == '/customer')?'':'collapsed'}}" href="{{ route('customer') }}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>
                             Customer
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                <div class="collapse {{($prefix == 'customer')?'collapse show':''}}" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{($prefix == '/customer')?'collapse show':''}}" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         @foreach ($permisson as $p)
                             @if ($p->page->name == 'customer')
@@ -244,12 +243,12 @@
                         @endforeach
                     </nav>
                 </div>
-                <a class="nav-link {{($prefix == 'website-content')?'':'collapsed'}}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
+                <a class="nav-link {{($prefix == '/website-content')?'':'collapsed'}}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Website Contents
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse {{($prefix == 'website-content')?'collapse show':''}} " id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{($prefix == '/website-content')?'collapse show':''}} " id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         @foreach ($permisson as $p)
                             @if ($p->page->name == 'welcome')
@@ -317,9 +316,9 @@
                                     <a class="nav-link {{($route == 'management.index')?'active':''}}"  href="{{ route('management.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Management</a>
                                 @endif
                             @endif
-                            @if ($p->page->name == 'partner.index')
+                            @if ($p->page->name == 'brand.index')
                                 @if($p->page->status == 1)
-                                <a class="nav-link {{($route == 'partner.index')?'active':''}}" href="{{ route('partner.index') }}"><i class="fas fa-angle-right"></i>&nbsp; Partner</a>
+                                <a class="nav-link {{($route == 'brand.index')?'active':''}}" href="{{ route('brand.index') }}"><i class="fas fa-angle-right"></i>&nbsp; Brands</a>
                                 @endif
                             @endif
                             @if ($p->page->name == 'blog.index')
@@ -350,13 +349,13 @@
                          @endif
                     @endif
                 @endforeach
-                <a class="nav-link {{($prefix == 'setting')?'':'collapsed'}}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
+                <a class="nav-link {{($prefix == '/setting')?'':'collapsed'}}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-sliders-h"></i></div>
                     Settings
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 
-                <div class="collapse {{($prefix == 'setting')?'collapse show':''}} " id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <div class="collapse {{($prefix == '/setting')?'collapse show':''}} " id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         @foreach ($permisson as $p)
                             @if ($p->page->name == 'profile.edit')

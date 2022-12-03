@@ -8701,6 +8701,7 @@ body .product-popup {
   height: auto;
   -webkit-transition: opacity 0.4s;
   transition: opacity 0.4s;
+  transition: all 0.4s;
 }
 .product-media img:last-child {
   position: absolute;

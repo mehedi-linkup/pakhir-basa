@@ -1,7 +1,9 @@
 <?php
 
 use GuzzleHttp\Middleware;
+use App\Models\Subsubcategory;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdController;
@@ -13,18 +15,20 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ThanaController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\InvoiceController;
-use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TimeSetController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PagelistController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -32,18 +36,14 @@ use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Admin\PhotoGalleryController;
+use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\PublicMessageController;
 use App\Http\Controllers\Admin\MessageSendingController;
-use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\SubsubcategoryController;
-use App\Http\Controllers\Admin\ThanaController;
-use App\Http\Controllers\Admin\TimeSetController;
-use App\Http\Controllers\Customer\CheckoutController;
-use App\Http\Controllers\Customer\CustomerController as CustomerCustomerController;
 use App\Http\Controllers\Customer\OrderCancelController;
-use App\Models\Subsubcategory;
-use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Customer\CustomerController as CustomerCustomerController;
 
 // optimiZe
 Route::get('/optimize', function() {
@@ -355,11 +355,11 @@ Route::post('/login',[AuthController::class, 'authCheck'])->name('login.check');
         Route::get('/ad/active/{id}',[AdController::class,'active'])->name('ad.active');
 
          //Partner Route
-        Route::get('/partner',[PartnerController::class,'index'])->name('partner.index')->middleware('check');
-        Route::post('/partner/store',[PartnerController::class,'store'])->name('partner.store');
-        Route::get('/partner/edit/{id}',[PartnerController::class,'edit'])->name('partner.edit')->middleware('check');
-        Route::put('/partner/update/{id}',[PartnerController::class,'update'])->name('partner.update');
-        Route::delete('/partner/{id}',[PartnerController::class,'destroy'])->name('partner.destroy');
+        Route::get('/brand',[BrandController::class,'index'])->name('brand.index')->middleware('check');
+        Route::post('/brand/store',[BrandController::class,'store'])->name('brand.store');
+        Route::get('/brand/edit/{id}',[BrandController::class,'edit'])->name('brand.edit')->middleware('check');
+        Route::put('/brand/update/{id}',[BrandController::class,'update'])->name('brand.update');
+        Route::delete('/brand/{id}',[BrandController::class,'destroy'])->name('brand.destroy');
          
         //Blog Route
         Route::get('/news-and-event',[BlogController::class,'index'])->name('blog.index')->middleware('check');
