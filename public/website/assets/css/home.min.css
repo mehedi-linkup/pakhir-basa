@@ -1000,7 +1000,9 @@ table {
 .text-primary {
   color: #015c05 !important;
 }
-
+.text-green {
+  color: #348c04 !important;
+}
 .text-secondary {
   color: #f77c29 !important;
 }
@@ -1011,6 +1013,9 @@ table {
 
 .text-default {
   color: #666 !important;
+}
+.text-darkred {
+  color: #8e290d !important;
 }
 
 .text-hover-underline::after {
@@ -1065,7 +1070,6 @@ table {
 .bg-primary {
   background-color: #015c05 !important;
 }
-
 .bg-secondary {
   background-color: #f77c29 !important;
 }
@@ -4054,6 +4058,11 @@ blockquote {
 .banner figure img {
   display: block;
   width: 100%;
+}
+@media (min-width: 992px) {
+  .banner figure img {
+    height: 397px;
+  }
 }
 .banner .banner-content {
   position: relative;
@@ -15273,19 +15282,23 @@ aside .sp-sidebar-banner span {
   margin-bottom: 2.1rem;
   font-size: 2.4em;
 }
+.intro-slider .pre-link-text {
+  margin-bottom: 2.1rem;
+  font-size: 2.4em;
+}
 .intro-slide .btn {
   padding: 1.23em 2.45em;
   font-size: 1.4em;
 }
 .intro-slide .slide-image {
   position: absolute;
-  width: 47.4rem;
+  width: 40.4rem;
 }
 
 .intro-slide1 .banner-content {
   right: 3.9%;
 }
-.intro-slide1 .banner-subtitle span::after {
+/* .intro-slide1 .banner-subtitle span::after {
   position: absolute;
   bottom: 0;
   left: -0.4rem;
@@ -15293,9 +15306,9 @@ aside .sp-sidebar-banner span {
   width: 2.8em;
   height: 0.3rem;
   background-color: #f77c29;
-}
+} */
 .intro-slide1 .slide-image {
-  right: 48%;
+  right: 56%;
   top: 0%;
 }
 

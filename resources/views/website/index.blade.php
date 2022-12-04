@@ -1,26 +1,25 @@
 @extends('layouts.website')
 @section('website-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('website/assets/css/home.min.css') }}">
+<link rel="stylesheet" href="{{ asset('website/assets/css/slider.css') }}">
 @endsection
 @section('website-content')
+
 <section class="intro-section">
     <div class="container-fluid pr-0">
         <div class="intro-wrapper">
             <div class="swiper-container swiper-theme nav-inner pg-inner swiper-nav-lg animation-slider pg-xxl-hide nav-xxl-show nav-hide"
             data-swiper-options="{
             'slidesPerView': 1,
-            'autoplay': {
-                'delay': 8000,
-                'disableOnInteraction': false
-            }
+            'autoplay': false
             }">
                 <div class="swiper-wrapper wrapper">
                 @foreach ($banner as $key => $item)
                 <div class="swiper-slide banner banner-fixed intro-slide intro-slide1 scrollDown"
-                style="background-image: url({{ asset($item->bgimage) }}); background-color: #ebeef2;">
+                style="background-image: url({{ asset($item->bgimage) }}); background-color: rgb(255 255 255 / 70%); background-blend-mode: color">
                     <div class="container">
                         <figure class="slide-image skrollable slide-animate"  data-animation-options="{
-                            'name': 'bounceInRight',
+                            'name': 'bounceInLeft',
                             'duration': '5s',
                             'delay': '.2s'
                         }">
@@ -29,32 +28,57 @@
                                 data-top-bottom="transform: translateY(-10vh);" width="474" height="397">
                         </figure>
                         <div class="banner-content y-50 text-right">
-                            <h5 class="banner-subtitle font-weight-normal text-default ls-50 lh-1 mb-2 slide-animate"
+                            <h5 class="banner-subtitle font-weight-normal text-green ls-50 lh-1 mb-5 animate animate3"
                                 data-animation-options="{
                             'name': 'bounceInLeft',
                             'duration': '5s',
                             'delay': '.2s'
                         }">
-                                {{ $item->offer_name }}
+                                {{-- {{ $item->offer_name }} --}}
+                                <?php
+                                    $offerArr = str_split($item->offer_name);
+                                    $firstspan = "";
+                                    for($i=0; $i < count($offerArr); $i++) {
+                                        if($offerArr[$i] == " ") {
+                                            $offerArr[$i] = "&nbsp";
+                                        }
+                                        $firstspan .= "<span>". $offerArr[$i] . "</span>";
+                                    }
+                                    echo $firstspan;
+                                ?>
                             </h5>
-                            <h3 class="banner-title font-weight-bolder ls-25 lh-1 slide-animate"
+                            <h3 class="banner-title font-weight-bold text-darkred ls-25 lh-1 animate animate5 mb-3"
                                 data-animation-options="{
                             'name': 'bounceInLeft',
                             'duration': '1s',
                             'delay': '.4s'
                         }">
-                                {{ $item->title }}
+                                {{-- {{ $item->title }} --}}
+                                <?php
+                                    $helloArr = str_split($item->title);
+                                    $span = "";
+                                    for($i=0; $i < count($helloArr); $i++) {
+                                        if($helloArr[$i] == " ") {
+                                            $helloArr[$i] = "&nbsp";
+                                        }
+                                        $span .= "<span>". $helloArr[$i] . "</span>";
+                                    }
+                                    echo $span;
+                                ?>
+                              
                             </h3>
                             <div class="font-weight-normal text-default slide-animate word bounce" data-text="Bouncing Text" data-animation-options="{
                             'name': 'bounceInLeft',
                             'duration': '5s',
                             'delay': '.10s'
                             }">
-                                {!! $item->short_details !!}
+                            <p>
+                                {{ $item->short_details }}
+                            </p>
                             </div>
     
                             <a href="{{ $item->offer_link }}"
-                                class="btn btn-dark btn-outline btn-rounded btn-icon-right slide-animate"
+                                class="btn btn-primary btn-outline btn-rounded btn-icon-right slide-animate"
                                 data-animation-options="{
                             {{-- 'name': 'fadeInRightShorter', --}}
                             'name': 'bounceInLeft',

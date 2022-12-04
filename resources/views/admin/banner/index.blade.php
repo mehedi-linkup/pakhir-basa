@@ -124,11 +124,11 @@
 <script src="{{ asset('admin/js/ckeditor.js') }}"></script>
 <script src="{{ asset('admin/js/sweetalert2.all.js') }}"></script>
 <script>
-    ClassicEditor
-        .create( document.querySelector('#short_details'))
-        .catch( error => {
-            console.error( error );
-        });
+    // ClassicEditor
+    //     .create( document.querySelector('#short_details'))
+    //     .catch( error => {
+    //         console.error( error );
+    //     });
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -259,7 +259,8 @@
               $('#createBtn').hide();
               $('#updateBtn').show();
               $('#title').val(res.title);
-              $('#short_details').html(res.short_details);
+              $('#short_details').val(res.short_details);
+            //   CKEDITOR.instances[$(this).attr("#short_details")].insertText(res.short_details);
                 // ClassicEditor.instances['#short_details'].insertText(res.short_details);
                 // $('#short_details').ClassicEditor().editor.insertHtml(res.short_details);
               $('#offer_name').val(res.offer_name);
