@@ -15272,7 +15272,9 @@ aside .sp-sidebar-banner span {
   margin-top: -0.3rem;
 }
 .intro-slide .banner-subtitle {
-  font-size: 4em;
+  font-size: 3.5em;
+  width: 50%;
+  display: inline-block;
 }
 .intro-slide .banner-title {
   font-size: 4em;

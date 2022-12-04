@@ -50,8 +50,8 @@
                             <h3 class="banner-title font-weight-bold text-darkred ls-25 lh-1 animate animate5 mb-3"
                                 data-animation-options="{
                             'name': 'bounceInLeft',
-                            'duration': '1s',
-                            'delay': '.4s'
+                            'duration': '5s',
+                            'delay': '.2s'
                         }">
                                 {{-- {{ $item->title }} --}}
                                 <?php
@@ -85,7 +85,7 @@
                             'duration': '1s',
                             'delay': '.8s'
                         }">SHOP NOW<i class="w-icon-long-arrow-right"></i></a>
-    
+
                         </div>
                         <!-- End of .banner-content -->
                     </div>
