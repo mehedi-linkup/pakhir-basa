@@ -30,7 +30,7 @@
                                     <textarea name="details" class="form-control" id="description" cols="30" rows="2"></textarea>     
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="image"> Image</label>
+                                    <label for="image"> Image <small>(190px X 184px)</small></label>
                                             <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" type="file" size="100" name="image" onchange="readURL(this);">
                                             @error('image')
                                             <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                                 </div>
                                 
                             </div>
-                            <div class="group">
+                            <div class="group mb-2">
                                 <input type="checkbox" name="is_popular" id="is_popular" value="1" title="is popular">
                                 <label for="is_popular">Is popular</label>
                                </div>

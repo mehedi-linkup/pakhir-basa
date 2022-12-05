@@ -4,7 +4,7 @@
         <div class="swiper-container swiper-theme brands-wrapper mb-9 appear-animate" data-swiper-options="{
             'spaceBetween': 0,
             'slidesPerView': 2,
-            'autoplay': false,
+            'autoplay': true,
             'loop': true,
             'breakpoints': {
                 '576': {
@@ -19,6 +19,10 @@
                 '1200': {
                     'slidesPerView': 6
                 }
+            },
+            'navigation': {
+                'nextEl': '.swiper-button-next',
+                'prevEl': '.swiper-button-prev'
             }
         }">
             <div class="swiper-wrapper row gutter-no cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2">
@@ -33,6 +37,9 @@
                 </div>
                 @endforeach
             </div>
+           
+            <button class="swiper-button-next"></button>
+            <button class="swiper-button-prev"></button>
             {{-- <div class="swiper-wrapper row gutter-no cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2">
             
             </div> --}}

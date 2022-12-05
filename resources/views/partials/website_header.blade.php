@@ -128,12 +128,12 @@
                             <ul class="menu vertical-menu category-menu">
                                 @foreach ($category as $item)
                                 <li>
-                                    <a href="{{route('categoryWise.list',$item->id)}}">{{ $item->name }} </a>
+                                    <a href="{{route('shop.box', ['category_filter'=>  $item->slug])}}">{{ $item->name }} </a>
                                     @if(count($item->SubCategory) > 0)
                                     <ul class="megamenu">
                                         <li>
                                             @foreach ($item->SubCategory as $item1)
-                                            <a class="menu-title " href="{{route('SubCategoryWise.list', $item1->id)}}">{{ $item1->name }}</a>
+                                            <a class="menu-title " href="{{route('shop.box', ['subcategory_filter'=>$item1->slug])}}">{{ $item1->name }}</a>
                                             <hr class="divider mb-1">
                                             @php
                                                $childcategory = \App\Models\ChildCategory::where('subcategory_id', $item1->id)->get();

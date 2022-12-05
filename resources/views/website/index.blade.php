@@ -9,9 +9,12 @@
     <div class="container-fluid pr-0">
         <div class="intro-wrapper">
             <div class="swiper-container swiper-theme nav-inner pg-inner swiper-nav-lg animation-slider pg-xxl-hide nav-xxl-show nav-hide"
-            data-swiper-options="{
-            'slidesPerView': 1,
-            'autoplay': false
+                data-swiper-options="{
+                'slidesPerView': 1,
+                'autoplay': {
+                    'delay': 8000,
+                    'disableOnInteraction': false
+                }
             }">
                 <div class="swiper-wrapper wrapper">
                 @foreach ($banner as $key => $item)
@@ -128,9 +131,12 @@
                     @foreach ($topcategory as $item)
                     <div
                         class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                        <a href="{{ route('shop.box') }}" class="category-media">
-                            <img src="{{ asset($item->image) }}" alt="{{ $item->name }}"
-                                width="130" height="130">
+                        <a href="{{ route('shop.box', ['category_filter'=>  $item->slug]) }}" class="category-media">
+                            <div style="overflow: hidden">
+                                <img src="{{ asset($item->image) }}" alt="{{ $item->name }}"
+                                    width="130" height="130">
+                            </div>
+                            <div class="pt-3 pb-3 bg-grey"></div>    
                         </a>
                         <div class="category-content">
                             <h4 class="category-name">{{ $item->name }}</h4>
@@ -153,70 +159,68 @@
         <div class="product-wrapper-1 appear-animate mb-5">
             <div class="title-link-wrapper pb-1 mb-4">
                 <h2 class="title ls-normal text-uppercase mb-0">MOST POPULAR FOR {{ $popcat->name }}</h2>
-                <a href="{{ route('shop.box') }}" class="font-size-normal font-weight-bold ls-25 mb-0">More
+                <a href="{{ route('shop.box', ['category_filter'=>  $popcat->slug]) }}" class="font-size-normal font-weight-bold ls-25 mb-0">More
                     Products<i class="w-icon-long-arrow-right"></i></a>
             </div>
-            <div class="row">
-                <div class="col-lg-12 col-sm-8">
-                   
-                    <div class="swiper-wrapper row cols-xl-5 cols-lg-4 cols-3">
-                        @foreach ($popcat->product as $item)
-                            <div class="swiper-slide product-col">
-                                <div class="product-wrap product text-center">
-                                    <figure class="product-media">
-                                        <a href="{{ route('product.details', $item->slug) }}">
-                                            <img src="{{ asset('uploads/product/thumbnail/'.$item->thum_image) }}" alt="{{ $item->name }}"
-                                                width="216" height="243" />
-                                        </a>
-                                        <div class="product-action-vertical">
-                                            <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
-                                                title="Add to cart"></a>
-                                            <a href="" class="btn-product-icon btn-quickview w-icon-search" onclick="quickView({{$item->id}})"
-                                                title="Quickview"></a>
-                                        </div>
-                                        @if($item->discount && $item->discount != null)
-                                        <div class="product-label-group">
-                                            <label class="product-label label-discount">{{ $item->discount }}% Off</label>
-                                        </div>
-                                        @endif
-                                    </figure>
-                                    <div class="product-details">
-                                        <h4 class="product-name"><a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a></h4>
-                                        {{-- <div class="ratings-container">
-                                            <div class="ratings-full">
-                                                <span class="ratings" style="width: 60%;"></span>
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div>
-                                            {{-- <a href="{{ route('product.details', $item->slug) }}" class="rating-reviews">(3
-                                                reviews)</a>
-                                        </div> --}}
-                                        <div class="product-price">
-                                            @if($item->discount && $item->discount != null)
-                                            @php
-                                                $newPrice = $item->price / 100;
-                                                $newPrice = $newPrice * $item->discount;
-                                                $newPrice = $item->price - $newPrice;
-                                            @endphp
-                                            <ins class="new-price">{{ $newPrice  }}TK</ins><del
-                                                class="old-price">{{ $item->price }}TK</del>
-                                            @else
-                                            {{ $item->price }}TK
-                                            @endif
-                                            
-                                        </div>
-                                    </div>
+            <div class="swiper-wrapper row cols-xl-5 cols-lg-4 cols-3">
+                @foreach ($popcat->product->take(15) as $item)
+                <div class="swiper-slide product-col">
+                    <div class="product-wrap product text-center">
+                        <figure class="product-media">
+                            <a href="{{ route('product.details', $item->slug) }}">
+                                <img src="{{ asset('uploads/product/thumbnail/'.$item->thum_image) }}" alt="{{ $item->name }}"
+                                    width="216" height="243" />
+                            </a>
+                            <div class="product-action-vertical">
+                                {{-- <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
+                                    title="Add to cart"></a> --}}
+                                <a href="" class="btn-product-icon btn-quickview w-icon-search" onclick="quickView({{$item->id}})"
+                                    title="Quickview"></a>
+                            </div>
+                            @if($item->discount && $item->discount != null)
+                            <div class="product-label-group">
+                                <label class="product-label label-discount">{{ $item->discount }}% Off</label>
+                            </div>
+                            @endif
+                        </figure>
+                        <div class="product-details">
+                            <h4 class="product-name"><a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a></h4>
+                            {{-- <div class="ratings-container">
+                                <div class="ratings-full">
+                                    <span class="ratings" style="width: 60%;"></span>
+                                    <span class="tooltiptext tooltip-top"></span>
                                 </div>
-                            </div>                           
-                        @endforeach
+                                {{-- <a href="{{ route('product.details', $item->slug) }}" class="rating-reviews">(3
+                                    reviews)</a>
+                            </div> --}}
+                            <div class="product-price">
+                                @if($item->discount && $item->discount != null)
+                                @php
+                                    $newPrice = $item->price / 100;
+                                    $newPrice = $newPrice * $item->discount;
+                                    $newPrice = $item->price - $newPrice;
+                                @endphp
+                                <ins class="new-price">{{ $newPrice  }}TK</ins><del
+                                    class="old-price">{{ $item->price }}TK</del>
+                                @else
+                                {{ $item->price }}TK
+                                @endif
+                            </div>
+                            <div>
+                                <a href="" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
+                                        class="w-icon-cart"></i> Add To Cart</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div>                           
+                @endforeach
             </div>
         </div>
         @endif
         @endforeach
     
         <!-- End of Product Wrapper 1 -->
-
+{{-- 
         @foreach ($fullAd as $item)
         <div class="banner banner-fashion appear-animate br-sm mb-9" style="background-image: url({{ asset($item->image) }});
         background-color: #383839;">
@@ -241,7 +245,7 @@
             </div>
         </div>
         </div>       
-        @endforeach
+        @endforeach --}}
         <!-- End of Banner Fashion -->
     </div>
 <!--End of Catainer -->
@@ -255,76 +259,61 @@
         <div class="product-wrapper-1 appear-animate mb-5">
             <div class="title-link-wrapper pb-1 mb-4">
                 <h2 class="title ls-normal text-uppercase mb-0">MOST POPULAR FOR {{ $popcat->name }}</h2>
-                <a href="{{ route('shop.box') }}" class="font-size-normal font-weight-bold ls-25 mb-0">More
+                <a href="{{ route('shop.box', ['subcategory_filter'=>  $popcat->slug]) }}" class="font-size-normal font-weight-bold ls-25 mb-0">More
                     Products<i class="w-icon-long-arrow-right"></i></a>
             </div>
-            <div class="row">
-                <div class="col-lg-12 col-sm-8">
-                    <div class="swiper-container swiper-theme" data-swiper-options="{
-                        'spaceBetween': 20,
-                        'slidesPerView': 2,
-                        'breakpoints': {
-                            '992': {
-                                'slidesPerView': 3
-                            },
-                            '1200': {
-                                'slidesPerView': 5
-                            }
-                        }
-                    }">
-                        <div class="swiper-wrapper row cols-xl-4 cols-lg-3 cols-2">
-                            @foreach ($popcat->product as $item)
-                                <div class="swiper-slide product-col">
-                                    <div class="product-wrap product text-center">
-                                        <figure class="product-media">
-                                            <a href="{{ route('product.details', $item->slug) }}">
-                                                <img src="{{ asset('uploads/product/thumbnail/'.$item->thum_image) }}" alt="{{ $item->name }}"
-                                                    width="216" height="243" />
-                                            </a>
-                                            <div class="product-action-vertical">
-                                                <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
-                                                    title="Add to cart"></a>
-                                                <a href="" class="btn-product-icon btn-quickview w-icon-search" onclick="quickView({{$item->id}})"
-                                                    title="Quickview"></a>
-                                            </div>
-                                            @if($item->discount && $item->discount != null)
-                                            <div class="product-label-group">
-                                                <label class="product-label label-discount">{{ $item->discount }}% Off</label>
-                                            </div>
-                                            @endif
-                                        </figure>
-                                        <div class="product-details">
-                                            <h4 class="product-name"><a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a></h4>
-                                            {{-- <div class="ratings-container">
-                                                <div class="ratings-full">
-                                                    <span class="ratings" style="width: 60%;"></span>
-                                                    <span class="tooltiptext tooltip-top"></span>
-                                                </div>
-                                                {{-- <a href="{{ route('product.details', $item->slug) }}" class="rating-reviews">(3
-                                                    reviews)</a>
-                                            </div> --}}
-                                            <div class="product-price">
-                                                @if($item->discount && $item->discount != null)
-                                                @php
-                                                    $newPrice = $item->price / 100;
-                                                    $newPrice = $newPrice * $item->discount;
-                                                    $newPrice = $item->price - $newPrice;
-                                                @endphp
-                                                <ins class="new-price">{{ $newPrice  }}TK</ins><del
-                                                    class="old-price">{{ $item->price }}TK</del>
-                                                @else
-                                                {{ $item->price }}TK
-                                                @endif
-                                                
-                                            </div>
-                                        </div>
+            <div class="swiper-wrapper row cols-xl-5 cols-lg-4 cols-3">
+                @foreach ($popcat->product->take(15) as $item)
+                    <div class="swiper-slide product-col">
+                        <div class="product-wrap product text-center">
+                            <figure class="product-media">
+                                <a href="{{ route('product.details', $item->slug) }}">
+                                    <img src="{{ asset('uploads/product/thumbnail/'.$item->thum_image) }}" alt="{{ $item->name }}"
+                                        width="216" height="243" />
+                                </a>
+                                <div class="product-action-vertical">
+                                    {{-- <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
+                                        title="Add to cart"></a> --}}
+                                    <a href="" class="btn-product-icon btn-quickview w-icon-search" onclick="quickView({{$item->id}})"
+                                        title="Quickview"></a>
+                                </div>
+                                @if($item->discount && $item->discount != null)
+                                <div class="product-label-group">
+                                    <label class="product-label label-discount">{{ $item->discount }}% Off</label>
+                                </div>
+                                @endif
+                            </figure>
+                            <div class="product-details">
+                                <h4 class="product-name"><a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a></h4>
+                                {{-- <div class="ratings-container">
+                                    <div class="ratings-full">
+                                        <span class="ratings" style="width: 60%;"></span>
+                                        <span class="tooltiptext tooltip-top"></span>
                                     </div>
-                                </div>                           
-                            @endforeach
+                                    {{-- <a href="{{ route('product.details', $item->slug) }}" class="rating-reviews">(3
+                                        reviews)</a>
+                                </div> --}}
+                                <div class="product-price">
+                                    @if($item->discount && $item->discount != null)
+                                    @php
+                                        $newPrice = $item->price / 100;
+                                        $newPrice = $newPrice * $item->discount;
+                                        $newPrice = $item->price - $newPrice;
+                                    @endphp
+                                    <ins class="new-price">{{ $newPrice  }}TK</ins><del
+                                        class="old-price">{{ $item->price }}TK</del>
+                                    @else
+                                    {{ $item->price }}TK
+                                    @endif
+                                </div>
+                                <div>
+                                    <a href="" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
+                                            class="w-icon-cart"></i> Add To Cart</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
+                    </div>                           
+                @endforeach
             </div>
         </div>
         @endif
@@ -333,75 +322,60 @@
 </section>
 
 
-
 @if(count($new_arrival) > 0)
 <section class="popular-product appear-animate">
     <div class="container">
         <div class="product-wrapper-1 appear-animate mb-5">
             <div class="title-link-wrapper pb-1 mb-4">
                 <h2 class="title ls-normal text-uppercase mb-0">New Arrivals</h2>
-                <a href="{{ route('shop.box') }}" class="font-size-normal font-weight-bold ls-25 mb-0">More
+                <a href="{{ route('shop.box', ['newproduct_filter'=>'show-all']) }}" class="font-size-normal font-weight-bold ls-25 mb-0">More
                     Products<i class="w-icon-long-arrow-right"></i></a>
             </div>
-            <div class="row">
-                <div class="col-lg-12 col-sm-8">
-                    <div class="swiper-container swiper-theme" data-swiper-options="{
-                        'spaceBetween': 20,
-                        'slidesPerView': 2,
-                        'breakpoints': {
-                            '992': {
-                                'slidesPerView': 3
-                            },
-                            '1200': {
-                                'slidesPerView': 5
-                            }
-                        }
-                    }">
-                        <div class="swiper-wrapper row cols-xl-4 cols-lg-3 cols-2">
-                            @foreach ($new_arrival as $item)
-                                <div class="swiper-slide product-col">
-                                    <div class="product-wrap product text-center">
-                                        <figure class="product-media">
-                                            <a href="{{ route('product.details', $item->slug) }}">
-                                                <img src="{{ asset('uploads/product/thumbnail/'.$item->thum_image) }}" alt="{{ $item->name }}"
-                                                    width="216" height="243" />
-                                            </a>
-                                            <div class="product-action-vertical">
-                                                <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
-                                                    title="Add to cart"></a>
-                                                <a href="" class="btn-product-icon btn-quickview w-icon-search" onclick="quickView({{$item->id}})"
-                                                    title="Quickview"></a>
-                                            </div>
-                                            @if($item->discount && $item->discount != null)
-                                            <div class="product-label-group">
-                                                <label class="product-label label-discount">{{ $item->discount }}% Off</label>
-                                            </div>
-                                            @endif
-                                        </figure>
-                                        <div class="product-details">
-                                            <h4 class="product-name"><a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a></h4>
-                                            <div class="product-price">
-                                                @if($item->discount && $item->discount != null)
-                                                @php
-                                                    $newPrice = $item->price / 100;
-                                                    $newPrice = $newPrice * $item->discount;
-                                                    $newPrice = $item->price - $newPrice;
-                                                @endphp
-                                                <ins class="new-price">{{ $newPrice  }}TK</ins><del
-                                                    class="old-price">{{ $item->price }}TK</del>
-                                                @else
-                                                {{ $item->price }}TK
-                                                @endif
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                           
-                            @endforeach
+         
+            <div class="swiper-wrapper row cols-xl-5 cols-lg-4 cols-3">
+                @foreach ($new_arrival->take(15) as $item)
+                    <div class="swiper-slide product-col">
+                        <div class="product-wrap product text-center">
+                            <figure class="product-media">
+                                <a href="{{ route('product.details', $item->slug) }}">
+                                    <img src="{{ asset('uploads/product/thumbnail/'.$item->thum_image) }}" alt="{{ $item->name }}"
+                                        width="216" height="243" />
+                                </a>
+                                <div class="product-action-vertical">
+                                    {{-- <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
+                                        title="Add to cart"></a> --}}
+                                    <a href="" class="btn-product-icon btn-quickview w-icon-search" onclick="quickView({{$item->id}})"
+                                        title="Quickview"></a>
+                                </div>
+                                @if($item->discount && $item->discount != null)
+                                <div class="product-label-group">
+                                    <label class="product-label label-discount">{{ $item->discount }}% Off</label>
+                                </div>
+                                @endif
+                            </figure>
+                            <div class="product-details">
+                                <h4 class="product-name"><a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a></h4>
+                                <div class="product-price">
+                                    @if($item->discount && $item->discount != null)
+                                    @php
+                                        $newPrice = $item->price / 100;
+                                        $newPrice = $newPrice * $item->discount;
+                                        $newPrice = $item->price - $newPrice;
+                                    @endphp
+                                    <ins class="new-price">{{ $newPrice  }}TK</ins><del
+                                        class="old-price">{{ $item->price }}TK</del>
+                                    @else
+                                    {{ $item->price }}TK
+                                    @endif
+                                </div>
+                                <div>
+                                    <a href="" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
+                                            class="w-icon-cart"></i> Add To Cart</a>
+                                </div>
+                            </div>
                         </div>
-                        {{-- <div class="swiper-pagination"></div> --}}
-                    </div>
-                </div>
+                    </div>                           
+                @endforeach
             </div>
         </div>
     </div>
@@ -414,68 +388,54 @@
         <div class="product-wrapper-1 appear-animate mb-5">
             <div class="title-link-wrapper pb-1 mb-4">
                 <h2 class="title ls-normal text-uppercase mb-0">Products Offers</h2>
-                <a href="{{ route('shop.box') }}" class="font-size-normal font-weight-bold ls-25 mb-0">More
+                <a href="{{ route('shop.box', ['offerproduct_filter'=>'show-all']) }}" class="font-size-normal font-weight-bold ls-25 mb-0">More
                     Products<i class="w-icon-long-arrow-right"></i></a>
             </div>
-            <div class="row">
-                <div class="col-lg-12 col-sm-8">
-                    <div class="swiper-container swiper-theme" data-swiper-options="{
-                        'spaceBetween': 20,
-                        'slidesPerView': 2,
-                        'breakpoints': {
-                            '992': {
-                                'slidesPerView': 3
-                            },
-                            '1200': {
-                                'slidesPerView': 5
-                            }
-                        }
-                    }">
-                        <div class="swiper-wrapper row cols-xl-4 cols-lg-3 cols-2">
-                            @foreach ($offers_product as $item)
-                                <div class="swiper-slide product-col">
-                                    <div class="product-wrap product text-center">
-                                        <figure class="product-media">
-                                            <a href="{{ route('product.details', $item->slug) }}">
-                                                <img src="{{ asset('uploads/product/thumbnail/'.$item->thum_image) }}" alt="{{ $item->name }}"
-                                                    width="216" height="243" />
-                                            </a>
-                                            <div class="product-action-vertical">
-                                                <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
-                                                    title="Add to cart"></a>
-                                                <a href="" class="btn-product-icon btn-quickview w-icon-search" onclick="quickView({{$item->id}})"
-                                                    title="Quickview"></a>
-                                            </div>
-                                            @if($item->discount && $item->discount != null)
-                                            <div class="product-label-group">
-                                                <label class="product-label label-discount">{{ $item->discount }}% Off</label>
-                                            </div>
-                                            @endif
-                                        </figure>
-                                        <div class="product-details">
-                                            <h4 class="product-name"><a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a></h4>
-                                            <div class="product-price">
-                                                @if($item->discount && $item->discount != null)
-                                                @php
-                                                    $newPrice = $item->price / 100;
-                                                    $newPrice = $newPrice * $item->discount;
-                                                    $newPrice = $item->price - $newPrice;
-                                                @endphp
-                                                <ins class="new-price">{{ $newPrice  }}TK</ins><del
-                                                    class="old-price">{{ $item->price }}TK</del>
-                                                @else
-                                                {{ $item->price }}TK
-                                                @endif
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                           
-                            @endforeach
+
+            <div class="swiper-wrapper row cols-xl-5 cols-lg-4 cols-3">
+                @foreach ($offers_product as $item)
+                    <div class="swiper-slide product-col">
+                        <div class="product-wrap product text-center">
+                            <figure class="product-media">
+                                <a href="{{ route('product.details', $item->slug) }}">
+                                    <img src="{{ asset('uploads/product/thumbnail/'.$item->thum_image) }}" alt="{{ $item->name }}"
+                                        width="216" height="243" />
+                                </a>
+                                <div class="product-action-vertical">
+                                    {{-- <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
+                                        title="Add to cart"></a> --}}
+                                    <a href="" class="btn-product-icon btn-quickview w-icon-search" onclick="quickView({{$item->id}})"
+                                        title="Quickview"></a>
+                                </div>
+                                @if($item->discount && $item->discount != null)
+                                <div class="product-label-group">
+                                    <label class="product-label label-discount">{{ $item->discount }}% Off</label>
+                                </div>
+                                @endif
+                            </figure>
+                            <div class="product-details">
+                                <h4 class="product-name"><a href="{{ route('product.details', $item->slug) }}">{{ $item->name }}</a></h4>
+                                <div class="product-price">
+                                    @if($item->discount && $item->discount != null)
+                                    @php
+                                        $newPrice = $item->price / 100;
+                                        $newPrice = $newPrice * $item->discount;
+                                        $newPrice = $item->price - $newPrice;
+                                    @endphp
+                                    <ins class="new-price">{{ $newPrice  }}TK</ins><del
+                                        class="old-price">{{ $item->price }}TK</del>
+                                    @else
+                                    {{ $item->price }}TK
+                                    @endif
+                                </div>
+                                <div>
+                                    <a href="" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
+                                            class="w-icon-cart"></i> Add To Cart</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
+                    </div>                           
+                @endforeach
             </div>
         </div>
     </div>

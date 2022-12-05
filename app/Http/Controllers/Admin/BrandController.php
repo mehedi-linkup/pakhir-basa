@@ -98,7 +98,7 @@ class BrandController extends Controller
             if (!empty($brand->image) && file_exists($brand->image)) {
                 unlink($brand->image);
             }
-            $Image = $this->imageUpload($request, 'image', 'uploads/ad');
+            $Image = $this->imageUpload($request, 'image', 'uploads/brand');
         } else {
             $Image = $brand->image;
         }

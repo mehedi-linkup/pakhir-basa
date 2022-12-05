@@ -15,6 +15,6 @@ class SubCategory extends Model
         return  $this->belongsTo(Category::class)->withTrashed();
     }
     public function product(){
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class)->orderBy('id', 'desc');
     }
 }

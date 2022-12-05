@@ -16,7 +16,7 @@
                 @csrf
                 @method('put')
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-3">
                                 <label> Name</label>
@@ -31,15 +31,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <label>Image </label>
+                                <div class="col-md-5">
+                                    <label>Image <small>(width: 410px X 186px)</small></label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <input type="file" class="form-control" id="image" name="image" onchange="readURL(this);">
                                 </div>
-                                <div class="col-md-12 text-center mt-2">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-7 text-center mt-2">
                                     <img class="form-controlo img-thumbnail" src="#" id="previewImage" style="height:120px;width:140px; background: #3f4a49;">
                                 </div>
                             </div>

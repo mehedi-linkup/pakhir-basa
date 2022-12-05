@@ -35,7 +35,7 @@ class HomeController extends Controller
         $popularcategory = Category::with('product')->where('is_popular', 1)->orderBy('rank_id', 'ASC')->get();
         $recent = Product::latest()->take(24)->get();
         $popular = Product::latest()->where('is_popular', '1')->limit(24)->get();
-        $new_arrival = Product::where('is_arrival', '1')->get();
+        $new_arrival = Product::where('is_arrival', '1')->latest()->get();
         $offers_product = Product::where('is_offer', '1')->latest()->get();
         $home = Product::where('category_id', '8')->inRandomOrder()->limit(12)->get();
         $fullAd = Ad::where('status', 'a')->inRandomOrder()->limit(1)->get();
@@ -122,6 +122,25 @@ class HomeController extends Controller
             $brandFilter = Brand::find($brand_filter);
             
             return view('website.shop-boxed', compact('product', 'size', 'color', 'brandFilter'));
+        } else if($req->query('category_filter')) {
+            $category_filter = $req->query('category_filter');
+            $categoryFilter = Category::where('slug', $category_filter)->first();
+            $product = Product::where('category_id', $categoryFilter->id)->latest()->paginate(12);
+            return view('website.shop-boxed', compact('product', 'size', 'color', 'categoryFilter'));;
+        } else if($req->query('subcategory_filter')) {
+            $subcategory_filter = $req->query('subcategory_filter');
+            $subcategoryFilter = SubCategory::where('slug', $subcategory_filter)->first();
+            $product = Product::where('sub_category_id', $subcategoryFilter->id)->latest()->paginate(12);
+            return view('website.shop-boxed', compact('product', 'size', 'color', 'subcategoryFilter'));
+        } else if($req->query('newproduct_filter')) {
+            $product = Product::where('is_arrival', '1')->latest()->paginate(12);
+            $newproductFilter = count($product);
+            return view('website.shop-boxed', compact('product', 'size', 'color', 'newproductFilter'));
+
+        } else if($req->query('offerproduct_filter')) {
+            $product = Product::where('is_offer', '1')->latest()->paginate(12);
+            $offerproductFilter = count($product);
+            return view('website.shop-boxed', compact('product', 'size', 'color', 'offerproductFilter'));
         } else {
             return view('website.shop-boxed', compact('product', 'size', 'color'));
         }

@@ -33,7 +33,7 @@
                             <h3 class="widget-title"><span>All Categories</span></h3>
                             <ul class="widget-body filter-items search-ul">
                                 @foreach ($category as $item)
-                                <li><a href="{{ route('categoryWise.list', $item->id) }}">{{ $item->name }}</a></li>
+                                <li><a href="{{ route('shop.box', ['category_filter'=>  $item->slug]) }}">{{ $item->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -124,6 +124,41 @@
                         </a>
                     </div>
                     @endisset
+                    @isset($categoryFilter)
+                    <div class="toolbox-left">
+                        <label>Showing product by :</label>
+                        <a class="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
+                            btn-icon-left"><i class="w-icon-sale"></i><span>{{ $categoryFilter->name }}</span>
+                        </a>
+                    </div>
+                    @endisset
+                    @isset($subcategoryFilter)
+                    <div class="toolbox-left">
+                        <label>Showing product by :</label>
+                        <a class="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
+                            btn-icon-left"><i class="w-icon-sale"></i><span>{{ $subcategoryFilter->name }}</span>
+                        </a>
+                    </div>
+                    @endisset
+                    @isset($newproductFilter)
+                    <div class="toolbox-left">
+                        <label>Showing All Products: </label>
+                        <a class="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
+                            btn-icon-left"><i class="w-icon-sale"></i><span>New</span>
+                        </a>
+                    </div>
+                    @endisset
+                    @isset($offerproductFilter)
+                    <div class="toolbox-left">
+                        <label>Showing All Products: </label>
+                        <a class="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
+                            btn-icon-left"><i class="w-icon-sale"></i><span>Offers</span>
+                        </a>
+                    </div>
+                    @endisset
+                    
+                    
+                    @if(!(isset($categoryFilter) || isset($subcategoryFilter)))
                     <div class="toolbox-right">
                         <div class="toolbox-item toolbox-layout">
                             <a href="{{ route('shop.box', ['shop_view'=>'shop box']) }}" class="icon-mode-grid btn-layout {{ $queryText == 'shop box' ||  $_SERVER['REQUEST_URI'] ? 'active': ''}}">
@@ -137,6 +172,7 @@
                             </a>
                         </div>
                     </div>
+                    @endif
                 </nav>
                
                 <div class="product-wrapper row cols-md-3 cols-sm-2 cols-2">
@@ -149,8 +185,8 @@
                                         height="338" />
                                 </a>
                                 <div class="product-action-horizontal">
-                                    <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
-                                        title="Add to cart"></a>
+                                    {{-- <a href="" class="btn-product-icon btn-cart w-icon-cart" onclick="addToCard({{$item->id}})"
+                                        title="Add to cart"></a> --}}
                                     <a href="" class="btn-product-icon btn-quickview w-icon-search"
                                         title="Quick View" onclick="quickView({{$item->id}})"></a>
                                 </div>
@@ -165,9 +201,23 @@
                         
                                 <div class="product-pa-wrapper">
                                     <div class="product-price">
-                                        <ins class="new-price">{{ $item->price }} TK</ins>
-                                        {{-- <del class="old-price">$60.00</del> --}}
+                                        @if($item->discount && $item->discount != null)
+                                        @php
+                                            $newPrice = $item->price / 100;
+                                            $newPrice = $newPrice * $item->discount;
+                                            $newPrice = $item->price - $newPrice;
+                                        @endphp
+                                        <ins class="new-price">{{ $newPrice  }}TK</ins><del
+                                            class="old-price">{{ $item->price }}TK</del>
+                                        @else
+                                        {{ $item->price }}TK
+                                        @endif
+                                        
                                     </div>
+                                </div>
+                                <div>
+                                    <a href="" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
+                                            class="w-icon-cart"></i> Add To Cart</a>
                                 </div>
                             </div>
                         </div>

@@ -110,16 +110,16 @@ button[name=track] {
 }
 
 
-.product-wrap{
+.product-wrap {
     overflow: hidden;
     background: #fff;
     border-radius: 3px;
-    box-shadow: 0 0 1px rgba(0,0,0,.2),0 2px 4px rgba(0,0,0,.03);
-    transition: ease-in-out .3s ;
-    -webkit-transition: ease-in-out .3s ;
-    -moz-transition: ease-in-out .3s ;
-    -ms-transition: ease-in-out .3s ;
-    -o-transition: ease-in-out .3s ;
+    box-shadow: 0 0 2px 0px #f77c29, 0 2px 4px rgb(0 0 0 / 3%);
+    transition: ease-in-out .3s;
+    -webkit-transition: ease-in-out .3s;
+    -moz-transition: ease-in-out .3s;
+    -ms-transition: ease-in-out .3s;
+    -o-transition: ease-in-out .3s;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
