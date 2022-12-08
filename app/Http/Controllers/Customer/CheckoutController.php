@@ -282,15 +282,18 @@ class CheckoutController extends Controller
 
                         $stock = $product->inventory->purchase;
                         if ($stock >= $value->quantity) {
-                            $totalprice = $value->price * $value->quantity;
+                           
                             $orderDetails                  = new OrderDetails();
                             $orderDetails->order_id        = $order->id;
                             $orderDetails->product_id      = $value->id;
                             $orderDetails->product_name    = $value->name;
                             $orderDetails->customer_id     = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : null;
                             $orderDetails->price           = $value->price;
+                            $orderDetails->offer_price     = $value->attributes->offer_price;
                             $orderDetails->quantity        = $value->quantity;
+                            $totalprice = $value->attributes->offer_price * $value->quantity;
                             $orderDetails->total_price     = $totalprice;
+                            $orderDetails->message = "1st condition applied";
                             $orderDetails->save();
                             $sum += $totalprice;
                             $inventory           = Inventory::where('product_id', $value->id)->first();
@@ -320,9 +323,10 @@ class CheckoutController extends Controller
                                 $orderDetails->customer_id    = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->id : null;
                                 $orderDetails->price          = $value->price;
                                 $orderDetails->offer_price    = $value->attributes->offer_price;
-                                $orderDetails->offer_quantity = $value->attributes->quantity;
+                                $orderDetails->offer_quantity = $value->quantity;
                                 $orderDetails->quantity       = $value->quantity;
                                 $orderDetails->total_price    = $price;
+                                $orderDetails->message = "2nd condition applied";
                                 $orderDetails->save();
                                 $inventory                    = Inventory::where('product_id', $value->id)->first();
                                 $inventory->sales             = $value->quantity;
@@ -353,6 +357,7 @@ class CheckoutController extends Controller
                                 $orderDetails->quantity      = $value->quantity;
                                 $orderDetails->offer_quantity = $value->attributes->quantity;
                                 $orderDetails->total_price   = $price;
+                                $orderDetails->message = "3rd condition applied";
                                 $orderDetails->save();
                                 $sum += $price;
                                 $inventory            = Inventory::where('product_id', $value->id)->first();
@@ -381,6 +386,7 @@ class CheckoutController extends Controller
                     $orderDetails->quantity      = $value->quantity;
                     $price                       = $value->quantity * $value->price;
                     $orderDetails->total_price   = $price;
+                    $orderDetails->message = "without offer condition applied";
                     $orderDetails->save();
                     $sum += $price;
                     $inventory                   = Inventory::where('product_id', $value->id)->first();
@@ -407,14 +413,14 @@ class CheckoutController extends Controller
                 return redirect()->back();
             } else {
                 $company            = CompanyProfile::first();
-                $admin_phone        = $company->phone_3;
-                $admin_phone_2      = $company->phone_4;
-                $admin_phone_3      = $company->phone_5;
+                // $admin_phone        = $company->phone_3;
+                // $admin_phone_2      = $company->phone_4;
+                // $admin_phone_3      = $company->phone_5;
                 $customer_phone     = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->phone : $request->phone;
                 $name               = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->name : $request->name;
                 $customer_id        = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->code : '';
-                // $msg                = " Order submit  $name . Invoice No. $order->invoice_no";
-                // $message            = "$name .Your order submited successfully. Invoice No. $order->invoice_no";
+                $msg                = " Order submit  $name . Invoice No. $order->invoice_no";
+                $message            = "$name .Your order submited successfully. Invoice No. $order->invoice_no";
                 // $this->send_sms($admin_phone , $msg);
                 // $this->send_sms($admin_phone_2 , $msg);
                 // $this->send_sms($admin_phone_3 , $msg);

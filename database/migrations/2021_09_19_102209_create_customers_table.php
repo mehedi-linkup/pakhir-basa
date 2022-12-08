@@ -27,6 +27,7 @@ class CreateCustomersTable extends Migration
             $table->string('username', 20);
             $table->string('password', 100);
             $table->string('status', 1)->default('p');
+            $table->integer('otp', 6)->nullable();
             $table->string('save_by', 3);
             $table->string('updated_by', 3);
             $table->softDeletes();

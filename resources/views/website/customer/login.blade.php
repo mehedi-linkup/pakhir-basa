@@ -13,7 +13,7 @@
     <nav class="breadcrumb-nav">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{route('home')}}">Home</a></li>
                 <li>My account</li>
             </ul>
         </div>
@@ -40,7 +40,7 @@
                         <div class="form-checkbox d-flex align-items-center justify-content-between">
                             {{-- <input type="checkbox" class="custom-checkbox" id="remember1" name="remember1" required="">
                             <label for="remember1">Remember me</label> --}}
-                            <a href="#">Forgot password?</a>
+                            <a href="{{ route('forget.password') }}">Forgot password?</a>
                         </div> 
                      
                         <button type="submit" class="btn btn-primary w-100 sign-in">Sign In</button>

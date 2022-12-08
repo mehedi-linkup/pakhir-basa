@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Models\Order;
-use App\Models\Customer;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Models\Area;
-use App\Models\District;
-use App\Models\OrderDetails;
+use App\Models\Order;
 use App\Models\Thana;
+use App\Models\Customer;
+use App\Models\District;
+use Illuminate\Support\Str;
+use App\Models\OrderDetails;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
@@ -253,27 +257,36 @@ class CustomerController extends Controller
         }
     }
 
-    public function forgetPassword(){
-        return view('website.customer.forgetPassword');
+    public function forgetPassword() {
+        return view('website.customer.forgetEmail');
     }
-    public function forgetPasswordStore(Request $request){
-        // $otp = rand(1000,9999);
-        $exit_number = Customer::where('phone',$request->phone)->first();
-        
-        if($exit_number){
-            $otp = rand(1000,9999);
-            $exit_number->otp = $otp;
-            $exit_number->save();
-            Session::put('phone', $request->phone);
-            // $message = "Zenevia password reset otp is $otp";
-            $message = "অনুগ্রহ করে আপনার পাসওয়ার্ড রিসেট করুন $otp. এটা কাউকে শেয়ার করবেন না";
-            $this->send_sms($request->phone , $message);
-            // dd($message);
-            return redirect()->route('forget.password.form');
-        }else{
-            return back()->with('error',' Your Phone number or something wrong');
-        }
-}
+    public function forgetPasswordStore(Request $request) {
+        $request->validate([
+            'email'=>'required|email|exists:customers,email'
+        ],[
+            'email.required' => 'You have to choose the file!',
+            'email.exists' => 'The selected email have no account!'
+        ]);
+
+        $token = Str::random(64);
+        DB::table('password_resets')->insert([
+              'email'=>$request->email,
+              'token'=>$token,
+              'created_at'=>Carbon::now(),
+        ]);
+
+        // $app_name = CompanyProfile::first();
+        $action_link = route('forget.password.form',['token'=>$token,'email'=>$request->email]);
+        $body = "We have received a request to reset the password for <b>ASR World Fashion</b> account associated with ".$request->email.". You can reset your password by clicking the link below.";
+
+        Mail::send('website.customer.forgetPasswordResetForm',['action_link'=>$action_link,'body'=>$body], function($message) use ($request){
+             $message->from('info@thelookbd.com', 'ASR World Fashion');
+             $message->to($request->email, 'Hi')
+                     ->subject('Reset Password');
+        });
+
+        return back()->with('success', 'We have e-mailed your password reset link');
+    }
 
   
     public function forgetResetPasswordForm(Request $request){

@@ -86,7 +86,7 @@ Route::post('/subscriber-store', [SubscriberController::class, 'subscriberList']
 
 
 // User Login
-Route::get('/customer', [CustomerCustomerController::class, 'customer'])->name('customer.login');
+Route::get('/customer/login', [CustomerCustomerController::class, 'customer'])->name('customer.login');
 Route::get('/customer/signUp', [CustomerCustomerController::class, 'signUp'])->name('customer.signup');
 Route::post('/customer-auth', [CustomerCustomerController::class, 'AuthCheck'])->name('customer.auth');
 Route::post('/customer-auth-inpage', [CustomerCustomerController::class, 'AuthCheckInPage'])->name('customer.auth.page');

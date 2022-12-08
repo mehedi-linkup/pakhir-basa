@@ -5482,7 +5482,9 @@ blockquote {
   position: relative;
   font-size: 1rem;
   color: #666;
-  box-shadow: 1px 1px 5px rgba(247, 124, 41, 0.2);
+  border: 2px solid rgb(1 92 5 / 5%);
+  border-radius: 10px;
+  /* box-shadow: 0px 0px 3px 0px rgb(1 92 5 / 20%); */
 }
 .category a {
   color: inherit;

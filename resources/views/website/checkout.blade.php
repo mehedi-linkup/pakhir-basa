@@ -242,7 +242,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-lg-5 mb-4 sticky-sidebar-wrapper">
+                    <div class="col-lg-6 mb-4 sticky-sidebar-wrapper">
                         <div class="order-summary-wrapper sticky-sidebar">
                             <h3 class="title text-uppercase ls-10">Your Order</h3>
                             <div class="order-summary">

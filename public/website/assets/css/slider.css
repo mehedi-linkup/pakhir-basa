@@ -5,7 +5,7 @@
 }
 .swiper-slide-active .animate3 span {
   animation: ani3 5s forwards;
-  transform: translate(-800px, 0px) scale(2);
+  transform: translate(-800px, 0px) rotate(45deg) scale(2);
 }
 .sec4 .animate.show span {
   animation: ani4 .5s forwards;
@@ -13,7 +13,7 @@
 }
 .swiper-slide-active .animate5 span {
   animation: ani5 4s forwards;
-  transform: translate(800px, 0px) rotate(0deg) scale(2);
+  transform: translate(800px, 0px) rotate(135deg) scale(2);
 }
 .swiper-slide-active .animate6 span {
   animation: ani6 .5s forwards;
