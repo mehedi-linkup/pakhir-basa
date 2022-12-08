@@ -6,102 +6,100 @@
 @section('website-content')
 
 <section class="intro-section">
-    <div class="container-fluid pr-0">
-        <div class="intro-wrapper">
-            <div class="swiper-container swiper-theme nav-inner pg-inner swiper-nav-lg animation-slider pg-xxl-hide nav-xxl-show nav-hide"
-                data-swiper-options="{
-                'slidesPerView': 1,
-                'autoplay': {
-                    'delay': 8000,
-                    'disableOnInteraction': false
-                }
-            }">
-                <div class="swiper-wrapper wrapper">
-                @foreach ($banner as $key => $item)
-                <div class="swiper-slide banner banner-fixed intro-slide intro-slide1 scrollDown"
-                style="background-image: url({{ asset($item->bgimage) }}); background-color: rgb(255 255 255 / 70%); background-blend-mode: color">
-                    <div class="container">
-                        <figure class="slide-image skrollable slide-animate"  data-animation-options="{
-                            'name': 'bounceInLeft',
-                            'duration': '5s',
-                            'delay': '.2s'
-                        }">
-                            <img src="{{ asset($item->image) }}" alt="Banner"
-                                data-bottom-top="transform: translateY(10vh);"
-                                data-top-bottom="transform: translateY(-10vh);" width="474" height="397">
-                        </figure>
-                        <div class="banner-content y-50 text-right">
-                            <h5 class="banner-subtitle font-weight-normal text-green ls-50 lh-1 mb-5 animate animate3"
-                                data-animation-options="{
-                            'name': 'bounceInLeft',
-                            'duration': '5s',
-                            'delay': '.2s'
-                        }">
-                                {{-- {{ $item->offer_name }} --}}
-                                <?php
-                                    $offerArr = str_split($item->offer_name);
-                                    $firstspan = "";
-                                    for($i=0; $i < count($offerArr); $i++) {
-                                        if($offerArr[$i] == " ") {
-                                            $offerArr[$i] = "&nbsp";
-                                        }
-                                        $firstspan .= "<span>". $offerArr[$i] . "</span>";
+    <div class="container-fluid px-0">
+        <div class="swiper-container swiper-theme nav-inner pg-inner swiper-nav-lg animation-slider pg-xxl-hide nav-xxl-show nav-hide"
+            data-swiper-options="{
+            'slidesPerView': 1,
+            'autoplay': {
+                'delay': 8000,
+                'disableOnInteraction': false
+            }
+        }">
+            <div class="swiper-wrapper wrapper">
+            @foreach ($banner as $key => $item)
+            <div class="swiper-slide banner banner-fixed intro-slide intro-slide1 scrollDown"
+            style="background-image: url({{ asset($item->bgimage) }}); background-color: rgb(255 255 255 / 70%); background-blend-mode: color">
+                <div class="container">
+                    <figure class="slide-image skrollable slide-animate"  data-animation-options="{
+                        'name': 'bounceInLeft',
+                        'duration': '5s',
+                        'delay': '.2s'
+                    }">
+                        <img src="{{ asset($item->image) }}" alt="Banner"
+                            data-bottom-top="transform: translateY(10vh);"
+                            data-top-bottom="transform: translateY(-10vh);" width="474" height="397">
+                    </figure>
+                    <div class="banner-content y-50 text-right">
+                        <h5 class="banner-subtitle font-weight-normal text-green ls-50 lh-1 mb-5 animate animate3"
+                            data-animation-options="{
+                        'name': 'bounceInLeft',
+                        'duration': '5s',
+                        'delay': '.2s'
+                    }">
+                            {{-- {{ $item->offer_name }} --}}
+                            <?php
+                                $offerArr = str_split($item->offer_name);
+                                $firstspan = "";
+                                for($i=0; $i < count($offerArr); $i++) {
+                                    if($offerArr[$i] == " ") {
+                                        $offerArr[$i] = "&nbsp";
                                     }
-                                    echo $firstspan;
-                                ?>
-                            </h5>
-                            <h3 class="banner-title font-weight-bold text-darkred ls-25 lh-1 animate animate5 mb-3"
-                                data-animation-options="{
-                            'name': 'bounceInLeft',
-                            'duration': '5s',
-                            'delay': '.2s'
-                        }">
-                                {{-- {{ $item->title }} --}}
-                                <?php
-                                    $helloArr = str_split($item->title);
-                                    $span = "";
-                                    for($i=0; $i < count($helloArr); $i++) {
-                                        if($helloArr[$i] == " ") {
-                                            $helloArr[$i] = "&nbsp";
-                                        }
-                                        $span .= "<span>". $helloArr[$i] . "</span>";
+                                    $firstspan .= "<span>". $offerArr[$i] . "</span>";
+                                }
+                                echo $firstspan;
+                            ?>
+                        </h5>
+                        <h3 class="banner-title font-weight-bold text-darkred ls-25 lh-1 animate animate5 mb-3"
+                            data-animation-options="{
+                        'name': 'bounceInLeft',
+                        'duration': '5s',
+                        'delay': '.2s'
+                    }">
+                            {{-- {{ $item->title }} --}}
+                            <?php
+                                $helloArr = str_split($item->title);
+                                $span = "";
+                                for($i=0; $i < count($helloArr); $i++) {
+                                    if($helloArr[$i] == " ") {
+                                        $helloArr[$i] = "&nbsp";
                                     }
-                                    echo $span;
-                                ?>
-                              
-                            </h3>
-                            <div class="font-weight-normal text-default slide-animate word bounce" data-text="Bouncing Text" data-animation-options="{
-                            'name': 'bounceInLeft',
-                            'duration': '5s',
-                            'delay': '.10s'
-                            }">
-                            <p>
-                                {{ $item->short_details }}
-                            </p>
-                            </div>
-    
-                            <a href="{{ $item->offer_link }}"
-                                class="btn btn-primary btn-outline btn-rounded btn-icon-right slide-animate"
-                                data-animation-options="{
-                            {{-- 'name': 'fadeInRightShorter', --}}
-                            'name': 'bounceInLeft',
-                            'duration': '1s',
-                            'delay': '.8s'
-                        }">SHOP NOW<i class="w-icon-long-arrow-right"></i></a>
-
+                                    $span .= "<span>". $helloArr[$i] . "</span>";
+                                }
+                                echo $span;
+                            ?>
+                            
+                        </h3>
+                        <div class="font-weight-normal text-default slide-animate word bounce" data-text="Bouncing Text" data-animation-options="{
+                        'name': 'bounceInLeft',
+                        'duration': '5s',
+                        'delay': '.10s'
+                        }">
+                        <p>
+                            {{ $item->short_details }}
+                        </p>
                         </div>
-                        <!-- End of .banner-content -->
+
+                        <a href="{{ $item->offer_link }}"
+                            class="btn btn-primary btn-outline btn-rounded btn-icon-right slide-animate"
+                            data-animation-options="{
+                        {{-- 'name': 'fadeInRightShorter', --}}
+                        'name': 'bounceInLeft',
+                        'duration': '1s',
+                        'delay': '.8s'
+                    }">SHOP NOW<i class="w-icon-long-arrow-right"></i></a>
+
                     </div>
-                    <!-- End of .container -->
-                </div> 
-                <div class="placeholder"></div>
-                @endforeach
+                    <!-- End of .banner-content -->
                 </div>
-                <div class="swiper-pagination"></div>
-                <button class="swiper-button-next"></button>
-                <button class="swiper-button-prev"></button>
+                <!-- End of .container -->
+            </div> 
+            <div class="placeholder"></div>
+            @endforeach
             </div>
-        </div> 
+            <div class="swiper-pagination"></div>
+            <button class="swiper-button-next"></button>
+            <button class="swiper-button-prev"></button>
+        </div>
     </div>
     <!-- End of .swiper-container -->
 </section>
@@ -208,7 +206,7 @@
                             </div>
                             <div>
                                 <a href="" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
-                                        class="w-icon-cart"></i> Add To Cart</a>
+                                        class="w-icon-cart"></i>&nbsp;Add To Cart</a>
                             </div>
                         </div>
                     </div>
@@ -308,7 +306,7 @@
                                 </div>
                                 <div>
                                     <a href="" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
-                                            class="w-icon-cart"></i> Add To Cart</a>
+                                            class="w-icon-cart"></i>&nbsp;Add To Cart</a>
                                 </div>
                             </div>
                         </div>
@@ -370,7 +368,7 @@
                                 </div>
                                 <div>
                                     <a href="" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
-                                            class="w-icon-cart"></i> Add To Cart</a>
+                                            class="w-icon-cart"></i>&nbsp;Add To Cart</a>
                                 </div>
                             </div>
                         </div>
@@ -430,7 +428,7 @@
                                 </div>
                                 <div>
                                     <a href="" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
-                                            class="w-icon-cart"></i> Add To Cart</a>
+                                            class="w-icon-cart"></i>&nbsp;Add To Cart</a>
                                 </div>
                             </div>
                         </div>

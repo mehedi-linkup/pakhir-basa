@@ -216,8 +216,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <a href="" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
-                                            class="w-icon-cart"></i> Add To Cart</a>
+                                    <a href="#!" class="btn-product btn-cart" title="Add to Cart" onclick="addToCard({{$item->id}})"><i
+                                            class="w-icon-cart"></i>&nbsp;Add To Cart</a>
                                 </div>
                             </div>
                         </div>

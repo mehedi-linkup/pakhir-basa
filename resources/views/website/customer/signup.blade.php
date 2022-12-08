@@ -22,13 +22,15 @@
         <div class="page-content">
             <div class="container">
                 <div class="login-popup">
-                    <h2 class="text-center text-success"> Customer Sign-Up</h2>
                     <div class="row justify-content-center">
                         <div class="col-lg-12 col-12">
                             <div class="card">
-                                <div class="card-body p-2">
+                                <div class="card-body" style="padding-top: 0px">
                                     <form action="{{ route('customerStore') }}" method="post">
                                         @csrf
+                                        <div class="image-fluid d-flex justify-content-center">
+                                            <img src="{{ asset($content->logo) }}" alt="{{ $content->logo }}" style="height: 150px; width: 150px">
+                                        </div>
                                         <div class="form-group">
                                             <label for="">Name</label>
                                             <input type="text" name="name"

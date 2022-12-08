@@ -1,4 +1,14 @@
 @extends('layouts.website')
+@section('website-css')
+    <style>
+        .old-amount {
+            text-decoration: line-through;
+            padding-left: 15px;
+            font-size: 1.3rem;
+            color: #898989;
+        }
+    </style>
+@endsection
 @section('website-content')
  <!-- Start of Breadcrumb -->
  <nav class="breadcrumb-nav">
@@ -60,7 +70,11 @@
                                     {{ $item->name }}
                                 </a>
                             </td>
-                            <td id="product-price-{{ $item->id }}" data-price="{{ $item->price }}" class="product-price"><span class="amount">{{ $item->price }}</span></td>
+                            @if($item->attributes->offer_price == "" || $item->attributes->offer_price == null)
+                            <td id="product-price-{{ $item->id }}" data-price="{{ $item->price }}" class="product-price"><span class="amount">{{ $item->price }}</span>TK</td>
+                            @else
+                            <td id="product-price-{{ $item->id }}" data-price="{{ $item->attributes->offer_price }}" class="product-price"><span class="amount">{{ $item->attributes->offer_price }}TK</span><span class="old-amount">{{ $item->price }}TK</span></td>
+                            @endif
                             <td class="product-quantity">
                                 <div class="input-group">
                                     <input type="hidden" name="cart_id[]" value="{{ $item->id }}">
@@ -70,7 +84,11 @@
                                 </div>
                             </td>
                             <td class="product-subtotal">
-                                <span id="quantity-amount-{{$item->id}}" class="amount">{{ $item->price * $item->quantity }}</span>
+                                @if($item->attributes->offer_price == "" || $item->attributes->offer_price == null)
+                                <span id="quantity-amount-{{$item->id}}" class="amount">{{ $item->price * $item->quantity }}TK</span>
+                                @else
+                                <span id="quantity-amount-{{$item->id}}" class="amount">{{ $item->attributes->offer_price * $item->quantity }}TK</span>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -83,100 +101,16 @@
                     <button type="submit" class="btn btn-rounded btn-update" name="update_cart" value="Update Cart">Update Cart</button>
                 </div>
                 </form>
-                {{-- <form class="coupon">
-                    <h5 class="title coupon-title font-weight-bold text-uppercase">Coupon Discount</h5>
-                    <input type="text" class="form-control mb-4" placeholder="Enter coupon code here..." required />
-                    <button class="btn btn-dark btn-outline btn-rounded">Apply Coupon</button>
-                </form> --}}
             </div>
             <div class="col-lg-4 sticky-sidebar-wrapper">
                 <div class="sticky-sidebar">
                     <div class="cart-summary mb-4">
                         <h3 class="cart-title text-uppercase">Cart Totals</h3>
-                        {{-- <div class="cart-subtotal d-flex align-items-center justify-content-between">
-                            <label class="ls-25">Subtotal</label>
-                            <span>$100.00</span>
-                        </div> --}}
-
                         <hr class="divider">
-
-                        {{-- <ul class="shipping-methods mb-2">
-                            <li>
-                                <label
-                                    class="shipping-title text-dark font-weight-bold">Shipping</label>
-                            </li>
-                            <li>
-                                <div class="custom-radio">
-                                    <input type="radio" id="free-shipping" class="custom-control-input"
-                                        name="shipping">
-                                    <label for="free-shipping"
-                                        class="custom-control-label color-dark">Free
-                                        Shipping</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-radio">
-                                    <input type="radio" id="local-pickup" class="custom-control-input"
-                                        name="shipping">
-                                    <label for="local-pickup"
-                                        class="custom-control-label color-dark">Local
-                                        Pickup</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-radio">
-                                    <input type="radio" id="flat-rate" class="custom-control-input"
-                                        name="shipping">
-                                    <label for="flat-rate" class="custom-control-label color-dark">Flat
-                                        rate:
-                                        $5.00</label>
-                                </div>
-                            </li>
-                        </ul> --}}
-
-                        {{-- <div class="shipping-calculator">
-                            <p class="shipping-destination lh-1">Shipping to <strong>CA</strong>.</p>
-
-                            <form class="shipping-calculator-form">
-                                <div class="form-group">
-                                    <div class="select-box">
-                                        <select name="country" class="form-control form-control-md">
-                                            <option value="default" selected="selected">United States
-                                                (US)
-                                            </option>
-                                            <option value="us">United States</option>
-                                            <option value="uk">United Kingdom</option>
-                                            <option value="fr">France</option>
-                                            <option value="aus">Australia</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="select-box">
-                                        <select name="state" class="form-control form-control-md">
-                                            <option value="default" selected="selected">California
-                                            </option>
-                                            <option value="ohaio">Ohaio</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control form-control-md" type="text"
-                                        name="town-city" placeholder="Town / City">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control form-control-md" type="text"
-                                        name="zipcode" placeholder="ZIP">
-                                </div>
-                                <button type="submit" class="btn btn-dark btn-outline btn-rounded">Update
-                                    Totals</button>
-                            </form>
-                        </div> --}}
-
-                        {{-- <hr class="divider mb-6"> --}}
                         <div class="order-total d-flex justify-content-between align-items-center">
                             <label>Total</label>
-                            <span id="order-total" class="ls-50">{{ \Cart::getTotal()}}</span>
+                            <span id="order-total" class="ls-50">{{ $customSubtotal }}TK</span>
+                            {{-- <span id="order-total" class="ls-50">{{ \Cart::getTotal()}}</span> --}}
                         </div>
                         <a href="{{ route('checkout.index') }}"
                             class="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout">
@@ -215,13 +149,8 @@
         function quantityValue(id) {
             let quantityValue = $('#quantity-mod-'+id).val();
             let productPrice = $('#product-price-'+id).attr("data-price");
-            $('#quantity-amount-'+id).text(quantityValue * productPrice);
+            $('#quantity-amount-'+id).text(quantityValue * productPrice + "TK");
         }
         
-        // $('#update_cart').click(function (e) {
-        //     e.preventDefault();
-        //     console.log('update cart')
-        // });
-
     </script>
 @endpush

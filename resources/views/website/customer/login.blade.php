@@ -26,6 +26,9 @@
                 <div class="col-md-12 col-12">
                     <form action="{{ route('customer.auth')}}" method="POST">
                         @csrf
+                        <div class="image-fluid d-flex justify-content-center">
+                            <img src="{{ asset($content->logo) }}" alt="{{ $content->logo }}" style="height: 150px; width: 150px">
+                        </div>
                         <div class="form-group">
                             <label>Email address *</label>
                             <input type="email" class="form-control" name="email" id="email" required>
@@ -34,11 +37,12 @@
                             <label>Password *</label>
                             <input type="password" class="form-control" name="password" id="password" required>
                         </div>
-                        {{-- <div class="form-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-checkbox" id="remember1" name="remember1" required="">
-                            <label for="remember1">Remember me</label>
-                            <a href="#">Last your password?</a>
-                        </div> --}}
+                        <div class="form-checkbox d-flex align-items-center justify-content-between">
+                            {{-- <input type="checkbox" class="custom-checkbox" id="remember1" name="remember1" required="">
+                            <label for="remember1">Remember me</label> --}}
+                            <a href="#">Forgot password?</a>
+                        </div> 
+                     
                         <button type="submit" class="btn btn-primary w-100 sign-in">Sign In</button>
 
                     </form>

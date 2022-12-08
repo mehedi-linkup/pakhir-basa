@@ -13,13 +13,22 @@ class CartController extends Controller
     public function cartList()
     {
         $cartItems = \Cart::getContent();
-        return view('website.cart', compact('cartItems'));
+        $customSubtotal = 0;
+        foreach ($cartItems as $key => $item) {
+            if($item->attributes->offer_price == "" || $item->attributes->offer_price == null) {
+                $customSubtotal += $item->price * $item->quantity;
+            } else {
+                $customSubtotal += $item->attributes->offer_price * $item->quantity;
+            }
+        }
+        return view('website.cart', compact('cartItems', 'customSubtotal'));
     }
 
     public function addToCart(Request $request)
     {
     //    dd($request->all());
             $total_item = \Cart::getContent()->count();
+            
             if($total_item < 100) {
                 \Cart::add([
                     'id' => $request->id,
@@ -66,6 +75,8 @@ class CartController extends Controller
         } catch (\Throwable $th) {
             
         }
+       } else {
+            return response()->json(['success' => 'Limit exceed']);
        }
     //    
     }
@@ -75,7 +86,7 @@ class CartController extends Controller
 
         foreach(\Cart::getContent() as $item){
             $product = Product::with('inventory')->where('id',$id)->first();
-            $stock = $product->inventory->purchage;
+            $stock = $product->inventory->purchase;
             $total_item = \Cart::getContent()->count();
             if($total_item <100){
                 if($request->quantity > 100){

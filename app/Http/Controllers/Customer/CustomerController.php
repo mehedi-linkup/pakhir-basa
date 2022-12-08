@@ -85,8 +85,6 @@ class CustomerController extends Controller
 
     public function customerStore(Request $request)
     {
-        // dd($request->all());
-
         $request->validate([
             'name' => 'required|min:3|max:100',
             'phone' => 'required|unique:customers|regex:/^01[13-9][\d]{8}$/|min:11',

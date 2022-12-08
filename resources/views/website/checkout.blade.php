@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <label>Name *</label>
                                     <input type="hidden" name="customer_id" value="{{ @Auth::guard('customer')->user()->id }}">
-                                    <input type="text" class="form-control form-control-md" name="name" value="{{ @Auth::guard('customer')->user()->name }}"
+                                    <input type="text" class="form-control form-control-md @error('name') is-invalid @enderror"" name="name" value="{{ @old('name') ? old('name') : @Auth::guard('customer')->user()->name }}"
                                       placeholder="Enter Name" required>
 
                                     @error('name')
@@ -80,7 +80,7 @@
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input type="text" class="form-control form-control-md" name="phone" value="{{ @Auth::guard('customer')->user()->phone }}" placeholder="Enter Email">
+                                    <input type="text" class="form-control form-control-md @error('phone') is-invalid @enderror" name="phone" value="{{ @old('phone') ? old('phone') : @Auth::guard('customer')->user()->phone }}" placeholder="Enter Phone">
         
                                     @error('phone')
                                         <span class="text-danger" role="alert">
@@ -92,7 +92,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label>Email Address</label>
-                                    <input type="email" class="form-control form-control-md" name="email" value="{{ @Auth::guard('customer')->user()->email }}" placeholder="Enter Email">
+                                    <input type="email" class="form-control form-control-md @error('email') is-invalid @enderror" name="email" value="{{ @old('email') ? old('email') : @Auth::guard('customer')->user()->email }}" placeholder="Enter Email">
         
                                     @error('email')
                                         <span class="text-danger" role="alert">
@@ -140,9 +140,14 @@
                         
                         <div class="form-group mt-3">
                             <label for="address">Address *</label>
-                            <textarea class="form-control mb-0" id="address" name="address" cols="30"
+                            <textarea class="form-control mb-0 @error('address') is-invalid @enderror" id="address" name="address" cols="30"
                                 rows="4"
-                                placeholder="Enter Address">{{ @Auth::guard('customer')->user()->address }}</textarea>
+                                placeholder="Enter Address">{{ @old('address') ? old('address') : @Auth::guard('customer')->user()->address }}</textarea>
+                            @error('address')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         {{-- <div class="form-group checkbox-toggle pb-2">
                             <input type="checkbox" class="custom-checkbox" id="shipping-toggle"
@@ -227,9 +232,14 @@
                         </div> --}}
                         <div class="form-group mt-3">
                             <label for="order-note">Order notes (optional)</label>
-                            <textarea class="form-control mb-0" id="order_note" name="order_note" cols="30"
+                            <textarea class="form-control mb-0 @error('order_note') is-invalid  @enderror" id="order_note" name="order_note" cols="30"
                                 rows="3"
-                                placeholder="Notes about your order, e.g special notes for delivery" >{{ @Auth::guard('customer')->user()->order_note }}</textarea>
+                                placeholder="Notes about your order, e.g special notes for delivery" >{{ @old('order_note') ? old('order_note') : @Auth::guard('customer')->user()->order_note }}</textarea>
+                            @error('order_note')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-lg-5 mb-4 sticky-sidebar-wrapper">
@@ -256,8 +266,16 @@
                                             <td class="product-name"> {{ $item->name }} <i
                                                     class="fas fa-times"></i> <span
                                                     class="product-quantity">{{ $item->quantity }}</span></td>
-                                            <td class="product-name">{{ $item->price }}</td>
-                                            <td class="product-total">{{ $item->quantity * $item->price }}</td>
+                                            @if($item->attributes->offer_price == "" || $item->attributes->offer_price == null)
+                                            <td class="product-name">{{ $item->price }}TK</td>
+                                            @else
+                                            <td class="product-name">{{ $item->attributes->offer_price }}TK</td>
+                                            @endif
+                                            @if($item->attributes->offer_price == "" || $item->attributes->offer_price == null)
+                                            <td class="product-total">{{ $item->quantity * $item->price }}TK</td>
+                                            @else
+                                            <td class="product-total">{{ $item->quantity * $item->attributes->offer_price }}TK</td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                         <tr class="cart-subtotal bb-no">
@@ -266,7 +284,18 @@
                                             </td>
                                             <td></td>
                                             <td>
-                                                <b id="cartTotal">{{ \Cart::getTotal() }}</b>
+                                                <b id="cartTotal">{{ $customSubtotal }}TK</b>
+                                                {{-- <b id="cartTotal">{{ \Cart::getTotal() }}</b> --}}
+                                            </td>
+                                        </tr>
+                                        <tr class="cart-subtotal bb-no">
+                                            <td>
+                                                <b>Delivery Charge</b>
+                                            </td>
+                                            <td></td>
+                                            <td>
+                                                <b id="cartTotal">60Tk</b>
+                                                {{-- <b id="cartTotal">{{ \Cart::getTotal() }}</b> --}}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -301,7 +330,8 @@
                                             </th>
                                             <td></td>
                                             <td>
-                                                <b id="priceTotal">{{ \Cart::getTotal() }}</b>
+                                                {{-- <b id="priceTotal">{{ \Cart::getTotal() }}</b> --}}
+                                                <b id="priceTotal">{{ $customSubtotal + 60 }}TK</b>
                                             </td>
                                         </tr>
                                     </tfoot>

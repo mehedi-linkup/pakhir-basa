@@ -11,7 +11,8 @@
                 <!-- End of Dropdown Menu -->
                 <!-- <span class="divider d-lg-show"></span> -->
                 @if(Auth::guard('customer')->user())
-                <a href="{{ route('customer.panel') }}" class="d-lg-show">My Account</a>
+                <a href="{{ route('customer.panel') }}" class="d-lg-show"><i
+                    class="w-icon-account"></i>My Account</a>
                 @else
                 <a href="{{ route('customer.login') }}" class="d-lg-show login sign-in"><i
                         class="w-icon-account"></i>Sign In</a>
@@ -80,7 +81,11 @@
                                         <a href="#" class="product-name">{{ $item->name }}</a>
                                         <div class="price-box">
                                             <span class="product-quantity">{{ $item->quantity }}</span>
+                                            @if($item->attributes->offer_price != null || $item->attributes->offer_price != "")
+                                            <span class="product-price">{{ $item->attributes->offer_price }}TK</span>
+                                            @else
                                             <span class="product-price">{{ $item->price }}TK</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <figure class="product-media">

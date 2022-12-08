@@ -1245,7 +1245,12 @@ blockquote {
     Layout
 -----------------------------------------*/
 .container,
-.container-fluid {
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
   width: 100%;
   padding-left: 20px;
   padding-right: 20px;
@@ -1266,6 +1271,32 @@ blockquote {
 
 .container {
   max-width: 1280px;
+}
+@media (min-width:992px) {
+  .container-lg,
+  .container-md,
+  .container-sm {
+      max-width: 960px
+  }
+}
+
+@media (min-width:1200px) {
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+      max-width: 1140px
+  }
+}
+
+@media (min-width:1400px) {
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+      max-width: 1320px
+  }
 }
 
 /*----------------------------------------
@@ -2564,7 +2595,10 @@ blockquote {
 .pr-0 {
   padding-right: 0rem !important;
 }
-
+.px-0 {
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
 .ml-1 {
   margin-left: 0.5rem !important;
 }
@@ -5448,6 +5482,7 @@ blockquote {
   position: relative;
   font-size: 1rem;
   color: #666;
+  box-shadow: 1px 1px 5px rgba(247, 124, 41, 0.2);
 }
 .category a {
   color: inherit;
@@ -5466,7 +5501,7 @@ blockquote {
   margin-bottom: 0;
   text-align: center;
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: -0.025em;
@@ -5676,12 +5711,12 @@ blockquote {
   text-align: center;
 }
 .category-classic .category-name {
-  color: #f04;
+  color: #f77c29;
   font-size: 1.8rem;
   line-height: 1.45;
   text-transform: capitalize;
   -webkit-transform: translateY(0);
-          transform: translateY(0);
+  transform: translateY(0);
   -webkit-transition: -webkit-transform 0.3s;
   transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
@@ -13778,7 +13813,7 @@ aside .sp-sidebar-banner span {
   overflow: visible;
 }
 .cart-dropdown .products {
-  max-height: 28rem;
+  max-height: 46rem;
   border-bottom: 1px solid #eee;
   padding-bottom: 2.1rem;
 }
@@ -15370,7 +15405,7 @@ aside .sp-sidebar-banner span {
   background-color: #f77c29;
 } */
 .intro-slide1 .slide-image {
-  right: 56%;
+  right: 45%;
   top: 0%;
 }
 

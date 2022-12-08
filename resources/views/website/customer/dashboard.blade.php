@@ -2,7 +2,7 @@
 @section('website-content')
 
      <!-- Start of Breadcrumb -->
-     <nav class="breadcrumb-nav">
+     <nav class="breadcrumb-nav" style="background-color: #202020">
         <div class="container">
             <ul class="breadcrumb shop-breadcrumb bb-no">
                 <li class="passed"><a href="{{ route('home') }}">Home</a></li>
@@ -12,7 +12,7 @@
         </div>
     </nav>
     <!-- End of Breadcrumb -->
-    <div class="page-content my-account pt-2">
+    <div class="page-content my-account pt-6" style="background-color: #5c340121">
         <div class="container">
             @if(Auth::guard('customer')->user()->status == 'a')
             <div class="tab tab-vertical row gutter-lg">
