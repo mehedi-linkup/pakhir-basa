@@ -100,7 +100,7 @@ Route::put('/customer-password-update', [CustomerCustomerController::class, 'cus
 Route::get('/customerLogout', [CustomerCustomerController::class, 'logout'])->name('customerLogout');
 Route::get('/forget/password', [CustomerCustomerController::class, 'forgetPassword'])->name('forget.password');
 Route::post('/forget/password/store', [CustomerCustomerController::class, 'forgetPasswordStore'])->name('forget.password.store');
-Route::get('/forget/password/form', [CustomerCustomerController::class, 'forgetResetPasswordForm'])->name('forget.password.form');
+Route::get('/forget/password/form', [CustomerCustomerController::class, 'resetForm'])->name('forget.password.form');
 Route::post('/forget/otp/check', [CustomerCustomerController::class, 'forgetPassOtpCheck'])->name('forget.password.otp.check');
 Route::get('/forget/password/form/reset', [CustomerCustomerController::class, 'forgetPasswordResetForm'])->name('forget.password.reset.form');
 Route::post('/forget/password/reset/change', [CustomerCustomerController::class, 'forgetpasswordResetUpdate'])->name('forget.password.reset.update');

@@ -277,27 +277,28 @@ class CustomerController extends Controller
 
         // $app_name = CompanyProfile::first();
         $action_link = route('forget.password.form',['token'=>$token,'email'=>$request->email]);
-        $body = "We have received a request to reset the password for <b>ASR World Fashion</b> account associated with ".$request->email.". You can reset your password by clicking the link below.";
+        $body = "We have received a request to reset the password for <b>Pakhir Basa </b> account associated with ".$request->email.". You can reset your password by clicking the link below.";
 
-        Mail::send('website.customer.forgetPasswordResetForm',['action_link'=>$action_link,'body'=>$body], function($message) use ($request){
-             $message->from('info@thelookbd.com', 'ASR World Fashion');
+        Mail::send('website.customer.email_pattern_forgot',['action_link'=>$action_link,'body'=>$body], function($message) use ($request){
+             $message->from('info@pakhir-basa.com', 'Pakhir Basa');
              $message->to($request->email, 'Hi')
                      ->subject('Reset Password');
         });
 
-        return back()->with('success', 'We have e-mailed your password reset link');
+        return back()->with('success', 'Your password reset link has been sent '.$request->email);
     }
 
   
-    public function forgetResetPasswordForm(Request $request){
+    // public function forgetResetPasswordForm(Request $request){
 
-        return view('website.customer.forgetOtpForm');
+    //     return view('website.customer.forgetOtpForm');
+    // }
+    public function resetForm(Request $request) {
+        $token = $request->query('token');
+        $email = $request->query('email');
+        return view('website.customer.resetForm', compact('token', 'email'));
     }
-    public function forgetPasswordResetForm(){
-        
-        return view('website.customer.forgetPasswordResetForm');
-    }
-    public function forgetPassOtpCheck(Request $request){
+    public function forgetPassOtpCheck(Request $request) {
         // dd($request->all());
         $phone = $request->phone;
         $otp = $request->otp;
@@ -313,17 +314,33 @@ class CustomerController extends Controller
 
     public function forgetpasswordResetUpdate(Request $request){
         $request->validate([
+            'email'=>'required|email|exists:customers,email',
             'password' => 'required|min:1|same:confirmed',
         ]);
-        $customer = Customer::where('phone',$request->phone)->first();
-        if($customer != NULL){
-            $customer->password = Hash::make($request->password);
-            $customer->save();
-            
-            return redirect()->route('customer.login')->with('success','Your password reset successfully');
-        }
-        else{
-            return back()->with('error','Your password reset fail!');
+
+        $check_token = DB::table('password_resets')->where([
+            'email'=>$request->email,
+            'token'=>$request->token,
+       ])->first();
+
+
+        if(!$check_token){
+            return back()->withInput()->with('fail', 'Invalid token');
+        } else {
+            $customer = Customer::where('email', $request->email)->first();
+            if($customer != NULL){
+                $customer->password = Hash::make($request->password);
+                $customer->save();
+
+                DB::table('password_resets')->where([
+                    'email'=>$request->email
+                ])->delete();
+                
+                return redirect()->route('customer.login')->with('success','Your password reset successfully');
+            }
+            else{
+                return back()->with('error','Your password reset fail!');
+            }
         }
 
 

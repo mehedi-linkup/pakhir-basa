@@ -28,15 +28,21 @@
                 <form action="{{ route('forget.password.store')}}" method="POST">
                     @csrf
                     @if (Session::get('fail'))
+
                     <div class="alert alert-danger">
                         {{ Session::get('fail') }}
                     </div>
                     @endif
 
                     @if (Session::get('success'))
-                    <div class="alert alert-success">
+                    {{-- <div class="alert alert-success">
                         {{ Session::get('success') }}
+                    </div> --}}
+                    <div class="alert alert-icon alert-success alert-bg alert-inline show-code-action">
+                        <h4 class="alert-title">
+                            <i class="fas fa-check"></i>Well done!</h4>{{ Session::get('success') }}
                     </div>
+
                     @endif
 
                     <div class="image-fluid d-flex justify-content-center">
