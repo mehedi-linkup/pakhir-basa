@@ -42,6 +42,7 @@
                             @endforeach
                         </select>
                     </div>
+                    {{-- <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque, voluptas!</p> --}}
                     <input type="search" name="q"
                             class="form-control search-box keyword" id="keyword"
                             autocomplete="off" placeholder="search products...">
