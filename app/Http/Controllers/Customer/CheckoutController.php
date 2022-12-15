@@ -18,6 +18,7 @@ use App\Models\DeliveryTime;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Models\CompanyProfile;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
@@ -425,6 +426,18 @@ class CheckoutController extends Controller
                 // $this->send_sms($admin_phone_2 , $msg);
                 // $this->send_sms($admin_phone_3 , $msg);
                 // $this->send_sms($customer_phone , $message);
+
+                Mail::send('website.customer.customer_order_pattern',['msg'=>$message], function($message) use ($request){
+                    $message->from('info@pakhir-basa.com', 'Pakhir Basa');
+                    $message->to($request->email, 'Hi')
+                            ->subject('Order Submission');
+                });
+
+                Mail::send('website.customer.owner_order_pattern',['msg'=>$msg], function($message) use ($request){
+                    $message->from('info@pakhir-basa.com', 'Pakhir Basa');
+                    $message->to('mbbabin99@gmail.com', 'Hi')
+                            ->subject('New order added');
+                });
                 DB::commit();
                 Session::flash('success', 'Order Submit successfully');
                 \Cart::clear();

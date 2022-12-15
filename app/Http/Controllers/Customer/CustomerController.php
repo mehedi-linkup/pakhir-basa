@@ -312,7 +312,7 @@ class CustomerController extends Controller
      
     }
 
-    public function forgetpasswordResetUpdate(Request $request){
+    public function forgetpasswordResetUpdate(Request $request) {
         $request->validate([
             'email'=>'required|email|exists:customers,email',
             'password' => 'required|min:1|same:confirmed',
