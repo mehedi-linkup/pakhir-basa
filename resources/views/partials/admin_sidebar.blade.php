@@ -384,16 +384,16 @@
                                 @endif
                             @endif
                            
-                            {{-- @if ($p->page->name == 'area.index')
+                            @if ($p->page->name == 'area.index')
                                 @if($p->page->status == 1)
                                     <a class="nav-link {{($route == 'area.index')?'active':''}}" href="{{ route('area.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Area Entry</a>
                                 @endif
-                            @endif --}}
-                            {{-- @if ($p->page->name == 'thana.index')
-                            @if($p->page->status == 1)
-                                <a class="nav-link {{($route == 'thana.index')?'active':''}}" href="{{ route('thana.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Thana Entry</a>
                             @endif
-                            @endif --}}
+                            @if ($p->page->name == 'thana.index')
+                                @if($p->page->status == 1)
+                                    <a class="nav-link {{($route == 'thana.index')?'active':''}}" href="{{ route('thana.index') }}"><i class="fas fa-angle-right"></i>&nbsp;Thana Entry</a>
+                                @endif
+                            @endif
                             @if ($p->page->name == 'country.index')
                                 @if($p->page->status == 1)
                                     <a class="nav-link {{($route == 'country.index')?'active':''}}" style="white-space: nowrap" href="{{route('country.index')}}"><i class="fas fa-angle-right"></i>&nbsp;Country Management</a>

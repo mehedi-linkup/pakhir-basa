@@ -101,14 +101,14 @@
                                     @enderror
                                 </div>
                             </div>
-                            {{-- <div class="col-xs-6">
+                            <div class="col-xs-6">
                                 <div class="form-group">
                                     <label>Thana</label>
                                     <div class="select-box">
-                                        <select name="thana_id" class="form-control form-control-md">
+                                        <select name="thana_id" class="form-control form-control-md @error('thana_id') is-invalid @enderror">
                                             <option value="">Select Thana</option>
                                             @foreach ($thana as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}" {{ @Auth::guard('customer')->user()->thana_id == $item->id? 'selected': '' }}>{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -118,25 +118,26 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                                <div class="form-group">
+                                    <label>Area</label>
+                                    <div class="select-box">
+                                        <select name="area_id" class="form-control form-control-md">
+                                            <option value="" selected="selected">Select Area</option>
+                                            @foreach ($area as $item)
+                                            <option value="{{ $item->id }} {{ @Auth::guard('customer')->user()->area_id == $item->id ? 'selected' : '' }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('area_id')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                    
-                        {{-- <div class="form-group">
-                            <label>Area</label>
-                            <div class="select-box">
-                                <select name="area_id" class="form-control form-control-md">
-                                    <option value="" selected="selected">Select Area</option>
-                                    @foreach ($area as $item)
-                                    <option value="{{ $item->id }} {{ @Auth::guard('customer')->user()->area_id == $item->id ? 'selected' : '' }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('area_id')
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
+                      
                         
                         <div class="form-group mt-3">
                             <label for="address">Address *</label>
@@ -149,12 +150,12 @@
                                 </span>
                             @enderror
                         </div>
-                        {{-- <div class="form-group checkbox-toggle pb-2">
+                        <div class="form-group checkbox-toggle pb-2">
                             <input type="checkbox" class="custom-checkbox" id="shipping-toggle"
                                 name="shipping-toggle">
                             <label for="shipping-toggle">Ship to a different address?</label>
-                        </div> --}}
-                        {{-- <div class="checkbox-content">
+                        </div>
+                        <div class="checkbox-content">
                             <div class="row gutter-sm">
                                 <div class="col-xs-12">
                                     <div class="form-group">
@@ -229,7 +230,7 @@
                                     rows="4"
                                     placeholder="Enter Address"></textarea>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="form-group mt-3">
                             <label for="order-note">Order notes (optional)</label>
                             <textarea class="form-control mb-0 @error('order_note') is-invalid  @enderror" id="order_note" name="order_note" cols="30"
