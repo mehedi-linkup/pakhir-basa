@@ -60,6 +60,12 @@ Route::get('/SubCategory/{id}', [HomeController::class, 'SubCategoryWise'])->nam
 Route::get('/subcategory/list/{slug}',[HomeController::class,'singleSubCategory'])->name('single.subcategory.list');
 Route::get('/allproduct',[HomeController::class,'allProduct'])->name('all.product');
 Route::get('/shop-banner',[HomeController::class,'shopBanner'])->name('shop.banner');
+
+//get json data for checkout page
+Route::get('/district/get/{id}',[HomeController::class,'getDistrict'])->name('district.data');
+Route::get('/thana/get/{id}',[HomeController::class,'getThana'])->name('thana.data');
+Route::get('/union/get/{id}',[HomeController::class,'getUnion'])->name('union.data');
+
 // search route
 Route::get('/get_suggestions/{k}/{id?}', [HomeController::class, 'getSearchSuggestions'])->name('searh.product');
 Route::get('/search', [HomeController::class, 'productSearch'])->name('search');

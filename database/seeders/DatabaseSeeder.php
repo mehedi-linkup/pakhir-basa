@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Sandofvega\Bdgeocode\Seeds\BdgeocodeSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
 	        PagesSeeder::class,
 	        PermissionSeeder::class,
+            BdgeocodeSeeder::class
     	]);
     }
 }

@@ -20,8 +20,22 @@ class CreateCustomersTable extends Migration
             $table->string('phone', 11);
             $table->string('email', 50)->nullable();
             $table->string('address')->nullable();
-            $table->string('country_id', 3)->nullable();
-            $table->string('area_id', 3)->nullable();
+            $table->foreignId('division_id')
+                    ->nullable()
+                    ->constrained('divisions')
+                    ->onDelete('cascade');
+            $table->foreignId('district_id')
+                    ->nullable()
+                    ->constrained('districts')
+                    ->onDelete('cascade');
+            $table->foreignId('thana_id')
+                    ->nullable()
+                    ->constrained('thanas')
+                    ->onDelete('cascade');
+            $table->foreignId('union_id')
+                    ->nullable()
+                    ->constrained('unions')
+                    ->onDelete('cascade');       
             $table->text('profile_picture')->nullable();
             $table->string('thum_picture')->nullable();
             $table->string('username', 20);

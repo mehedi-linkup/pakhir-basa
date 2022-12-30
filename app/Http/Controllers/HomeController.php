@@ -10,11 +10,13 @@ use App\Models\Team;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Thana;
+use App\Models\Union;
 use App\Models\Banner;
 use App\Models\Partner;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\Category;
+use App\Models\District;
 use App\Models\Management;
 use App\Models\SubCategory;
 use App\Models\DeliveryTime;
@@ -22,6 +24,7 @@ use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use PharIo\Manifest\Manifest;
 use App\Models\CompanyProfile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
 class HomeController extends Controller
@@ -305,5 +308,21 @@ class HomeController extends Controller
     {
         $thana = Area::where('thana_id', $request->thana_id)->get();
         return response()->json($thana);
+    }
+
+    public function getDistrict($id) {
+        $district = District::where('division_id', $id)->get();
+        // $district = District::select(DB::raw("CONCAT('bd_name', '-' ,'name') AS ID"))->where('division_id', $id)->get();
+        return response()->json($district);
+    }
+
+    public function getThana($id) {
+        $thana = Thana::where('district_id', $id)->get();
+        return response()->json($thana);
+    }
+
+    public function getUnion($id) {
+        $union = Union::where('thana_id', $id)->get();
+        return response()->json($union);
     }
 }

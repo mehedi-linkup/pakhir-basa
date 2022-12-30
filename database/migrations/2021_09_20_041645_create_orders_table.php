@@ -37,11 +37,17 @@ class CreateOrdersTable extends Migration
             $table->foreignId('time_id')->nullable()
                 ->constrained('delivery_times')
                 ->onDelete('cascade');
-            $table->foreignId('area_id')->nullable()
-                ->constrained('areas')
+            $table->foreignId('union_id')->nullable()
+                ->constrained('unions')
                 ->onDelete('cascade');
             $table->foreignId('thana_id')->nullable()
                 ->constrained('thanas')
+                ->onDelete('cascade');
+            $table->foreignId('district_id')->nullable()
+                ->constrained('districts')
+                ->onDelete('cascade');
+            $table->foreignId('division_id')->nullable()
+                ->constrained('divisions')
                 ->onDelete('cascade');
             $table->string('updated_by', 3);
             $table->string('status')->default('p');

@@ -10,10 +10,10 @@ class Permission extends Model
 
     use HasFactory;
     protected $fillable = ['user_id','page_id'];
-    public function user(){
+    public function user() {
         return $this->belongsTo(User::class,'user_id','id');
     }
-    public function page(){
+    public function page() {
         return $this->belongsTo(Page::class,'page_id','id');
     }
 

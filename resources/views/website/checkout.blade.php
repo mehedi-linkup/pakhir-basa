@@ -17,7 +17,11 @@
     <!-- Start of PageContent -->
     <div class="page-content">
         <div class="container">
-            @if(!Auth::guard('customer')->user())
+            @php
+                $user = Auth::guard('customer')->user();
+            @endphp
+
+            @if(!$user)
             <div class="login-toggle">
                 Returning customer? <a href=""
                     class="show-login font-weight-bold text-uppercase text-dark">Login</a>
@@ -29,14 +33,14 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             <label>Email *</label>
-                            <input type="email" class="form-control form-control-md" name="email" id="email" 
+                            <input type="email" class="form-control form-control-md" name="email" id="email" value="{{ old('email') }}"
                                 required>
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
                             <label>Password *</label>
-                            <input type="password" class="form-control form-control-md" name="password" id="password"
+                            <input type="password" class="form-control form-control-md" name="password" id="password" value="{{ old('password') }}"
                                 required>
                         </div>
                     </div>
@@ -62,12 +66,13 @@
                         <h3 class="title billing-title text-uppercase ls-10 pt-1 pb-3 mb-0">
                             Billing Details
                         </h3>
+                       
                         <div class="row gutter-sm">
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label>Name *</label>
-                                    <input type="hidden" name="customer_id" value="{{ @Auth::guard('customer')->user()->id }}">
-                                    <input type="text" class="form-control form-control-md @error('name') is-invalid @enderror"" name="name" value="{{ @old('name') ? old('name') : @Auth::guard('customer')->user()->name }}"
+                                    <input type="hidden" name="customer_id" value="{{ @$user->id }}">
+                                    <input type="text" class="form-control form-control-md @error('name') is-invalid @enderror" name="name" value="{{ @old('name') ? old('name') : @$user->name }}" {{ @$user?'readonly' : '' }}
                                       placeholder="Enter Name" required>
 
                                     @error('name')
@@ -80,7 +85,7 @@
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input type="text" class="form-control form-control-md @error('phone') is-invalid @enderror" name="phone" value="{{ @old('phone') ? old('phone') : @Auth::guard('customer')->user()->phone }}" placeholder="Enter Phone">
+                                    <input type="text" class="form-control form-control-md @error('phone') is-invalid @enderror" name="phone" value="{{ @old('phone') ? old('phone') : @$user->phone }}" placeholder="Enter Phone" {{ @$user?'readonly' : '' }}>
         
                                     @error('phone')
                                         <span class="text-danger" role="alert">
@@ -92,7 +97,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label>Email Address</label>
-                                    <input type="email" class="form-control form-control-md @error('email') is-invalid @enderror" name="email" value="{{ @old('email') ? old('email') : @Auth::guard('customer')->user()->email }}" placeholder="Enter Email">
+                                    <input type="email" class="form-control form-control-md @error('email') is-invalid @enderror" name="email" value="{{ @old('email') ? old('email') : @$user->email }}" placeholder="Enter Email" {{ @$user?'readonly' : '' }}>
         
                                     @error('email')
                                         <span class="text-danger" role="alert">
@@ -103,12 +108,48 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
+                                    <label>Divison</label>
+                                    <div class="select-box">
+                                        <select name="division_id" class="form-control form-control-md @error('division_id') is-invalid @enderror" {{ @$user?'disabled' : '' }}>
+                                            <option value="">Select Division</option>
+                                            @foreach ($division as $item)
+                                            <option value="{{ $item->id }}" {{ @$user->division_id == $item->id || old('division_id') == $item->id ? 'selected': '' }}>{{ $item->bn_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('division_id')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label>District</label>
+                                    <div class="select-box">
+                                        <select name="district_id" class="form-control form-control-md @error('district_id') is-invalid @enderror" {{ @$user?'disabled' : '' }}>
+                                            <option value="">Select District</option>
+                                            @foreach ($district as $item)
+                                            <option value="{{ $item->id }}" {{ @$user->district_id == $item->id || old('district_id') == $item->id ? 'selected': '' }}>{{ $item->bn_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('district_id')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
                                     <label>Thana</label>
                                     <div class="select-box">
-                                        <select name="thana_id" class="form-control form-control-md @error('thana_id') is-invalid @enderror">
+                                        <select name="thana_id" class="form-control form-control-md @error('thana_id') is-invalid @enderror" {{ @$user?'disabled' : '' }}>
                                             <option value="">Select Thana</option>
                                             @foreach ($thana as $item)
-                                            <option value="{{ $item->id }}" {{ @Auth::guard('customer')->user()->thana_id == $item->id? 'selected': '' }}>{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}" {{ @$user->thana_id == $item->id || old('thana_id') == $item->id ? 'selected': '' }}>{{ $item->bn_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -118,16 +159,18 @@
                                         </span>
                                     @enderror
                                 </div>
+                            </div>
+                            <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label>Area</label>
+                                    <label>Union</label>
                                     <div class="select-box">
-                                        <select name="area_id" class="form-control form-control-md">
-                                            <option value="" selected="selected">Select Area</option>
-                                            @foreach ($area as $item)
-                                            <option value="{{ $item->id }} {{ @Auth::guard('customer')->user()->area_id == $item->id ? 'selected' : '' }}">{{ $item->name }}</option>
+                                        <select name="union_id" class="form-control form-control-md @error('union_id') is-invalid @enderror" {{ @$user?'disabled' : '' }}>
+                                            <option value="" selected="selected">Select Union</option>
+                                            @foreach ($union as $item)
+                                            <option value="{{ $item->id }}" {{ @$user->union_id == $item->id || old('union_id') == $item->id ? 'selected' : '' }}>{{ $item->bn_name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('area_id')
+                                        @error('union_id')
                                             <span class="text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -136,14 +179,12 @@
                                 </div>
                             </div>
                         </div>
-                   
-                      
                         
                         <div class="form-group mt-3">
                             <label for="address">Address *</label>
                             <textarea class="form-control mb-0 @error('address') is-invalid @enderror" id="address" name="address" cols="30"
                                 rows="4"
-                                placeholder="Enter Address">{{ @old('address') ? old('address') : @Auth::guard('customer')->user()->address }}</textarea>
+                                placeholder="Enter Address" {{ @$user?'readonly' : '' }}>{{ @old('address') ? old('address') : @$user->address }}</textarea>
                             @error('address')
                                 <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -157,13 +198,25 @@
                         </div>
                         <div class="checkbox-content">
                             <div class="row gutter-sm">
-                                <div class="col-xs-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Name *</label>
-                                        <input type="text" class="form-control form-control-md" name="name" value=""
-                                            placeholder="Enter Name"  required>
+                                        <label for="s_name">Name *</label>
+                                        <input type="text" class="form-control form-control-md" name="s_name"
+                                            placeholder="Enter Name" value="{{ old('s_name') }}">
     
-                                        @error('name')
+                                        @error('s_name')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="s_phone">Phone Number</label>
+                                        <input type="text" class="form-control form-control-md" name="s_phone" value="{{ old('s_phone') }}" placeholder="Enter Email">
+            
+                                        @error('s_phone')
                                             <span class="text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -171,71 +224,112 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Phone Number</label>
-                                <input type="text" class="form-control form-control-md" name="phone" value="" placeholder="Enter Email">
-    
-                                @error('phone')
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Email Address</label>
-                                <input type="email" class="form-control form-control-md" name="email" value="" placeholder="Enter Email">
-    
-                                @error('email')
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Thana</label>
-                                <div class="select-box">
-                                    <select name="thana_id" class="form-control form-control-md">
-                                        <option value="">Select Thana</option>
-                                        @foreach ($thana as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="s_email">Email Address</label>
+                                        <input type="email" class="form-control form-control-md" name="s_email" value="{{ old('s_email') }}" placeholder="Enter Email">
+            
+                                        @error('s_email')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                                @error('thana_id')
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-                            <div class="form-group">
-                                <label>Area</label>
-                                <div class="select-box">
-                                    <select name="area_id" class="form-control form-control-md">
-                                        <option value="" selected="selected">Select Area</option>
-                                        @foreach ($area as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('area_id')
+                           
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Division</label>
+                                        <div class="select-box">
+                                            <select name="s_division_id" class="form-control form-control-md">
+                                                <option value="">Select Division</option>
+                                                @foreach ($division as $item)
+                                                <option value="{{ $item->id }}" {{ old('s_division_id') == $item->id ? 'selected' : '' }}>{{ $item->bn_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('s_division_id')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>District</label>
+                                        <div class="select-box">
+                                            <select name="s_district_id" class="form-control form-control-md">
+                                                <option value="">Select District</option>
+                                                
+                                            </select>
+                                        </div>
+                                        @error('s_district_id')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Thana</label>
+                                        <div class="select-box">
+                                            <select name="s_thana_id" class="form-control form-control-md">
+                                                <option value="">Select Thana</option>
+                                               
+                                            </select>
+                                        </div>
+                                        @error('s_thana_id')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Union</label>
+                                        <div class="select-box">
+                                            <select name="s_union_id" class="form-control form-control-md">
+                                                <option value="">Select Union</option>
+                                               
+                                            </select>
+                                            @error('s_union_id')
+                                                <span class="text-danger" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="form-group mt-3">
+                                <label for="s_address">Address *</label>
+                                <textarea class="form-control mb-0" id="s_address" name="s_address" cols="30"
+                                    rows="4"
+                                    placeholder="Enter Address">{{ old('s_address') }}</textarea>
+
+                                    @error('s_address')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="form-group mt-3">
-                                <label for="order-notes">Address *</label>
-                                <textarea class="form-control mb-0" id="address" name="address" cols="30"
-                                    rows="4"
-                                    placeholder="Enter Address"></textarea>
                             </div>
                         </div>
                         <div class="form-group mt-3">
                             <label for="order-note">Order notes (optional)</label>
                             <textarea class="form-control mb-0 @error('order_note') is-invalid  @enderror" id="order_note" name="order_note" cols="30"
                                 rows="3"
-                                placeholder="Notes about your order, e.g special notes for delivery" >{{ @old('order_note') ? old('order_note') : @Auth::guard('customer')->user()->order_note }}</textarea>
+                                placeholder="Notes about your order, e.g special notes for delivery" >{{ @old('order_note') ? old('order_note') : @$user->order_note }}</textarea>
                             @error('order_note')
                                 <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -295,8 +389,14 @@
                                             </td>
                                             <td></td>
                                             <td>
-                                                <b id="cartTotal">60Tk</b>
-                                                {{-- <b id="cartTotal">{{ \Cart::getTotal() }}</b> --}}
+                                                <b id="deliveryCharge">
+                                                    @if(@$user)
+                                                    {{ $user->district_id == 65 ? 60 : 120}}
+                                                    @else
+                                                    0
+                                                    @endif
+                                                </b>
+                                                <b>TK</b>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -393,7 +493,7 @@
                                 </div>
 
                                 <div class="form-group place-order pt-6">
-                                    <button type="submit" class="btn btn-dark btn-block btn-rounded">Place Order</button>
+                                    <button id="order-button" type="submit" class="btn btn-dark btn-block btn-rounded">Place Order</button>
                                 </div>
                             </div>
                         </div>
@@ -407,9 +507,157 @@
 @endsection
 @push('website-js')
     <script>
+        var shippedDifferenton = false;
         function priceTotal(number) {
             let priceTotal = $('#cartTotal').text();
             console.log(number)
         }
+    </script>
+    <script>
+        $('#order-button').click(function () {
+            $('select[name="division_id"]').attr('disabled', false);
+            $('select[name="district_id"]').attr('disabled', false);
+            $('select[name="thana_id"]').attr('disabled', false);
+            $('select[name="union_id"]').attr('disabled', false);
+        });
+    </script>
+
+    <script>
+        $('select[name="division_id"]').on('change', function() {
+            var division_id = this.value;
+            if(division_id) {
+                $.ajax({
+                    url: '{{ url("/district/get") }}/'+division_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var d = $('select[name="district_id"]').empty();
+                        $('select[name="district_id"]').append('<option value="">Select District</option>');
+                        $.each(data, function(key, value){
+                            $('select[name="district_id"]').append('<option value="'+ value.id +'">'+ value.bn_name +'</option>');
+                        });
+                    }
+                })
+            } else {
+                alert('Please select division');
+            }
+        });
+
+
+        $('select[name="district_id"]').on('change', function() {
+            var district_id = this.value;
+            if(district_id) {
+                $.ajax({
+                    url: '{{ url("/thana/get") }}/'+district_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var d = $('select[name="thana_id"]').empty();
+                        $('select[name="thana_id"]').append('<option value="">Select Thana</option>');
+                        $.each(data, function(key, value){
+                            $('select[name="thana_id"]').append('<option value="'+ value.id +'">'+ value.bn_name +'</option>');
+                        });
+                    }
+                })
+            } else {
+                alert('Please select district');
+            }
+
+            if(shippedDifferenton == false) {
+                if(district_id == 65) {
+                    $('#deliveryCharge').text(60);
+                } else {
+                    $('#deliveryCharge').text(120);
+                }
+            }
+        });
+
+        $('select[name="thana_id"]').on('change', function() {
+            var thana_id = this.value;
+            if(thana_id) {
+                $.ajax({
+                    url: '{{ url("/union/get") }}/'+thana_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var d = $('select[name="union_id"]').empty();
+                        $('select[name="union_id"]').append('<option value="">Select Union</option>');
+                        $.each(data, function(key, value){
+                            $('select[name="union_id"]').append('<option value="'+ value.id +'">'+ value.bn_name +'</option>');
+                        });
+                    }
+                })
+            } else {
+                alert('Please select Thana');
+            }
+        });
+
+        $('select[name="s_division_id"]').on('change', function() {
+            var division_id = this.value;
+            shippedDifferenton = true;
+            if(division_id) {
+                $.ajax({
+                    url: '{{ url("/district/get") }}/'+division_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var d = $('select[name="s_district_id"]').empty();
+                        $('select[name="s_district_id"]').append('<option value="">Select District</option>');
+                        $.each(data, function(key, value){
+                            $('select[name="s_district_id"]').append('<option value="'+ value.id +'">'+ value.bn_name +'</option>');
+                        });
+                    }
+                })
+            } else {
+                alert('Please select shipping division');
+            }
+        });
+
+
+        $('select[name="s_district_id"]').on('change', function() {
+            var district_id = this.value;
+            if(district_id) {
+                $.ajax({
+                    url: '{{ url("/thana/get") }}/'+district_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var d = $('select[name="s_thana_id"]').empty();
+                        $('select[name="s_thana_id"]').append('<option value="">Select Thana</option>');
+                        $.each(data, function(key, value){
+                            $('select[name="s_thana_id"]').append('<option value="'+ value.id +'">'+ value.bn_name +'</option>');
+                        });
+                    }
+                })
+            } else {
+                alert('Please select shipping district');
+            }
+
+            if(district_id == 65) {
+                $('#deliveryCharge').text(60);
+            } else {
+                $('#deliveryCharge').text(120);
+            }
+        });
+
+        $('select[name="s_thana_id"]').on('change', function() {
+            var thana_id = this.value;
+            if(thana_id) {
+                $.ajax({
+                    url: '{{ url("/union/get") }}/'+thana_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var d = $('select[name="s_union_id"]').empty();
+                        $('select[name="s_union_id"]').append('<option value="">Select Union</option>');
+                        $.each(data, function(key, value){
+                            $('select[name="s_union_id"]').append('<option value="'+ value.id +'">'+ value.bn_name +'</option>');
+                        });
+                    }
+                })
+            } else {
+                alert('Please select shipping union');
+            }
+        });
     </script>
 @endpush

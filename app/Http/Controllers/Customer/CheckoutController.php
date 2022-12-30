@@ -8,9 +8,11 @@ use App\Models\Area;
 use App\Models\Offer;
 use App\Models\Order;
 use App\Models\Thana;
+use App\Models\Union;
 use App\Models\Country;
 use App\Models\Product;
 use App\Models\District;
+use App\Models\Division;
 use App\Models\Inventory;
 use Darryldecode\Cart\Cart;
 use Illuminate\Support\Str;
@@ -18,12 +20,12 @@ use App\Models\DeliveryTime;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Models\CompanyProfile;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
@@ -203,8 +205,21 @@ class CheckoutController extends Controller
     public function checkout()
     {
         if (\Cart::getContent()->count() > 0) {
-            $area = Area::latest()->get();
-            $thana = Thana::latest()->get();
+
+            $division = Division::get();
+            $district = [];
+            $thana = [];
+            $union = [];
+
+            $customer = Auth::guard('customer')->user();
+            if($customer) {
+                $district = District::where('division_id', $customer->division_id)->get();
+                $thana = Thana::where('district_id', $customer->district_id)->get();
+                if($customer->union_id && $customer->union_id != null) {
+                    $union = Union::where('thana_id', $customer->thana_id)->get();
+                }
+            }
+
             $cartItems = \Cart::getContent();
 
             $customSubtotal = 0;
@@ -216,7 +231,7 @@ class CheckoutController extends Controller
                 }
             }
 
-            return view('website.checkout', compact('cartItems', 'area', 'thana', 'customSubtotal'));
+            return view('website.checkout', compact('cartItems','division', 'district', 'union', 'thana', 'customSubtotal'));
         } else {
             Session::flash('message', 'Add Product First');
             return redirect()->route('cart.list');
@@ -233,7 +248,7 @@ class CheckoutController extends Controller
             'address' => 'max:250',
             'order_note' => 'max:500'
         ]);
-        $request;
+        return $request;
         $sum = 0;
         $last_invoice_no =  Order::whereDate('created_at', today())->latest()->take(1)->pluck('invoice_no');
         if (count($last_invoice_no) > 0) {

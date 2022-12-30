@@ -74,6 +74,13 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'sandofvega/bdgeocode' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Sandofvega\\Bdgeocode\\BdgeocodeServiceProvider',
+    ),
+  ),
   'tymon/jwt-auth' => 
   array (
     'aliases' => 
