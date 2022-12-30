@@ -281,7 +281,6 @@ class CheckoutController extends Controller
             $order->time_id = $request->time_id;
             $order->ip_address = $request->ip();
             $order->save();
-
             $offer_product = Product::where('is_offer', '1')->get()->pluck('id')->toArray();
             // dd($offer_product);
             if (Auth::guard('customer')->user()) {
@@ -416,6 +415,7 @@ class CheckoutController extends Controller
             $order2 = Order::where('id', $order->id)->first();
             $order2->total_amount = $sum + $area_amount;
             $order2->save();
+
             if ($sum < 1) {
                 Order::where('id', $order->id)->delete();
                 $customer_phone     = Auth::guard('customer')->user() ? Auth::guard('customer')->user()->phone : $request->phone;
@@ -456,6 +456,39 @@ class CheckoutController extends Controller
                 DB::commit();
                 Session::flash('success', 'Order Submit successfully');
                 \Cart::clear();
+
+                // $mail =  $order2->email;
+                // Mail::send(['html'=>'website.mail'], ['token' => $order2], function($message) use ($mail) {
+                //   $message->to( $mail, 'PakhirBasa')->subject
+                //     ('Pakhir Basa Confirmation Mail');
+                //   $message->from('info@pakhir-basa.com','PakhirBasa');
+                // });
+                // if($order2){
+                //     if($order->order == 1){
+                //       Mail::send(['html'=>'website.mail'],    ['order2' => $order2], function($message) {
+                //         $message->to('abdullah.linktach@gmail.com', 'PakhirBasa')->subject
+                //           ('Pakhir Basa Confirmation Mail');
+                //         $message->from('info@pakhir-basa.com','PakhirBasa');
+                //       });
+          
+                //     }
+                //     if($order->proccess == 1){
+                //       Mail::send(['html'=>'website.mail'],    ['order2' => $order2], function($message) {
+                //         $message->to('abdullah.linktach@gmail.com', 'PakhirBasa')->subject
+                //           ('Pakhir Basa Confirmation Mail');
+                //         $message->from('info@pakhir-basa.com','PakhirBasa');
+                //       });
+          
+                //     }
+                //     if($order->cancel == 1){
+                //       Mail::send(['html'=>'website.mail'],    ['order2' => $order2], function($message) {
+                //         $message->to('abdullah.linktach@gmail.com', 'PakhirBasa')->subject
+                //           ('Pakhir Basa Confirmation Mail');
+                //         $message->from('info@pakhir-basa.com','PakhirBasa');
+                //       });
+          
+                //     }
+                //   }
                 return redirect()->route('home');
             }
         } catch (\Throwable $th) {
