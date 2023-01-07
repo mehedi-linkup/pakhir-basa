@@ -246,9 +246,14 @@ class CheckoutController extends Controller
             'ip_address' => 'max:15',
             'phone' => 'required|regex:/^(?:\+?88)?01[1345-9]\d{8}$/',
             'address' => 'max:250',
-            'order_note' => 'max:500'
+            'email' => 'required|regex:/^\\S+@\\S+\\.\\S+$/',
+            'order_note' => 'max:500',
+            's_name' => 'nullable|max:100',
+            's_phone' => 'nullable|regex:/^(?:\+?88)?01[1345-9]\d{8}$/',
+            's_email' => 'nullable|regex:/^\\S+@\\S+\\.\\S+$/',
+            's_address' => 'max:250'
         ]);
-        return $request;
+        // return $request;
         $sum = 0;
         $last_invoice_no =  Order::whereDate('created_at', today())->latest()->take(1)->pluck('invoice_no');
         if (count($last_invoice_no) > 0) {
@@ -256,12 +261,12 @@ class CheckoutController extends Controller
         } else {
             $invoice_no = date('ymd') . '000001';
         }
-        $area = Area::where('id', $request->area_id)->first();
-        if ($area) {
-            $area_amount = $area->amount;
-        } else {
-            $area_amount = 0;
-        }
+        // $area = Area::where('id', $request->area_id)->first();
+        // if ($area) {
+        //     $area_amount = $area->amount;
+        // } else {
+        //     $area_amount = 0;
+        // }
         try {
             DB::beginTransaction();
             $order = new Order();
@@ -270,14 +275,26 @@ class CheckoutController extends Controller
             $order->customer_name = $request->name;
             $order->customer_mobile = $request->phone;
             $order->customer_email = $request->email;
-            $order->area_id = $request->area_id;
-            // $order->shipping_address = $request->address;
+            $order->division_id = $request->division_id;
+            $order->district_id = $request->district_id;
+            $order->thana_id = $request->thana_id;
+            $order->union_id = $request->union_id;
             $order->billing_address = $request->address;
-            $order->shipping_cost = $area_amount;
-            $order->total_amount = $request->total_amount + $area_amount;
+
+            $order->s_name = $request->s_name;
+            $order->s_phone = $request->s_phone;
+            $order->s_email = $request->s_email;
+            $order->s_division_id = $request->s_division_id;
+            $order->s_district_id = $request->s_district_id;
+            $order->s_thana_id = $request->s_thana_id;
+            $order->s_union_id = $request->s_union_id;
+            $order->s_address = $request->s_address;
+
+            $order->shipping_cost = $request->shipping_cost;
+            $order->total_amount = $request->total_amount + $request->shipping_cost;
+
             $order->order_note = $request->order_note;
             $order->delivery_date = $request->delivery_date;
-            $order->thana_id = $request->thana_id;
             $order->time_id = $request->time_id;
             $order->ip_address = $request->ip();
             $order->save();
@@ -413,7 +430,7 @@ class CheckoutController extends Controller
             }
 
             $order2 = Order::where('id', $order->id)->first();
-            $order2->total_amount = $sum + $area_amount;
+            $order2->total_amount = $sum + 0;
             $order2->save();
 
             if ($sum < 1) {

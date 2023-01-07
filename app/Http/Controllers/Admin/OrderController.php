@@ -267,7 +267,7 @@ class OrderController extends Controller
         $orderDetails = OrderDetails::where('order_id',$id)->get();
         foreach($orderDetails as $item){
             $product = Product::with('inventory')->where('id',$item->product_id)->first();
-            $product->inventory->purchage = $product->inventory->purchage + $item->quantity;
+            $product->inventory->purchase = $product->inventory->purchase + $item->quantity;
             $product->inventory->sales = $product->inventory->sales - $item->quantity;
             $product->inventory->save();
         }

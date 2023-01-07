@@ -150,7 +150,7 @@
                             <p  style="text-align: right;margin-bottom:0; margin-top:10px"><span style="font-weight:600">Sub Total :</span>  {{ $order->orderDetails->sum('total_price') }} Tk</p>
                             <p  style="text-align: right;margin-bottom:0; margin-top:10px"><span style="font-weight:600">Offer :</span>  {{ round($percent, 2) }} %</p>
                             <p  style="text-align: right;margin-bottom:15px"><span style="font-weight:600;  ">Shipping :</span>  {{ $order->shipping_cost }} Tk</p>
-                            <h4 style="text-align: right; font-weight:700"><span>Total :</span><span id="number"> {{ $order->total_amount }}  </span> Tk</h4>
+                            <h4 style="text-align: right; font-weight:700"><span>Total :</span><span id="number"> {{ $order->total_amount + $order->shipping_cost}}  </span> Tk</h4>
                             <hr >
                           </div>
                       </div>

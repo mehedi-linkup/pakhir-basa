@@ -1,4 +1,13 @@
 @extends('layouts.website')
+@section('website-css')
+    <style>
+        .btn-close {
+            position: absolute;
+            top: 0.6rem;
+            right: .1rem;
+        }
+    </style>
+@endsection
 @section('website-content')
 <main class="main checkout">
     <!-- Start of Breadcrumb -->
@@ -63,6 +72,17 @@
                 @csrf
                 <div class="row mb-9 justify-content-center">
                     <div class="col-lg-4 pr-lg-4 mb-4">
+                        @if(@$errors->any())
+                        <div class="alert alert-icon alert-warning alert-bg alert-inline show-code-action">
+                            <h4 class="alert-title">
+                                <i class="w-icon-exclamation-triangle"></i>
+                                Warning!</h4> Error occured check input fields and also "Ship to different address fields.
+                            <button class="btn btn-link btn-close" aria-label="button">
+                                <i class="close-icon"></i>
+                            </button>
+                        </div>
+                        @endif
+                       
                         <h3 class="title billing-title text-uppercase ls-10 pt-1 pb-3 mb-0">
                             Billing Details
                         </h3>
@@ -397,6 +417,7 @@
                                                     @endif
                                                 </b>
                                                 <b>TK</b>
+                                                <input id="shipping_cost" type="hidden" name="shipping_cost" value="">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -515,6 +536,8 @@
     </script>
     <script>
         $('#order-button').click(function () {
+            var deliveryCharge = $('#deliveryCharge').text();
+            $('input[name="shipping_cost"]').val(+deliveryCharge);
             $('select[name="division_id"]').attr('disabled', false);
             $('select[name="district_id"]').attr('disabled', false);
             $('select[name="thana_id"]').attr('disabled', false);
@@ -659,5 +682,9 @@
                 alert('Please select shipping union');
             }
         });
+        // $('input[name="shipping-toggle"]').change(function () {
+        //     alert('changed');
+        // });
+
     </script>
 @endpush

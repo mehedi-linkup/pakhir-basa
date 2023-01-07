@@ -486,7 +486,7 @@
           this.className += " active";
           });
         }
-        </script>
+    </script>
 </body>
 
 </html>

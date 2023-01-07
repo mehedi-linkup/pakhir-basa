@@ -1,6 +1,5 @@
 @extends('layouts.website')
 @section('website-content')
-
      <!-- Start of Breadcrumb -->
      <nav class="breadcrumb-nav" style="background-color: #202020">
         <div class="container">
@@ -24,16 +23,13 @@
                         <a href="#account-orders" class="nav-link"> <i class="w-icon-orders"></i> Orders</a>
                     </li>
                     <li class="nav-item">
-                        
                         <a href="#account-addresses" class="nav-link"><i class="w-icon-map-marker"></i> Addresses</a>
                     </li>
                     <li class="nav-item">
                         <a href="#account-details" class="nav-link"> <i class="w-icon-user"></i> Account details</a>
                     </li>
                     <li class="link-item">
-                       
-                            <i class="w-icon-logout"></i>
-                        
+                        <i class="w-icon-logout"></i>
                         <a href="{{ route('customerLogout') }}">Logout</a>
                     </li>
                 </ul>
@@ -123,6 +119,7 @@
                                 <tr>
                                     <th class="order-id border">Order</th>
                                     <th class="order-date">Date</th>
+                                    <th class="customer-address">Customer Address</th>
                                     <th class="shipping-address">shipping-address</th>
                                     <th class="shipping-cost">shipping-cost</th>
                                     {{-- <th class="delivery-data">delivery-data</th> --}}
@@ -136,8 +133,8 @@
                                 <tr>
                                     <td class="order-id">#{{$item->invoice_no}}</td>
                                     <td class="order-date">{{$item->created_at->format('d/m/y')}}</td>
-                                    {{-- <td class="shipping-address">{{$item->shipping_address}}</td> --}}
                                     <td class="shipping-address">{{$item->billing_address}}</td>
+                                    <td class="shipping-address">{{$item->s_address? $item->s_address : $item->billing_address}}</td>
                                     <td class="shipping-cost">{{$item->shipping_cost}}</td>
                                     {{-- <td class="delivery-data">@if(isset($item->delivery_date)){{$item->delivery_date}}@endif</td> --}}
                                     <td class="order-status">
@@ -154,7 +151,7 @@
                                         @endif
                                     </td>
                                     <td class="order-total">
-                                        <span class="order-price">{{$item->total_amount}}</span> for
+                                        <span class="order-price">{{$item->total_amount + $item->shipping_cost }}</span> for
                                         <span class="order-quantity">{{ \App\Models\OrderDetails::where('order_id', $item->id)->count() }}</span> item
                                     </td>
                                     <td class="order-action">
@@ -162,7 +159,7 @@
                                         <a href="{{route('invoice.customer',$item->id)}}"
                                             class="btn btn-outline btn-default btn-block btn-sm btn-rounded">View</a>
                                         @elseif($item->status == 'on' || $item->status == 'w')
-                                        <a href="javascript:void(0)"  id="procesing" onclick="processing({{$item->id}})" data-bs-toggle="modal" data-bs-target="#myModal"
+                                        <a href="" id="procesing" onclick="processing(event, {{$item->id}})" data-bs-toggle="modal" data-bs-target="#myModal"
                                             class="btn btn-outline btn-default btn-block btn-sm btn-rounded">View</a>
                                         @else
                                         <a href="{{route('customer.order.cancel',$item->id)}}"
@@ -362,28 +359,55 @@
             @else 
             <h4 class="text-center text-danger">Your Account Inactive. Please contact Admin</h4>
             @endif
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form action="" id="modal-form" method="post">
+                        @csrf
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                        <h4 class="modal-title">Write Your message to customer</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <textarea name="message" id="" cols="30" rows="4" class="form-control"></textarea>
+                        </div>
+                
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Send</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
         </div>
     </div> 
+@endsection
+@push('website-js')
 <script> 
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload=function(e) {
-                    $('#previewImage')
-                        .attr('src', e.target.result)
-                        .width(100);
-                       
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload=function(e) {
+                $('#previewImage')
+                    .attr('src', e.target.result)
+                    .width(100);
+                   
+            };
+            reader.readAsDataURL(input.files[0]);
         }
-        document.getElementById("previewImage").src="{{ asset('uploads/customer/'.Auth::guard('customer')->user()->profile_picture) }}";
- </script> 
+    }
+    document.getElementById("previewImage").src="{{ asset('uploads/customer/'.Auth::guard('customer')->user()->profile_picture) }}";
+</script> 
 <script>
-    function processing(id){
+    function processing(e, id) {
+        e.preventDefault();
         var url = "/customer-invoice-remove/"+id;
-        $('#modal-form').attr('action',url);
+        $('#modal-form').attr('action', url);
     }
 </script>
-    
-@endsection
+@endpush
